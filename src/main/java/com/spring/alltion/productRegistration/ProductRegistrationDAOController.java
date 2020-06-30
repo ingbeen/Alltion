@@ -34,37 +34,49 @@ public class ProductRegistrationDAOController {
 		// 업로드할 파일 이름
 		String originalFilename = file.getOriginalFilename();
 		String savedFilename = uuid.toString() + originalFilename;
+		System.out.println(originalFilename);
 		
-		// 확장자 유효성 검사
+		// 파일용량 유효성 검사, 3MB가 넘으면 리턴
+		long size = file.getSize();
+		System.out.println(size);
+		if (size > 3145728) {
+			out.println(1);
+			out.close();
+			return;
+		}
+
+		// 확장자 유효성 검사, jpg가 아니면 리턴
 		String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
 		if(!(extension.equals("jpg"))) {
 			out.println(0);
 			out.close();
-		} else {
-			// 이미지 가로폭 할당
-			Image image = ImageIO.read(file.getInputStream());
-			int imageWidth = image.getWidth(null);
-			
-			
-			// 원본 이미지 경로 + 파일명
-			String filepath = realFolder + "\\" + savedFilename;
-			
-			// 파일 저장
-			File f = new File(filepath);
-			if (!f.exists()) {
-				f.mkdirs();
-			}
-			file.transferTo(f);
-			
-			// 이미지 가로폭 유효성 검사
-			if (imageWidth > 1000) {
-				savedFilename = ImageResize(filepath, image, savedFilename);
-			}
-			
-			// 에디터에 이미지 경로 출력
-			out.println("/alltion/AlltionUpload/" + savedFilename);
-			out.close();
+			return;
 		}
+		
+		// 이미지 가로폭 할당
+		Image image = ImageIO.read(file.getInputStream());
+		int imageWidth = image.getWidth(null);
+		
+		
+		// 원본 이미지 경로 + 파일명
+		String filepath = realFolder + "\\" + savedFilename;
+		
+		// 파일 저장
+		File f = new File(filepath);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		file.transferTo(f);
+		
+		// 이미지 가로폭 유효성 검사
+		if (imageWidth > 1000) {
+			savedFilename = ImageResize(filepath, image, savedFilename);
+		}
+		
+		// 에디터에 이미지 경로 출력
+		out.println("/alltion/AlltionUpload/" + savedFilename);
+		out.close();
+		
 	}
 	
 	public String ImageResize(String filepath, Image image, String savedFilename) {

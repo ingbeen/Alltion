@@ -11,10 +11,10 @@ $(window).scroll(function(){
 
 // 카테고리변경 by.유빈
 function changeCategory(item) {
-    var name = item.name; // 카테고리1, 카테고리2
-    var value = item.value; // 선택한 카테고리
-    var selectOutput = ''; // 카테고리표 출력
-    var routeOutput = ''; // 카테고리 경로 출력
+    let name = item.name; // 카테고리1, 카테고리2
+    let value = item.value; // 선택한 카테고리
+    let selectOutput = ''; // 카테고리표 출력
+    let routeOutput = ''; // 카테고리 경로 출력
     
     // 선택한 카테고리가 1차인지 2차인지
     if (name == 'product_category_1') {
@@ -229,7 +229,7 @@ function changeCategory(item) {
     // 2차 카테고리를 선택했을시에는 경로를 추가하여 표시해준다
     else if(name == 'product_category_2') {
     	// 2차 카테고리에서 선택한 값을 할당
-        var category02Check = $('.category--select__02 option:selected').text();
+    	let category02Check = $('.category--select__02 option:selected').text();
         
         if (category02Check == '- 선택해주세요 -') {
             routeOutput = $('.category--select__01 option:selected').text();
@@ -247,8 +247,8 @@ function changeCategory(item) {
 
 // 직거래, 가능지역 input태그 Open, Close 하기 by.유빈
 function changeInput(item) {
-    var name = item.name; // 직거래, 즉시구매
-    var value = item.value; // 불가능, 가능
+	let name = item.name; // 직거래, 즉시구매
+	let value = item.value; // 불가능, 가능
     
     // 변경된 값이 직거래일때
     if (name == 'direct') {
@@ -280,38 +280,38 @@ function changeInput(item) {
 
 // 경매기간에 따른 마감시간 계산 후 input태그에 삽입 by.유빈
 function changeEndDate(value) {
-    var now = new Date(); // 현재
+	let now = new Date(); // 현재
     value = Number(value); // Number로 타입변환
     
     now.setDate(now.getDate() + value); // 현재 + 선택한 기간
     
-    var year = now.getFullYear(); // 년
+    let year = now.getFullYear(); // 년
     
     // if문
     // 10이하는 한자리수 이므로 "0"을 붙여 2자리수로 만든다
-    var month = now.getMonth() + 1; // 월
+    let month = now.getMonth() + 1; // 월
     
     if (month < 10) {
         month = "0" + month;
     }
 
-    var date = now.getDate(); // 일
+    let date = now.getDate(); // 일
     if (date < 10) {
         date = "0" + date;
     }
     
-    var hour = now.getHours(); // 시간
+    let hour = now.getHours(); // 시간
     if (hour < 10) {
         hour = "0" + hour;
     }
 
-    var min = now.getMinutes(); // 분
+    let min = now.getMinutes(); // 분
     if (min < 10) {
         min = "0" + min;
     }
     
     // 출력 포맷
-    var output = year + "년 " + month + "월 " + date + "일 " + hour + "시 " + min + "분"
+    let output = year + "년 " + month + "월 " + date + "일 " + hour + "시 " + min + "분"
     
     // input태그에 삽입
     $('.endDate').val(output);
@@ -319,7 +319,7 @@ function changeEndDate(value) {
 }
 
 function productInsert(){
-	var prama = $('.product--form').serialize();
+	let prama = $('.product--form').serialize();
 	alert(prama);
 	
 //	$.ajax({
@@ -339,7 +339,7 @@ function productInsert(){
 };
 
 function sendFile(file, editor) {
-	var form_data = new FormData();
+	let form_data = new FormData();
   	form_data.append('file', file);
   	$.ajax({
     	data: form_data,
@@ -355,13 +355,19 @@ function sendFile(file, editor) {
     	processData: false,
     	enctype: 'multipart/form-data',
     	success: function(img_name) {
+    		
     		if (0 == img_name){
     			alert("이미지는 jpg 형식만 가능합니다");
+    		} else if (1 == img_name) {
+    			alert("업로드 가능한 파일의 최대용량은 3MB입니다");
     		} else {
     			$(editor).summernote('insertImage', img_name);
     		}
+    		
     	}, error:function(){
+    		
         	alert("ajax통신 실패!!!");
+        	
     	}
   	});
 }
@@ -381,7 +387,7 @@ $('document').ready(function(){
           
 		  callbacks: {
 			  onImageUpload: function(files) {
-				  for (var i = files.length - 1; i >= 0; i--) {
+				  for (let i = files.length - 1; i >= 0; i--) {
 					  sendFile(files[i], this);
 				  }
 			  }
