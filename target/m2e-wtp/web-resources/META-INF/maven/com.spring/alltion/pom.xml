@@ -221,20 +221,6 @@
 		</dependency>
 		<!-- jstl 끝 -->
 		
-		<!-- cmyk to rgb 시작 by.유빈 -->
-		<!-- 이미지 타입변환(이미지 파일 리사이즈 할때 필요) -->
-		<dependency>
-            <groupId>com.twelvemonkeys.imageio</groupId>
-            <artifactId>imageio-jpeg</artifactId>
-            <version>3.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.twelvemonkeys.imageio</groupId>
-            <artifactId>imageio-tiff</artifactId>
-            <version>3.5</version>
-        </dependency>
-        <!-- cmyk to rgb 끝 -->
-		
 	</dependencies>
 	<build>
 		<plugins>
