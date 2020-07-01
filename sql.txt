@@ -7,5 +7,5 @@ sample4_postcode varchar2(30),
 sample4_roadAddress varchar2(50),
 sample4_jibunAddress varchar2(50),
 sample4_detailAddress varchar2(50),
-member_delete varchar2(2) default 0
+member_delete varchar2(2) default 1  -- 회원탈퇴시 값이 0으로 바뀌면서 로그인 불가
 );
