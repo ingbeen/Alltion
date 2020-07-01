@@ -72,7 +72,7 @@ pageEncoding="UTF-8"%>
                         <a href="./main.kj">${member_id}</a>
                     </li>
                     <li>
-                        <a href="./logout.">로그아웃</a>
+                        <a href="./logout.kj">로그아웃</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>

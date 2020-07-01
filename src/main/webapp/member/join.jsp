@@ -110,10 +110,10 @@ body a.base_btn1 {
                 </p>
                 <ul>
                     <li>
-                        <a href="login.jsp">로그인</a>
+                        <a href="loginForm.kj">로그인</a>
                     </li>
                     <li>
-                        <a href="joinForm.jsp">회원 가입</a>
+                        <a href="#">회원 가입</a>
                     </li>
                 </ul>
             </div>

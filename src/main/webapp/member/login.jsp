@@ -103,7 +103,7 @@ pageEncoding="UTF-8"%>
                         <a href="#">로그인</a>
                     </li>
                     <li>
-                        <a href="./naverjoin.me">회원 가입</a>
+                        <a href="./naverjoin.kj">회원 가입</a>
                     </li>
                 </ul>
             </div>

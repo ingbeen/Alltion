@@ -78,7 +78,7 @@
 			var member_id = $('#member_id').val();
 
 			$.ajax({
-				url: '/tst/user_check.bo',
+				url: 'user_check.kj',
 				type: 'POST',
 				data: {'member_id':member_id},
 				dataType : 'json',
@@ -318,7 +318,6 @@
             </div>
         </div>
     </div>
-<input type = "hidden" name = "id" value = "${email}"/>    
     <!-- 회원가입 폼 by 계정 -->
     <div class = "joinWrap">
         <h2>All-tion 통합 회원 가입</h2>
@@ -327,12 +326,13 @@
                 <h3 class = "join_title_title" text-align = "left">
                     &lt;필수 입력 사항&gt;
                 </h3>                
-                <label class = "join_title" text-align = "left">아이디</label><br>
+                <label class = "join_title" text-align = "left">아이디</label>
+                <span id="alert-danger" style="display: none; color: #1ec700; font-weight: bold; ">*&nbsp;사용가능 아이디</span>   			
+    			<span id="alert-success" style="display: none; color: #d92742;">일치하는 아이디가 존재합니다.</span>
                 <input type = "text" id = "member_id" name = "member_id"  class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와알파벳만 사용해 주세요">
                 <input type = "button" class = "base_btn1" value = "중복 확인" onclick="usercheck()">
             </div>
-            	<span id="alert-danger" style="display: none; color: #1ec700; font-weight: bold; ">*&nbsp;사용가능 아이디</span>   			
-    			<span id="alert-success" style="display: none; color: #d92742;">일치하는 아이디가 존재합니다.</span>
+            	
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호</label>
                 <input type = "password" id = "member_password" name = "member_password" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요">
@@ -486,12 +486,7 @@
 </c:when>
 
 <c:otherwise><!-- 일반 회원가입 -->
-<div class="ad__banner">
-        <a href="#" class="ad__banner--link">
-            <img src="./resources/img/header/adEx.png" class="ad__banner--img">
-            <button class="ad__banner--closeBtn"></button>
-        </a>
-    </div>
+
     <div class="header">
         <div class="upper_header">
              <div class="upper_header--nav">

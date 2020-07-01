@@ -27,7 +27,7 @@
 	 (#{member_id},#{member_password},#{email},#{member_phone},#{sample4_postcode},#{sample4_roadAddress},#{sample4_jibunAddress},#{sample4_detailAddress},#{member_delete})
 	 </insert>
 	 
-	 <select id="idCheck" parameterType="String" resultType="int">
+	 <select id="idCheckService" parameterType="String" resultType="int">
 		select count(*) from member where member_id = #{member_id}
 	</select>
 	 
