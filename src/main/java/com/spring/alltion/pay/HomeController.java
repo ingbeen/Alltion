@@ -29,7 +29,7 @@ public class HomeController {
 	@RequestMapping(value = "/pay.ms", method = RequestMethod.GET)
 	public String home() {
 	
-		return "pay/payfnc";
+		return "pay/pay";
 	}
 	
 	@RequestMapping(value = "/cancel.ms", method = RequestMethod.POST)
