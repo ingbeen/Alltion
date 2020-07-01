@@ -12,4 +12,12 @@
 	<select id="getDetail" parameterType="int" resultType="BoardVO">
 		select * from product where product_number=#{product_number}
 	</select>
+	
+	<update	id="updateBoard" parameterType="BoardVO">
+		update product set product_starting_price=#{price} where product_number=#{bid_product_number}
+	</update>
+	
+	<select id="selectNowPrice" parameterType="BoardVO" resultType="int">
+		select nvl(product_starting_price,0) from product where product_number=#{bid_product_number}
+	</select>
 </mapper>

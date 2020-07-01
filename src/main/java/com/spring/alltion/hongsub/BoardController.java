@@ -14,6 +14,9 @@ public class BoardController {
 	@Autowired
 	private BoardServiceImpl boardService;
 	
+	@Autowired
+	private MemberServiceImpl memberService;
+	
 	@RequestMapping("/boardlist.hs")
 	public String boardlist(HttpServletRequest request,Model model)throws Exception {
 		boardService.getBoardList(request,model);
@@ -25,6 +28,10 @@ public class BoardController {
 	public String boardDetail(@RequestParam(value="product_number")int product_number,Model model) {
 		BoardVO bvo = boardService.getDetail(product_number);
 		model.addAttribute("bvo",bvo);
+		MemberVO mvo = memberService.getMemberInfo(bvo.getProduct_id());
+		model.addAttribute("mvo",mvo);
+		
+		
 		
 		return "board/board_detail";
 	}

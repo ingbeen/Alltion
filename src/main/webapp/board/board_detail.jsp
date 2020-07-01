@@ -5,6 +5,7 @@
 	String id = (String)session.getAttribute("id");
 	BoardVO bvo = (BoardVO)request.getAttribute("bvo");
 	String writerId = bvo.getProduct_id();
+	MemberVO mvo = (MemberVO)request.getAttribute("mvo");
 %>
 <!DOCTYPE html>
 <html>
@@ -182,7 +183,7 @@
                                         <ul>
                                             <li>
                                                 <label>아이디</label>
-                                                <font>꾸엥꾸꾸엥</font>
+                                                <font><%=mvo.getMember_id() %></font>
                                             </li>
                                             <li>
                                                 <label>이메일</label>
@@ -215,7 +216,7 @@
                         </li>
                         <li>
                             <label for="start_price">시작가</label>
-                            <p><%=bvo.getProduct_starting_price() %></p>
+                            <p><%=bvo.getProduct_starting_price() %>원</p>
                         </li>
                         <li>
                             <label for="end_price">즉시 구매가</label>
@@ -315,19 +316,19 @@
 
         <!-- ↓↓응찰자 리스트↓↓ -->
         <div class="bid_list" align="center">
-
+			
+			 
             <div class="bid_list_column">
                 <div class="bid_list_no">응찰 번호</div>
                 <div class="bid_price">응찰 가격</div>
                 <div class="bidder_id">응찰자</div>
                 <div class="bid_time">응찰 시간</div>
             </div>
+            
             <div class="bidder">
-                <div class="bid_list_no">4</div>
-                <div class="bid_price">30,000 원</div>
-                <div class="bidder_id">가지마 님</div>
-                <div class="bid_time">몇 시간전</div>
+                
             </div>
+             <!--
             <div class="bidder">
                 <div class="bid_list_no">3</div>
                 <div class="bid_price">20,000 원</div>
@@ -346,6 +347,7 @@
                 <div class="bidder_id">가지마3 님</div>
                 <div class="bid_time">몇 시간전</div>
             </div>
+             -->
         </div>
 
 
@@ -748,5 +750,63 @@
                 }
             }
         }
+        
+        // ↓↓응찰관련
+        $(document).ready(function(){
+			bidList(); //페이지 로딩시 응찰 목록 출력 
+		});
+        
+        let bno = <%=bvo.getProduct_number()%>;
+        let limit_price = <%=bvo.getProduct_purchase_price()%>;
+        let sessionid = '<%=id%>';
+      	// ↓↓응찰하기 버튼 클릭시
+      	function bidList(){
+			$.ajax({
+				url : '/alltion/bid_list.hs',
+				type : 'post',
+				data : {'bno':bno},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success : function(data){
+					var a='';
+					$.each(data,function(key,value){
+						a += '<div class="bidder1">';
+						a += '<div class="bid_list_no">'+value.bid_no+'</div>';
+						a += '<div class="bid_price">'+value.bid_price+'</div>';
+						a += '<div class="bidder_id">'+value.bid_id+'</div>';
+						a += '<div class="bid_time">'+value.bid_date+'</div>';
+						a += '</div>';
+						//응찰하다가 응찰가격이 즉시구매가랑 동일하게 될때 
+						//응찰리스트 추가 후 응찰하기 버튼(bid_btn),즉시구매하기 버튼(bid_btn2) 비활성화
+						if(value.bid_price==limit_price){
+							document.getElementById("bid_btn").disabled = true;
+							document.getElementById("bid_btn2").disabled = true;
+						}
+					});
+					$(".bidder").html(a);
+				},
+				error:function(){
+					alert("ajax통신 실패(list)!!!");		
+				}
+			});
+		}
+      	
+		function bidInsert(){
+			$.ajax({
+				url: '/alltion/bid_insert.hs',
+				type : 'POST',
+				data : {'bid_product_number':bno,'bid_id':sessionid},
+				success : function(data){
+					if(data==1){
+						bidList(); //페이지 로딩시 응찰 목록 갱신
+						window.location.reload(true);
+					}
+					
+				},
+				error:function(){
+					alert("ajax통신 실패(insert)");
+				}
+			});
+		}
     </script>
 </body></html>

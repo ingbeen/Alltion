@@ -27,4 +27,11 @@ public class MemberServiceImpl {
 		}
 	}
 
+	public MemberVO getMemberInfo(String product_id) {
+		MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+		MemberVO mvo = membermapper.getInfo(product_id);
+		
+		return mvo;
+	}
+
 }
