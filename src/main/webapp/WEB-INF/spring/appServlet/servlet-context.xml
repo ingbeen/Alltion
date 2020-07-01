@@ -43,4 +43,8 @@
 	-->
 	<!-- File Upload 끝 -->
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 by.계정 -->
+	
+	<beans:bean id="naverLoginBO" class="com.spring.alltion.login.NaverLoginBO" />
+	
 </beans:beans>

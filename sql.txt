@@ -1,0 +1,11 @@
+create table member(
+member_id varchar2(20) primary key,
+member_password varchar2(20) not null,
+email varchar2(50) not null,
+member_phone varchar2(11) not null,
+sample4_postcode varchar2(30),
+sample4_roadAddress varchar2(50),
+sample4_jibunAddress varchar2(50),
+sample4_detailAddress varchar2(50),
+member_delete varchar2(2) default 0
+);
