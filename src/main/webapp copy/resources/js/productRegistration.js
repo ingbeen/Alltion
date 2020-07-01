@@ -1,10 +1,10 @@
 // 헤더 고정
 var header = $('.lower_header');
-$(window).scroll(function () {
-    if ($(this).scrollTop() > 0) {
+$(window).scroll(function(){
+    if($(this).scrollTop() > 0){
 
         header.addClass('sticky');
-    } else {
+    }else{
         header.removeClass('sticky');
     }
 })
@@ -15,12 +15,12 @@ function changeCategory(item) {
     let value = item.value; // 선택한 카테고리
     let selectOutput = ''; // 카테고리표 출력
     let routeOutput = ''; // 카테고리 경로 출력
-
+    
     // 선택한 카테고리가 1차인지 2차인지
     if (name == 'product_category_1') {
-
-        // 카테고리가 1차이면 선택한 값을 카테고리 경로로 바꾼다
-        // '선택해주세요'를 선택하면 공란으로 바꾼다
+    	
+    	// 카테고리가 1차이면 선택한 값을 카테고리 경로로 바꾼다
+    	// '선택해주세요'를 선택하면 공란으로 바꾼다
         routeOutput = $('.category--select__01 option:selected').text();
         if (routeOutput == '- 선택해주세요 -') {
             $('.category--route__text').children('p').html('');
@@ -29,12 +29,12 @@ function changeCategory(item) {
         } else {
             $('.category--route__text').children('p').html(routeOutput);
         }
-
+        
         // 선택한 1차 카테고리에 대한 세부적인 2차 카테고리를 띄운다
         /* 시작 */
         if (value == 'cate01') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0101">여성의류</option>';
@@ -47,11 +47,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0108">기타잡화/관련용품</option>';
             selectOutput += '<option value="cate0109">수입명품</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate02') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0201">스킨케어</option>';
@@ -62,11 +62,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0206">남성 화장품</option>';
             selectOutput += '<option value="cate0207">가발/기타용품</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate03') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0301">출산/육아용품</option>';
@@ -76,11 +76,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0305">유아동가구</option>';
             selectOutput += '<option value="cate0306">기타 유아동용품</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate04') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2"         size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0401">모바일</option>';
@@ -90,11 +90,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0405">카메라</option>';
             selectOutput += '<option value="cate0406">캠코더</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate05') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0501">냉장고</option>';
@@ -108,11 +108,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0509">생활가전</option>';
             selectOutput += '<option value="cate0510">기타 가전제품</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate06') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0601">침실가구</option>';
@@ -127,11 +127,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0610">이벤트/파티용품</option>';
             selectOutput += '<option value="cate0611">리빙생활</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate07') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0701">반려동물</option>';
@@ -142,11 +142,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0706">미술재료/미술도구</option>';
             selectOutput += '<option value="cate0707">게임</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate08') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0801">유아동도서/음반</option>';
@@ -160,11 +160,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0809">음반/DVD/굿즈</option>';
             selectOutput += '<option value="cate0810">문구/사무용품</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate09') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate0901">티켓</option>';
@@ -172,11 +172,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate0903">여행숙박/이용권</option>';
             selectOutput += '<option value="cate0904">기타 티켓/쿠폰/이용권</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate10') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate1001">골프</option>';
@@ -192,11 +192,11 @@ function changeCategory(item) {
             selectOutput += '<option value="cate1007">기타 스포츠</option>';
             selectOutput += '<option value="cate1007">레저/여행</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate11') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)">';
             selectOutput += '<option value="">- 선택해주세요 -</option>';
             selectOutput += '<option value="cate1101">드릴/전동공구</option>';
@@ -211,67 +211,67 @@ function changeCategory(item) {
             selectOutput += '<option value="cate1107">산업/안전/공구함</option>';
             selectOutput += '<option value="cate1107">산업자재</option>';
             selectOutput += '<option value="cate1107">농기계/농업용공구</option>';
-
+            
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         } else if (value == 'cate12') {
             $('.category--select__01').next().remove();
-
+            
             selectOutput += '<select class="category--select__02" name="product_category_2" size="7" dionchange="changeCategory(this)" style="display: none;">';
             selectOutput += '<option value="cate1201" selected>기타잡홥</option>';
             selectOutput += '</select>';
-
+            
             $('.category--select__01').after(selectOutput);
         }
         /* 끝 */
-    }
+    } 
     // 2차 카테고리를 선택했을시에는 경로를 추가하여 표시해준다
-    else if (name == 'product_category_2') {
-        // 2차 카테고리에서 선택한 값을 할당
-        let category02Check = $('.category--select__02 option:selected').text();
-
+    else if(name == 'product_category_2') {
+    	// 2차 카테고리에서 선택한 값을 할당
+    	let category02Check = $('.category--select__02 option:selected').text();
+        
         if (category02Check == '- 선택해주세요 -') {
             routeOutput = $('.category--select__01 option:selected').text();
             $('.category--route__text').children('p').html(routeOutput);
         } else {
             routeOutput = $('.category--select__01 option:selected').text();
-            routeOutput += ' &gt; ';
+            routeOutput += ' &gt; '; 
             routeOutput += $('.category--select__02 option:selected').text();
             $('.category--route__text').children('p').html(routeOutput);
         }
     }
-
-
+    
+    
 }
 
 // 직거래, 가능지역 input태그 Open, Close 하기 by.유빈
 function changeInput(item) {
-    let name = item.name; // 직거래, 즉시구매
-    let value = item.value; // 불가능, 가능
-
+	let name = item.name; // 직거래, 즉시구매
+	let value = item.value; // 불가능, 가능
+    
     // 변경된 값이 직거래일때
     if (name == 'direct') {
         if (value == 0) {
-            $('.directArea').attr("readonly", true);
+            $('.directArea').attr("readonly",true); 
             $('.directArea').addClass('readonlyfalse');
             $('.directArea').val('');
         }
         if (value == 1) {
-            $('.directArea').attr("readonly", false);
+            $('.directArea').attr("readonly",false);
             $('.directArea').removeClass('readonlyfalse');
             $('.directArea').focus();
         }
-    }
+    } 
     // 변경된 값이 즉시구매일때
     else if (name == 'purchase') {
         if (value == 0) {
-            $('.purchasePrice').attr("readonly", true);
+            $('.purchasePrice').attr("readonly",true); 
             $('.purchasePrice').addClass('readonlyfalse');
             $('.purchasePrice').val('');
         }
         if (value == 1) {
-            $('.purchasePrice').attr("readonly", false);
+            $('.purchasePrice').attr("readonly",false);
             $('.purchasePrice').removeClass('readonlyfalse');
             $('.purchasePrice').focus();
         }
@@ -280,17 +280,17 @@ function changeInput(item) {
 
 // 경매기간에 따른 마감시간 계산 후 input태그에 삽입 by.유빈
 function changeEndDate(value) {
-    let now = new Date(); // 현재
+	let now = new Date(); // 현재
     value = Number(value); // Number로 타입변환
-
+    
     now.setDate(now.getDate() + value); // 현재 + 선택한 기간
-
+    
     let year = now.getFullYear(); // 년
-
+    
     // if문
     // 10이하는 한자리수 이므로 "0"을 붙여 2자리수로 만든다
     let month = now.getMonth() + 1; // 월
-
+    
     if (month < 10) {
         month = "0" + month;
     }
@@ -299,7 +299,7 @@ function changeEndDate(value) {
     if (date < 10) {
         date = "0" + date;
     }
-
+    
     let hour = now.getHours(); // 시간
     if (hour < 10) {
         hour = "0" + hour;
@@ -309,183 +309,145 @@ function changeEndDate(value) {
     if (min < 10) {
         min = "0" + min;
     }
-
+    
     // 출력 포맷
     let output = year + "년 " + month + "월 " + date + "일 " + hour + "시 " + min + "분"
-
+    
     // input태그에 삽입
     $('.endDate').val(output);
-
+    
 }
 
-function productInsert() {
-    let prama = $('.product--form').serialize();
-    alert(prama);
-
-    //	$.ajax({
-    //		url:'commentInsert.do',
-    //		type:'POST',
-    //		data: prama,
-    //		contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-    //        success:function(){
-    //        	$(".secret").attr("checked", false);
-    //        	$('.content').val("")
-    //        	commentList();
-    //    	},
-    //    	error:function(){
-    //        	alert("ajax통신 실패!!!");
-    //    	}
-    //	})
+function productInsert(){
+	let prama = $('.product--form').serialize();
+	alert(prama);
+	
+//	$.ajax({
+//		url:'commentInsert.do',
+//		type:'POST',
+//		data: prama,
+//		contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+//        success:function(){
+//        	$(".secret").attr("checked", false);
+//        	$('.content').val("")
+//        	commentList();
+//    	},
+//    	error:function(){
+//        	alert("ajax통신 실패!!!");
+//    	}
+//	})
 };
 
 function sendFile(file, editor) {
-    let form_data = new FormData();
-    form_data.append('file', file);
-    $.ajax({
-        data: form_data,
-        type: "POST",
-        url: 'imgUpload.yb',
+	let form_data = new FormData();
+  	form_data.append('file', file);
+  	$.ajax({
+    	data: form_data,
+    	type: "POST",
+    	url: 'imgUpload.yb',
     	/*
     	- cache : false 로 선언 시 ajax 로 통신 중 cache 가 남아서 갱신된 데이터를 받아오지 못할 경우를 방지함
     	- contentType : false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
 		- processData : false로 선언 시 formData를 string으로 변환하지 않음
     	*/
-        cache: false,
-        contentType: false,
-        processData: false,
-        enctype: 'multipart/form-data',
-        success: function (img_name) {
-
-            if (0 == img_name) {
-                alert("이미지는 jpg 형식만 가능합니다");
-            } else if (1 == img_name) {
-                alert("업로드 가능한 이미지의 최대용량은 3MB입니다");
-            } else {
-                $(editor).summernote('insertImage', img_name);
-            }
-
-        }, error: function () {
-
-            alert("ajax통신 실패!!!");
-
-        }
-    });
+    	cache: false,
+    	contentType: false,
+    	processData: false,
+    	enctype: 'multipart/form-data',
+    	success: function(img_name) {
+    		
+    		if (0 == img_name){
+    			alert("이미지는 jpg 형식만 가능합니다");
+    		} else if (1 == img_name) {
+    			alert("업로드 가능한 파일의 최대용량은 3MB입니다");
+    		} else {
+    			$(editor).summernote('insertImage', img_name);
+    		}
+    		
+    	}, error:function(){
+    		
+        	alert("ajax통신 실패!!!");
+        	
+    	}
+  	});
 }
 
-/* 상품정보 - 이미지 등록 시작 */
-let uploadFiles = []; // 업로드 할 이미지가 할당 돨 배열
+$('.content')
+	.on("dragover", dragOver)
+	.on("dragleave", dragOver)
+	.on("drop", uploadFiles);
 
-$('#drop')
-    .on("dragover", dragOver) // 드래그 요소가 들어왔을때
-    .on("dragleave", dragOver) // 드래그 요소가 나갔을때
-    .on('drop', uploadFile); // 드래그 요소를 떨어트렸을때
+function dragOver(e){
+	e.stopPropagation();
+	e.preventDefault();
+}
 
-
+function uploadFiles(e){
+	e.stopPropagation();
+	e.preventDefault();
+}
 
 function dragOver(e) {
     e.stopPropagation();
     e.preventDefault();
     if (e.type == "dragover") {
-        $('#drop').css({
-            "background-color": "#ddd"
+        $(e.target).css({
+            "background-color": "black",
+            "outline-offset": "-20px"
         });
     } else {
-        $('#drop').css({
-            "background-color": "#eee"
+        $(e.target).css({
+            "background-color": "gray",
+            "outline-offset": "-10px"
         });
     }
 }
 
-function uploadFile(e) { // 드래그한 항목을 떨어뜨렸을때
+function uploadFiles(e) {
     e.stopPropagation();
     e.preventDefault();
     dragOver(e);
-
-    let files = e.originalEvent.dataTransfer.files; // 드래그&드랍 항목
-    for (let i = 0; i < files.length; i++) { // 이미지 한개씩 할당
-        if (uploadFiles.length > 4) { // 이미지는 최대 5장까지만
-            alert("이미지는 최대 5장까지 가능합니다");
-            return;
-        }
-
-        let file = files[i]; // 이미지 할당
-
-        if (file.size > 3145728) { // 용량 3MB 유효성 검사
-            alert("업로드 가능한 이미지의 최대용량은 3MB입니다");
-            return;
-        } else if (file.type != "image/jpeg") { // 확장자 유효성 검사
-            alert("이미지는 jpg 형식만 가능합니다");
-            return;
-        }
-        
-        let idx = uploadFiles.push(file); // 업로드 목록에 추가
-        preview(file, idx - 1); // 미리보기 만들기
+  
+    e.dataTransfer = e.originalEvent.dataTransfer;
+    
+    var files = e.target.files || e.dataTransfer.files;
+    alert(files);
+    if (files.length > 1) {
+        alert('하나만 올려라.');
+        return;
+    }
+    if (files[0].type.match(/image.*/)) {
+                $(e.target).css({
+            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+            "outline": "none",
+            "background-size": "100% 100%"
+        });
+    }else{
+      alert('이미지가 아닙니다.');
+      return;
     }
 }
 
-function preview(file, idx) {
-    let reader = new FileReader(); // 파일을 읽기 위한 FileReader객체 생성
-
-    reader.onload = (function (f, idx) { 
-        return function (e) {
-            let thumb = '\
-            <div class="thumb"> \
-                <div class="close" data-idx="' + idx + '">X</div> \
-                <img src="' + e.target.result + '" title="' + escape(f.name) + '"/> \
-            </div>';
-            $("#thumbnails").append(thumb);
-        };
-    })(file, idx);
-
-    reader.readAsDataURL(file);
-    
-}
-
-$("#thumbnails").on("click", ".close", function (e) {
-    let idx = $(e.target).attr('data-idx');
-    uploadFiles[idx].upload = 'disable'; // 삭제된 항목은 업로드하지 않기 위해 플래그 생성
-    $(e.target).parent().remove(); // 프리뷰 삭제
-});
-/* 상품정보 - 이미지 등록 끝 */
-
-$("#btnSubmit").on("click", function () {
-    let formData = new FormData();
-    $.each(uploadFiles, function (i, file) {
-        if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
-            formData.append('upload-file', file, file.name);
-    });
-    $.ajax({
-        url: '/api/etc/file/upload',
-        data: formData,
-        type: 'post',
-        contentType: false,
-        processData: false,
-        success: function (ret) {
-            alert("완료");
-        }
-    });
-});
-
-$('document').ready(function () {
+$('document').ready(function(){
     // 경매기간 초기값
     changeEndDate(1);
-
-    // 썸머노트 가본설정
-    $('#summernote').summernote({
-        height: 300,	// 에디터 높이
-        minHeight: 400,	// 최소 높이
-        maxHeight: 800,	// 최대 높이
-        lang: "ko-KR",	// 한글 설정
-        disableDragAndDrop: true, // 드래그 앤 드롭 비활성화
-        placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-
-        callbacks: {
-            onImageUpload: function (files) {
-                for (let i = files.length - 1; i >= 0; i--) {
-                    sendFile(files[i], this);
-                }
-            }
-        }
-    });
-
+    
+	//여기 아래 부분
+	$('#summernote').summernote({
+		  height: 300,	// 에디터 높이
+		  minHeight: 400,	// 최소 높이
+		  maxHeight: 800,	// 최대 높이
+		  lang: "ko-KR",	// 한글 설정
+		  disableDragAndDrop: true, // 드래그 앤 드롭 비활성화
+		  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+          
+		  callbacks: {
+			  onImageUpload: function(files) {
+				  for (let i = files.length - 1; i >= 0; i--) {
+					  sendFile(files[i], this);
+				  }
+			  }
+		  }
+	});
+	
 })
