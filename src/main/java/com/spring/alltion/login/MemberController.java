@@ -160,5 +160,10 @@ public class MemberController {
 		{
 			return "member/mypage";
 		}
+		@RequestMapping(value = "/update.kj")
+		public String updatePage()
+		{
+			return "member/update";
+		}
 		
 }

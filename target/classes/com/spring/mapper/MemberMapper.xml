@@ -29,6 +29,6 @@
 	 
 	 <select id="idCheckService" parameterType="String" resultType="int">
 		select count(*) from member where member_id = #{member_id}
-	</select>
-	 
+	 </select>
+
 </mapper>

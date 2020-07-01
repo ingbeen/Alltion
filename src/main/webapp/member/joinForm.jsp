@@ -259,10 +259,10 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="#">로그인</a>
+                        <a href="./loginForm.kj">로그인</a>
                     </li>
                     <li>
-                        <a href="#">회원 가입</a>
+                        <a href="./naverjoin.kj">회원 가입</a>
                     </li>
                 </ul>
             </div>
@@ -270,7 +270,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="/tst/">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -297,19 +297,19 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="#">
+                        <a href="./loginForm.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./loginForm.kj">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./loginForm.kj">
                             <span class="material-icons">access_time</span>
                             <span>참여 경매</span>
                         </a>
@@ -495,10 +495,10 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="#">로그인</a>
+                        <a href="./loginForm.kj">로그인</a>
                     </li>
                     <li>
-                        <a href="#">회원 가입</a>
+                        <a href="./naverjoin.kj">회원 가입</a>
                     </li>
                 </ul>
             </div>
@@ -506,7 +506,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="/tst/">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -533,19 +533,19 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="#">
+                        <a href="./loginForm.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./loginForm.kj">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./loginForm.kj">
                             <span class="material-icons">access_time</span>
                             <span>참여 경매</span>
                         </a>
