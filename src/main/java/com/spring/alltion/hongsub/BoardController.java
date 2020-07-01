@@ -1,0 +1,31 @@
+package com.spring.alltion.hongsub;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class BoardController {
+	
+	@Autowired
+	private BoardServiceImpl boardService;
+	
+	@RequestMapping("/boardlist.hs")
+	public String boardlist(HttpServletRequest request,Model model)throws Exception {
+		boardService.getBoardList(request,model);
+		
+		return "board/board_list";
+	}
+	
+	@RequestMapping("/boarddetail.hs")
+	public String boardDetail(@RequestParam(value="product_number")int product_number,Model model) {
+		BoardVO bvo = boardService.getDetail(product_number);
+		model.addAttribute("bvo",bvo);
+		
+		return "board/board_detail";
+	}
+}
