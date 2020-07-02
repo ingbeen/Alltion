@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.spring.alltion.productList.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+ <!-- 
+	//List<ProductVO> productList=(List<ProductVO>)request.getAttribute("productlist");
+	//int listcount=((Integer)request.getAttribute("listcount")).intValue();
+	//int nowpage=((Integer)request.getAttribute("page")).intValue();
+	//int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
+	//int startpage=((Integer)request.getAttribute("startpage")).intValue();
+	//int endpage=((Integer)request.getAttribute("endpage")).intValue();
+-->
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="product_list.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/product_list.css" />">
+    <link href="<c:url value="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"/>" rel="stylesheet">
+    <link href="<c:url value="https://fonts.googleapis.com/icon?family=Material+Icons"/>" rel="stylesheet">
     <title>All-tion</title>
 </head>
 <body>
@@ -754,8 +766,8 @@
     </div>
 
     <!--  스크립트 영역  -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/product_detail.js"></script>
+    <script src="<c:url value="https://code.jquery.com/jquery-3.5.1.min.js" />"></script>
+    <script src="<c:url value="/resources/js/common.js" />"></script>
+    <script src="<c:url value="/resources/js/product_detail.js" />"></script>
 </body>
 </html>
