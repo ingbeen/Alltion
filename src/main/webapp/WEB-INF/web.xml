@@ -28,6 +28,7 @@
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<!-- 팀원별  컨트롤러 경로 지정 by.유빈 -->
+		<url-pattern>/</url-pattern>
 		<url-pattern>*.yb</url-pattern>
 		<url-pattern>*.ms</url-pattern>
 		<url-pattern>*.kj</url-pattern>
