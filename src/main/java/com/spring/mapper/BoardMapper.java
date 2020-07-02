@@ -16,4 +16,6 @@ public interface BoardMapper {
 
 	void updateBoard(@Param("price")int price,@Param(value="bid_product_number") int bid_product_number);
 
+	int selectPurchasePrice(int bid_product_number);
+
 }

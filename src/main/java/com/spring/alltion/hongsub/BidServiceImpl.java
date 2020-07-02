@@ -15,12 +15,14 @@ public class BidServiceImpl {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//응찰 리스트 구하는 서비스.
 	public List<BidVO> bidListService(int bno) {
 		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
 		
 		return bidmapper.bidList(bno);
 	}
 
+	//응찰 하기 서비스.
 	public int bidInsertService(BidVO bidvo) {
 		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
 		BoardMapper boardmapper = sqlSession.getMapper(BoardMapper.class);
@@ -44,6 +46,23 @@ public class BidServiceImpl {
 		}
 		//상세보기의 현재가 갱신
 		boardmapper.updateBoard(price,bid_product_number);
+		
+		return bidmapper.bidInsert(bidvo);
+	}
+
+	//즉시 구매하기 서비스.
+	public int bidpurchaseService(BidVO bidvo) {
+		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
+		BoardMapper boardmapper = sqlSession.getMapper(BoardMapper.class);
+		int bid_product_number = bidvo.getBid_product_number();
+		int price = 0;
+		price = boardmapper.selectPurchasePrice(bid_product_number);
+		
+		int res = bidmapper.countBidList(bid_product_number);
+		bidvo.setBid_no(res);
+		bidvo.setBid_price(price);
+		
+		boardmapper.updateBoard(price, bid_product_number);
 		
 		return bidmapper.bidInsert(bidvo);
 	}

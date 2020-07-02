@@ -11,14 +11,12 @@ create table bid_list(
 
 package com.spring.alltion.hongsub;
 
-import java.util.Date;
-
 public class BidVO {
 	private int bid_number;
 	private int bid_product_number;
 	private String bid_id;
 	private int bid_price;
-	private Date bid_date;
+	private String bid_date;
 	private int bid_no;
 	public int getBid_number() {
 		return bid_number;
@@ -44,16 +42,16 @@ public class BidVO {
 	public void setBid_price(int bid_price) {
 		this.bid_price = bid_price;
 	}
-	public Date getBid_date() {
-		return bid_date;
-	}
-	public void setBid_date(Date bid_date) {
-		this.bid_date = bid_date;
-	}
 	public int getBid_no() {
 		return bid_no;
 	}
 	public void setBid_no(int bid_no) {
 		this.bid_no = bid_no;
+	}
+	public String getBid_date() {
+		return bid_date;
+	}
+	public void setBid_date(String bid_date) {
+		this.bid_date = bid_date;
 	}
 }

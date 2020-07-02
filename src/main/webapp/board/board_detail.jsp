@@ -158,7 +158,7 @@
                         </li>
                         <li>
                             <label for="now_price">현재가</label>
-                            <p id="now_price"><%=bvo.getProduct_starting_price() %>원</p>
+                            <p id="now_price"><%=bvo.getProduct_now_price() %>원</p>
                         </li>
                     </ul>
                 </div>
@@ -292,7 +292,7 @@
                 </div>
                 <div class="btns" align="center">
                     <button type="button" id="bid_btn" onclick="bidInsert()">응찰하기</button>
-                    <button type="button" id="bid_btn2">즉시구매</button>
+                    <button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
 <!--                            <button type="button" id="bid_btn3">문의하기</button>-->
                 </div>
 
@@ -310,7 +310,7 @@
                 <a type="button" onclick="move(3)">문의 사항</a>
             </li>
             <li>
-                <a type="button" onclick="move(4)">판매자 정보</a>
+                <a type="button" onclick="move(4)">댓 글 (10)</a>
             </li>
         </ul>
 
@@ -362,7 +362,7 @@
                 <a type="button" onclick="move(3)">문의 사항</a>
             </li>
             <li>
-                <a type="button" onclick="move(4)">판매자 정보</a>
+                <a type="button" onclick="move(4)">댓 글 (10)</a>
             </li>
         </ul>
 
@@ -398,14 +398,14 @@
                     <a style="color:white;">문의 사항</a>
                 </li>
                 <li>
-                    <a type="button" onclick="move(4)">판매자 정보</a>
+                    <a type="button" onclick="move(4)">댓 글 (10)</a>
                 </li>
             </ul>
         </div>
 
         <!-- ↓↓경매물품의 상세정보↓↓ -->
         <div class="information_detail">
-            <span class="dot1"></span>
+            
             <span>제품 설명</span>
             <p>
                 가나다라마바사아자차카타파하<br>
@@ -428,37 +428,20 @@
                 <a type="button" onclick="move(3)">문의 사항</a>
             </li>
             <li style="border-radius: 4px 4px 0 0;background-color:#BBBBBB;font-weight: bold;">
-                <a style="color:white;">판매자 정보</a>
+                <a style="color:white;">댓 글 (10)</a>
             </li>
         </ul>
 
-        <!-- ↓↓판매자 정보넣어둠. //수정 필요. 다른 항목을 넣어야 될듯.↓↓  -->
-        <div class="seller_detail">
-            <span class="dot1"></span>
-            <span>판매자 정보</span>
-            <ul>
-                <li>
-                    <label for="id">판매자 아이디</label>
-                    아푸아푸아푸
-                </li>
-                <li>
-                    <label for="grade">판매자 등급</label>
-                    플레티넘
-                </li>
-                <li>
-                    <label for="info1">정보1</label>
-                    정보정보정보
-                </li>
-                <li>
-                    <label for="info1">정보2</label>
-                    정보정보정보
-                </li>
-                <li>
-                    <label for="info1">정보3</label>
-                    정보정보정보
-                </li>
-
-            </ul>
+        <!-- ↓↓댓 글 항목.↓↓-->
+        <div class="comment_div">
+            <div class="comment_title">댓 글 <font size="2"> |악의적인 비방글이나 욕설글은 무통보 삭제 되오니 이점 유의바랍니다</font>&nbsp;&nbsp;<input type="checkbox" id="secret" value="1"><font size="3" style="color:cornflowerblue;"> 비밀글</font></div>
+            <textarea id="comment_content_input" placeholder="  *댓글을 작성해주세요..
+  *비밀글 입력시 판매자와 관리자만 볼 수 있습니다."></textarea>
+            <br>
+            <button type="button" id="comment_btn" onclick="commentInsert()">작 성</button>
+            <div class="comment_list">
+            
+            </div>
         </div>
 
     </div>
@@ -713,7 +696,7 @@
             } else if (n == 3) {
                 var offset = $(".information_detail").offset();
             } else if (n == 4) {
-                var offset = $(".seller_detail").offset();
+                var offset = $(".comment_div").offset();
             }
             $('html, body').animate({
                 scrollTop: offset.top - 200}, 400);
@@ -754,10 +737,14 @@
         // ↓↓응찰관련
         $(document).ready(function(){
 			bidList(); //페이지 로딩시 응찰 목록 출력 
+			commentList(); //페이지 로딩시 댓글 목록 출력
 		});
         
+        //경매 번호
         let bno = <%=bvo.getProduct_number()%>;
+        //경매 즉시 구매가
         let limit_price = <%=bvo.getProduct_purchase_price()%>;
+        //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
       	// ↓↓응찰하기 버튼 클릭시
       	function bidList(){
@@ -808,5 +795,91 @@
 				}
 			});
 		}
+		
+		function nowpurchase(){
+			$.ajax({
+				url: '/alltion/now_purchase.hs',
+				type : 'POST',
+				data : {'bid_product_number':bno,'bid_id':sessionid},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success:function(data){
+					if(data==1){
+						bidList(); //페이지 로딩시 응찰 목록 갱신
+						window.location.reload(true);
+					}
+				},
+				error:function(){
+					alert("ajax통신 실패(nowpurchase)");
+				}
+			});
+		}
+		
+		//경매등록자 아이디
+		let writerId = '<%=writerId%>'; 
+		
+		function commentList(){
+			$.ajax({
+				url : '/alltion/commentlist.hs',
+				type : 'post',
+				data : {'comment_product_number':bno},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success : function(data){
+					var a='';
+					$.each(data,function(key,value){
+						a += '<div class="comment_list1">';
+						a += '<div class="comment_number">NO. '+value.comment_list_no+'</div>';
+						a += '<div class="comment_id"> 작성자: '+value.comment_id+'</div>';
+						if(value.comment_secret.equals("1")){
+							if(sessionid.equals(value.comment_id)||sessionid.equals(writerId)){
+								a += '<div class="comment_content>"'+value.comment_content+'</div>';
+							}else{
+								a += '<div class="comment_content">비밀글 입니다.</div>';
+							}
+								
+						}else if(value.comment_is_deleted.equals("1")){
+							if(sessionid.equals(value.comment_id)){
+								a += '<div class="comment_content>"'+value.comment_content+'</div>';
+							}else{
+								a += '<div class="comment_content">삭제된 글 입니다.</div>';
+							}
+						}else{
+							a += '<div class="comment_content">'+value.comment_content+'</div>';
+						}
+						a += '<div class="comment_date">'+value.comment_date+'</div>';
+						a += '</div>';
+					});
+					$(".comment_list").html(a);
+				},
+				error:function(){
+					alert("ajax통신 실패(comment_list)!!!");		
+				}
+			});
+		}
+		
+		let comment_content_input = document.getElementById('comment_content_input').val();
+		let comment_secret = document.getElementById('secret').val();
+		
+		function commentInsert(){
+			alert(comment_content_input);
+			$.ajax({
+				url: '/alltion/commentinsert.hs',
+				type : 'POST',
+				data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content_input':comment_content_input,'comment_secret':comment_secret},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success:function(data){
+					if(data==1){
+						commentList(); //페이지 로딩시 응찰 목록 갱신
+						window.location.reload(true);
+					}
+				},
+				error:function(){
+					alert("ajax통신 실패(commentinsert)");
+				}
+			});
+		}
     </script>
-</body></html>
+</body>
+</html>

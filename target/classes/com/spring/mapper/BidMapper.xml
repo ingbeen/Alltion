@@ -6,7 +6,10 @@
 	<!-- root-context에서 아래와 같이 typeAliasesPackage를 설정하면 패키지 경로 생략 가능. -->
 <mapper namespace="com.spring.mapper.BidMapper">
 	<select id="bidList" parameterType="int" resultType="BidVO">
-		select * from bid_list where bid_product_number=#{bno} order by bid_no desc
+		select 
+		bid_number,bid_product_number,bid_id,bid_price,to_char(bid_date,'MM-dd HH:mm') as bid_date,bid_no
+		from bid_list 
+		where bid_product_number=#{bno} order by bid_no desc
 	</select>
 	
 	<insert id="bidInsert" parameterType="BidVO">

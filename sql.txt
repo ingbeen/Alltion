@@ -24,8 +24,22 @@ create table product(
     product_img4 varchar2(50),
     product_img5 varchar2(50),
     product_starting_price number,
+    product_now_price number,  --bid_list의 마지막 bid_price와 동일 
     product_purchase_price number
 );
-    
+
+create table comment_list(
+    comment_number number primary key,
+    comment_group_number number,
+    comment_product_number number references product(product_number),
+    comment_id varchar2(15) references member(member_id),
+    comment_reply_id varchar2(15) default 'no' references member(member_id),
+    comment_content varchar2(1000),
+    comment_lev varchar2(1) default '0' check(comment_lev in('0','1')),
+    comment_secret varchar2(1) default '0' check(comment_secret in('0','1')),
+    comment_is_deleted varchar2(1) default '0' check(comment_is_deleted in('0','1')),
+    comment_date date default sysdate,
+    comment_list_no number
+);   
     
 */

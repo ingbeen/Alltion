@@ -27,6 +27,7 @@ public class BoardVO {
 	private String product_img5;
 	private int product_starting_price;
 	private int product_purchase_price;
+	private int product_now_price;
 	public int getProduct_number() {
 		return product_number;
 	}
@@ -86,5 +87,11 @@ public class BoardVO {
 	}
 	public void setProduct_purchase_price(int product_purchase_price) {
 		this.product_purchase_price = product_purchase_price;
+	}
+	public int getProduct_now_price() {
+		return product_now_price;
+	}
+	public void setProduct_now_price(int product_now_price) {
+		this.product_now_price = product_now_price;
 	}
 }

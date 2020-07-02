@@ -13,12 +13,6 @@ public class MemberController {
 	@Autowired
 	private MemberServiceImpl memberService;
 	
-	@RequestMapping("/loginform.hs")
-	public String loginForm(HttpSession session) throws Exception{
-		session.invalidate();
-		return "loginForm";
-	}
-	
 	@RequestMapping("/login.hs")
 	public String login(@RequestParam(value="id")String id,@RequestParam(value="password")String password, HttpSession session)throws Exception{
 		String res = memberService.userCheck(id,password);

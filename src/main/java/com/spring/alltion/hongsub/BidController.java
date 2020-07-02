@@ -27,4 +27,12 @@ public class BidController {
 		
 		return res;
 	}
+	
+	@RequestMapping(value="now_purchase.hs",produces="application/json;charset=utf-8")
+	private int purchase_now(BidVO bidvo)throws Exception {
+		int res = bidService.bidpurchaseService(bidvo);
+		
+		return res;
+	}
+
 }
