@@ -173,8 +173,13 @@
                                 <div id="thumbnails" class="flexCenter">
                                 </div>
                             </div>
-                            <a href="" class="form_wrap--items__file">파일첨부</a>
+                            <div class="filebox">
+                                <label for="fileUpload" class="form_wrap--items__file">파일 첨부</label>
+                                <input type="file" id="fileUpload"></input>
+                            </div>
+                            
                             <p>
+                                수정해야됨<br>
                                 이미지 형식 : JPG<br>
                                 사이즈 규격 : 가로폭 1000px (1000px 보다 클 경우 1000이하로 자동 편집됩니다) 5장까지 등록 가능합니다.<br>
                                 원활한 물품 등록을 위하여 이미지 1장 기준으로 3MB 이하로 등록하셔야 합니다.
