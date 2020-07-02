@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import = "com.spring.alltion.login.MemberVO" %>
+<%
+	String id = (String)session.getAttribute("member_id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,9 +93,10 @@
         <h3 class="myPage__title">마이 페이지</h3>
         <ul class="myPage__category">
             <li>
-                <a href="./update.kj">
+                <a href="./memberinfo.kj?member_id=<%=id%>">
                     <span class="material-icons">recent_actors</span><br>
                     <span class="myPage__menu">회원 정보</span>
+                    
                 </a>
             </li>
             <li>
@@ -245,6 +249,7 @@
             };
             return i;
         } // 2020-06-23 pm 03:55 추가
+        
     </script>
 
 </body>

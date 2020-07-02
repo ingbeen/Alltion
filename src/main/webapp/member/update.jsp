@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import = "com.spring.alltion.login.MemberVO" %>
+<%
+	MemberVO membervo = (MemberVO)request.getAttribute("memberVO");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -218,8 +222,7 @@
         <div class = "row_group">
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">아이디</label><br>
-                <input type = "text" id = "member_id" class = "int" value = "${member_id}">
-                
+                <input type = "hidden" id = "member_id" class = "int"><%=membervo.getMember_id()%>
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호</label>
@@ -232,19 +235,21 @@
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">이메일</label>
+             	 
                 <div>
-                    <input type="text" class = "int" id="member_email" size="35" >
+                    <input type="text" class = "int" id="member_email" size="35" placeholder="<%=membervo.getEmail() %>">
                     <br>
                     <input type = "button" value = "이메일 변경" class = "base_btn">
                 </div>
             </div>  
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">휴대 전화 번호</label>
-                <input type = "text" id = "member_phone" class = "int" maxlength = "11" >
+                <input type = "text" id = "member_phone" class = "int" maxlength = "11">
                 <input type = "button" value = "휴대전화 변경" class = "base_btn">
             </div>
             <input type = "button" value = "뒤로가기" class = "base_btn1"> 
-        </div>        
+        </div>    
+        </div>    
     <!-- 경매 규칙 및 회원 등급 제도 설명 -->
     <div class="rules">
         <div class="rules__content">

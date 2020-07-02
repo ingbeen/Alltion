@@ -1,6 +1,7 @@
 package com.spring.alltion.login;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO selectMember(MemberVO membervo) {
+	public MemberVO selectMember(String member_id) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		MemberVO vo = memberMapper.selectMember(membervo);
+		
+		MemberVO vo = memberMapper.selectMember(member_id);
 		return vo;
 	}
 

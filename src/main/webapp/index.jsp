@@ -69,7 +69,7 @@ pageEncoding="UTF-8"%>
                 </p>
                 <ul>
                     <li>
-                        <a href="./main.kj">${member_id}</a>
+                        <a href="./mypage.kj">${member_id}</a>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>

@@ -53,6 +53,7 @@ public class MemberController {
 		public String userCheck(MemberVO membervo, HttpSession session,
 				HttpServletResponse response) throws Exception
 		{
+			
 			int res = memberService.userCheck(membervo);
 			
 			response.setCharacterEncoding("utf-8");
@@ -158,12 +159,18 @@ public class MemberController {
 		@RequestMapping(value = "/mypage.kj")
 		public String myPage()
 		{
+			
 			return "member/mypage";
 		}
-		@RequestMapping(value = "/update.kj")
-		public String updatePage()
-		{
+		
+		@RequestMapping(value = "/memberinfo.kj")
+		public String updateForm(@RequestParam(value="member_id")String member_id,Model model)throws Exception
+		{	
+			MemberVO vo = memberService.selectMember(member_id);
+			model.addAttribute("memberVO",vo);
+			
 			return "member/update";
 		}
+		
 		
 }
