@@ -5,20 +5,40 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @RestController
 public class ProductRegistrationDAOController {
 	
-	@RequestMapping(value = "imgUpload.yb", produces="application/json;charset=UTF-8")
-	public void profileUpload(MultipartFile file, HttpServletResponse response) throws Exception {
+	// 에디터 이미지 업로드
+	@RequestMapping(value = "editorImgUpload.yb", produces="application/json;charset=UTF-8")
+	public void editorImgUpload(MultipartFile file, HttpServletResponse response, 
+			HttpSession session) throws Exception {
+		String realFolder; // 이미지가 저장될 실제 경로
+		UUID uuid; // 실제 저장될 파일명에 들어갈 랜덤값
+		String originalFilename; // 원본 이미지 파일명
+		String userId; // 로그인한 아이디
+		String savedFilename; // 이미지가 저장될 실제 파일명
+		
+		long size; // 파일용량
+		String extension; // 확장자
+		Image image; // 이미지가 할당될 객체
+		int imageWidth; // 이미지 가로폭
+		
+		String filepath;// 원본 이미지 경로 + 파일명
+		File f; // 저장경로와 함께 파일을 담을 객체 생성
+		
 		// 출력값 셋팅
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -28,15 +48,16 @@ public class ProductRegistrationDAOController {
 		// Servers 폴더의 server.xml <host>태그 안에 아래 문구 삽입(하단쪽)
 		// <Context docBase="C:\AlltionUpload"  path="alltion/AlltionUpload" reloadable="true"/>
 		// 실제 폴더도 직접 생성해주자
-		String realFolder = "C:\\AlltionUpload";
-		UUID uuid = UUID.randomUUID();
+		realFolder = "C:\\AlltionUpload";
+		uuid = UUID.randomUUID();
 
 		// 업로드할 파일 이름
-		String originalFilename = file.getOriginalFilename();
-		String savedFilename = uuid.toString() + originalFilename;
+		originalFilename = file.getOriginalFilename();
+		userId = (String) session.getAttribute("userId");
+		savedFilename = uuid + "+" + userId + "+" + originalFilename;
 		
 		// 파일용량 유효성 검사, 3MB가 넘으면 리턴
-		long size = file.getSize();
+		size = file.getSize();
 		if (size > 3145728) {
 			out.println(1);
 			out.close();
@@ -44,7 +65,7 @@ public class ProductRegistrationDAOController {
 		}
 
 		// 확장자 유효성 검사, jpg가 아니면 리턴
-		String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+		extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
 		if(!(extension.equals("jpg"))) {
 			out.println(0);
 			out.close();
@@ -52,15 +73,15 @@ public class ProductRegistrationDAOController {
 		}
 		
 		// 이미지 가로폭 할당
-		Image image = ImageIO.read(file.getInputStream());
-		int imageWidth = image.getWidth(null);
+		image = ImageIO.read(file.getInputStream());
+		imageWidth = image.getWidth(null);
 		
 		
 		// 원본 이미지 경로 + 파일명
-		String filepath = realFolder + "\\" + savedFilename;
+		filepath = realFolder + "\\" + savedFilename;
 		
 		// 파일 저장
-		File f = new File(filepath);
+		f = new File(filepath);
 		if (!f.exists()) {
 			f.mkdirs();
 		}
@@ -68,16 +89,69 @@ public class ProductRegistrationDAOController {
 		
 		// 이미지 가로폭 유효성 검사
 		if (imageWidth > 1000) {
-			savedFilename = ImageResize(filepath, image, savedFilename);
+			savedFilename = imageResize(filepath, image, savedFilename);
 		}
 		
 		// 에디터에 이미지 경로 출력
 		out.println("/alltion/AlltionUpload/" + savedFilename);
 		out.close();
-		
 	}
 	
-	public String ImageResize(String filepath, Image image, String savedFilename) {
+	// 썸네일 이미지 업로드
+	@RequestMapping(value = "thumbnailsUpload.yb", produces="application/json;charset=UTF-8")
+	public List<String> profileUpload(MultipartHttpServletRequest mtfRequest, HttpSession session) throws Exception {
+		List<MultipartFile> fileList; // 이미지들을 받을 리스트
+		
+		String realFolder; // 이미지가 저장될 실제 경로
+		UUID uuid; // 실제 저장될 파일명에 들어갈 랜덤값
+		String originalFilename; // 원본 이미지 파일명
+		String userId; // 로그인한 아이디
+		String savedFilename; // 이미지가 저장될 실제 파일명
+		
+		String filepath;// 원본 이미지 경로 + 파일명
+		File f; // 저장경로와 함께 파일을 담을 객체 생성
+		
+		List<String> imgSrcList = new ArrayList<String>(); //
+		String imgSrc; // 
+		
+		// 등록된 이미지가 없으면 리턴
+		if (mtfRequest.getContentLength() <= 44) {
+			return null;
+		}
+		
+		// 이미지가 저장될 실제 경로
+		realFolder = "C:\\AlltionUpload";
+
+		// 로그인한 아이디
+		userId = (String) session.getAttribute("userId");
+		
+		// 이미지 파일의 갯수만큼 반복
+		fileList = mtfRequest.getFiles("file");
+		for (MultipartFile file : fileList) {
+			// 실제 파일이 저장될 파일이름
+			uuid = UUID.randomUUID();
+			originalFilename = file.getOriginalFilename();
+			savedFilename = uuid + "+" + userId + "+" + originalFilename;
+			
+			// 실제 파일이 저장될 경로 + 파일이름
+			filepath = realFolder + "\\" + savedFilename;
+			
+			// 파일 저장
+			f = new File(filepath);
+			if (!f.exists()) {
+				f.mkdirs();
+			}
+			file.transferTo(f);
+			
+			imgSrc = "/alltion/AlltionUpload/" + savedFilename;
+			imgSrcList.add(imgSrc);
+        }
+		
+		return imgSrcList;
+	}
+	
+	// 이미지 리사이즈
+	public String imageResize(String filepath, Image image, String savedFilename) {
 		// resize 경로  + 파일명
         String resizeSavedFilename = 
         		new StringBuffer(filepath).insert(filepath.lastIndexOf("."), "_resize").toString();
@@ -122,5 +196,4 @@ public class ProductRegistrationDAOController {
         String newSavedFilename = new StringBuffer(savedFilename).insert(savedFilename.lastIndexOf("."), "_resize").toString();
 		return newSavedFilename;
     }
-	
 }

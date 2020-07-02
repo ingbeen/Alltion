@@ -9,27 +9,7 @@ $(window).scroll(function () {
     }
 })
 
-function changeCategory_2(value) {
-    let selectOutput;
-    let categoryNumber;
-
-    $('.category--select__01').next().remove();
-
-    selectOutput = '<select class="category--select__02" name="product_category_2" size="7" onchange="changeCategory(this)"> \
-            <option value="">- 선택해주세요 -</option>';
-        for(var i = 1; i < arguments.length; i ++){
-            if (i < 10) {
-                categoryNumber = 0 + String(i);
-            }
-
-            selectOutput += '<option value="' + value + categoryNumber + '">' + arguments[i] + '</option>';
-        }
-    selectOutput += '</select>';
-
-    $('.category--select__01').after(selectOutput);
-}
-
-// 카테고리변경 by.유빈
+/* 카테고리변경  시작 by.유빈 */
 function changeCategory(item) {
     let name = item.name; // 카테고리1, 카테고리2
     let value = item.value; // 선택한 카테고리
@@ -95,11 +75,13 @@ function changeCategory(item) {
                 "초경/절삭/접착윤활", "전기/전자", "배관설비/포장운송", "금형공작", "용접기자재", 
                 "산업/안전/공구함", "산업자재", "농기계/농업용공구");
 
-        } else if (value == 'cate12') { // 기타잡화
+        } else if (value == 'cate12') { // 기타잡화 display: none 때문에 따로 정의
             $('.category--select__01').next().remove();
 
             let selectOutput = ' \
-            <select class="category--select__02" name="product_category_2" size="7" dionchange="changeCategory(this)" style="display: none;"> \
+            <select class="category--select__02" name="product_category_2" \
+            	size="7" dionchange="changeCategory(this)" \
+            	style="display: none;"> \
                 <option value="cate1201" selected>기타잡홥</option> \
             </select>';
 
@@ -112,18 +94,43 @@ function changeCategory(item) {
         // 2차 카테고리에서 선택한 값을 할당
         let category02Check = $('.category--select__02 option:selected').text();
 
-        if (category02Check == '- 선택해주세요 -') {
+        if (category02Check == '- 선택해주세요 -') { // 1차경로만 표시
             routeOutput = $('.category--select__01 option:selected').text();
             $('.category--route__text').children('p').html(routeOutput);
-        } else {
+        } else { // 1차경로 + 2차경로 표시
             routeOutput = $('.category--select__01 option:selected').text();
             routeOutput += ' &gt; ';
             routeOutput += $('.category--select__02 option:selected').text();
             $('.category--route__text').children('p').html(routeOutput);
         }
     }
+}
+/* 카테고리변경  끝 by.유빈 */
 
+// 2차 카테고리 체인지
+function changeCategory_2(value) {
+    let selectOutput; // 2차 카테고리 생성 태그가 담길 객체
+    let categoryNumber; // 2차카테고리 넘버
 
+    $('.category--select__01').next().remove(); // 기존에 있던 2차카테고리 삭제
+    
+    /* 2차 카테고리 태그 작성 시작 */
+    selectOutput = '\
+    	<select class="category--select__02" name="product_category_2" \
+    		size="7" onchange="changeCategory(this)"> \
+            <option value="">- 선택해주세요 -</option>';
+    
+        for(var i = 1; i < arguments.length; i ++){ // 2차 카테고리 갯수만큼 루프
+            if (i < 10) { // 2차 카테고리 넘버가 한자리 수이면 앞에 0 붙이기. 예) 0 + 1 = 01
+                categoryNumber = 0 + String(i);
+            }
+            // 함수의 0번쨰 파라미터를 제외한 나머지 갯수만큼 option태그 생성
+            selectOutput += '<option value="' + value + categoryNumber + '">' + arguments[i] + '</option>';
+        }
+    selectOutput += '</select>';
+    /* 2차 카테고리 태그 작성 끝 */
+
+    $('.category--select__01').after(selectOutput);
 }
 
 // 직거래, 가능지역 input태그 Open, Close 하기 by.유빈
@@ -199,33 +206,14 @@ function changeEndDate(value) {
 
 }
 
-function productInsert() {
-    let prama = $('.product--form').serialize();
-    alert(prama);
-
-    //	$.ajax({
-    //		url:'commentInsert.do',
-    //		type:'POST',
-    //		data: prama,
-    //		contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-    //        success:function(){
-    //        	$(".secret").attr("checked", false);
-    //        	$('.content').val("")
-    //        	commentList();
-    //    	},
-    //    	error:function(){
-    //        	alert("ajax통신 실패!!!");
-    //    	}
-    //	})
-};
-
-function sendFile(file, editor) {
+// 에디터 이미지 업로드 및 이미지 출력
+function editorImgUpload(file, editor) {
     let form_data = new FormData();
     form_data.append('file', file);
     $.ajax({
         data: form_data,
         type: "POST",
-        url: 'imgUpload.yb',
+        url: 'editorImgUpload.yb',
     	/*
     	- cache : false 로 선언 시 ajax 로 통신 중 cache 가 남아서 갱신된 데이터를 받아오지 못할 경우를 방지함
     	- contentType : false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
@@ -236,7 +224,12 @@ function sendFile(file, editor) {
         processData: false,
         enctype: 'multipart/form-data',
         success: (img_name) => {
-
+        	/*
+        	0 = jpg 형식이 아님.
+        	1 = 3MB 초과
+        	그외는 에디터에 이미지 추가
+        	*/
+        	
             if (0 == img_name) {
                 alert("이미지는 jpg 형식만 가능합니다");
             } else if (1 == img_name) {
@@ -245,11 +238,7 @@ function sendFile(file, editor) {
                 $(editor).summernote('insertImage', img_name);
             }
 
-        }, error: () => {
-
-            alert("ajax통신 실패!!!");
-
-        }
+        }, error: () => alert("이미지 업로드를 실패하였습니다")
     });
 }
 
@@ -317,7 +306,8 @@ function uploadFile(e) { // 파일첨부 실행
     
 }
 
-function fileValidation(file) { // 이미지 유효성 검사
+// 이미지 유효성 검사
+function fileValidation(file) { 
     if ($('.thumb').length > 4) { // 이미지는 최대 5장까지만
         alert("이미지는 최대 5장까지 가능합니다");
         return true;
@@ -330,7 +320,8 @@ function fileValidation(file) { // 이미지 유효성 검사
     }
 }
 
-function preview (file, idx) { // 미리보기 생성
+// 미리보기 생성
+function preview (file, idx) {
     let reader = new FileReader(); // 파일을 읽기 위한 FileReader객체 생성
 
     reader.onload = (e) => { // 파일 읽어들이기를 성공했을때 홀출되는 이벤트 핸들러
@@ -347,7 +338,8 @@ function preview (file, idx) { // 미리보기 생성
     reader.readAsDataURL(file); // File내용을 읽어 dataURL형식의 문자열로 저장
 }
 
-$("#thumbnails").on("click", ".close", (e) => { // 미리보기 삭제
+// 미리보기 삭제
+$("#thumbnails").on("click", ".close", (e) => {
     let idx = $(e.target).attr('data-idx');
     uploadFiles[idx].upload = 'disable'; // 삭제된 항목은 업로드하지 않기 위해 플래그 생성
     $(e.target).parent().remove(); // 프리뷰 삭제
@@ -355,23 +347,53 @@ $("#thumbnails").on("click", ".close", (e) => { // 미리보기 삭제
 
 /* 상품정보 - 이미지 등록 끝 */
 
-$("#btnSubmit").on("click", () => {
-    let formData = new FormData();
+
+function productInsert() {
+	let formData = new FormData();
     $.each(uploadFiles, (i, file) => {
         if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
-            formData.append('upload-file', file, file.name);
+            formData.append('file', file);
     });
+    
     $.ajax({
-        url: '/api/etc/file/upload',
+        url: 'thumbnailsUpload.yb',
         data: formData,
         type: 'post',
         contentType: false,
         processData: false,
-        success: (ret) => {
-            alert("완료");
-        }
+        success: (imgSrcList) => {
+        	console.log(imgSrcList);
+        	if(imgSrcList == null) {
+        		console.log(11);
+        	}
+        	ss();
+    	}, error: () => alert("이미지 업로드를 실패하였습니다")
     });
-});
+};
+
+function ss() {
+	let prama = $('.product--form').serialize();
+	alert(prama);
+}
+
+
+//$("#btnSubmit").on("click", () => {
+//    let formData = new FormData();
+//    $.each(uploadFiles, (i, file) => {
+//        if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
+//            formData.append('upload-file', file, file.name);
+//    });
+//    $.ajax({
+//        url: '/api/etc/file/upload',
+//        data: formData,
+//        type: 'post',
+//        contentType: false,
+//        processData: false,
+//        success: (ret) => {
+//            alert("완료");
+//        }
+//    });
+//});
 
 $('document').ready(() => {
     // 경매기간 초기값
@@ -388,8 +410,9 @@ $('document').ready(() => {
 
         callbacks: {
             onImageUpload: (files) => {
+            	let summernote = $('#summernote');
                 for (let i = files.length - 1; i >= 0; i--) {
-                    sendFile(files[i], this);
+                	editorImgUpload(files[i], summernote);
                 }
             }
         }
