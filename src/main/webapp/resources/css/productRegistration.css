@@ -474,6 +474,12 @@ li {list-style: none;}
     padding: 0 10px;
     flex-wrap: nowrap;
     overflow: auto;
+    /* 드래그방지 */
+	-ms-user-select: none; 
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .thumb {
@@ -489,13 +495,15 @@ li {list-style: none;}
     height: 100%;
     border: 1px solid #888;
 }
+
 .thumb > .close {
     position: absolute;
-    top: -15px;
-    right: 2px;
+    top: -19px;
+    right: 0px;
     cursor: pointer;
     opacity: .5;
-    font-size: 15px;
+    font-size: 22px;
+    font-weight: 1000;
 }
 
 .thumb > p {
@@ -520,7 +528,7 @@ li {list-style: none;}
 }
 /* 경매 설정 끝 */
 
-/* 배송 설정 시작 */
+/* 거래 설정 시작 */
 .delivery--subtitle .material-icons::before {
     content: "거래 설정";
 }
@@ -528,7 +536,7 @@ li {list-style: none;}
 .form--delivery .form_wrap--items__contents .directArea {
     width: 350px;
 }
-/* 배송 설정 끝 */
+/* 거래 설정 끝 */
 
 /* 기타 설정 시작 */
 .other--subtitle .material-icons::before {

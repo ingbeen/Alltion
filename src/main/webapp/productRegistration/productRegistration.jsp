@@ -6,12 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	
+	<link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/productRegistration.css">
     <link rel="stylesheet" href="resources/css/summernote/summernote-lite.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>All-tion</title>
@@ -19,18 +18,28 @@
 
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
+    <!-- top 키 -->
+    <div id="topKey" class="topKey_btn" >
+        <span class="material-icons">
+            keyboard_arrow_up
+        </span>
+    </div>
+    <!-- 헤더 -->
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
                 <p>
-                    <a href="">고객 센터</a>
+                    <a href="" id="clock"></a>
                 </p>
                 <ul>
                     <li>
-                        <a href="#">로그인</a>
+                        <a href="loginForm.html">로그인</a>
                     </li>
                     <li>
-                        <a href="#">회원 가입</a>
+                        <a href="joinForm.html">회원 가입</a>
+                    </li>
+                    <li>
+                        <a href="#">고객 센터</a>
                     </li>
                 </ul>
             </div>
@@ -38,7 +47,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="#">ALL-TION</a>
+                    <a href="index.html">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -65,7 +74,7 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="#">
+                        <a href="mypage.html">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
@@ -86,6 +95,7 @@
             </div>
         </div>
     </div>
+    <!-- !! 기재해야 될 코드 여기에서부터 입력 start -->
 
     <!-- 경매등록 시작 -->
 
@@ -98,6 +108,7 @@
 
         <!-- 입력폼 -->
         <form name="product_form" class="product--form">
+        	<input type="hidden" name="product_id" value=${userId }>
 
             <!-- 카테고리 시작 -->
             <div class="form--category">
@@ -251,7 +262,7 @@
             </div>
             <!-- 경매 설정 끝 -->
 
-            <!-- 배송 설정 시작 -->
+            <!-- 거래 설정 시작 -->
             <div class="form--delivery">
                 <div class="delivery--subtitle">
                     <span class="material-icons">done</span>
@@ -264,13 +275,13 @@
                         </div>
                         <div class="flexCenter form_wrap--items__contents">
                             <label>
-                                <input type="radio" name="product_delivery" value="10" checked>착불
+                                <input type="radio" name="product_delivery" value="before" checked>착불
                             </label>
                             <label>
-                                <input type="radio" name="product_delivery" value="20">선불
+                                <input type="radio" name="product_delivery" value="after">선불
                             </label>
                             <label>
-                                <input type="radio" name="product_delivery" value="0">불가능
+                                <input type="radio" name="product_delivery" value="x">불가능
                             </label>
                         </div>
                     </div>
@@ -282,10 +293,12 @@
                         <div class="flexCenter form_wrap--items__contents">
                             <div class="flexCenter minH50">
                                 <label>
-                                    <input type="radio" name="direct" value="0" onclick="changeInput(this)" checked>불가능
+                                    <input type="radio" name="direct" value="0" 
+                                    	onclick="changeInput(this)" checked>불가능
                                 </label>
                                 <label>
-                                    <input type="radio" name="direct" value="1" onclick="changeInput(this)">가능
+                                    <input type="radio" name="direct" value="1" 
+                                    	onclick="changeInput(this)">가능
                                 </label>
                             </div>
                             <div>
@@ -298,7 +311,7 @@
 
                 </div>
             </div>
-            <!-- 배송 설정 끝 -->
+            <!-- 거래 설정 끝 -->
 
             <!-- 기타 설정 시작 -->
             <div class="form--other">
@@ -324,7 +337,7 @@
                             <div>
                                 <span class="fw700">금액 </span>
                                 <input class="purchasePrice readonlyfalse" type="text" name="product_purchase_price"
-                                    readonly>
+                                    disabled>
                             </div>
                         </div>
                     </div>
@@ -370,7 +383,7 @@
 
             <!-- submit -->
             <div class="form--button">
-                <a class="form-button__submit" onclick="productInsert()">등록</a>
+                <a class="form-button__submit" onclick="productSubmit()">등록</a>
                 <a class="form-button__cancel" onclick="product_form.reset()">다시 작성</a>
             </div>
 
@@ -378,6 +391,7 @@
     </section>
     <!-- 경매등록 끝 -->
 
+    <!-- !! 기재해야 될 코드 여기에서부터 입력 end -->
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -420,12 +434,12 @@
             </ul>
         </div>
         <div class="lower_footer">
-
-        </div>
+        </div>        
     </div>
 
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="resources/js/common.js"></script>
     <script src="resources/js/productRegistration.js"></script>
     <script src="resources/js/summernote/summernote-lite.js"></script>
     <script src="resources/js/summernote/summernote-ko-KR.js"></script>

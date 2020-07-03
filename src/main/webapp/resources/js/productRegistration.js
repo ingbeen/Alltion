@@ -82,7 +82,7 @@ function changeCategory(item) {
             <select class="category--select__02" name="product_category_2" \
             	size="7" dionchange="changeCategory(this)" \
             	style="display: none;"> \
-                <option value="cate1201" selected>기타잡홥</option> \
+                <option value="cate1201" selected>기타잡화</option> \
             </select>';
 
             $('.category--select__01').after(selectOutput);
@@ -115,19 +115,20 @@ function changeCategory_2(value) {
     $('.category--select__01').next().remove(); // 기존에 있던 2차카테고리 삭제
     
     /* 2차 카테고리 태그 작성 시작 */
-    selectOutput = '\
-    	<select class="category--select__02" name="product_category_2" \
-    		size="7" onchange="changeCategory(this)"> \
-            <option value="">- 선택해주세요 -</option>';
+    selectOutput = `<select class="category--select__02" 
+    	name="product_category_2" size="7" onchange="changeCategory(this)">
+            <option value="">- 선택해주세요 -</option>`;
     
         for(var i = 1; i < arguments.length; i ++){ // 2차 카테고리 갯수만큼 루프
             if (i < 10) { // 2차 카테고리 넘버가 한자리 수이면 앞에 0 붙이기. 예) 0 + 1 = 01
                 categoryNumber = 0 + String(i);
             }
             // 함수의 0번쨰 파라미터를 제외한 나머지 갯수만큼 option태그 생성
-            selectOutput += '<option value="' + value + categoryNumber + '">' + arguments[i] + '</option>';
+            selectOutput += `<option value="${value}${categoryNumber}">
+            	${arguments[i]}</option>`;
         }
-    selectOutput += '</select>';
+        
+    selectOutput += `</select>`;
     /* 2차 카테고리 태그 작성 끝 */
 
     $('.category--select__01').after(selectOutput);
@@ -154,12 +155,12 @@ function changeInput(item) {
     // 변경된 값이 즉시구매일때
     else if (name == 'purchase') {
         if (value == 0) {
-            $('.purchasePrice').attr("readonly", true);
+            $('.purchasePrice').attr("disabled", true);
             $('.purchasePrice').addClass('readonlyfalse');
             $('.purchasePrice').val('');
         }
         if (value == 1) {
-            $('.purchasePrice').attr("readonly", false);
+            $('.purchasePrice').attr("disabled", false);
             $('.purchasePrice').removeClass('readonlyfalse');
             $('.purchasePrice').focus();
         }
@@ -245,6 +246,7 @@ function editorImgUpload(file, editor) {
 /* 상품정보 - 이미지 등록 시작 */
 
 let uploadFiles = []; // 업로드 할 이미지가 할당 될 배열
+let thumbnailCount = 0;
 
 $('#drop')
     .on("dragover", dragOver) // 드래그 요소가 들어왔을때
@@ -282,7 +284,7 @@ function uploadFile(e) { // 파일첨부 실행
 
         if (fileValidation(file)) { // 이미지 유효성 검사
             return;
-        };
+        }
 
         idx = uploadFiles.push(file); // 업로드 목록에 추가
         preview(file, idx - 1); // 미리보기 만들기
@@ -294,11 +296,11 @@ function uploadFile(e) { // 파일첨부 실행
 
         for (let i = 0; i < files.length; i++) { // 이미지 한개씩 할당
             file = files[i]; // 이미지 할당
-
+            
             if (fileValidation(file)) { // 이미지 유효성 검사
                 return;
-            };
-
+            }
+            
             idx = uploadFiles.push(file); // 업로드 목록에 추가
             preview(file, idx - 1); // 미리보기 만들기
         }
@@ -308,7 +310,7 @@ function uploadFile(e) { // 파일첨부 실행
 
 // 이미지 유효성 검사
 function fileValidation(file) { 
-    if ($('.thumb').length > 4) { // 이미지는 최대 5장까지만
+    if (thumbnailCount > 4) { // 이미지는 최대 5장까지만
         alert("이미지는 최대 5장까지 가능합니다");
         return true;
     } else if (file.size > 3145728) { // 용량 3MB 유효성 검사
@@ -318,24 +320,28 @@ function fileValidation(file) {
         alert("이미지는 jpg 형식만 가능합니다");
         return true;
     }
+    
+    return false;
 }
 
 // 미리보기 생성
 function preview (file, idx) {
     let reader = new FileReader(); // 파일을 읽기 위한 FileReader객체 생성
-
-    reader.onload = (e) => { // 파일 읽어들이기를 성공했을때 홀출되는 이벤트 핸들러
-        let thumb = '\
-        <div class="thumb"> \
-            <div class="close" data-idx="' + idx + '">❌</div> \
-            <img src="' + e.target.result + '"/> \
-            <p>' + file.name + '</p> \
-        </div>';
-        
+    
+    reader.onload = (e) => { // 파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+    	let thumb = `
+    	<div class="thumb">
+    		<span class="material-icons close" data-idx="${idx}">clear</span>
+    		<img src="${e.target.result}"/>
+    		<p>${file.name}</p>
+    	</div>`;
+    	
         $("#thumbnails").append(thumb);
     };
-
+    
     reader.readAsDataURL(file); // File내용을 읽어 dataURL형식의 문자열로 저장
+    thumbnailCount++; // 썸네일 갯수 증가
+	$('#drop').css({"font-size": "0"}); // 드롭박스 안내문구 안보이게
 }
 
 // 미리보기 삭제
@@ -343,57 +349,77 @@ $("#thumbnails").on("click", ".close", (e) => {
     let idx = $(e.target).attr('data-idx');
     uploadFiles[idx].upload = 'disable'; // 삭제된 항목은 업로드하지 않기 위해 플래그 생성
     $(e.target).parent().remove(); // 프리뷰 삭제
+    
+    // 썸네일 갯수 감소
+    thumbnailCount--;
+    if (thumbnailCount == 0) { // 드롭박스 안내문구 보이게
+    	$('#drop').css({"font-size": "14px"});
+    }
 });
 
 /* 상품정보 - 이미지 등록 끝 */
 
-
-function productInsert() {
-	let formData = new FormData();
-    $.each(uploadFiles, (i, file) => {
-        if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
-            formData.append('file', file);
-    });
-    
-    $.ajax({
-        url: 'thumbnailsUpload.yb',
-        data: formData,
-        type: 'post',
-        contentType: false,
-        processData: false,
-        success: (imgSrcList) => {
-        	console.log(imgSrcList);
-        	if(imgSrcList == null) {
-        		console.log(11);
-        	}
-        	ss();
-    	}, error: () => alert("이미지 업로드를 실패하였습니다")
-    });
-};
-
-function ss() {
-	let prama = $('.product--form').serialize();
-	alert(prama);
-}
-
-
-//$("#btnSubmit").on("click", () => {
-//    let formData = new FormData();
-//    $.each(uploadFiles, (i, file) => {
+// 상품(경매) 등록 - 버튼눌렀을때(썸네일이미지 등록부터)
+function productSubmit() {
+	
+	if (formCheck()) {
+		return;
+	}
+	
+//	let formData = new FormData(); 
+//    $.each(uploadFiles, (idx, file) => { // 이미지등록(썸네일)에 있는 파일들
 //        if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
-//            formData.append('upload-file', file, file.name);
+//            formData.append('file', file);
 //    });
-//    $.ajax({
-//        url: '/api/etc/file/upload',
+//    
+//    $.ajax({ // 상품 등록전 썸네일에 올라온 이미지들을 업로드한다
+//        url: 'thumbnailsUpload.yb',
 //        data: formData,
 //        type: 'post',
 //        contentType: false,
 //        processData: false,
-//        success: (ret) => {
-//            alert("완료");
-//        }
+//        success: (imgSrcList) => { // 이미지경로를 담은 배열을 파라미터로 넘기고 상품등록 진행
+//        	productInsert(imgSrcList);
+//    	}, error: () => alert("이미지 업로드를 실패하였습니다")
 //    });
-//});
+};
+
+function formCheck() {
+	let category_2 = $('.category--select__02');
+	let subject = $('input[name=product_subject]');
+	let content = $('.note-editable');
+	
+	console.log();
+	
+//	if (!(category_2.length == 1 && category_2.val().startsWith('cate'))) {
+//		alert("카테고리를 선택해주세요");
+//	} else if (subject.val().trim().length < 3) {
+//		alert("상품제목을 최소 세글자 이상 입력해주세요");
+//	} else if (content.text().length < 10) {
+//		alert("상품설명을 최소 열글자 이상 입력해주세요");
+//	} else 
+		if (content.text().length < 10) {
+		alert("상품설명을 최소 열글자 이상 입력해주세요");
+	}
+}
+
+// 상품(경매) 등록 - DB저장
+function productInsert(imgSrcList) {
+	let formData = $('.product--form').serialize(); // 사용자가 입력한 내용
+	$.each(imgSrcList, (idx, imgSrc) => { // 이미지등록(썸네일)에 있는 이미지
+		formData += `&product_img_${idx + 1}=${imgSrc}`;
+	})
+	console.log(formData);
+	
+	$.ajax({ // 상품 등록전 썸네일에 올라온 이미지들을 업로드한다
+        url: 'productInsert.yb',
+        type: 'post',
+        data: formData,
+//        dataType: "json",
+        success: () => alert("성공"), 
+        error: () => alert("경매 등록을 실패하였습니다")
+    });
+}
 
 $('document').ready(() => {
     // 경매기간 초기값

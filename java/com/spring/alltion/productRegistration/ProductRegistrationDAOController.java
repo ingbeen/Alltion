@@ -13,7 +13,9 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -44,57 +46,63 @@ public class ProductRegistrationDAOController {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		// 업로드할 폴더 경로
-		// Servers 폴더의 server.xml <host>태그 안에 아래 문구 삽입(하단쪽)
-		// <Context docBase="C:\AlltionUpload"  path="alltion/AlltionUpload" reloadable="true"/>
-		// 실제 폴더도 직접 생성해주자
-		realFolder = "C:\\AlltionUpload";
-		uuid = UUID.randomUUID();
+		try {
+			// 업로드할 폴더 경로
+			// Servers 폴더의 server.xml <host>태그 안에 아래 문구 삽입(하단쪽)
+			// <Context docBase="C:\AlltionUpload"  path="alltion/AlltionUpload" reloadable="true"/>
+			// 실제 폴더도 직접 생성해주자
+			realFolder = "C:\\AlltionUpload";
+			uuid = UUID.randomUUID();
 
-		// 업로드할 파일 이름
-		originalFilename = file.getOriginalFilename();
-		userId = (String) session.getAttribute("userId");
-		savedFilename = uuid + "+" + userId + "+" + originalFilename;
-		
-		// 파일용량 유효성 검사, 3MB가 넘으면 리턴
-		size = file.getSize();
-		if (size > 3145728) {
-			out.println(1);
+			// 업로드할 파일 이름
+			originalFilename = file.getOriginalFilename();
+			userId = (String) session.getAttribute("userId");
+			savedFilename = uuid + "+" + userId + "+" + originalFilename;
+			
+			// 파일용량 유효성 검사, 3MB가 넘으면 리턴
+			size = file.getSize();
+			if (size > 3145728) {
+				out.println(1);
+				out.close();
+				return;
+			}
+			
+			// 확장자 유효성 검사, jpg가 아니면 리턴
+			extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+			if(!(extension.equals("jpg"))) {
+				out.println(0);
+				out.close();
+				return;
+			}
+			
+			// 이미지 가로폭 할당
+			image = ImageIO.read(file.getInputStream());
+			imageWidth = image.getWidth(null);
+			
+			
+			// 원본 이미지 경로 + 파일명
+			filepath = realFolder + "\\" + savedFilename;
+			
+			// 파일 저장
+			f = new File(filepath);
+			if (!f.exists()) {
+				f.mkdirs();
+			}
+			file.transferTo(f);
+			
+			// 이미지 가로폭 유효성 검사
+			if (imageWidth > 1000) {
+				savedFilename = imageResize(filepath, image, savedFilename);
+			}
+			
+			// 에디터에 이미지 경로 출력
+			out.println("/alltion/AlltionUpload/" + savedFilename);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			out.close();
-			return;
 		}
-
-		// 확장자 유효성 검사, jpg가 아니면 리턴
-		extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-		if(!(extension.equals("jpg"))) {
-			out.println(0);
-			out.close();
-			return;
-		}
-		
-		// 이미지 가로폭 할당
-		image = ImageIO.read(file.getInputStream());
-		imageWidth = image.getWidth(null);
-		
-		
-		// 원본 이미지 경로 + 파일명
-		filepath = realFolder + "\\" + savedFilename;
-		
-		// 파일 저장
-		f = new File(filepath);
-		if (!f.exists()) {
-			f.mkdirs();
-		}
-		file.transferTo(f);
-		
-		// 이미지 가로폭 유효성 검사
-		if (imageWidth > 1000) {
-			savedFilename = imageResize(filepath, image, savedFilename);
-		}
-		
-		// 에디터에 이미지 경로 출력
-		out.println("/alltion/AlltionUpload/" + savedFilename);
-		out.close();
 	}
 	
 	// 썸네일 이미지 업로드
@@ -111,43 +119,60 @@ public class ProductRegistrationDAOController {
 		String filepath;// 원본 이미지 경로 + 파일명
 		File f; // 저장경로와 함께 파일을 담을 객체 생성
 		
-		List<String> imgSrcList = new ArrayList<String>(); //
-		String imgSrc; // 
+		List<String> imgSrcList = new ArrayList<String>(); // 이미지 경로를 담을 배열
+		String imgSrc; // 이미지 경로
 		
-		// 등록된 이미지가 없으면 리턴
-		if (mtfRequest.getContentLength() <= 44) {
-			return null;
+		try {
+			// 등록된 이미지가 없으면 리턴
+			if (mtfRequest.getContentLength() <= 44) {
+				return null;
+			}
+			
+			// 이미지가 저장될 실제 경로
+			realFolder = "C:\\AlltionUpload";
+
+			// 로그인한 아이디
+			userId = (String) session.getAttribute("userId");
+			
+			// 이미지 파일의 갯수만큼 반복
+			fileList = mtfRequest.getFiles("file");
+			for (MultipartFile file : fileList) {
+				// 실제 파일이 저장될 파일이름
+				uuid = UUID.randomUUID();
+				originalFilename = file.getOriginalFilename();
+				savedFilename = uuid + "+" + userId + "+" + originalFilename;
+				
+				// 실제 파일이 저장될 경로 + 파일이름
+				filepath = realFolder + "\\" + savedFilename;
+				
+				// 파일 저장
+				f = new File(filepath);
+				if (!f.exists()) {
+					f.mkdirs();
+				}
+				file.transferTo(f);
+				
+				// 이미지 경로 배열에 추가
+				imgSrc = "/alltion/AlltionUpload/" + savedFilename;
+				imgSrcList.add(imgSrc);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		// 이미지가 저장될 실제 경로
-		realFolder = "C:\\AlltionUpload";
-
-		// 로그인한 아이디
-		userId = (String) session.getAttribute("userId");
-		
-		// 이미지 파일의 갯수만큼 반복
-		fileList = mtfRequest.getFiles("file");
-		for (MultipartFile file : fileList) {
-			// 실제 파일이 저장될 파일이름
-			uuid = UUID.randomUUID();
-			originalFilename = file.getOriginalFilename();
-			savedFilename = uuid + "+" + userId + "+" + originalFilename;
-			
-			// 실제 파일이 저장될 경로 + 파일이름
-			filepath = realFolder + "\\" + savedFilename;
-			
-			// 파일 저장
-			f = new File(filepath);
-			if (!f.exists()) {
-				f.mkdirs();
-			}
-			file.transferTo(f);
-			
-			imgSrc = "/alltion/AlltionUpload/" + savedFilename;
-			imgSrcList.add(imgSrc);
-        }
-		
+		// 이미지 경로 리스트 반환
 		return imgSrcList;
+	}
+	
+	// 상품(경매) 등록
+	@RequestMapping(value = "productInsert.yb", produces="application/json;charset=UTF-8")
+	public void productInsert(ProductVO productVO) {
+		
+		try {
+			System.out.println(productVO.getProduct_id());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// 이미지 리사이즈
@@ -162,6 +187,8 @@ public class ProductRegistrationDAOController {
         double ratio; // 이미지 축소 비율
         int newWidth; // resize 된 가로
         int newHeight; // resize 된 세로
+        
+        String newSavedFilename = null; // 새로운 resize 파알명
  
         try{
             // 원본 이미지 사이즈 가져오기
@@ -188,12 +215,15 @@ public class ProductRegistrationDAOController {
             g.dispose();
             ImageIO.write(newImage, "jpg", new File(resizeSavedFilename));
             
+            // 새로운 resize 파알명
+            newSavedFilename = new StringBuffer(savedFilename)
+            		.insert(savedFilename.lastIndexOf("."), "_resize").toString();
+            
         } catch (Exception e){
             e.printStackTrace();
         }
         
-        // resize 파일명 리턴
-        String newSavedFilename = new StringBuffer(savedFilename).insert(savedFilename.lastIndexOf("."), "_resize").toString();
+        // 리사이즈된 새로운 파일명 반환
 		return newSavedFilename;
     }
 }
