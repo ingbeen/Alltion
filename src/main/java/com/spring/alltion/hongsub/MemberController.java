@@ -16,7 +16,8 @@ public class MemberController {
 	@RequestMapping("/login.hs")
 	public String login(@RequestParam(value="id")String id,@RequestParam(value="password")String password, HttpSession session)throws Exception{
 		String res = memberService.userCheck(id,password);
-		session.setAttribute("id", res);
+		
+		session.setAttribute("userId", res);
 		if(res==id) {
 			System.out.println("로그인 성공.");
 			return "redirect:/boardlist.hs";

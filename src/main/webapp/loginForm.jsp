@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
-	String id = (String)session.getAttribute("id");
+	String id = (String)session.getAttribute("userId");
 %>
 <html>
 <head>
@@ -62,7 +62,7 @@ function check_input()
 </script>
 </head>
 <body>
-접속 중인 아이디: ${id }
+접속 중인 아이디: <%=id %>
 <form name="loginform" action="./login.hs" method="post">
 <table border=1 align=center>
 	<tr>

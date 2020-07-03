@@ -17,6 +17,9 @@ public class BoardController {
 	@Autowired
 	private MemberServiceImpl memberService;
 	
+	@Autowired
+	private CommentServiceImpl commentService;
+	
 	@RequestMapping("/boardlist.hs")
 	public String boardlist(HttpServletRequest request,Model model)throws Exception {
 		boardService.getBoardList(request,model);
@@ -30,8 +33,8 @@ public class BoardController {
 		model.addAttribute("bvo",bvo);
 		MemberVO mvo = memberService.getMemberInfo(bvo.getProduct_id());
 		model.addAttribute("mvo",mvo);
-		
-		
+		int count_comment_list = commentService.getCount_comment(product_number);
+		model.addAttribute("count_comment_list",count_comment_list-1);
 		
 		return "board/board_detail";
 	}

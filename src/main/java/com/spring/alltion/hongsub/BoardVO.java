@@ -20,6 +20,7 @@ public class BoardVO {
 	private int product_number;
 	private String product_id;
 	private String product_subject;
+	private String product_top_bidder;
 	private String product_img1;
 	private String product_img2;
 	private String product_img3;
@@ -93,5 +94,11 @@ public class BoardVO {
 	}
 	public void setProduct_now_price(int product_now_price) {
 		this.product_now_price = product_now_price;
+	}
+	public String getProduct_top_bidder() {
+		return product_top_bidder;
+	}
+	public void setProduct_top_bidder(String product_top_bidder) {
+		this.product_top_bidder = product_top_bidder;
 	}
 }

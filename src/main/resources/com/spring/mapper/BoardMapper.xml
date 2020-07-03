@@ -14,7 +14,7 @@
 	</select>
 	
 	<update	id="updateBoard" parameterType="BoardVO">
-		update product set product_now_price=#{price} where product_number=#{bid_product_number}
+		update product set product_now_price=#{price},product_top_bidder=#{product_top_bidder} where product_number=#{bid_product_number}
 	</update>
 	
 	<select id="selectNowPrice" parameterType="int" resultType="int">

@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.alltion.hongsub.*" %>
 <%
-	String id = (String)session.getAttribute("id");
+	String id = (String)session.getAttribute("userId");
 	BoardVO bvo = (BoardVO)request.getAttribute("bvo");
 	String writerId = bvo.getProduct_id();
 	MemberVO mvo = (MemberVO)request.getAttribute("mvo");
+	String count_comment_list = request.getAttribute("count_comment_list").toString();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -224,7 +226,7 @@
                         </li>
                         <li>
                             <label for="boarddate">최고 응찰자</label>
-                            <p><br></p>
+                            <p><%=bvo.getProduct_top_bidder() %><br></p>
                         </li>
                         <li>
                             <label for="boarddate">판매자 등급</label>
@@ -310,7 +312,7 @@
                 <a type="button" onclick="move(3)">문의 사항</a>
             </li>
             <li>
-                <a type="button" onclick="move(4)">댓 글 (10)</a>
+                <a type="button" onclick="move(4)">댓 글 (<%=count_comment_list %>)</a>
             </li>
         </ul>
 
@@ -362,7 +364,7 @@
                 <a type="button" onclick="move(3)">문의 사항</a>
             </li>
             <li>
-                <a type="button" onclick="move(4)">댓 글 (10)</a>
+                <a type="button" onclick="move(4)">댓 글 (<%=count_comment_list %>)</a>
             </li>
         </ul>
 
@@ -374,16 +376,16 @@
             </div>
             <div class="img_1">
                 <div align="center">
-                    <img src="<%=bvo.getProduct_img1() %>" align="center"></div>
+                    <img src="<%=bvo.getProduct_img1() %>"></div>
             </div>
             <div class="img_2">
                 <div align="center">
-                    <img src="<%=bvo.getProduct_img2() %>" align="center">
+                    <img src="<%=bvo.getProduct_img2() %>">
                 </div>
             </div>
             <div class="img_3">
                 <div align="center">
-                    <img src="<%=bvo.getProduct_img3() %>" align="center">
+                    <img src="<%=bvo.getProduct_img3() %>">
                 </div>
             </div>
 
@@ -398,7 +400,7 @@
                     <a style="color:white;">문의 사항</a>
                 </li>
                 <li>
-                    <a type="button" onclick="move(4)">댓 글 (10)</a>
+                    <a type="button" onclick="move(4)">댓 글 (<%=count_comment_list %>)</a>
                 </li>
             </ul>
         </div>
@@ -428,13 +430,13 @@
                 <a type="button" onclick="move(3)">문의 사항</a>
             </li>
             <li style="border-radius: 4px 4px 0 0;background-color:#BBBBBB;font-weight: bold;">
-                <a style="color:white;">댓 글 (10)</a>
+                <a style="color:white;">댓 글 (<%=count_comment_list %>)</a>
             </li>
         </ul>
 
         <!-- ↓↓댓 글 항목.↓↓-->
         <div class="comment_div">
-            <div class="comment_title">댓 글 <font size="2"> |악의적인 비방글이나 욕설글은 무통보 삭제 되오니 이점 유의바랍니다</font>&nbsp;&nbsp;<input type="checkbox" id="secret" value="1"><font size="3" style="color:cornflowerblue;"> 비밀글</font></div>
+            <div class="comment_title">댓 글 <font size="2"> |악의적인 비방글이나 욕설글은 무통보 삭제 되오니 이점 유의바랍니다</font>&nbsp;&nbsp;<input type="checkbox" id="secret"><font size="3" style="color:cornflowerblue;"> 비밀글</font></div>
             <textarea id="comment_content_input" placeholder="  *댓글을 작성해주세요..
   *비밀글 입력시 판매자와 관리자만 볼 수 있습니다."></textarea>
             <br>
@@ -746,7 +748,8 @@
         let limit_price = <%=bvo.getProduct_purchase_price()%>;
         //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
-      	// ↓↓응찰하기 버튼 클릭시
+        
+        // ↓↓응찰하기 버튼 클릭시
       	function bidList(){
 			$.ajax({
 				url : '/alltion/bid_list.hs',
@@ -819,6 +822,7 @@
 		let writerId = '<%=writerId%>'; 
 		
 		function commentList(){
+			
 			$.ajax({
 				url : '/alltion/commentlist.hs',
 				type : 'post',
@@ -828,19 +832,20 @@
 				success : function(data){
 					var a='';
 					$.each(data,function(key,value){
+						
 						a += '<div class="comment_list1">';
 						a += '<div class="comment_number">NO. '+value.comment_list_no+'</div>';
 						a += '<div class="comment_id"> 작성자: '+value.comment_id+'</div>';
-						if(value.comment_secret.equals("1")){
-							if(sessionid.equals(value.comment_id)||sessionid.equals(writerId)){
-								a += '<div class="comment_content>"'+value.comment_content+'</div>';
+						if(value.comment_secret=="1"){
+							if(sessionid==value.comment_id||sessionid==writerId){
+								a += '<div class="comment_content">'+value.comment_content+'</div>';
 							}else{
 								a += '<div class="comment_content">비밀글 입니다.</div>';
 							}
 								
-						}else if(value.comment_is_deleted.equals("1")){
-							if(sessionid.equals(value.comment_id)){
-								a += '<div class="comment_content>"'+value.comment_content+'</div>';
+						}else if(value.comment_is_deleted=="1"){
+							if(sessionid==value.comment_id){
+								a += '<div class="comment_content">'+value.comment_content+'</div>';
 							}else{
 								a += '<div class="comment_content">삭제된 글 입니다.</div>';
 							}
@@ -858,15 +863,21 @@
 			});
 		}
 		
-		let comment_content_input = document.getElementById('comment_content_input').val();
-		let comment_secret = document.getElementById('secret').val();
+		// ↓↓ 댓글 달기.
+		let comment_content_input = document.getElementById('comment_content_input');
+		let comment_secret = document.getElementById('secret');
+		let comment_secret_value="";
 		
 		function commentInsert(){
-			alert(comment_content_input);
+			if(comment_secret.checked==true){
+				comment_secret_value = "1";
+			}else{
+				comment_secret_value = "0";
+			}
 			$.ajax({
 				url: '/alltion/commentinsert.hs',
 				type : 'POST',
-				data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content_input':comment_content_input,'comment_secret':comment_secret},
+				data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
 				dataType : 'json',
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 				success:function(data){

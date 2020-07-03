@@ -28,7 +28,8 @@ public class BidServiceImpl {
 		BoardMapper boardmapper = sqlSession.getMapper(BoardMapper.class);
 		int bid_product_number = bidvo.getBid_product_number();
 		int price = 0;
-		System.out.println("bid_product_number"+bid_product_number);
+		String product_top_bidder = " ";
+		System.out.println("bid_product_number = "+bid_product_number);
 		//응찰리스트의 수를 구함 =>응찰리스트 순서 정렬용.
 		int res = bidmapper.countBidList(bid_product_number);
 		bidvo.setBid_no(res);
@@ -45,7 +46,9 @@ public class BidServiceImpl {
 			bidvo.setBid_price(price); 
 		}
 		//상세보기의 현재가 갱신
-		boardmapper.updateBoard(price,bid_product_number);
+		product_top_bidder = bidvo.getBid_id();
+		System.out.println("product_top_bidder = "+product_top_bidder);
+		boardmapper.updateBoard(price,bid_product_number,product_top_bidder);
 		
 		return bidmapper.bidInsert(bidvo);
 	}
@@ -61,8 +64,8 @@ public class BidServiceImpl {
 		int res = bidmapper.countBidList(bid_product_number);
 		bidvo.setBid_no(res);
 		bidvo.setBid_price(price);
-		
-		boardmapper.updateBoard(price, bid_product_number);
+		String product_top_bidder = bidvo.getBid_id();
+		boardmapper.updateBoard(price, bid_product_number,product_top_bidder);
 		
 		return bidmapper.bidInsert(bidvo);
 	}

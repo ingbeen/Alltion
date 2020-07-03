@@ -18,12 +18,24 @@ public class CommentServiceImpl {
 		CommentMapper commentmapper = sqlSession.getMapper(CommentMapper.class);
 		
 		
-		return null;
+		return commentmapper.commentlist(comment_product_number);
 	}
 
 	public int commentInsertService(CommentVO commentvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		CommentMapper commentmapper = sqlSession.getMapper(CommentMapper.class);
+		int comment_product_number = commentvo.getComment_product_number();
+		int count = commentmapper.countcommentList(comment_product_number);
+		
+		commentvo.setComment_list_no(count);
+		
+		return commentmapper.commentinsert(commentvo);
+	}
+
+	public int getCount_comment(int product_number) {
+		CommentMapper commentmapper = sqlSession.getMapper(CommentMapper.class);
+		int count = commentmapper.countcommentList(product_number);
+		
+		return count;
 	}
 
 }

@@ -367,6 +367,7 @@
 	cursor: pointer;
 	font-size: 15px;
 	font-weight: bold;
+	margin-bottom : 30px;
 }
 
 #comment_btn:hover,
@@ -379,11 +380,17 @@
 	width:1150px;
 	height: 100px;
 	border-top: thin solid darkgray;
-	border-bottom: thin solid darkgray;
 }
 
 .comment_list1{
 	border-bottom: thin solid darkgray;
+}
+
+.comment_list1 .comment_number{
+	width:50px;
+}
+.comment_list1 .comment_id{
+	width:300px;
 }
 
 /*여기까지 product_information*/

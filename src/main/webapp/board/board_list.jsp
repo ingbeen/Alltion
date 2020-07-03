@@ -5,8 +5,8 @@
 <%@ page import="com.spring.alltion.hongsub.BoardVO" %>
 <%
 	String id = null;
-	if(session.getAttribute("id")!=null){
-		id = (String)session.getAttribute("id");
+	if(session.getAttribute("userId")!=null){
+		id = (String)session.getAttribute("userId");
 	}
 	ArrayList<BoardVO> boardList = (ArrayList<BoardVO>)request.getAttribute("boardlist");
 %>
@@ -17,7 +17,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-현재 접속중인 사용자: ${id }
+현재 접속중인 사용자: <%=id %>
+
 <form>
 	<div align="center">
 	<fieldset style="width:300px;">
