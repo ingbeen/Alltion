@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
     <style>
-    <style>
         .joinWrap {
             width: 700px;
             margin: 160px auto;
@@ -33,6 +32,16 @@
             margin-bottom: 50px;
             font-size: 24px;
             text-align: center;
+        }
+        .joinWrap h1 {
+            margin-top: 10px;
+            font-size: 25px;
+            text-align: left;
+        }
+        .joinWrap h4 {
+            margin-top: 10px;
+            font-size: 10px;
+            text-align: left;
         }
         
         .row_group {
@@ -221,8 +230,10 @@
         <h2>All-tion 회원 정보 수정</h2>
         <div class = "row_group">
             <div class = "join_row">
-                <label class = "join_title" text-align = "left">아이디</label><br>
-                <input type = "hidden" id = "member_id" class = "int"><%=membervo.getMember_id()%>
+                <label class = "join_title" text-align = "left">아이디</label>
+                <h1><%=membervo.getMember_id()%></h1>
+                <h4>아이디는 변경 불가능합니다.</h4>
+                <input type = "hidden" id = "member_id" class = "int">
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호</label>
@@ -244,7 +255,7 @@
             </div>  
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">휴대 전화 번호</label>
-                <input type = "text" id = "member_phone" class = "int" maxlength = "11">
+                <input type = "text" id = "member_phone" class = "int" maxlength = "11" placeholder="<%=membervo.getMember_phone() %>">
                 <input type = "button" value = "휴대전화 변경" class = "base_btn">
             </div>
             <input type = "button" value = "뒤로가기" class = "base_btn1"> 

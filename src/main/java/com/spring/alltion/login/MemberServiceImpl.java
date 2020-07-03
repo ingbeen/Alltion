@@ -17,10 +17,14 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int insertMember(MemberVO membervo) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);		
+		//if문은 일반회원 네이버 회원가입은 if문 실행 안함
+		if(membervo.getEmail() == "") {
 		String email = "";
 		email = membervo.getEmail1() + "@" + membervo.getEmail2();
+		System.out.println("asdasd" + email);
 		membervo.setEmail(email);
+		}
 		int res = memberMapper.insertMember(membervo);
 		return res;
 	}
