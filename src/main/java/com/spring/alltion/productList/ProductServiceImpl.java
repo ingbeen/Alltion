@@ -14,7 +14,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired(required=false)
 	private SqlSession sqlSession;
-	
+	/*
 	@Override
 	public List<ProductVO> getproductList(int page, int limit) {
 		// TODO Auto-generated method stub
@@ -28,13 +28,21 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productlist;
 	}
-
+*/
 	@Override
 	public int getListCount() {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		int res = productListMapper.getListCount();
 		return res;
+	}
+
+	@Override
+	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
+		return productlist;
 	}
 
 }

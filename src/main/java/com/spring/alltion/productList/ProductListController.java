@@ -1,5 +1,6 @@
 package com.spring.alltion.productList;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,23 @@ public class ProductListController {
 	
 	@Autowired
 	private ProductService productService;
-	
+	/*
 	@RequestMapping(value = "/productList.ms", method = RequestMethod.GET)
 	public String home() {
 	
 		return "productList/productList";
 	}
-	
-	@RequestMapping(value = "/productList22.ms", method = RequestMethod.GET)
+	*/
+	@RequestMapping(value = "/productList.ms", method = RequestMethod.GET)
 	public String getProductList(Model model, @RequestParam(value="page", required=false, defaultValue="1") int page) {
 		int limit = 16;
 		int listcount = productService.getListCount();
-		
-		List<ProductVO> productlist = productService.getproductList(page, limit);
+		int startrow = (page - 1) * 5 + 1;
+		int endrow = startrow + limit - 1;
+		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+		hashmap.put("startrow", startrow);
+		hashmap.put("endrow", endrow);
+		List<ProductVO> productlist = productService.getproductList(hashmap);
 		
 		// ÃÑ ÆäÀÌÁö ¼ö
 		int maxpage=(int)((double)listcount/limit+0.95);
@@ -44,6 +49,6 @@ public class ProductListController {
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
 		
-		return "productList/product_list";
+		return "productList/productList";
 	}
 }

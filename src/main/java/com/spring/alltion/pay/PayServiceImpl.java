@@ -22,7 +22,7 @@ public class PayServiceImpl implements PayService {
 		payMapper.insertPay(vo);
 		return;
 	}
-
+	
 	@Override
 	public void deletePay(String buyer_email) {
 		// TODO Auto-generated method stub

@@ -3,15 +3,16 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.spring.alltion.productList.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
- <!-- 
-	//List<ProductVO> productList=(List<ProductVO>)request.getAttribute("productlist");
-	//int listcount=((Integer)request.getAttribute("listcount")).intValue();
-	//int nowpage=((Integer)request.getAttribute("page")).intValue();
-	//int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
-	//int startpage=((Integer)request.getAttribute("startpage")).intValue();
-	//int endpage=((Integer)request.getAttribute("endpage")).intValue();
--->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
+ <% 
+	List<ProductVO> productList=(List<ProductVO>)request.getAttribute("productlist");
+	int listcount=((Integer)request.getAttribute("listcount")).intValue();
+	int nowpage=((Integer)request.getAttribute("page")).intValue();
+	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
+	int startpage=((Integer)request.getAttribute("startpage")).intValue();
+	int endpage=((Integer)request.getAttribute("endpage")).intValue();
+%>
 <!DOCTYPE html>
 <html>
 
@@ -58,7 +59,7 @@
                 </h1>
                 <div class="category">
                     <a class="category--drop">
-                        <img src="./img/header/category_tab.png">
+                        <img src="./resources/img/header/category_tab.png">
                     </a>
                 </div>
                 <div class="search">
@@ -110,55 +111,55 @@
                 <li class="mainmenu" style="cursor:pointer">패션</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="#">여성의류</a>
+                        <a href="/productList/productList?c=1&l=a">여성의류</a>
                     </li>
                     <li>
-                        <a href="#">남성의류</a>
+                        <a href="/productList/productList?c=1&l=b">남성의류</a>
                     </li>
                     <li>
-                        <a href="#">여성신발</a>
+                        <a href="/productList/productList?c=1&l=c">여성신발</a>
                     </li>
                     <li>
-                        <a href="#">남성신발</a>
+                        <a href="/productList/productList?c=1&l=d">남성신발</a>
                     </li>
                     <li>
-                        <a href="#">악세서리</a>
+                        <a href="/productList/productList?c=1&l=e">악세서리</a>
                     </li>
                     <li>
-                        <a href="#">귀금속</a>
+                        <a href="/productList/productList?c=1&l=f">귀금속</a>
                     </li>
                     <li>
-                        <a href="#">모자</a>
+                        <a href="/productList/productList?c=1&l=g">모자</a>
                     </li>
                     <li>
-                        <a href="#">기타잡화/관련용품</a>
+                        <a href="/productList/productList?c=1&l=h">기타잡화/관련용품</a>
                     </li>
                     <li>
-                        <a href="#">수입명품</a>
+                        <a href="/productList/productList?c=1&l=i">수입명품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">뷰티</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="#">스킨케어</a>
+                        <a href="/productList/productList?c=2&l=a">스킨케어</a>
                     </li>
                     <li>
-                        <a href="#">메이크업</a>
+                        <a href="/productList/productList?c=2&l=b">메이크업</a>
                     </li>
                     <li>
-                        <a href="#">헤어/바디</a>
+                        <a href="/productList/productList?c=2&l=c">헤어/바디</a>
                     </li>
                     <li>
-                        <a href="#">향수</a>
+                        <a href="/productList/productList?c=2&l=d">향수</a>
                     </li>
                     <li>
-                        <a href="#">네일케어</a>
+                        <a href="/productList/productList?c=2&l=e">네일케어</a>
                     </li>
                     <li>
-                        <a href="#">남성 화장품</a>
+                        <a href="/productList/productList?c=2&l=f">남성 화장품</a>
                     </li>
                     <li>
-                        <a href="#">가발/기타용품</a>
+                        <a href="/productList/productList?c=2&l=g">가발/기타용품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">출산/유아동</li>
@@ -204,7 +205,7 @@
                         <li>
                             <a href="#">
                                 <div class="product-box">
-                                   <img src="img/product/product_ex.png"><br>
+                                   <img src="./resources/img/product/product_ex.png"><br>
                                 </div>
                                 <div class="items__product--info list">
                                     <p class="product_name">품목 이름</p>
@@ -226,7 +227,7 @@
                         <li>
                             <a href="#">
                                 <div class="product-box">
-                                   <img src="img/product/product_ex.png"><br>
+                                   <img src="./resources/img/product/product_ex.png"><br>
                                 </div>
                                 <div class="items__product--info list">
                                     <p class="product_name">품목 이름</p>
@@ -248,7 +249,7 @@
                         <li>
                             <a href="#">
                                 <div class="product-box">
-                                   <img src="img/product/product_ex.png"><br>
+                                   <img src="./resources/img/product/product_ex.png"><br>
                                 </div>
                                 <div class="items__product--info list">
                                     <p class="product_name">품목 이름</p>
@@ -274,7 +275,7 @@
                         <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name">품목 이름</p>
@@ -296,7 +297,7 @@
                         <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name">품목 이름</p>
@@ -318,7 +319,7 @@
                         <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name">품목 이름</p>
@@ -344,7 +345,7 @@
                         <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name">품목 이름</p>
@@ -366,7 +367,7 @@
                         <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name">품목 이름</p>
@@ -388,7 +389,7 @@
                         <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name">품목 이름</p>
@@ -432,7 +433,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -454,7 +455,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -476,7 +477,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -498,7 +499,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -520,7 +521,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -542,7 +543,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -564,7 +565,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -586,7 +587,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -608,7 +609,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -630,7 +631,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -652,7 +653,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -674,7 +675,7 @@
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="img/product/product_ex.png"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name">품목 이름</p>
@@ -695,9 +696,23 @@
                     </li>
                 </ul>
                 <ul class="page_number">
+                	<%if(nowpage<=1){ %>
+                	<li>&#60;</li>
+                	<%}else{ %>         	          
                     <li>
-                        <a href="">&#60;</a>
+                        <a href="./productList.ms?page=<%=nowpage-1 %>">&#60;</a>
                     </li>
+                    <%} %>
+                    <%for(int a=startpage;a<=endpage;a++){
+						if(a==nowpage){%>
+							<li><%=a %></li>
+						<%}else{ %>
+						<li>
+						<a href="./productList.ms?page=<%=a %>"><%=a %></a>
+						</li>
+						<%} %>
+					<%} %>
+					<!-- 
                     <li>
                         <a href="">1</a>
                     </li>
@@ -712,10 +727,14 @@
                     </li>
                     <li>
                         <a href="">5</a>
-                    </li>
+                    </li>  -->
+                    <%if(nowpage>=maxpage){ %>
+                    	<li>&#62;</li>
+                    <%}else{ %>
                     <li>
-                        <a href="">&#62;</a>
+                        <a href="./productList.ms?page=<%=nowpage+1 %>">&#60;</a>
                     </li>
+                    <%} %>
                 </ul>
             </div>
         </div>
