@@ -117,6 +117,7 @@
 	<select id="getCategorylist1" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select
+			product_bids,
     		product_number, 
     		product_subject, 
     		product_img_1,
@@ -137,6 +138,7 @@
 	<select id="getCategorylist2" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select
+			product_bids,
     		product_number, 
     		product_subject, 
     		product_img_1,
@@ -157,6 +159,7 @@
 	<select id="getCategorylist3" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select
+			product_bids,
     		product_number, 
     		product_subject, 
     		product_img_1,
@@ -177,6 +180,7 @@
 	<select id="getCategorylist4" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select
+			product_bids,
     		product_number, 
     		product_subject, 
     		product_img_1,
@@ -203,6 +207,7 @@
 	<select id="getfamousPricelist" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select 
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,
@@ -222,6 +227,7 @@
 	<select id="getfamousParticipantslist" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select 
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,
@@ -241,6 +247,7 @@
 	<select id="getfamousViewslist" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select 
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,
@@ -261,6 +268,7 @@
 	<select id="getfamousPricelist2" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select 
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,
@@ -279,6 +287,7 @@
 	<select id="getfamousParticipantslist2" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select 
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,
@@ -297,6 +306,7 @@
 	<select id="getfamousViewslist2" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		select 
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,

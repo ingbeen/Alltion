@@ -156,15 +156,18 @@
                                     <p class="product_name"><%=vo.getProduct_subject() %></p>
                                     <span class="material-icons timer">timer</span>
                                     <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
-                                    <div class="bookmark">
-                                        <span class="material-icons bookmark_border">bookmark_border</span>
-                                    </div>
-                                    <div class="price-txt">
-                                        <p class="price_text">현재가</p>
-                                        <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
-                                        <p class="price_text">즉시 구매가</p>
-                                        <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
-                                    </div>
+                                    <span class="view_count_text">입찰</span>
+	                                <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
+	                                <div class="price-txt">
+	                                    <span class="price_text">현재가</span>
+	                                    <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                    <span class="price_text">즉구가</span>
+	                                    <%if (vo.getProduct_purchase_price() == 0) {%>
+                                            <span class="direct_price">없음</span><br>
+                                        <%}else { %>    
+                                            <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                        <%} %>
+	                                </div>
                                 </div>
                             </a>
                         </li>
@@ -189,14 +192,17 @@
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
                                 <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                </div>
+                                <span class="view_count_text">입찰</span>
+                                <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
                                 <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <span class="price_text">현재가</span>
+	                                <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                <span class="price_text">즉구가</span>
+	                                <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <span class="direct_price">없음</span><br>
+                                    <%}else { %>    
+                                        <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
@@ -221,14 +227,17 @@
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
                                 <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                </div>
+                                <span class="view_count_text">입찰</span>
+                                <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
                                 <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <span class="price_text">현재가</span>
+	                                <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                <span class="price_text">즉구가</span>
+	                                <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <span class="direct_price">없음</span><br>
+                                    <%}else { %>    
+                                        <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
@@ -283,14 +292,17 @@
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
                                 <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                </div>
+                                <span class="view_count_text">입찰</span>
+                                <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
                                 <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                	<span class="price_text">현재가</span>
+	                                <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                <span class="price_text">즉구가</span>
+	                                <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <span class="direct_price">없음</span><br>
+                                    <%}else { %>    
+                                        <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
