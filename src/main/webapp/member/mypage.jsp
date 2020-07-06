@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%
-	String id = (String)session.getAttribute("member_id");
+	String id = (String)session.getAttribute("userId");
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="./mypage.kj">${member_id}</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
@@ -40,7 +40,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="#">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -93,7 +93,7 @@
         <h3 class="myPage__title">마이 페이지</h3>
         <ul class="myPage__category">
             <li>
-                <a href="./memberinfo.kj?member_id=<%=id%>">
+                <a href="./memberinfo.kj">
                     <span class="material-icons">recent_actors</span><br>
                     <span class="myPage__menu">회원 정보</span>
                     

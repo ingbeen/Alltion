@@ -2,7 +2,8 @@
     pageEncoding="EUC-KR"%>
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%
-	MemberVO membervo = (MemberVO)request.getAttribute("memberVO");
+	MemberVO membervo = (MemberVO)request.getAttribute("membervo");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -109,20 +110,6 @@
             border-radius: 5px;
         }
         
-        .base_btn {
-            margin-top: 15px;
-            bottom: 4px;
-            right: 0;
-            display: inline-block;
-            padding: 0 10px;
-            height: 28px;
-            background: #F8C436;
-            color: #fff;
-            text-align: center;
-            vertical-align: middle;
-            border-radius: 2px;
-            font-size: 14px;
-        }
         .base_btn1 {
             margin-top: 15px;
             margin-left : 400px;
@@ -143,7 +130,95 @@
             width: 40%;
         }
 
+/*modal*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px 20px 30px 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: #BBBBBB;
+    float: right;
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*member_update 모달창css*/
+#member_update ul{
+    border-top: thin solid darkgray;
+    border-bottom: thin solid darkgray;
+    height : 40px;
+}
+
+#member_update label{
+    width: 150px;
+    margin-top : 20px;
+    
+}
+#member_update legend{
+    font-size: 20px;
+    color: cornflowerblue;
+}
+.base_btn {
+			border-color : #fff;
+            bottom: 4px;
+            right: 0;
+            display: inline-block;
+            padding: 0 10px;
+            height: 28px;
+            background: #F8C436;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 15px;
+        }
+
+
     </style>
+<script>
+        function modal_display() {
+          
+                var member_update_modal = document.getElementById('member_update_modal');
+                var close0 = document.getElementsByClassName('close')[0];
+                member_update_modal.style.display = "block";
+                close0.onclick = function(event) {
+                	member_update_modal.style.display = "none";
+                }
+
+
+            // ↓↓모달창 외부 클릭시 모달창 닫아짐.
+            window.onclick = function(event) {
+                if (event.target == seller_info_modal) {
+                	member_update_modal.style.display = "none";
+                }
+                if (event.target == bid_notify_modal) {
+                    bid_notify_modal.style.display = "none";
+                }
+            }
+        }
+        </script>
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
@@ -163,7 +238,7 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="./main.kj">${member_id}</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
@@ -177,7 +252,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="index.html">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -231,9 +306,9 @@
         <div class = "row_group">
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">아이디</label>
-                <h1><%=membervo.getMember_id()%></h1>
+                <h1><%=membervo.getMember_id() %></h1>
                 <h4>아이디는 변경 불가능합니다.</h4>
-                <input type = "hidden" id = "member_id" class = "int">
+                <input type = "hidden" id = "member_id" name = "member_id" class = "int">
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호</label>
@@ -241,18 +316,37 @@
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호 재확인</label>
-                <input type = "password" id = "member_password2" class = "int" maxlength = "20" >
-             <input type = "button" value = "비밀번호 변경" class = "base_btn"> 
+                <input type = "password" id = "member_password2" class = "int" maxlength = "20" onchange="checkpassword()">
+                <span id="alert-success1" style="display: none; color:#1ec700;">비밀번호가 일치합니다 변경 가능합니다.</span>
+   			    <span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+             <input type = "button" value = "비밀번호 변경" class = "base_btn" > 
             </div>
+            <form name="updateEmail" action="./updateEmail.kj" method="post">
             <div class = "join_row">
-                <label class = "join_title" text-align = "left">이메일</label>
-             	 
+                <label class = "join_title" text-align = "left">이메일</label>	
                 <div>
-                    <input type="text" class = "int" id="member_email" size="35" placeholder="<%=membervo.getEmail() %>">
+                    <input type="text" class = "int" id="email" size="35" placeholder="<%=membervo.getEmail() %>">
                     <br>
-                    <input type = "button" value = "이메일 변경" class = "base_btn">
                 </div>
-            </div>  
+                <input type ="button" onclick = "modal_display()" class = "base_btn" value = "이메일 변경">
+                            <div id="member_update_modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <fieldset id="member_update">
+                                        <legend>이메일 변경</legend>
+                                        <ul>
+                                            <li>
+                                                <label>이메일&nbsp;&nbsp;:&nbsp;</label>
+                                                  <input type="email"  id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="변경할 이메일을 입력하세요." >     
+				                                   <a href="javascript:updateEmail.submit()" class = "base_btn">이메일 변경</a>&nbsp;&nbsp;
+				                                   <input type = "submit" value = "전송">
+                                            </li>   
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>	   
+            </div> 
+            </form> 
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">휴대 전화 번호</label>
                 <input type = "text" id = "member_phone" class = "int" maxlength = "11" placeholder="<%=membervo.getMember_phone() %>">
@@ -411,5 +505,27 @@
             return i;
         } // 2020-06-23 pm 03:55 추가
     </script>
+<!-- 비밀번호 재확인  -->   
+<script>
+    function checkpassword() {
+    	
+    	var pwd1 = $("#member_password").val();
+        var pwd2 = $("#member_password2").val();
+        
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success1").css('display', 'inline-block');
+                $("#alert-danger1").css('display', 'none');
+            } else {
+                
+                $("#alert-success1").css('display', 'none');
+                $("#alert-danger1").css('display', 'inline-block');
+                document.getElementsClassName("base_btn").disabled = true;
+            }
+        }
+    }
+</script>
 </body>
 </html>

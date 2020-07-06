@@ -325,7 +325,11 @@
             <div class = "join_row">
                 <h3 class = "join_title_title" text-align = "left">
                     &lt;필수 입력 사항&gt;
-                </h3>                
+                </h3>    
+                <div class = "join_row">
+                <label class = "join_title" text-align = "left">이름</label><br>
+                <input type = "text" id = "member_name" name = "member_name" class = "int" maxlength = "5" placeholder="이름">
+            	</div>            
                 <label class = "join_title" text-align = "left">아이디</label>
                 <span id="alert-danger" style="display: none; color: #1ec700; font-weight: bold; ">*&nbsp;사용가능 아이디</span>   			
     			<span id="alert-success" style="display: none; color: #d92742;">일치하는 아이디가 존재합니다.</span>
@@ -339,10 +343,12 @@
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호 재확인</label>
-                <input type = "password" id = "member_password2" name = "member_password2" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요">
+                <input type = "password" id = "member_password2" name = "member_password2" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요"
+                onchange="checkpassword()">
             	<span id="alert-success1" style="display: none; color: #1ec700;">비밀번호가 일치합니다.</span>
     			<span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
             </div>
+
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">이메일</label>
                 <div>
@@ -563,7 +569,10 @@
                 <h3 class = "join_title_title" text-align = "left">
                     &lt;필수 입력 사항&gt;
                 </h3>
-                
+                <div class = "join_row">
+                <label class = "join_title" text-align = "left">이름</label><br>
+                <input type = "text" id = "member_name" name = "member_name" class = "int" maxlength = "5" placeholder="이름">
+            	</div>
                 <label class = "join_title" text-align = "left">아이디</label>
                 <span id="alert-danger" style="display: none; color: #1ec700; font-weight: bold; ">&nbsp;*&nbsp;사용가능 아이디</span>   			
     			<span id="alert-success" style="display: none; color: #d92742;">&nbsp;*&nbsp;일치하는 아이디가 존재합니다.</span>
@@ -579,10 +588,12 @@
             </div>
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">비밀번호 재확인</label>
-                <input type = "password" id = "member_password2" name = "member_password2" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요">
+                <input type = "password" id = "member_password2" name = "member_password2" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요"
+                onchange="checkpassword()">
             	<span id="alert-success1" style="display: none; color:#1ec700;">비밀번호가 일치합니다.</span>
    			    <span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
             </div>
+            
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">이메일</label>
                 <div>
@@ -734,9 +745,9 @@
 </c:choose>
 </form>
 
-<!-- 비밀번호 재확인  -->
+<!-- 비밀번호 재확인  -->   
 <script>
-    $('.int').focusout(function () {
+    function checkpassword() {
     	
     	var pwd1 = $("#member_password").val();
         var pwd2 = $("#member_password2").val();
@@ -748,12 +759,13 @@
                 $("#alert-success1").css('display', 'inline-block');
                 $("#alert-danger1").css('display', 'none');
             } else {
-                alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                
                 $("#alert-success1").css('display', 'none');
                 $("#alert-danger1").css('display', 'inline-block');
+                document.getElementsClassName("base_btn").disabled = true;
             }
         }
-    });
+    }
 </script>
 
 </body>

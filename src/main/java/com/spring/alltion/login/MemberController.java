@@ -61,7 +61,7 @@ public class MemberController {
 			PrintWriter writer = response.getWriter();
 			if (res == 1)
 			{
-				session.setAttribute("member_id",membervo.getMember_id());
+				session.setAttribute("userId",membervo.getMember_id());
 				//writer.write("<script>alert('로그인 성공!!');location.href='./';</script>");
 				return "redirect:/";
 			}
@@ -164,13 +164,39 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value = "/memberinfo.kj")
-		public String updateForm(@RequestParam(value="member_id")String member_id,Model model)throws Exception
+		public String updateForm(Model model,HttpSession session)throws Exception
 		{	
-			MemberVO vo = memberService.selectMember(member_id);
-			model.addAttribute("memberVO",vo);
+			String userId = (String)session.getAttribute("userId");
+			MemberVO vo = memberService.selectMember(userId);
+			model.addAttribute("membervo",vo);
 			
 			return "member/update";
 		}
+		@RequestMapping(value = "/updateEmail.kj")
+		public String updateEmail(MemberVO membervo, HttpServletResponse response,HttpSession session)
+		throws Exception 
+		{
+			String userId = (String)session.getAttribute("userId");
+			membervo.setMember_id(userId);
+			int res = memberService.updateEmail(membervo);
+			
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if (res != 0)
+			{
+				writer.write("<script>alert('이메일 변경 완료!!');"
+						+ "location.href='./memberinfo.kj';</script>");
+			}
+			else
+			{
+				writer.write("<script>alert('이메일 변경 실패!!');"
+						+ "location.href='./memberinfo.kj';</script>");
+			}
+			return null;
+			
+		}
+		
 		
 		
 }

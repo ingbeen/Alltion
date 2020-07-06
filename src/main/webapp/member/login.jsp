@@ -87,6 +87,15 @@ pageEncoding="UTF-8"%>
     
     .login-link:hover {font-weight: bold;}
     </style>
+<script>
+function enterkey() {
+        if (window.event.keyCode == 13) {
+ 
+             // 엔터키가 눌렸을 때 실행할 내용
+             login();
+        }
+}
+</script>
 </head>
 <body>
 
@@ -111,7 +120,7 @@ pageEncoding="UTF-8"%>
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="/tst/">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -179,7 +188,7 @@ pageEncoding="UTF-8"%>
                     <input type="password" name = "member_password" class="login-field" id="member_password"  placeholder="비밀번호를 입력해 주세요" >
                 </div>
 
-                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()">로그인</a>
+                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()" onkeyup="enterkey();">로그인</a>
                 <p>아직 회원이 아니신가요?&nbsp;
                     <a class="login-link" href = "./naverjoin.kj">회원가입 바로 가기</a>
                 </p>

@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
 <body>
 <c:choose>
 
-<c:when test="${member_id != null}"><!-- 메인페이지 로그인시 -->
+<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <!-- top 키 -->
     <div id="topKey" class="topKey_btn" >
@@ -69,7 +69,7 @@ pageEncoding="UTF-8"%>
                 </p>
                 <ul>
                     <li>
-                        <a href="./mypage.kj">${member_id}</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
@@ -83,7 +83,7 @@ pageEncoding="UTF-8"%>
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="#">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">

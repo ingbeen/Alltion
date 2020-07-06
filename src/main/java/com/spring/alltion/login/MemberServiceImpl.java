@@ -18,11 +18,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int insertMember(MemberVO membervo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);		
-		//if문은 일반회원 네이버 회원가입은 if문 실행 안함
-		if(membervo.getEmail() == "") {
+		//if문은 네이버 아이디 연동시 이메일 
+		//getEmail에 값이 있다
+		if(membervo.getEmail() != null) {
+			int res = memberMapper.insertMember(membervo);
+			return res;
+		}
+		//일반 회원가입 이메일
+		else{
 		String email = "";
 		email = membervo.getEmail1() + "@" + membervo.getEmail2();
-		System.out.println("asdasd" + email);
 		membervo.setEmail(email);
 		}
 		int res = memberMapper.insertMember(membervo);
@@ -44,10 +49,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO selectMember(String member_id) {
+	public MemberVO selectMember(String userId) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		
-		MemberVO vo = memberMapper.selectMember(member_id);
+		MemberVO vo = memberMapper.selectMember(userId);
 		return vo;
 	}
 
@@ -59,10 +64,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int updateMember(MemberVO membervo) {
+	public int updateEmail(MemberVO membervo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
-		int res = memberMapper.updateMember(membervo);
-		return res;
+		
+		return memberMapper.updateEmail(membervo);
 	}
 
 	@Override

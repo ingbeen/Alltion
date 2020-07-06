@@ -6,6 +6,7 @@
 <mapper namespace="com.spring.mapper.MemberMapper">
 
 <resultMap type="MemberVO" id = "memberResultMap">
+		<result property="member_name" column="member_name"/>
 	 	<result property="member_id" column="member_id"/>
 	 	<result property="member_password" column="member_password"/>
 	 	<result property="email" column="email"/>
@@ -19,12 +20,12 @@
 	 </resultMap>
 	 
 	 <select id="userCheck" parameterType="MemberVO" resultType="int">
-	 	select count(*) from member where member_id = #{member_id} and member_password = #{member_password}
+	 	select count(*) from member where member_id = #{member_id} and member_password = #{member_password} and member_delete = '0'
 	 </select>
 	 
 	 <insert id="insertMember" parameterType="MemberVO">
 	 insert into member values
-	 (#{member_id},#{member_password},#{email},#{member_phone},#{sample4_postcode},#{sample4_roadAddress},#{sample4_jibunAddress},#{sample4_detailAddress},#{member_delete})
+	 (#{member_name},#{member_id},#{member_password},#{email},#{member_phone},#{sample4_postcode},#{sample4_roadAddress},#{sample4_jibunAddress},#{sample4_detailAddress},#{member_delete})
 	 </insert>
 	 
 	 <select id="idCheckService" parameterType="String" resultType="int">
@@ -34,4 +35,8 @@
 	 <select id="selectMember"  parameterType="String" resultType="MemberVO">
 	 	select * from member where member_id = #{member_id} 
 	 </select>
+	 
+	 <update id="updateEmail" parameterType="MemberVO" >
+	 update member set email=#{email} where member_id=#{member_id}
+	 </update>
 </mapper>
