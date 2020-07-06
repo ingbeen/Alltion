@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
-    <link rel="stylesheet" href="./resources/css/product_detail.css"> <!-- 상세페이지 스타일시트 참조 (by.HONG)-->
+    <link rel="stylesheet" href="./resources/css/product_detail.css?after"> <!-- 상세페이지 스타일시트 참조 (by.HONG)-->
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
@@ -34,7 +34,7 @@
     <!-- 광고 배너 및 헤더 -->
     <div class="ad__banner">
         <a href="#" class="ad__banner--link">
-            <img src=".resources/img/header/adEx.png" class="ad__banner--img">
+            <img src="./resources/img/header/adEx.png" class="ad__banner--img">
             <button class="ad__banner--closeBtn"></button>
         </a>
     </div>
@@ -64,7 +64,7 @@
                 </h1>
                 <div class="category">
                     <a class="category--drop">
-                        <img src=".resources/img/header/category_tab.png">
+                        <img src="./resources/img/header/category_tab.png">
                     </a>
                 </div>
                 <div class="search">
@@ -834,8 +834,8 @@
 					$.each(data,function(key,value){
 						
 						a += '<div class="comment_list1">';
-						a += '<div class="comment_number">NO. '+value.comment_list_no+'</div>';
-						a += '<div class="comment_id"> 작성자: '+value.comment_id+'</div>';
+						a += '<span class="comment_id">'+value.comment_id+'</span>';
+						a += '<span class="comment_date">'+value.comment_date+'</span>';
 						if(value.comment_secret=="1"){
 							if(sessionid==value.comment_id||sessionid==writerId){
 								a += '<div class="comment_content">'+value.comment_content+'</div>';
@@ -852,7 +852,6 @@
 						}else{
 							a += '<div class="comment_content">'+value.comment_content+'</div>';
 						}
-						a += '<div class="comment_date">'+value.comment_date+'</div>';
 						a += '</div>';
 					});
 					$(".comment_list").html(a);

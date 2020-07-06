@@ -384,15 +384,21 @@
 
 .comment_list1{
 	border-bottom: thin solid darkgray;
+	width: 100%;
+	margin-bottom:20px;
+	
 }
 
-.comment_list1 .comment_number{
-	width:50px;
-}
-.comment_list1 .comment_id{
-	width:300px;
+.comment_id{
+	margin-right:10px;
+	width: 300px;
 }
 
+.comment_date{
+	font-size: 12px;
+	width: 500px;
+	
+}
 /*여기까지 product_information*/
 /*네비게이션바 요약내용 아래*/
 .detail_page_nav li {
