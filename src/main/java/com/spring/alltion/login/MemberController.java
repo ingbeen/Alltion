@@ -37,6 +37,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@RequestMapping("/")
+	public String main()
+	{
+		return "index";
+	}
+	
 	@RequestMapping("/main.kj")
 	public String mainPage()
 	{
@@ -290,7 +296,7 @@ public class MemberController {
 			if (res != 0)
 			{
 				writer.write("<script>alert('회원이 삭제 되었습니다!!');"
-						+ "location.href='./main.kj';</script>");
+				+ "location.href='./main.kj';</script>");
 				session.invalidate();
 			}
 			else

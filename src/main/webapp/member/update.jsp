@@ -695,7 +695,7 @@ function checkpassword() {
                                 <ul>
                                 <li>
                                 <label>회원 탈퇴 : &nbsp;</label>
-                                <input type = "hidden" id = "member_delete" name = "member_delete">
+                                
                                 <span>회원 탈퇴시 무슨 불이행이 있어도 책임질수 없습니다.</span>&nbsp;&nbsp;&nbsp;
                                 <br>
                                 <button type = "submit">회원 삭제</button>
