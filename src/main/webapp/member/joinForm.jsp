@@ -747,26 +747,26 @@
 
 <!-- 비밀번호 재확인  -->   
 <script>
-    function checkpassword() {
-    	
-    	var pwd1 = $("#member_password").val();
-        var pwd2 = $("#member_password2").val();
-        
-        if ( pwd1 != '' && pwd2 == '' ) {
-            null;
-        } else if (pwd1 != "" || pwd2 != "") {
-            if (pwd1 == pwd2) {
-                $("#alert-success1").css('display', 'inline-block');
-                $("#alert-danger1").css('display', 'none');
-            } else {
-                
-                $("#alert-success1").css('display', 'none');
-                $("#alert-danger1").css('display', 'inline-block');
-                document.getElementsClassName("base_btn").disabled = true;
-            }
-        }
-    }
+function checkpassword() {
+	
+	var pwd1 = $("#member_password").val();
+    var pwd2 = $("#member_password2").val();
+    
+	if (pwd1 == pwd2) {
+	    $("#alert-success1").css('display', 'inline-block');
+	    $("#alert-danger1").css('display', 'none');
+	} else {
+	    
+	    $("#alert-success1").css('display', 'none');
+	    $("#alert-danger1").css('display', 'inline-block');
+	    $("#member_password").val('');
+	    $("#member_password2").val('');
+	    $("#member_password").focus();
+	}
+
+}
 </script>
+
 
 </body>
 </html>
