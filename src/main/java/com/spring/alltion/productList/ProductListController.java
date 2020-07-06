@@ -15,13 +15,13 @@ public class ProductListController {
 	
 	@Autowired
 	private ProductService productService;
-	/*
-	@RequestMapping(value = "/productList.ms", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 	
 		return "productList/productList";
 	}
-	*/
+	
 	@RequestMapping(value = "/productList.ms", method = RequestMethod.GET)
 	public String getProductList(Model model, @RequestParam(value="page", required=false, defaultValue="1") int page) throws Exception {
 		int limit = 9;
@@ -53,7 +53,7 @@ public class ProductListController {
 	}
 	
 	@RequestMapping(value = "/gocategory.ms", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-	public String getList(@RequestParam(value = "c") String product_category_2, @RequestParam(value = "l") String product_category_1, Model model) throws Exception{
+	public String getList(@RequestParam(value = "product_category_2") String product_category_2, @RequestParam(value = "product_category_1") String product_category_1, Model model) throws Exception{
 		
 		List<ProductVOTest> productlist = null;
 		productlist = productService.list(product_category_2, product_category_1);
