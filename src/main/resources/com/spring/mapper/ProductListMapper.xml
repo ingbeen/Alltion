@@ -3,7 +3,7 @@
 
 <mapper namespace="com.spring.mapper.ProductListMapper">
 
-	<resultMap type="ProductVO" id="productResultMap">
+	<resultMap type="ProductVOTest" id="productResultMap">
 		<result property="product_number" column="product_number" />
 		<result property="product_id" column="product_id" />
 		<result property="product_subject" column="product_subject" />
@@ -31,12 +31,18 @@
 		select product_number,product_id,product_subject,product_category_1,product_category_2,product_starting_price,product_re_auction,product_progress,product_img_1,product_date 
         from (select rownum rnum,product_number,product_id,product_subject,product_category_1,product_category_2,product_starting_price,product_re_auction,product_progress,product_img_1,product_date 
               from (select * from product order by product_number asc)) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_category_2 = #{product_category_2, jdbcType=VARCHAR} and product_progress = #{product_progress, jdbcType=VARCHAR}
+        where rnum>=#{startrow} and rnum<=#{endrow}
      	]]>
-	
 	</select>
+	
+	<select id="list" resultType="com.spring.alltion.productList.ProductVOTest">
+		select * from product where product_category_2 = #{product_category_2} and product_category_1 = #{product_category_1}
+	</select>
+
 	
 	<select id="getListCount" parameterType="int" resultType="int">
 		SELECT count(*) FROM product where product_category_2 = #{product_category_2, jdbcType=VARCHAR}
 	</select>
+	
+	
 </mapper>

@@ -242,6 +242,7 @@
 		</dependency>
 		
 		<!-- HttpCore : HTTP 프로토콜을 이용해서 데이터를 전송할 수 있는 로우 레벨의 기능을 제공 -->
+
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
