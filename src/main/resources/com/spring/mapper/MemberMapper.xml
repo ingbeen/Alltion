@@ -39,4 +39,8 @@
 	 <update id="updateEmail" parameterType="MemberVO" >
 	 update member set email=#{email} where member_id=#{member_id}
 	 </update>
+	 
+	 <update id="updatePassword" parameterType="MemberVO" >
+	 update member set member_password=#{member_password} where member_id=#{member_id}
+	 </update>
 </mapper>

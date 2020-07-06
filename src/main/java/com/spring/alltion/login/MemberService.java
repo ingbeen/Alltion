@@ -10,6 +10,7 @@ public interface MemberService {
 		public MemberVO selectMember(String userId);
 		public int deleteMember(MemberVO membervo);
 		public int updateEmail(MemberVO membervo);
+		public int updatePassword(MemberVO membervo);
 		int idCheckService(String member_id);
 		
 }

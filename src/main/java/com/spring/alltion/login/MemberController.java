@@ -62,62 +62,62 @@ public class MemberController {
 			if (res == 1)
 			{
 				session.setAttribute("userId",membervo.getMember_id());
-				//writer.write("<script>alert('·Î±×ÀÎ ¼º°ø!!');location.href='./';</script>");
+				
 				return "redirect:/";
 			}
 			else 	
 			{
 					
-				writer.write("<script>alert('ÇØ´ç ¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä!!');location.href='./loginForm.kj';</script>");
-				//return "redirect:/loginform.kj";
+				writer.write("<script>alert('í•´ë‹¹ ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ ì£¼ì„¸ìš”!!');location.href='./loginForm.kj';</script>");
+				
 			}
 			return null;
 		}
-		//·Î±×¾Æ¿ô
+		//ë¡œê·¸ì•„ì›ƒ
 		@RequestMapping(value = "/logout.kj", method = { RequestMethod.GET, RequestMethod.POST })
 		public String logout(HttpSession session) throws IOException {
 		session.invalidate();
 		return "redirect:/";
 		}
 		
-		//·Î±×ÀÎ Ã¹ È­¸é ¿äÃ» ¸Ş¼Òµå
+		//ë¡œê·¸ì¸ ì²« í™”ë©´ ìš”ì²­ ë©”ì†Œë“œ
 		@RequestMapping(value = "/naverjoin.kj", method = { RequestMethod.GET, RequestMethod.POST })
 		public String login(Model model, HttpSession session) {
-			/* ³×ÀÌ¹ö¾ÆÀÌµğ·Î ÀÎÁõ URLÀ» »ı¼ºÇÏ±â À§ÇÏ¿© naverLoginBOÅ¬·¡½ºÀÇ getAuthorizationUrl¸Ş¼Òµå È£Ãâ */
+			/* ë„¤ì´ë²„ì•„ì´ë””ë¡œ ì¸ì¦ URLì„ ìƒì„±í•˜ê¸° ìœ„í•˜ì—¬ naverLoginBOí´ë˜ìŠ¤ì˜ getAuthorizationUrlë©”ì†Œë“œ í˜¸ì¶œ */
 			String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 			//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 			//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-			System.out.println("³×ÀÌ¹ö : " + naverAuthUrl);
-			//³×ÀÌ¹ö
+			System.out.println("ë„¤ì´ë²„ : " + naverAuthUrl);
+			//ë„¤ì´ë²„
 			model.addAttribute("url", naverAuthUrl);
 			
 			return "member/join";
 		}
-		//³×ÀÌ¹ö ·Î±×ÀÎ ¼º°ø½Ã callbackÈ£Ãâ ¸Ş¼Òµå
+		//ë„¤ì´ë²„ ë¡œê·¸ì¸ ì„±ê³µì‹œ callbackí˜¸ì¶œ ë©”ì†Œë“œ
 		@RequestMapping(value = "/callback.kj", method = { RequestMethod.GET, RequestMethod.POST })
 		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException, ParseException {
-			System.out.println("¿©±â´Â callback");
+			System.out.println("ì—¬ê¸°ëŠ” callback");
 			OAuth2AccessToken oauthToken;
 			oauthToken = naverLoginBO.getAccessToken(session, code, state);
-			//1. ·Î±×ÀÎ »ç¿ëÀÚ Á¤º¸¸¦ ÀĞ¾î¿Â´Ù.
-			apiResult = naverLoginBO.getUserProfile(oauthToken); // StringÇü½ÄÀÇ jsonµ¥ÀÌÅÍ
+			//1. ë¡œê·¸ì¸ ì‚¬ìš©ì ì •ë³´ë¥¼ ì½ì–´ì˜¨ë‹¤.
+			apiResult = naverLoginBO.getUserProfile(oauthToken); // Stringí˜•ì‹ì˜ jsonë°ì´í„°
 			/**
-			 * apiResult json ±¸Á¶ {"resultcode":"00", "message":"success",
+			 * apiResult json êµ¬ì¡° {"resultcode":"00", "message":"success",
 			 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
 			 **/
-			//2. StringÇü½ÄÀÎ apiResult¸¦ jsonÇüÅÂ·Î ¹Ù²Ş
+			//2. Stringí˜•ì‹ì¸ apiResultë¥¼ jsoní˜•íƒœë¡œ ë°”ê¿ˆ
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(apiResult);
 			JSONObject jsonObj = (JSONObject) obj;
-			//3. µ¥ÀÌÅÍ ÆÄ½Ì
-			//Top·¹º§ ´Ü°è _response ÆÄ½Ì
+			//3. ë°ì´í„° íŒŒì‹±
+			//Topë ˆë²¨ ë‹¨ê³„ _response íŒŒì‹±
 			JSONObject response_obj = (JSONObject) jsonObj.get("response");
-			//responseÀÇ nickname°ª ÆÄ½Ì
+			//responseì˜ nicknameê°’ íŒŒì‹±
 			String email = (String) response_obj.get("email");
 			System.out.println(email);
-			//4.ÆÄ½Ì ´Ğ³×ÀÓ ¼¼¼ÇÀ¸·Î ÀúÀå
-			session.setAttribute("email", email); // ¼¼¼Ç »ı¼º
+			//4.íŒŒì‹± ë‹‰ë„¤ì„ ì„¸ì…˜ìœ¼ë¡œ ì €ì¥
+			session.setAttribute("email", email); // ì„¸ì…˜ ìƒì„±
 			model.addAttribute("result", apiResult);
 			
 			return "member/joinForm";
@@ -131,7 +131,7 @@ public class MemberController {
 		@RequestMapping("/joinprocess.kj") 
 		public String insertMember(MemberVO membervo, HttpServletResponse response) 
 			throws Exception { 
-			//ÆÄ¶ó¹ÌÅÍ¿¡´Â form ¾ç½ÄÀÇ name¿¡ µû¶ó °ªÀÌ ÀúÀåµÈ´Ù.\
+			//íŒŒë¼ë¯¸í„°ì—ëŠ” form ì–‘ì‹ì˜ nameì— ë”°ë¼ ê°’ì´ ì €ì¥ëœë‹¤.\
 			int res = memberService.insertMember(membervo);
 			
 			
@@ -140,12 +140,12 @@ public class MemberController {
 			PrintWriter writer = response.getWriter();
 			if (res != 0)
 			{
-				writer.write("<script>alert('È¸¿ø°¡ÀÔ ¼º°ø!!');"
+				writer.write("<script>alert('íšŒì›ê°€ì… ì„±ê³µ!!');"
 						+ "location.href='./loginForm.kj';</script>");
 			}
 			else
 			{
-				writer.write("<script>alert('È¸¿ø°¡ÀÔ ½ÇÆĞ!!');"
+				writer.write("<script>alert('íšŒì›ê°€ì… ì‹¤íŒ¨!!');"
 						+ "location.href='./joinForm.kj';</script>");
 			}
 			return null;
@@ -185,12 +185,39 @@ public class MemberController {
 			PrintWriter writer = response.getWriter();
 			if (res != 0)
 			{
-				writer.write("<script>alert('ÀÌ¸ŞÀÏ º¯°æ ¿Ï·á!!');"
+				writer.write("<script>alert('ì´ë©”ì¼ ë³€ê²½ì™„ë£Œ!!');"
 						+ "location.href='./memberinfo.kj';</script>");
 			}
 			else
 			{
-				writer.write("<script>alert('ÀÌ¸ŞÀÏ º¯°æ ½ÇÆĞ!!');"
+				writer.write("<script>alert('ì´ë©”ì¼ ë³€ê²½ì‹¤íŒ¨!!');"
+						+ "location.href='./memberinfo.kj';</script>");
+			}
+			return null;
+			
+		}
+				
+		@RequestMapping(value = "/updatePassword.kj", method = { RequestMethod.GET, RequestMethod.POST })
+		public String updatePassword(MemberVO membervo, HttpServletResponse response,HttpSession session)
+		throws Exception 
+		{
+			String userId = (String)session.getAttribute("userId");
+			membervo.setMember_id(userId);
+			int res = memberService.updatePassword(membervo);
+			
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if (res != 0)
+			{
+				
+				writer.write("<script>alert('ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì™„ë£Œ!!');"
+				+ "location.href='./loginForm.kj';</script>");
+				session.invalidate();
+			}
+			else
+			{
+				writer.write("<script>alert('ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì‹¤íŒ¨!!');"
 						+ "location.href='./memberinfo.kj';</script>");
 			}
 			return null;

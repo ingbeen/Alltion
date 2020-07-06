@@ -11,6 +11,8 @@ public interface MemberMapper {
 	public ArrayList<MemberVO> getMemberlist();
 	public int deleteMember(MemberVO membervo);
 	public int updateEmail(MemberVO membervo);
+	public int updatePassword(MemberVO membervo);
 	int idCheckService(String member_id);
 	public MemberVO selectMember(String userId);
+
 }

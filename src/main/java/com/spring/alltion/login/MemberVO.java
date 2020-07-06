@@ -10,7 +10,7 @@ sample4_postcode varchar2(30),
 sample4_roadAddress varchar2(50),
 sample4_jibunAddress varchar2(50),
 sample4_detailAddress varchar2(50),
-member_delete varchar2(2) default '0'   -- È¸¿øÅ»Åğ½Ã °ªÀÌ 1À¸·Î ¹Ù²î¸é¼­ ·Î±×ÀÎ ºÒ°¡
+member_delete varchar2(2) default '0'   --íšŒì›íƒˆí‡´ì‹œ 0ì´ 1ë¡œ ë³€ê²½ë˜ë©° ë¡œê·¸ì¸ ë¶ˆê°€
 );
  */
 public class MemberVO {

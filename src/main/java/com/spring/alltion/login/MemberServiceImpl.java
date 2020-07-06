@@ -18,13 +18,13 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int insertMember(MemberVO membervo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);		
-		//if¹®Àº ³×ÀÌ¹ö ¾ÆÀÌµğ ¿¬µ¿½Ã ÀÌ¸ŞÀÏ 
-		//getEmail¿¡ °ªÀÌ ÀÖ´Ù
+		//ifë¬¸ì€ ë„¤ì´ë²„ ì•„ì´ë”” ì—°ë™ì‹œ ì´ë©”ì¼
+		//getEmailì— ê°’ì´ ìˆë‹¤
 		if(membervo.getEmail() != null) {
 			int res = memberMapper.insertMember(membervo);
 			return res;
 		}
-		//ÀÏ¹İ È¸¿ø°¡ÀÔ ÀÌ¸ŞÀÏ
+		//ì¼ë°˜ íšŒì›ê°€ì…
 		else{
 		String email = "";
 		email = membervo.getEmail1() + "@" + membervo.getEmail2();
@@ -74,6 +74,13 @@ public class MemberServiceImpl implements MemberService{
 	public int idCheckService(String member_id) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		return memberMapper.idCheckService(member_id);
+	}
+
+	@Override
+	public int updatePassword(MemberVO membervo) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		
+		return memberMapper.updatePassword(membervo);
 	}
 
 }
