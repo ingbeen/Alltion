@@ -1,11 +1,18 @@
 package com.spring.mapper;
 
-import com.spring.alltion.hongsub.MemberVO;
+import java.util.ArrayList;
+
+import com.spring.alltion.login.MemberVO;
 
 public interface MemberMapper {
 
-	String checkPassword(String id);
-
-	MemberVO getInfo(String product_id);
+	public int insertMember(MemberVO membervo);
+	public int userCheck(MemberVO membervo);
+	public ArrayList<MemberVO> getMemberlist();
+	public int deleteMember(MemberVO membervo);
+	public int updateEmail(MemberVO membervo);
+	public int updatePassword(MemberVO membervo);
+	int idCheckService(String member_id);
+	public MemberVO selectMember(String userId);
 
 }
