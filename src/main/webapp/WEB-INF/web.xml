@@ -36,6 +36,9 @@
 		<url-pattern>*.hs</url-pattern>
 	</servlet-mapping>
 	
+	<welcome-file-list> 
+		<welcome-file>loginform.hs</welcome-file> 
+	</welcome-file-list>
 	<!-- Korean Filter by.유빈 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
