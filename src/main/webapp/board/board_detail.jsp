@@ -330,26 +330,6 @@
             <div class="bidder">
                 
             </div>
-             <!--
-            <div class="bidder">
-                <div class="bid_list_no">3</div>
-                <div class="bid_price">20,000 원</div>
-                <div class="bidder_id">가지마1 님</div>
-                <div class="bid_time">몇 시간전</div>
-            </div>
-            <div class="bidder">
-                <div class="bid_list_no">2</div>
-                <div class="bid_price">19,000 원</div>
-                <div class="bidder_id">가지마2 님</div>
-                <div class="bid_time">몇 시간전</div>
-            </div>
-            <div class="bidder">
-                <div class="bid_list_no">1</div>
-                <div class="bid_price">15,000 원</div>
-                <div class="bidder_id">가지마3 님</div>
-                <div class="bid_time">몇 시간전</div>
-            </div>
-             -->
         </div>
 
 
@@ -780,7 +760,8 @@
 				dataType : 'json',
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 				success : function(data){
-					var a='';
+					var a = '';
+					var i = 0;
 					$.each(data,function(key,value){
 						a += '<div class="bidder1">';
 						a += '<div class="bid_list_no">'+value.bid_no+'</div>';
@@ -906,6 +887,10 @@
 				comment_secret_value = "1";
 			}else{
 				comment_secret_value = "0";
+			}
+			if(comment_content_input.value==""){
+				alert('내용을 입력해 주세요.');
+				return false;
 			}
 			$.ajax({
 				url: '/alltion/commentinsert.hs',
