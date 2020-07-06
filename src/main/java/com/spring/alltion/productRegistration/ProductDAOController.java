@@ -13,15 +13,17 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @RestController
-public class ProductRegistrationDAOController {
+public class ProductDAOController {
+	
+	@Autowired
+	private ProductService productService;
 	
 	// 에디터 이미지 업로드
 	@RequestMapping(value = "editorImgUpload.yb", produces="application/json;charset=UTF-8")
@@ -57,7 +59,7 @@ public class ProductRegistrationDAOController {
 			// 업로드할 파일 이름
 			originalFilename = file.getOriginalFilename();
 			userId = (String) session.getAttribute("userId");
-			savedFilename = uuid + "+" + userId + "+" + originalFilename;
+			savedFilename = uuid + "_" + userId + "_" + originalFilename;
 			
 			// 파일용량 유효성 검사, 3MB가 넘으면 리턴
 			size = file.getSize();
@@ -140,7 +142,7 @@ public class ProductRegistrationDAOController {
 				// 실제 파일이 저장될 파일이름
 				uuid = UUID.randomUUID();
 				originalFilename = file.getOriginalFilename();
-				savedFilename = uuid + "+" + userId + "+" + originalFilename;
+				savedFilename = uuid + "_" + userId + "_" + originalFilename;
 				
 				// 실제 파일이 저장될 경로 + 파일이름
 				filepath = realFolder + "\\" + savedFilename;
@@ -169,7 +171,27 @@ public class ProductRegistrationDAOController {
 	public void productInsert(ProductVO productVO) {
 		
 		try {
+			
 			System.out.println(productVO.getProduct_id());
+			System.out.println(productVO.getProduct_category_1());
+			System.out.println(productVO.getProduct_category_2());
+			System.out.println(productVO.getProduct_subject());
+			System.out.println(productVO.getProduct_content());
+			System.out.println(productVO.getProduct_img_1());
+			System.out.println(productVO.getProduct_img_2());
+			System.out.println(productVO.getProduct_img_3());
+			System.out.println(productVO.getProduct_img_4());
+			System.out.println(productVO.getProduct_img_5());
+			System.out.println(productVO.getProduct_starting_price());
+			System.out.println(productVO.getProduct_bidding_unit());
+			System.out.println(productVO.getProduct_end_date());
+			System.out.println(productVO.getProduct_delivery());
+			System.out.println(productVO.getProduct_transaction_area());
+			System.out.println(productVO.getProduct_purchase_price());
+			System.out.println(productVO.getProduct_re_auction());
+			
+			productService.ProductInsert(productVO);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

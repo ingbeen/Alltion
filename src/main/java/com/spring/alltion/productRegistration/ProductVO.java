@@ -31,6 +31,7 @@ public class ProductVO {
 	int product_views; // 조회수
 	String product_date; // 등록일
 	int product_progress; // 진행상태
+	
 	public int getProduct_number() {
 		return product_number;
 	}
