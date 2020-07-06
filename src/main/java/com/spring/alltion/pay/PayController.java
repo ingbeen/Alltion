@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class HomeController {
+public class PayController {
 	
 	@Autowired
 	private PayService payService;

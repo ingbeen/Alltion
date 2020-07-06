@@ -2,7 +2,7 @@ package com.spring.alltion.productList;
 
 import java.util.Date;
 
-public class ProductVO {
+public class ProductVOTest {
 	int product_number;  //상품번호
 	String product_id;   //아이디
 	String product_subject; //상품제목
@@ -23,7 +23,14 @@ public class ProductVO {
 	int product_views; //조회수
 	Date product_date; //등록일
 	String product_progress; //진행상태
+	String product_img_1; //이미지소스
 	
+	public String getProduct_img_1() {
+		return product_img_1;
+	}
+	public void setProduct_img_1(String product_img_1) {
+		this.product_img_1 = product_img_1;
+	}
 	public int getProduct_number() {
 		return product_number;
 	}

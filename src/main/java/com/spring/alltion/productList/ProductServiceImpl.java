@@ -3,6 +3,7 @@ package com.spring.alltion.productList;
 import java.util.HashMap;
 import java.util.List;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired(required=false)
 	private SqlSession sqlSession;
+
 	/*
 	@Override
 	public List<ProductVO> getproductList(int page, int limit) {
@@ -29,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
 		return productlist;
 	}
 */
+	
 	@Override
 	public int getListCount() {
 		// TODO Auto-generated method stub
@@ -36,12 +39,34 @@ public class ProductServiceImpl implements ProductService {
 		int res = productListMapper.getListCount();
 		return res;
 	}
-
+/*
 	@Override
-	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap) {
+	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap, ProductVO vo) {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
+		List<ProductVO> productlist = productListMapper.getProductList(hashmap, vo);
+		return productlist;
+	}
+*/
+	@Override
+	public List<ProductVOTest> list(String product_category_2, String product_category_1) throws Exception {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("product_category_2", product_category_2);
+		map.put("product_category_1", product_category_1);
+		List<ProductVOTest> productlist = productListMapper.list(product_category_2, product_category_1);
+		
+		return productlist;
+		
+	}
+
+	@Override
+	public List<ProductVOTest> getproductList(HashMap<String, Integer> hashmap) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVOTest> productlist = productListMapper.getProductList(hashmap);
 		return productlist;
 	}
 

@@ -5,17 +5,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
- <% 
-	List<ProductVO> productList=(List<ProductVO>)request.getAttribute("productlist");
-	int listcount=((Integer)request.getAttribute("listcount")).intValue();
-	int nowpage=((Integer)request.getAttribute("page")).intValue();
-	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
-	int startpage=((Integer)request.getAttribute("startpage")).intValue();
-	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-%>
+ <%
+  	List<ProductVOTest> productList=(List<ProductVOTest>)request.getAttribute("productlist");
+   	
+  	int listcount=((Integer)request.getAttribute("listcount")).intValue();
+  	int nowpage=((Integer)request.getAttribute("page")).intValue();
+  	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
+  	int startpage=((Integer)request.getAttribute("startpage")).intValue();
+  	int endpage=((Integer)request.getAttribute("endpage")).intValue();
+  %>
 <!DOCTYPE html>
 <html>
-
+<script>
+	$(".submenu").click(function gocg(){
+		var params = $(".submenu").serialize();
+		$.ajax({
+			url:'/alltion/productList/gocategory.ms',
+			type:'GET',
+			data : params,
+			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+			success: function(retVal){
+				if(retVal.res == "OK")
+					alert("성공");
+				else
+					alert("실패");
+			},
+			error:function(){
+				alert("ajax 실패");
+			}
+		});
+	});
+</script>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
@@ -24,6 +44,7 @@
     <link href="<c:url value="https://fonts.googleapis.com/icon?family=Material+Icons"/>" rel="stylesheet">
     <title>All-tion</title>
 </head>
+
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <!-- top 키 -->
@@ -104,6 +125,7 @@
         </div>
     </div>
     <!-- 목록 페이지 -->
+    
     <div class="product_list">
         <!-- 카테고리 영역 -->
         <div class="left_session cate">
@@ -111,55 +133,55 @@
                 <li class="mainmenu" style="cursor:pointer">패션</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="/productList/productList?c=1&l=a">여성의류</a>
+                        <a href="./productList.ms?product_category_2=a&product_category_1=1" onclick="gocg()">여성의류</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=b">남성의류</a>
+                        <a href="./productList.ms?product_category_2=b&product_category_1=1">남성의류</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=c">여성신발</a>
+                        <a href="./productList.ms?product_category_2=c&product_category_1=1">여성신발</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=d">남성신발</a>
+                        <a href="./productList.ms?product_category_2=d&product_category_1=1">남성신발</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=e">악세서리</a>
+                        <a href="./productList.ms?product_category_2=e&product_category_1=1">악세서리</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=f">귀금속</a>
+                        <a href="./productList.ms?product_category_2=f&product_category_1=1">귀금속</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=g">모자</a>
+                        <a href="./productList.ms?product_category_2=g&product_category_1=1">모자</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=h">기타잡화/관련용품</a>
+                        <a href="./productList.ms?product_category_2=h&product_category_1=1">기타잡화/관련용품</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=1&l=i">수입명품</a>
+                        <a href="./productList.ms?product_category_2=i&product_category_1=1">수입명품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">뷰티</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="/productList/productList?c=2&l=a">스킨케어</a>
+                        <a href="./productList.ms?product_category_2=a&product_category_1=2">스킨케어</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=2&l=b">메이크업</a>
+                        <a href="./productList.ms?product_category_2=b&product_category_1=2">메이크업</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=2&l=c">헤어/바디</a>
+                        <a href="./productList.ms?product_category_2=c&product_category_1=2">헤어/바디</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=2&l=d">향수</a>
+                        <a href="./productList.ms?product_category_2=d&product_category_1=2">향수</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=2&l=e">네일케어</a>
+                        <a href="./productList.ms?product_category_2=e&product_category_1=2">네일케어</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=2&l=f">남성 화장품</a>
+                        <a href="./productList.ms?product_category_2=f&product_category_1=2">남성 화장품</a>
                     </li>
                     <li>
-                        <a href="/productList/productList?c=2&l=g">가발/기타용품</a>
+                        <a href="./productList.ms?product_category_2=g&product_category_1=2">가발/기타용품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">출산/유아동</li>
@@ -196,6 +218,7 @@
             </div>
         </div>
         <!-- 상품 목록 영역 -->
+
         <div class="right_session slideshow-container">
             <!-- 인기 경매 영역 -->
             <div class="hot_item">
@@ -429,14 +452,19 @@
                     <option value="sort3">낮은 가격 순</option>
                     <option value="sort4">높은 가격 순</option>
                 </select>
+            <%
+            	for(int i=0; i<productList.size();i++){
+                    		ProductVOTest vo = (ProductVOTest)productList.get(i);
+            %>
                 <ul class="items__list product">
+                	<c:forEach items="${list}" var="list">
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
+                               <img src="<%=vo.getProduct_img_1()%>"><br>
                             </div>
                             <div class="items__product--info product">
-                                <p class="product_name">품목 이름</p>
+                                <p class="product_name">"<%=vo.getProduct_subject()%>"</p>
                                 <span class="material-icons timer">timer</span>
                                 <span class="countdown">2020/06/15 00:00</span>
                                 <div class="bookmark">
@@ -452,6 +480,8 @@
                             </div>
                         </a>
                     </li>
+                    </c:forEach>
+                   <%} %>
                     <li>
                         <a href="#">
                             <div class="product-box">
@@ -732,7 +762,7 @@
                     	<li>&#62;</li>
                     <%}else{ %>
                     <li>
-                        <a href="./productList.ms?page=<%=nowpage+1 %>">&#60;</a>
+                        <a href="./productList.ms?page=<%=nowpage+1 %>">&#62;</a>
                     </li>
                     <%} %>
                 </ul>

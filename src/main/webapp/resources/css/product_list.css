@@ -1,4 +1,5 @@
-/* Ä«Å×°í¸® */
+@charset "UTF-8";
+/* ì¹´í…Œê³ ë¦¬ */
 .list_sidebar {display: inline-block;}
 
 .list_sidebar.active {display: block;}
@@ -53,7 +54,7 @@
 
 
 
-/* ÀÎ±â °æ¸Å Ç×¸ñ */
+/* ì¸ê¸° ê²½ë§¤ í•­ëª© */
 .right_session {
     flex-basis: 75%;
 }
@@ -64,8 +65,8 @@
     display: inline-block;
 }
 
-/* -- style.css¿¡¼­ ¿µÇâ ¹ŞÀº Ç×¸ñ ¼öÁ¤ */
-/* --- ÀÎ±â °æ¸Å Ç×¸ñ, »óÇ° ¸ñ·Ï°ú °øÅëµÈ ºÎºĞÀº ¹­¾î¼­ ÀÛ¼º*/
+/* -- style.cssì—ì„œ ì˜í–¥ ë°›ì€ í•­ëª© ìˆ˜ì • */
+/* --- ì¸ê¸° ê²½ë§¤ í•­ëª©, ìƒí’ˆ ëª©ë¡ê³¼ ê³µí†µëœ ë¶€ë¶„ì€ ë¬¶ì–´ì„œ ì‘ì„±*/
 .items__list.list  {
     margin-top: 24px;
 }
@@ -79,7 +80,7 @@
     border-bottom: 1px solid rgba(112, 112, 112, 0.4);
 }
 
-/* ½½¶óÀÌµå */
+/* ìŠ¬ë¼ì´ë“œ */
 .product_list {
     width: 1200px;
     margin: 54px auto;
@@ -104,7 +105,7 @@
 
 
 
-/* »óÇ° ¸ñ·Ï */
+/* ìƒí’ˆ ëª©ë¡ */
 .product_li {
     margin-top: 28px;
     position: relative;
