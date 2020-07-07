@@ -168,6 +168,27 @@ function changeInput(item) {
     
 }
 
+/* 시작가, 즉시구매가 천단위쉼표, 숫자만입력 시작 by.유빈 */
+$(".product--form [name$='price']")
+	.on("focus", function () {
+		let value = $(this).val(); // 입력값
+		value = removeCommas(value); // 쉼표제거
+    	$(this).val(value); // 반환
+	})
+	.on("focusout", function () { 
+		let value = $(this).val(); // 입력값
+		if(value && value.length > 0) { // 데이터가 존재하면
+	        if(!$.isNumeric(value)) { // 숫자가 아닌것은 제거
+	        	value = value.replace(/[^0-9]/g, "");
+	        }
+	        value = addCommas(value); // 쉼표추가
+	        $(this).val(value); // 반환
+		}
+	})
+	.on("keyup", function () {
+    $(this).val($(this).val().replace(/[^0-9]/g, "")); // 숫자가 아닌것은 제거
+});
+
 //3자리 단위마다 콤마 생성
 function addCommas(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -181,27 +202,7 @@ function removeCommas(value) {
     	return value.split(",").join("");
     }
 }
-
-$(".product--form [name$='price']")
-	.on("focus", function() {
-		let value = $(this).val();
-		value = removeCommas(value);
-    	$(this).val(value);
-	})
-	.on("focusout", function() {
-		let value = $(this).val();
-		if(value && value.length > 0) {
-	        if(!$.isNumeric(value)) {
-	        	value = value.replace(/[^0-9]/g,"");
-	        }
-	        value = addCommas(value);
-	        $(this).val(value);
-		}
-	})
-	.on("keyup", function() {
-    $(this).val($(this).val().replace(/[^0-9]/g,""));
-});
-
+/* 시작가, 즉시구매가 천단위쉼표, 숫자만입력 끝 by.유빈 */
 
 // 경매기간에 따른 마감시간 계산 후 input태그에 삽입 by.유빈
 function changeEndDate(value) {
@@ -481,6 +482,13 @@ function formCheck() {
 
 // 상품(경매) 등록 - DB저장
 function productInsert(imgSrcList) {
+	
+	// 시작가, 즉사거래가 쉼표 없애기
+	let purchase_price = $(".product--form [name='product_purchase_price']");
+	let starting_price = $(".product--form [name='product_starting_price']");
+	purchase_price.val(removeCommas(purchase_price.val()));
+	starting_price.val(removeCommas(starting_price.val()));
+	
 	let formData = $('.product--form').serialize(); // 사용자가 입력한 내용
 	$.each(imgSrcList, (idx, imgSrc) => { // 이미지등록(썸네일)에 있는 이미지
 		formData += `&product_img_${idx + 1}=${imgSrc}`;
