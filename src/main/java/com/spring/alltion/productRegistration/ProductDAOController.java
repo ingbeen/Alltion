@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.spring.mapper.ProductMapper;
 
 @RestController
 public class ProductDAOController {
@@ -76,7 +79,7 @@ public class ProductDAOController {
 				out.close();
 				return;
 			}
-			
+
 			// 이미지 가로폭 할당
 			image = ImageIO.read(file.getInputStream());
 			imageWidth = image.getWidth(null);

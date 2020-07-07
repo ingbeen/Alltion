@@ -9,7 +9,7 @@ $(window).scroll(function () {
     }
 })
 
-/* 카테고리변경  시작 by.유빈 */
+/* 1차 카테고리 선택 시작 by.유빈 */
 function changeCategory(item) {
     let name = item.name; // 카테고리1, 카테고리2
     let value = item.value; // 선택한 카테고리
@@ -105,7 +105,7 @@ function changeCategory(item) {
         }
     }
 }
-/* 카테고리변경  끝 by.유빈 */
+/* 1차 카테고리 선택 끝 by.유빈 */
 
 // 2차 카테고리 체인지
 function changeCategory_2(value) {
@@ -165,7 +165,43 @@ function changeInput(item) {
             $('.purchasePrice').focus();
         }
     }
+    
 }
+
+//3자리 단위마다 콤마 생성
+function addCommas(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
+//모든 콤마 제거
+function removeCommas(value) {
+    if(!value || value.length == 0) {
+    	return "";
+    } else {
+    	return value.split(",").join("");
+    }
+}
+
+$(".product--form [name$='price']")
+	.on("focus", function() {
+		let value = $(this).val();
+		value = removeCommas(value);
+    	$(this).val(value);
+	})
+	.on("focusout", function() {
+		let value = $(this).val();
+		if(value && value.length > 0) {
+	        if(!$.isNumeric(value)) {
+	        	value = value.replace(/[^0-9]/g,"");
+	        }
+	        value = addCommas(value);
+	        $(this).val(value);
+		}
+	})
+	.on("keyup", function() {
+    $(this).val($(this).val().replace(/[^0-9]/g,""));
+});
+
 
 // 경매기간에 따른 마감시간 계산 후 input태그에 삽입 by.유빈
 function changeEndDate(value) {
@@ -454,7 +490,6 @@ function productInsert(imgSrcList) {
         url: 'productInsert.yb',
         type: 'post',
         data: formData,
-//        dataType: "json",
         success: () => alert("성공"), 
         error: () => alert("경매 등록을 실패하였습니다")
     });

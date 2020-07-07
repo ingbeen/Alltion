@@ -213,7 +213,7 @@
                             <p>시작가(<span class="notice">*</span>)</p>
                         </div>
                         <div class="form_wrap--items__contents">
-                            <input class="wd150" type="text" name="product_starting_price"><span> 원</span>
+                            <input class="wd150" type="text" name="product_starting_price" maxlength="9"><span> 원</span>
                         </div>
                     </div>
 
@@ -280,7 +280,7 @@
                                 <input type="radio" name="product_delivery" value="after">선불
                             </label>
                             <label>
-                                <input type="radio" name="product_delivery" value="x">불가능
+                                <input type="radio" name="product_delivery" value="none">불가능
                             </label>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                             <div>
                                 <span class="fw700">가능지역 </span>
                                 <input class="directArea readonlyfalse" type="text" name="product_transaction_area"
-                                    readonly>
+                                     maxlength="20" readonly>
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
                             <div>
                                 <span class="fw700">금액 </span>
                                 <input class="purchasePrice readonlyfalse" type="text" name="product_purchase_price"
-                                    disabled>
+                                     maxlength="9" disabled>
                             </div>
                         </div>
                     </div>
@@ -384,6 +384,7 @@
             <div class="form--button">
                 <a class="form-button__submit" onclick="productSubmit()">등록</a>
                 <a class="form-button__cancel" onclick="product_form.reset()">다시 작성</a>
+                <a href="productSelectTest.yb">리스트test</a>
             </div>
 
         </form>
