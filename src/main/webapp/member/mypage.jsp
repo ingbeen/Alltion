@@ -116,7 +116,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="./activity_history.kj">
                     <span class="material-icons">forum</span><br>
                     <span class="myPage__menu">활동 내역</span>
                 </a>

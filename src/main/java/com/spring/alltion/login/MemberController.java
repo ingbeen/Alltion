@@ -163,20 +163,30 @@ public class MemberController {
 			return res;
 		}
 		@RequestMapping(value = "/mypage.kj")
-		public String myPage()
+		public String myPage(MemberVO membervo, HttpSession session)throws Exception
 		{
+			String userId = (String)session.getAttribute("userId");
+			if(userId == null)
+			{
+			return "member/login";
+			}else
 			
 			return "member/mypage";
 		}
-		
 		@RequestMapping(value = "/memberinfo.kj")
 		public String updateForm(Model model,HttpSession session)throws Exception
 		{	
 			String userId = (String)session.getAttribute("userId");
+			if(userId ==null)
+			{
+				return "member/login";
+			}else 
+			{
 			MemberVO vo = memberService.selectMember(userId);
 			model.addAttribute("membervo",vo);
 			
 			return "member/update";
+			}
 		}
 		//회원 수정 이메일
 		@RequestMapping(value = "/updateEmail.kj")
@@ -308,4 +318,13 @@ public class MemberController {
 			
 		}
 		
+		@RequestMapping(value = "activity_history.kj")
+		public String history(Model model,HttpSession session)throws Exception
+		{	
+			String userId = (String)session.getAttribute("userId");
+			MemberVO vo = memberService.selectMember(userId);
+			model.addAttribute("membervo",vo);
+			
+			return "member/history";
+		}
 }

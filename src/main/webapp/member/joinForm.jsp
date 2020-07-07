@@ -355,7 +355,8 @@
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">이메일</label>
                 <div>
-                <input type="text" class = "int" id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="이메일 아이디" value = "${email}">     
+                <input type="hidden" class = "int" id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="이메일 아이디" value = "${email}">     
+            	${email}
             	</div>
             </div>  
             <div class = "join_row">
