@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.spring.mapper.ProductMapper;
 
 @RestController
 public class ProductDAOController {
@@ -174,7 +171,7 @@ public class ProductDAOController {
 	public void productInsert(ProductVO productVO) {
 		
 		try {
-			
+			/* 테스트
 			System.out.println(productVO.getProduct_id());
 			System.out.println(productVO.getProduct_category_1());
 			System.out.println(productVO.getProduct_category_2());
@@ -192,6 +189,7 @@ public class ProductDAOController {
 			System.out.println(productVO.getProduct_transaction_area());
 			System.out.println(productVO.getProduct_purchase_price());
 			System.out.println(productVO.getProduct_re_auction());
+			*/
 			
 			productService.ProductInsert(productVO);
 			
