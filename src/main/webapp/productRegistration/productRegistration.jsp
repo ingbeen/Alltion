@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -33,10 +34,13 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="loginForm.html">로그인</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="joinForm.html">회원 가입</a>
+                        <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
@@ -47,7 +51,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="index.html">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -74,7 +78,7 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="mypage.html">
+                        <a href="./mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
