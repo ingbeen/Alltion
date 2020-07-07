@@ -711,8 +711,7 @@ function checkpassword() {
                     </div>
                     </div>
             	</form>
-            	
-            	
+ 
             	
             	<div class="member_update--btn">
                	 <button class="update_btn__submit" onclick="history.back()">뒤로 가기</button>

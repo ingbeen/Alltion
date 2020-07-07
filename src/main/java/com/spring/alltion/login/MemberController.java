@@ -318,13 +318,18 @@ public class MemberController {
 			
 		}
 		
-		@RequestMapping(value = "activity_history.kj")
+		@RequestMapping(value = "/buyer.kj")
 		public String history(Model model,HttpSession session)throws Exception
 		{	
 			String userId = (String)session.getAttribute("userId");
+			if(userId ==null)
+			{
+				return "member/login";
+			}else {
 			MemberVO vo = memberService.selectMember(userId);
 			model.addAttribute("membervo",vo);
 			
-			return "member/history";
+			return "member/buyer";
+		}
 		}
 }
