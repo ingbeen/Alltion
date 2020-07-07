@@ -194,7 +194,6 @@
                             </div>
                             
                             <p>
-                                수정해야됨<br>
                                 이미지 형식 : JPG<br>
                                 사이즈 규격 : 가로폭 1000px (1000px 보다 클 경우 1000이하로 자동 편집됩니다) 5장까지 등록 가능합니다.<br>
                                 원활한 물품 등록을 위하여 이미지 1장 기준으로 3MB 이하로 등록하셔야 합니다.
@@ -218,7 +217,7 @@
                             <p>시작가(<span class="notice">*</span>)</p>
                         </div>
                         <div class="form_wrap--items__contents">
-                            <input class="wd150" type="text" name="product_starting_price"><span> 원</span>
+                            <input class="wd150" type="text" name="product_starting_price" maxlength="9"><span> 원</span>
                         </div>
                     </div>
 
@@ -285,7 +284,7 @@
                                 <input type="radio" name="product_delivery" value="after">선불
                             </label>
                             <label>
-                                <input type="radio" name="product_delivery" value="x">불가능
+                                <input type="radio" name="product_delivery" value="none">불가능
                             </label>
                         </div>
                     </div>
@@ -308,7 +307,7 @@
                             <div>
                                 <span class="fw700">가능지역 </span>
                                 <input class="directArea readonlyfalse" type="text" name="product_transaction_area"
-                                    readonly>
+                                     maxlength="20" readonly>
                             </div>
                         </div>
                     </div>
@@ -341,7 +340,7 @@
                             <div>
                                 <span class="fw700">금액 </span>
                                 <input class="purchasePrice readonlyfalse" type="text" name="product_purchase_price"
-                                    disabled>
+                                     maxlength="9" disabled>
                             </div>
                         </div>
                     </div>
@@ -389,6 +388,7 @@
             <div class="form--button">
                 <a class="form-button__submit" onclick="productSubmit()">등록</a>
                 <a class="form-button__cancel" onclick="product_form.reset()">다시 작성</a>
+                <a href="productSelectTest.yb">리스트test</a>
             </div>
 
         </form>
