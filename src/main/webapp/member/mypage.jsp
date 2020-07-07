@@ -9,6 +9,7 @@
 <head>
  <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/mypage.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion - 마이 페이지</title>
@@ -30,6 +31,9 @@
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
@@ -67,7 +71,7 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="../mypage/mypage.html">
+                        <a href="./mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
