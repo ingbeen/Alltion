@@ -3,6 +3,9 @@ package com.spring.alltion.productList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,5 +63,10 @@ public class ProductListController {
 		model.addAttribute("productlist", productlist);
 		
 		return "productList/productList";
+	}
+	@RequestMapping(value = "/categoryCheck.ms", method = RequestMethod.GET)
+	public String goCategory(HttpServletRequest request, ProductVOTest vo) {
+		vo.setProduct_category_1(request.getParameter(""));
+		return "redirect:/productList.ms";
 	}
 }

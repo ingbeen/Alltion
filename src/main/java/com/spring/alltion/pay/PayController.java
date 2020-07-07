@@ -1,15 +1,8 @@
 package com.spring.alltion.pay;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,6 +63,14 @@ public class PayController {
 		vo.setBuyer_name(vo.getBuyer_name());
 		//vo.setBuyer_tel(vo.getBuyer_tel());
 		payService.insertPay(vo);
+	}
+	
+	@RequestMapping(value = "/charge_post2.ms", method = RequestMethod.POST)
+	public String charge(PayVO payVO, Model model) {
+		PayVO vo = payService.charge(payVO);
+		System.out.println("controller vo.getAmount : " + vo.getAmount());
+		model.addAttribute(vo);
+		return "pay/pay";
 	}
 	/*
 	@RequestMapping(value="/goPay.do", method = RequestMethod.POST)

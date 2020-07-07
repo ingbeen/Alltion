@@ -46,4 +46,14 @@ public class PayServiceImpl implements PayService {
 		return payVO;
 	}
 
+	@Override
+	public PayVO charge(PayVO payVO) {
+		// TODO Auto-generated method stub
+		payVO.setAmount(payVO.getAmount());
+		payVO.setBuyer_name(payVO.getBuyer_name());
+		System.out.println(payVO.getAmount());
+		System.out.println(payVO.getBuyer_name());
+		return payVO;
+	}
+
 }
