@@ -183,6 +183,7 @@ public class MemberController {
 			}else 
 			{
 			MemberVO vo = memberService.selectMember(userId);
+			System.out.println(vo.getMember_id());
 			model.addAttribute("membervo",vo);
 			
 			return "member/update";

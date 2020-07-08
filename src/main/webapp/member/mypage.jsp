@@ -104,21 +104,21 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="./buyer.kj">
                     <span class="material-icons">receipt</span><br>
-                    <span class="myPage__menu">구매 정보</span>
+                    <span class="myPage__menu">구매 내역</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">list</span><br>
-                    <span class="myPage__menu">판매 정보</span>
+                    <span class="myPage__menu">낙찰 내역</span>
                 </a>
             </li>
             <li>
                 <a href="">
-                    <span class="material-icons">poll</span><br>
-                    <span class="myPage__menu">참여 경매</span>
+                    <span class="material-icons">forum</span><br>
+                    <span class="myPage__menu">활동 내역</span>
                 </a>
             </li>
             <li>
@@ -139,11 +139,10 @@
                     <span class="myPage__menu">신용 등급</span>
                 </a>
             </li>
-            
-             <li>
+            <li>
                 <a href="">
-                    <span class="material-icons">forum</span><br>
-                    <span class="myPage__menu">활동 내역</span>
+                    <span class="material-icons">poll</span><br>
+                    <span class="myPage__menu">참여 경매</span>
                 </a>
             </li>
         </ul>
