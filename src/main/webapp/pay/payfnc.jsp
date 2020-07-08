@@ -47,6 +47,18 @@ create table payobject(
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="http://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
+function makeid() {
+	  var text = "";
+	  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	  for (var i = 0; i < 9; i++)
+	    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	  return text;
+	}
+	var id = makeid();
+</script>
+<script>
     $(function() {
         var IMP = window.IMP;
         var code = "imp42790723"; // 가맹점 식별코드
@@ -58,7 +70,7 @@ create table payobject(
             pg : 'kakao', // pg 사 선택(kakao, kakaopay 둘다 가능)
             pay_method : 'card',
             //merchant_uid : 'merchant_' + new Date().getTime(),
-            merchant_uid : 'merchant_77', // 주문번호.. 취소할때 이 값이 필요
+            merchant_uid : id, // 주문번호.. 취소할때 이 값이 필요
             name : 'e머니', // 상품명
             amount : '<%=money%>',
             //buyer_email : 'minseok2709@naver.com',

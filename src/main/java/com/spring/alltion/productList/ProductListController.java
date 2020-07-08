@@ -38,7 +38,7 @@ public class ProductListController {
 		
 		// 총 페이지 수
 		int maxpage=(int)((double)listcount/limit+0.95);
-		//현재 페이지에 보여줄 시작 페이지 수(1, 6, 11 등...)
+		//현재 페이지에 보여줄 시작 페이지수(1, 6, 11 등...)
    		int startpage = (((int) ((double)page / 10 + 0.9)) - 1) * 5 + 1;
    		//현재 페이지에 보여줄 마지막 페이지 수(5, 10, 15 등...)
    		int endpage = maxpage;

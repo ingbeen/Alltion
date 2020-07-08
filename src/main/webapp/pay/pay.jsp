@@ -146,14 +146,14 @@ date = getFormatDate(date);
 							</colgroup>
 							<tbody>
 								<tr>
-									<th>입금인</th>
+									<th>아이디</th>
 									<td><input class="text1" type="text" name="buyer_name"
 										title="입금인" size="20"></td>
 									<th>현재 사이버 머니</th>
 									<td>￦ 0000</td>
 								</tr>
 								<tr>
-									<th>입금금액(원)</th>
+									<th>충전할 금액(원)</th>
 									<td colspan="3">
 										<div class="won moneyAdd">
 											<input class="text2" type="text" name="amount" title="입금금액"
@@ -204,17 +204,15 @@ date = getFormatDate(date);
 							</colgroup>
 							<tbody>
 								<tr>
-									<th>회원명</th>
-									<td><input class="text1" type="text" name="buyer_name"
-										title="환불회원" size="20"></td>
+									<th>결제 주문번호</th>
+									<td><input class="text2" type="text" name="merchant_uid"
+										title="결제 주문번호"></td>
 
 									<th>현재 사이버머니</th>
 									<td>￦ 0000</td>
 								</tr>
 								<tr>
-									<th>결제 주문번호</th>
-									<td><input class="text2" type="text" name="merchant_uid"
-										title="결제 주문번호"></td>
+									
 								</tr>
 							</tbody>
 						</table>
