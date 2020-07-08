@@ -5,6 +5,7 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./resources/css/index_main.css">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/css/index_main.css">
     <link href="https://fonts.googleapis.com/css2?
@@ -74,6 +75,9 @@ pageEncoding="UTF-8"%>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
@@ -1978,6 +1982,9 @@ pageEncoding="UTF-8"%>
                     </li>
                     <li>
                         <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    <li>
+                    	<a href="./loginForm.kj">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
