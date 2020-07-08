@@ -147,11 +147,11 @@
                 </div>
                 <br>
                 <div class="dot_group">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                    <span class="dot" onclick="currentSlide(4)"></span>
-                    <span class="dot" onclick="currentSlide(5)"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img class="target1" src="<%=bvo.getProduct_img1() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img class="target2" src="<%=bvo.getProduct_img2() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(3)"><img class="target3" src="<%=bvo.getProduct_img3() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(4)"><img class="target4" src="<%=bvo.getProduct_img4() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(5)"><img class="target5" src="<%=bvo.getProduct_img5() %>" style="width:100px; height:100px;"></span>
                 </div>
                 <button type="button" class="mag_btn"><img src="./resources/img/product/magicon.png"></button>&nbsp;&nbsp;&nbsp;
                 <button type="button" class="mag_close"><img src="./resources/img/product/mag_close.png"></button>
