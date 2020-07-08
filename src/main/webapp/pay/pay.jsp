@@ -7,11 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.spring.alltion.pay.*" %>
 <%
-	PayVO vo = (PayVO)request.getAttribute("vo");
+	String buyer = (String)request.getAttribute("buyer_name");
+	String amount = (String)request.getAttribute("amount");
 %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
@@ -26,97 +26,6 @@
 </style>
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="http://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script>
-	function pay() {
-		var IMP = window.IMP;
-		var code = "imp42790723"; // 가맹점 식별코드
-		IMP.init(code);
-
-		// 결제요청
-		IMP.request_pay({
-							url : "/pay/charge_post2.ms",
-							// name과 amount만 있어도 결제 진행가능
-							pg : 'kakao', // pg 사 선택(kakao, kakaopay 둘다 가능)
-							pay_method : 'card',
-							//merchant_uid : 'merchant_' + new Date().getTime(),
-							merchant_uid : 'merchant_49', // 주문번호.. 취소할때 이 값이 필요
-							name : 'e머니', // 상품명
-
-							amount : <%=vo.getAmount()%>,
-							//buyer_email : 'minseok2709@naver.com',
-							buyer_name : <%=vo.getBuyer_name()%>,
-						//buyer_tel : '010-9094-2709'
-						// 결제 완료후 이동할 페이지. kakao나 kakaopay는 생략함  
-						//m_redirect_url : 'https://localhost:8080/payments/complete' / 
-						},
-						function(rsp) {
-							if (rsp.success) { // 결제 성공시 
-								var msg = '결제가 완료되었습니다.';
-								msg += '고유ID : ' + rsp.imp_uid;
-								msg += '상점 거래ID : ' + rsp.merchant_uid;
-								msg += '결제 금액 : ' + rsp.paid_amount;
-								msg += '카드 승인번호 : ' + rsp.apply_num;
-
-								var payVO = {
-									//dfkek : rsp.imp_uid,
-									merchant_uid : rsp.merchant_uid, //주문번호...상품번호로 대체
-									//name : rsp.name,  //결제상품명
-									amount : rsp.paid_amount, //금액
-									status : rsp.status, // 결제상태
-									//buyer_email : rsp.buyer_email,
-									buyer_name : rsp.buyer_name, //아이디
-								//buyer_tel : rsp.buyer_tel
-								}
-
-								//post로 payVO객체의 내용을 전달해야한다............
-								$
-										.ajax({
-											url : '/pay/getSuccessData.ms',
-											type : 'POST',
-											data : payVO,
-											contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-											dataType : "json",
-										});
-							} else { // 결제 실패시
-								var msg = '결제에 실패하였습니다. 에러내용 : '
-										+ rsp.error_msg
-							}
-							alert(msg);
-						});
-	}
-
-	function cancelPay() {
-		jQuery.ajax({
-							url : "/pay/cancel.ms",
-							type : "post",
-							//datatype: "json",
-							contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-							data : {
-								"merchant_uid" : document.drawbackform.mechant_uid.value // 주문번호
-							//"cancel_request_amount": 2000, // 환불금액
-							//"reason": "테스트 결제 환불", // 환불사유
-							//"refund_holder": "홍길동", // [가상계좌 환불시 필수입력] 환불 가상계좌 예금주
-							//"refund_bank": "88", // [가상계좌 환불시 필수입력] 환불 가상계좌 은행코드(ex. KG이니시스의 경우 신한은행은 88번)
-							//"refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 가상계좌 번호
-							}
-						})
-				.done(
-						function(result) { // 환불 성공시 로직 
-							$
-									.ajax({
-										url : '/pay/cancelData.do',
-										type : 'POST',
-										data : {
-											"merchant_uid" : document.drawbackform.mechant_uid.value
-										},
-										contentType : 'application/x-www-form-urlencoded; charset=utf-8'
-									});
-							alert("환불 성공 : " + result);
-						}).fail(function(error) { // 환불 실패시 로직
-					alert("환불 실패 : " + error);
-				});
-	}
-</script>
 <script>
 	function test1(value) {
 		$('.text2').val(value);
@@ -225,7 +134,7 @@ date = getFormatDate(date);
 				</ul>
 
 				<div id="charge_1" class="Tab_box1 XenoTabLayer on">
-					<form id="chargeform" method="post" action="./charge_post2.ms" >
+					<form id="chargeform" method="post" action="./charge.ms" >
 						<!-- <input type="hidden" name="merchant_uid"> -->
 						<!-- <input type="hidden" name="id" value="id넣어야한다......"> -->
 						<table class="tb1_money">
@@ -277,14 +186,14 @@ date = getFormatDate(date);
 							</tbody>
 						</table>
 						<div class="submit">
-							<a onclick="pay()"><input type="image"
+							<input type="image"
 								src="data:image/gif;base64,R0lGODlheQAlAMQAAPTW1+ioqdxxdNlhZOKPkPnr69M5PtZOUvfh4e7Awd+AgvHLzPz19eWcnuu0tbscIf///9AfJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMTQgNzkuMTUxNDgxLCAyMDEzLzAzLzEzLTEyOjA5OjE1ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjgwNURBODcxNzM3RDExRTNCODNBQzdEODUzQzZEN0ZFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjgwNURBODcyNzM3RDExRTNCODNBQzdEODUzQzZEN0ZFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODA1REE4NkY3MzdEMTFFM0I4M0FDN0Q4NTNDNkQ3RkUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6ODA1REE4NzA3MzdEMTFFM0I4M0FDN0Q4NTNDNkQ3RkUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAAAh+QQAAAAAACwAAAAAeQAlAEAF/+AjjmRpnmiqrmzrvmIkz3Rt33iu73zv+7GfUDZgQCAAQWSwODIGMsURQogIBAlIYImYAgxWpA0AUcjIyuEvqBYGClNnAEwE2O93R04g1qHbQA+Ag4SFhjlsh4qLjDqJjTYBWjZxUzKSW5eTMnwAZwGgoWcQaZARj6ZLCmQFBFA0BwFVNJgHEE9LRwadnHAIdKOlkKipxcaBMMnKy8zNKsfQ0TvE0tXH1NbZw4LGBKBNRwigs5qZoGQBZJVavDXtf6nYh+v0cAxmA11VmHwFM3AD+DAAMMsAHDPBisk71GTBgRkGsiyY0Q4HAQAFACBsJwBhDXimFmobWUgkyZNqTNaiXNlDJcuXOFzCnDlDJs2ZNm++zKlzJU9AFxv8EBCg1EVyschZDPAwHrdi6uh5imAHTsapmBqcQwLqSh96CZ1Cw3IkC4QEHmU0mRon0xIBr8JMpdHgbNiQT1MNINB0xgECaepCaGBkTgRMEbosCNAEQZgjbvvNALnNWKitBS4HGOAA2JJyFdFUNNAlAQ3KjX7+OBA1DoK4FWUcEPDQQaUqvAaU9UyVlMK8pmwjAHyFQGmK9I7MtRH7BmpGqofsusK7p5Do1rNhz15tO/do3r9fAy5e54MQADs="
-								value="충전하기"></a>
+								value="충전하기" >
 						</div>
 					</form>
 				</div>
 				<div id="charge_2" class="Tab_box2 XenoTabLayer">
-					<form id="drawbackform" method="post" action="drawback">
+					<form id="drawbackform" method="post" action="./drawback.ms">
 						<table class="tbl_money" border="0" align="center" cellpadding="0"
 							cellspacing="0">
 							<colgroup>
@@ -296,7 +205,7 @@ date = getFormatDate(date);
 							<tbody>
 								<tr>
 									<th>회원명</th>
-									<td><input class="text1" type="text" name="moneyback"
+									<td><input class="text1" type="text" name="buyer_name"
 										title="환불회원" size="20"></td>
 
 									<th>현재 사이버머니</th>
@@ -304,7 +213,7 @@ date = getFormatDate(date);
 								</tr>
 								<tr>
 									<th>결제 주문번호</th>
-									<td><input class="text2" type="text" name="mechant_uid"
+									<td><input class="text2" type="text" name="merchant_uid"
 										title="결제 주문번호"></td>
 								</tr>
 							</tbody>
@@ -312,7 +221,7 @@ date = getFormatDate(date);
 						<div class="submit">
 							<input type="image"
 								src="data:image/gif;base64,R0lGODlheQAlAMQAAPTW19xxdNZOUvz19eKPkO7AwdM5Pvnr69lhZPfh4eWcnvHLzOu0td+AguioqbscIf///9AfJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMTQgNzkuMTUxNDgxLCAyMDEzLzAzLzEzLTEyOjA5OjE1ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjgzMUVDRTk0NzM3RDExRTM4QTAzQkU5RkMyNEFDQzRGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjgzMUVDRTk1NzM3RDExRTM4QTAzQkU5RkMyNEFDQzRGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODMxRUNFOTI3MzdEMTFFMzhBMDNCRTlGQzI0QUNDNEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6ODMxRUNFOTM3MzdEMTFFMzhBMDNCRTlGQzI0QUNDNEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAAAh+QQAAAAAACwAAAAAeQAlAEAF/+AjjmRpnmiqrmzrvmIkz3Rt33iu73zv+7GfcDaAOCKCA4QQgDgdgoB0OkXIHJBFrQApzBBOiCKCfQ6FwbOQAWi73dZyeA4YOpTzRED9S/P/gIGCNn6DhoeIOYWJBjJNdREGj1cQAA6Xl1yQkQ5FTgMFjTRYRzOkiTSLiABhA24FBJUyBG9uRaURk5S4jgueEAcFAqipD8THyIEwy8zNzs8sydLTQMbU19jF2dvXqoeSAZhMCLpYBVQBCrIR6gmiMgsQDLlzYXunx97fDgkQAwt7JmG6xMrSwGEGuMwRJqPfgAaRuIzBR0zfIVZ7cGBxVQsAgQj1QjrZw+ojDVa8EupZ5MZS0MqWMNW8jEmzWs2bgGbi3FlDJ8+fPn/uDCr0JlE+AhyYRKLUkYOMX5rWiDLsRjioERo8RXZUSJOQAMqJdALJgEMGDhgoccfUQcFLwyii6iqEwK8u9PQkHbsOZQ1dMjQ59ZvPGjJWCy4VkQJMDl8IAQwUOYDJYVW7EBr0WxDHCFfDxAhkAragjTpItNooOeBmjIykBMhJ2RoBAcMZVRl4LjxNARQausINvKQEF2C5sUBhYjWgakXQx1gl6AigM+XhTal3tKL7gIIpuiF/LhoIHNbx5NP3hK6ePN322d7D78Z+Ps8HIQAAOw=="
-								value="환불요청하기" onclick="cancelpay()">
+								value="환불요청하기" >
 						</div>
 					</form>
 				</div>

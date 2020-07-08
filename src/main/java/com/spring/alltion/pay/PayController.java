@@ -19,13 +19,13 @@ public class PayController {
 	private PayService payService;
 	//private MemberService memberService;
 	
-	@RequestMapping(value = "/pay.ms", method = RequestMethod.GET)
+	@RequestMapping(value = "/pay.ms")
 	public String home() {
 	
 		return "pay/pay";
 	}
 	
-	@RequestMapping(value = "/cancel.ms", method = RequestMethod.POST)
+	@RequestMapping(value = "/cancel.bo", method = RequestMethod.POST)
 	@ResponseBody
 	public String cancel(@RequestParam(value="merchant_uid") String merchant_uid) {  // 결제번호 : merchant_uid
 		System.out.println("merchant_uid=" + merchant_uid);
@@ -38,11 +38,12 @@ public class PayController {
 			return "Failure";
 	}
 	
-	@RequestMapping(value = "/getSuccessData.ms", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/getSuccessData.bo", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public void goOracle(PayVO vo){
+	public void goOracle(PayVO payVO){
 		try {
-			payService.insertPay(vo);
+			System.out.println("goOracle");
+			payService.insertPay(payVO);
 			System.out.println("데이터삽입 완료");
 		}catch(Exception e) {
 			System.out.println("실패");
@@ -50,9 +51,10 @@ public class PayController {
 			
 	}
 	
-	@RequestMapping(value = "/cancelData.ms", method = RequestMethod.POST)
+	@RequestMapping(value = "/cancelData.bo", method = RequestMethod.POST)
 	@ResponseBody
 	public void cancelOracle(@RequestParam(value="merchant_uid") String merchant_uid) {
+		System.out.println("cancelOracle: " + merchant_uid);
 		PayVO vo = new PayVO();
 		vo = payService.getPayList(merchant_uid);
 		vo.setMerchant_uid(vo.getMerchant_uid());
@@ -65,23 +67,15 @@ public class PayController {
 		payService.insertPay(vo);
 	}
 	
-	@RequestMapping(value = "/charge_post2.ms", method = RequestMethod.POST)
-	public String charge(PayVO payVO, Model model) {
-		PayVO vo = payService.charge(payVO);
-		System.out.println("controller vo.getAmount : " + vo.getAmount());
-		model.addAttribute(vo);
-		return "pay/pay";
+	@RequestMapping(value = "/charge.ms", method = RequestMethod.POST)
+	public String gocharge() {
+
+		return "pay/payfnc";
 	}
-	/*
-	@RequestMapping(value="/goPay.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String buyEMoney(MemberVO memberVO, HttpSession session, HttpServletResponse response) throws IOException {
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter writer = response.getWriter();
-		session.setAttribute("id",memberVO.getId());
-		writer.write("<script>location.href='./pay.jsp';</script>");
-		return null;
+	
+	@RequestMapping(value = "/drawback.ms", method = RequestMethod.POST)
+	public String gocancel() {
+
+		return "pay/cancelfnc";
 	}
-	*/
 }
