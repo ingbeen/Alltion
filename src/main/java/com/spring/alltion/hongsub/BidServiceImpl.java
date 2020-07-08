@@ -71,7 +71,7 @@ public class BidServiceImpl {
 		//상세보기의 현재가 갱신
 		product_top_bidder = bidvo.getBid_id();
 		System.out.println("product_top_bidder = "+product_top_bidder);
-		boardmapper.updateBoard(price,bid_product_number,product_top_bidder);
+		boardmapper.updateBoard(price,bid_product_number);
 		
 		return bidmapper.bidInsert(bidvo);
 	}
@@ -87,8 +87,8 @@ public class BidServiceImpl {
 		int res = bidmapper.countBidList(bid_product_number);
 		bidvo.setBid_no(res);
 		bidvo.setBid_price(price);
-		String product_top_bidder = bidvo.getBid_id();
-		boardmapper.updateBoard(price, bid_product_number,product_top_bidder);
+		
+		boardmapper.updateBoard(price, bid_product_number);
 		
 		return bidmapper.bidInsert(bidvo);
 	}
@@ -101,6 +101,21 @@ public class BidServiceImpl {
 		bid_listcount = bidmapper.countBidList(bno)-1; 
 		
 		return bid_listcount;
+	}
+
+	public String getTop_bidderService(int product_number) {
+		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
+		String top_bidder_id;
+		
+		top_bidder_id = bidmapper.getTop_bidder_id(product_number);
+		
+		if(top_bidder_id==null) {
+			top_bidder_id = "";
+		}else {
+			top_bidder_id = top_bidder_id.substring(0,3) + "****";
+		}
+		
+		return top_bidder_id;
 	}
 
 }

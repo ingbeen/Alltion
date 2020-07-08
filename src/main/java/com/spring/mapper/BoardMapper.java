@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.spring.alltion.hongsub.BoardVO;
+import com.spring.alltion.productRegistration.ProductVO;
 
 public interface BoardMapper {
 
-	ArrayList<BoardVO> getBoardList();
+	ArrayList<ProductVO> getBoardList();
 
-	BoardVO getDetail(int product_number);
+	ProductVO getDetail(int product_number);
 
 	int selectNowPrice(int bid_product_number);
 
-	void updateBoard(@Param("price")int price,@Param(value="bid_product_number") int bid_product_number,@Param(value="product_top_bidder")String product_top_bidder);
+	void updateBoard(@Param("price")int price,@Param(value="bid_product_number") int bid_product_number);
 
 	int selectPurchasePrice(int bid_product_number);
 

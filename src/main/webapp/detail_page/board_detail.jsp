@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.alltion.hongsub.*" %>
+<%@ page import="com.spring.alltion.productRegistration.*" %>
+<%@ page import="com.spring.alltion.login.*" %>
 <%
+	// 로그인한 세션 아이디
 	String id = (String)session.getAttribute("userId");
-	BoardVO bvo = (BoardVO)request.getAttribute("bvo");
-	String writerId = bvo.getProduct_id();
+	// 상품 정보
+	ProductVO productvo = (ProductVO)request.getAttribute("productvo");
+	// 판매자 정보
+	String writerId = productvo.getProduct_id();
+	// 판매자 정보
+	MemberVO membervo = (MemberVO)request.getAttribute("membervo");
 	
+	String top_bidder_id = (String)request.getAttribute("top_bidder_id");
 	int bid_listcount = (int)request.getAttribute("bid_listcount");
 	int bid_nowpage = (int)request.getAttribute("bid_page");
 	int bid_maxpage=(int)request.getAttribute("bid_maxpage");
@@ -128,30 +136,32 @@
             <div class="summary_slideshow" align="center">
                 <div class="slideshow-container">
                     <div class="mySlides fade">
-                        <img class="target1" src="<%=bvo.getProduct_img1() %>" data-zoom="2">
+                        <img class="target1" src="<%=productvo.getProduct_img_1() %>" data-zoom="2">
                     </div>
                     <div class="mySlides fade">
-                        <img class="target2" src="<%=bvo.getProduct_img2() %>" data-zoom="2">
+                        <img class="target2" src="<%=productvo.getProduct_img_2() %>" data-zoom="2">
                     </div>
                     <div class="mySlides fade">
-                        <img class="target3" src="<%=bvo.getProduct_img3() %>" data-zoom="2">
+                        <img class="target3" src="<%=productvo.getProduct_img_3() %>" data-zoom="2">
                     </div>
                     <div class="mySlides fade">
-                        <img class="target4" src="<%=bvo.getProduct_img4() %>" data-zoom="2">
+                        <img class="target4" src="<%=productvo.getProduct_img_4() %>" data-zoom="2">
                     </div>
                     <div class="mySlides fade">
-                        <img class="target5" src="<%=bvo.getProduct_img5() %>" data-zoom="2">
+                        <img class="target5" src="<%=productvo.getProduct_img_5() %>" data-zoom="2">
                     </div>
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
                 <br>
                 <div class="dot_group">
-                    <span class="dot" onclick="currentSlide(1)"><img class="target1" src="<%=bvo.getProduct_img1() %>" style="width:100px; height:100px;"></span>
-                    <span class="dot" onclick="currentSlide(2)"><img class="target2" src="<%=bvo.getProduct_img2() %>" style="width:100px; height:100px;"></span>
-                    <span class="dot" onclick="currentSlide(3)"><img class="target3" src="<%=bvo.getProduct_img3() %>" style="width:100px; height:100px;"></span>
-                    <span class="dot" onclick="currentSlide(4)"><img class="target4" src="<%=bvo.getProduct_img4() %>" style="width:100px; height:100px;"></span>
-                    <span class="dot" onclick="currentSlide(5)"><img class="target5" src="<%=bvo.getProduct_img5() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img src="<%=productvo.getProduct_img_1() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img src="<%=productvo.getProduct_img_2() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(3)"><img src="<%=productvo.getProduct_img_3() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(4)"><img src="<%=productvo.getProduct_img_4() %>" style="width:100px; height:100px;"></span>
+                    <span class="dot" onclick="currentSlide(5)"><img src="<%=productvo.getProduct_img_5() %>" style="width:100px; height:100px;"></span>
+                 
+                 
                 </div>
                 <button type="button" class="mag_btn"><img src="./resources/img/product/magicon.png"></button>&nbsp;&nbsp;&nbsp;
                 <button type="button" class="mag_close"><img src="./resources/img/product/mag_close.png"></button>
@@ -160,17 +170,17 @@
             <div class="summary_information">
                 <div class="summary_info_nowPrice">
                     <div class="summary_info_category" style="display: inline-block;">
-                        <span><a href="">카테고리</a></span>
+                        <span><a href=""><%=productvo.getProduct_category_1() %></a></span>
                         <span>&nbsp;&nbsp;&#10095;&nbsp;&nbsp;</span>
-                        <span><a href="">카테고리</a></span>
+                        <span><a href=""><%=productvo.getProduct_category_2() %></a></span>
                     </div>
                     <ul>
                         <li>
-                            <p class="product_detail name" style="font-size: 28px;"><%=bvo.getProduct_subject() %></p>
+                            <p class="product_detail name" style="font-size: 28px;"><%=productvo.getProduct_subject() %></p>
                         </li>
                         <li>
                             <label for="now_price">현재가</label>
-                            <p id="now_price"><%=bvo.getProduct_now_price() %>원</p>
+                            <p id="now_price"><%=productvo.getProduct_current_price() %>원</p>
                         </li>
                     </ul>
                 </div>
@@ -178,11 +188,11 @@
                     <ul>
                        <li>
                             <label for="product_number">상품 번호</label>
-                            <p><%=bvo.getProduct_number() %></p>
+                            <p><%=productvo.getProduct_number() %></p>
                         </li>
                         <li>
                             <label for="id">판매자</label>
-                            <font><%=bvo.getProduct_id() %>&nbsp;님</font>&nbsp;&nbsp; 
+                            <font><%=productvo.getProduct_id() %>&nbsp;님</font>&nbsp;&nbsp; 
                             <button id="seller_check_btn" onclick="modal_display(1)" style="background-color: #616161; color:white;">
                                 	판매자 정보 확인하기
                             </button>
@@ -195,11 +205,11 @@
                                         <ul>
                                             <li>
                                                 <label>아이디</label>
-                                                <font><%=bvo.getProduct_id() %></font>
+                                                <font><%=productvo.getProduct_id() %></font>
                                             </li>
                                             <li>
                                                 <label>이메일</label>
-                                                <font>gugueng@naver.com</font>
+                                                <font><%=membervo.getEmail() %></font>
                                             </li>
                                             <li>
                                                 <label>정상거래</label>
@@ -210,8 +220,8 @@
                                                 <font>0 건</font>
                                             </li>
                                             <li>
-                                                <label>판매등급</label>
-                                                <font>플레티넘</font>
+                                                <label>판매자 등급</label>
+                                                <font><%=productvo.getProduct_credit_score() %></font>
                                             </li>
                                             <li>
                                                 <label>현재 판매중 경매</label>
@@ -224,23 +234,23 @@
                         </li>
                         <li>
                             <label for="boarddate">경매기간</label>
-                            <p>2020/06/23 00:00:01 ~ 2020/06/24 23:59:59</p>
+                            <p><%=productvo.getProduct_issue_date().substring(0,19) %>&nbsp;&nbsp; ~ &nbsp;&nbsp;<%=productvo.getProduct_end_date().substring(0,19) %></p>
                         </li>
                         <li>
                             <label for="start_price">시작가</label>
-                            <p><%=bvo.getProduct_starting_price() %>원</p>
+                            <p><%=productvo.getProduct_starting_price() %>원</p>
                         </li>
                         <li>
                             <label for="end_price">즉시 구매가</label>
-                            <p style="color:#F9A825;font-weight:bold;font-size:18px;"><%=bvo.getProduct_purchase_price() %>원</p>
+                            <p style="color:#F9A825;font-weight:bold;font-size:18px;"><%=productvo.getProduct_purchase_price() %>원</p>
                         </li>
                         <li>
                             <label for="boarddate">최고 응찰자</label>
-                            <p><%=bvo.getProduct_top_bidder() %><br></p>
+                            <p><%=top_bidder_id %><br></p>
                         </li>
                         <li>
                             <label for="boarddate">판매자 등급</label>
-                            <p>플레티넘</p>
+                            <p><%=productvo.getProduct_credit_score() %></p>
                         </li>
                         <li>
                             <label for="boarddate">거래방법</label>
@@ -253,7 +263,7 @@
                         </li>
                         <li>
                             <label for="boarddate">응찰단위</label>
-                            <font>1,000원</font>&nbsp;&nbsp; 
+                            <font><%=productvo.getProduct_bidding_unit() %>원</font>&nbsp;&nbsp; 
                             <button class="btns1" type="button" id="bid_notify_btn" onclick="modal_display(2)">응찰 유의사항</button>
                             <!-- ↓↓응찰 유의사항을 눌렀을때↓↓-->
                             <div id="bid_notify_modal" class="modal">
@@ -372,16 +382,16 @@
             </div>
             <div class="img_1">
                 <div align="center">
-                    <img src="<%=bvo.getProduct_img1() %>"></div>
+                    <img src="<%=productvo.getProduct_img_1() %>"></div>
             </div>
             <div class="img_2">
                 <div align="center">
-                    <img src="<%=bvo.getProduct_img2() %>">
+                    <img src="<%=productvo.getProduct_img_2() %>">
                 </div>
             </div>
             <div class="img_3">
                 <div align="center">
-                    <img src="<%=bvo.getProduct_img3() %>">
+                    <img src="<%=productvo.getProduct_img_3() %>">
                 </div>
             </div>
 
@@ -767,9 +777,9 @@
 		});
         
         //경매 번호
-        let bno = <%=bvo.getProduct_number()%>;
+        let bno = <%=productvo.getProduct_number()%>;
         //경매 즉시 구매가
-        let limit_price = <%=bvo.getProduct_purchase_price()%>;
+        let limit_price = <%=productvo.getProduct_purchase_price()%>;
         //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
         
@@ -788,7 +798,7 @@
 						a += '<div class="bidder1">';
 						a += '<div class="bid_list_no">'+value.bid_no+'</div>';
 						a += '<div class="bid_price">'+value.bid_price+'</div>';
-						a += '<div class="bidder_id">'+value.bid_id+'</div>';
+						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
 						//응찰하다가 응찰가격이 즉시구매가랑 동일하게 될때 

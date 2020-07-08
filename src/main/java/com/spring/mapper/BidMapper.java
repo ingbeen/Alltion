@@ -16,5 +16,7 @@ public interface BidMapper {
 
 	int bidInsert(BidVO bidvo);
 
+	String getTop_bidder_id(int bid_product_number);
+
 
 }

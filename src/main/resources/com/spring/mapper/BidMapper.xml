@@ -28,6 +28,15 @@
 		select count(*)+1 from bid_list where bid_product_number=#{bid_product_number}
 	</select>
 	
+	<select id="getTop_bidder_id" parameterType="int" resultType="String">
+		select 
+		bid_id 
+		from bid_list 
+		where bid_price = (select 
+		            nvl(max(bid_price),0) as max_bid_price 
+		            from bid_list 
+		            where bid_product_number = #{bid_product_number})
+	</select>
 	
 	<select id="selectNowPrice" parameterType="int" resultType="int">
 		select nvl(max(bid_price),0) from bid_list where bid_product_number=#{bid_product_number}
