@@ -117,8 +117,8 @@
             </li>
             <li>
                 <a href="">
-                    <span class="material-icons">forum</span><br>
-                    <span class="myPage__menu">활동 내역</span>
+                    <span class="material-icons">poll</span><br>
+                    <span class="myPage__menu">참여 경매</span>
                 </a>
             </li>
             <li>
@@ -141,10 +141,11 @@
             </li>
             <li>
                 <a href="">
-                    <span class="material-icons">poll</span><br>
-                    <span class="myPage__menu">참여 경매</span>
+                    <span class="material-icons">forum</span><br>
+                    <span class="myPage__menu">활동 내역</span>
                 </a>
             </li>
+
         </ul>
     </div>
     <!-- 푸터 영역 -->

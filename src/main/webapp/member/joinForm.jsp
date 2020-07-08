@@ -246,9 +246,7 @@
 
 <body>
 <form name="joinform" action="./joinprocess.kj" method="post" onsubmit="return validate();">
-<c:choose>
 
-<c:when test="${email != null}"><!-- naver 연동시 email 값이 있을때 -->
     <!-- 모든 페이지 공통 영역 by 하나  -->
     
     <div class="header">
@@ -351,259 +349,19 @@
             	<span id="alert-success1" style="display: none; color: #1ec700;">비밀번호가 일치합니다.</span>
     			<span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
             </div>
-
+			
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">이메일</label>
+            <c:choose>
+
+			<c:when test="${email != null}"><!-- naver 연동시 email 값이 있을때 -->    
                 <div>
                 <input type="hidden" class = "int" id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="이메일 아이디" value = "${email}">     
             	${email}
             	</div>
-            </div>  
-            <div class = "join_row">
-                <label class = "join_title" text-align = "left">휴대 전화 번호</label>
-                <input type = "text" id = "member_phone" name = "member_phone" class = "int" maxlength = "11" placeholder="'-' 없이 입력해 주세요">
-            </div>
-        </div>    
-        <div class = "row_group">
-            <div class = "join_row" style="margin-bottom: 0;">
-                <h3 class = "join_title_title" text-align = "left">
-                    &lt;추가 입력 사항&gt;
-                </h3>
-                <label class = "join_title" text-align = "left">주소</label><br>
-                <input type="text" id="sample4_postcode" class = "int" name="sample4_postcode" placeholder="우편번호">
-                <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">
-            </div>
-        </div>
-        <div class = "row_group">
-            <div class = "join_row">
-            <input type="text" class="int" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">
-            <input type="text" class="int" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">
-            <span id="guide" style="color:#999;display:none;"></span>
-            <input type="text" class="int" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">
-            </div>
-        </div>
-        <h3>
-            <a href ="javascript:joinform.submit()" class = "base_btn submit" >회원가입</a> 
-            <a href ="javascript:joinform.reset()" class = "base_btn cancel">다시작성</a>                         
-        </h3> 
-    </div>    
-                
-            
-    <!-- 푸터 영역 -->
-    <div class="footer">
-        <div class="upper_footer">
-            <ul class="upper_footer--list">
-                <li>
-                    <a href="#">
-                        올션소개
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        채용정보
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        공지사항
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        이용약관
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        개인정보처리방침
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        전자금융거래약관
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        제휴서비스
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="lower_footer">           
-        </div>
-    </div>       
-    
-    <!--  스크립트 영역  -->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 2020-06-23 pm 03:55 추가
-            // 실시간 시간 구하기
-            setInterval(function(){
-
-                let nowDate = new Date();
-                let day = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
-                let dayNum = nowDate.getDay();
-                let year = nowDate.getFullYear();
-                let month= nowDate.getMonth() + 1;
-                let date = nowDate.getDate();
-                let hour = nowDate.getHours();
-                let min = nowDate.getMinutes();
-                let sec = nowDate.getSeconds();
-
-                /*
-                // 오전 오후로 나누고 싶을 때
-                let amPm = '오전';
-
-                if(hour >= 12) {
-                    amPm = '오후';
-                    hour = hour - 12;
-                }
-
-                document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + amPm + '&nbsp;' + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec);
-                */
-
-                document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + hour + ":" + addZero(min) + ":" + addZero(sec);
-            },1000);
-
-            // 일의 자리 숫자일 때 0 붙여 주기
-            function addZero(i) {
-                if (i < 10) {
-                    i = '0' + i
-                };
-                return i;
-            } // 2020-06-23 pm 03:55 추가
-        });
-    </script>
-
-</c:when>
-
-<c:otherwise><!-- 일반 회원가입 -->
-
-    <div class="header">
-        <div class="upper_header">
-             <div class="upper_header--nav">
-                <p>
-                    <a href="" id="clock"></a>
-                </p>
-                <ul>
-                    <li>
-                        <a href="./loginForm.kj">로그인</a>
-                    </li>
-                    <li>
-                        <a href="./naverjoin.kj">회원 가입</a>
-                    </li>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="lower_header">
-            <div class="lower_header--nav">
-                <h1 class="logo">
-                    <a href="/alltion/">ALL-TION</a>
-                </h1>
-                <div class="category">
-                    <a class="category--drop">
-                        <img src="./resources/img/header/category_tab.png">
-                    </a>
-                </div>
-                <div class="search">
-                    <select class="search--select">
-                        <option value="">전체</option>
-                        <option value="패션">패션</option>
-                        <option value="뷰티">뷰티</option>
-                        <option value="출산/유아동">출산/유아동</option>
-                        <option value="전자기기">전자기기</option>
-                        <option value="가전제품">가전제품</option>
-                        <option value="가구/인테리어">가구/인테리어</option>
-                        <option value="반려동물/취미">반려동물/취미</option>
-                        <option value="도서/음반/문구">도서/음반/문구</option>
-                        <option value="티켓/쿠폰">티켓/쿠폰</option>
-                        <option value="스포츠">스포츠</option>
-                        <option value="공구/산업용품">공구/산업용품</option>
-                        <option value="기타잡화">기타잡화</option>
-                    </select>
-                    <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
-                </div>
-                <ul class="member_info">
-                    <li>
-                        <a href="./loginForm.kj">
-                            <span class="material-icons">perm_identity</span>
-                            <span>마이 페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./loginForm.kj">
-                            <span class="material-icons">turned_in_not</span>
-                            <span>찜 목록</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./loginForm.kj">
-                            <span class="material-icons">access_time</span>
-                            <span>참여 경매</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 회원가입 폼 by 계정 -->
-    <div class = "joinWrap">
-        <h2>All-tion 통합 회원 가입</h2>
-        <div class = "row_group">
-            <div class = "join_row">
-                <h3 class = "join_title_title" text-align = "left">
-                    &lt;필수 입력 사항&gt;
-                </h3>
-                <div class = "join_row">
-                <label class = "join_title" text-align = "left">이름</label><br>
-                <input type = "text" id = "member_name" name = "member_name" class = "int" maxlength = "5" placeholder="이름">
-            	</div>
-                <label class = "join_title" text-align = "left">아이디</label>
-                <span id="alert-danger" style="display: none; color: #1ec700; font-weight: bold; ">&nbsp;*&nbsp;사용가능 아이디</span>   			
-    			<span id="alert-success" style="display: none; color: #d92742;">&nbsp;*&nbsp;일치하는 아이디가 존재합니다.</span>
-                <br>
-                <input type = "text" id = "member_id" name = "member_id" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와알파벳만 사용해 주세요">
-                <input type = "button" class = "base_btn1" value = "중복 확인" onclick="usercheck()">
-             </div>
-             	
-            <div class = "join_row">
-                <label class = "join_title" text-align = "left">비밀번호</label>
-                <input type = "password" id = "member_password" name = "member_password" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요">
-            	
-            </div>
-            <div class = "join_row">
-                <label class = "join_title" text-align = "left">비밀번호 재확인</label>
-                <input type = "password" id = "member_password2" name = "member_password2" class = "int" maxlength = "20" placeholder="최소6~최대20, 숫자와 알파벳만 사용해 주세요"
-                onchange="checkpassword()">
-            	<span id="alert-success1" style="display: none; color:#1ec700;">비밀번호가 일치합니다.</span>
-   			    <span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
-            </div>
-            
-            <div class = "join_row">
-                <label class = "join_title" text-align = "left">이메일</label>
-                <div>
+            </c:when>	
+            <c:otherwise><!-- 일반 회원가입 -->	
+            <div>
                     <input type="text" class = "int" id="email1" name="email1" size="35" style="ime-mode:inactive" placeholder="이메일 아이디">
                     <span>&nbsp;@&nbsp;</span>
                     <select name="email2" id = "email2">
@@ -613,6 +371,9 @@
                         <option value="gmail.com">gmail.com</option>
                     </select>
                 </div>
+                 
+            </c:otherwise>
+            </c:choose>	
             </div>  
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">휴대 전화 번호</label>
@@ -747,11 +508,8 @@
             } // 2020-06-23 pm 03:55 추가
         });
     </script>
-      
-</c:otherwise>
-</c:choose>
-</form>
 
+</form>
 <!-- 비밀번호 재확인  -->   
 <script>
 function checkpassword() {

@@ -6,48 +6,64 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
     <style>
-    
-.buyer_title {
-            font-size: 16px;
+.btn_style{
+    height: 40px;
+    min-width: 80px;
+    line-height: 40px;
+    background: #FFAE36;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    font-family: "맑은 고딕","Malgun Gothic";
+    border-radius: 7px;
+}
+.buyer_title  {
+            font-size: 25px;
         }
 .buyer h2 {
             line-height: 30px;
-            margin-top: 24px;
-            margin-left : 150px;
+            margin-bottom: 50px;
+            margin-left: 250px;
             font-size: 24px;
-        }  
+            margin-top: 50px;
+        } 
+.buyer_name h3{
+			line-height: 30px;
+            margin-bottom: 50px;
+            margin-left: 250px;
+            margin-top: 20px;
+            font-size: 24px;
+} 
 .table {
       border-collapse: collapse;
       border-top: 3px solid  #F9A825;
       width: 1200px;
-      margin-top: 30px;
-      margin-left : 150px;
-      margin-bottom: 150px;
+      margin : auto;
     }  
-    .table th {
+.table th {
       color:  #F9A825;
       background: #f0f6f9;
       text-align: left;
+      font-size: 18px;
     }
-    .table td {
+.table td {
       padding: 5px;
       border: 1px solid  #F9A825;
       text-align: center;
     }
-    .table th:first-child, .table td:first-child {
+.table th:first-child, .table td:first-child {
       border-left: 0;
     }
-    .table th:last-child, .table td:last-child {
+.table th:last-child, .table td:last-child {
       border-right: 0;
     }
-    .table tr td:first-child{
+.table tr td:first-child{
       text-align: center;
     }
-    .table caption{caption-side: bottom; display: none;}
+.table caption{caption-side: bottom; display: none;}
     </style>
 </head>
 <body>
@@ -75,7 +91,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="#">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -102,7 +118,7 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="#">
+                        <a href="./mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
@@ -127,21 +143,24 @@
    <div class = "buyer">
        <div class = "buyer_list">
            <div class = "buyer_list--list">
+           	<div class = "buyer_name">
+           	<h3>${userId}&nbsp;님</h3>
+           	</div>
                <div class = "buyer_title">
-                   <h2># 구매 중</h2>
+                <h2># 구매 중</h2>                 
                 </div>
                 <table class="table">
-                <tr><th colspan = "8">구매중 경매</th></tr>
-                <tr><td>1</td><td>게시물 글 제목입니다</td><td>관리자</td><td>2018-08-01</td><td>1</td><td>게시물 글 제목입니다</td><td>관리자</td><td>2018-08-01</td></tr>
-                <tr><td><a href = "#">o</a></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td></tr>
+                <tr><th colspan = "6">구매중 경매</th><th style = "text-align:right;"><button type = "submit" class = "btn_style">관리</button></th></tr>
+                <tr><td>구분</td><td>상품 번호</td><td>상품명</td><td>구매 가격</td><td>입금 기한</td><td>거래 방식</td><td>판매자</td></tr>
+                <tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                 </table>  
                 <div class = "buyer_title">
-                   <h2># 구매 완료</h2>
+                <h2># 구매 완료</h2>
                 </div>
                 <table class="table">
                 <tr><th colspan = "7">구매 완료 경매</tr>
                 <tr><td>구분</td><td>상품 번호</td><td>상품명</td><td>구매 가격</td><td>구매한 날짜</td><td>구매 확정일</td><td>판매자</td></tr>
-                <tr><td></td><td></td><td></td><td></td><td></td><td><a href = "#">o</a></td><td><a href = "#">o</a></td></tr>
+                <tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                 </table>  
            </div>    
        </div>       
