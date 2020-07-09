@@ -1,4 +1,4 @@
-package com.spring.alltion.hongsub;
+package com.spring.alltion.detailpage;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,33 @@ public class DetailServiceImpl {
 		String product_category_2 = productvo.getProduct_category_2();
 		productvo.setProduct_category_2(TranslateCate_2(product_category_2));
 		
+		// 거래방법 한글로 다듬기 (택배)
+		String product_delivery = productvo.getProduct_delivery();
+		if(product_delivery.equals("before")) {
+			product_delivery = "선불";
+		}else if(product_delivery.equals("after")) {
+			product_delivery = "착불";
+		}else{
+			product_delivery = "불가능";
+		}
+		productvo.setProduct_delivery(product_delivery);
+		
+		// 거래방법 한글로 다듬기 (직거래)
+		String product_transaction_area = productvo.getProduct_transaction_area();
+		if(product_transaction_area.equals("none")) {
+			product_transaction_area = "불가능";
+		}
+		
+		productvo.setProduct_transaction_area(product_transaction_area);
+		
 		return productvo;
+	}
+	
+	public Seller_Credit_Score_TestVO seller_credit_score_test(String sale_id) {
+		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
+		Seller_Credit_Score_TestVO scstvo = detailmapper.sellerTest(sale_id);
+		
+		return scstvo;
 	}
 	
 	public String TranslateCate_1(String product_category_1) {

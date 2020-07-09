@@ -35,10 +35,16 @@
 		where bid_price = (select 
 		            nvl(max(bid_price),0) as max_bid_price 
 		            from bid_list 
-		            where bid_product_number = #{bid_product_number})
+		            where bid_product_number = #{bid_product_number}) 
+		            	and bid_product_number = #{bid_product_number}
 	</select>
 	
 	<select id="selectNowPrice" parameterType="int" resultType="int">
 		select nvl(max(bid_price),0) from bid_list where bid_product_number=#{bid_product_number}
 	</select>
+	
+	<select id="getProduct_bidding_unit" parameterType="int" resultType="int">
+		select product_bidding_unit from product where product_number = #{product_number}
+	</select>
+	
 </mapper>

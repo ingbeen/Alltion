@@ -1,4 +1,4 @@
-package com.spring.alltion.hongsub;
+package com.spring.alltion.detailpage;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,6 +48,14 @@ public class DetailController {
 		MemberVO membervo = memberService.selectMember(productvo.getProduct_id());
 		model.addAttribute("membervo",membervo);
 		
+		// 판매자 신용도관련 정보를 얻는다.
+		Seller_Credit_Score_TestVO scstvo = detailService.seller_credit_score_test(membervo.getMember_id());
+		int sale_credit_score = scstvo.getSale_credit_score();
+		String sale_credit = translateSale_credit(sale_credit_score);
+		
+		model.addAttribute("scstvo",scstvo);
+		model.addAttribute("sale_credit",sale_credit); // 판매자 등급제
+		
 		// 응찰 리스트 갯수를 얻는다.
 		int bid_listcount = bidService.getBid_listcountService(product_number);
 		model.addAttribute("bid_listcount",bid_listcount);
@@ -70,6 +78,29 @@ public class DetailController {
 		int comment_page = (int)(double)(comment_listcount/10+0.9);
 		commentService.commentListService(comment_product_number, comment_page, model);
 		
+		
+		
 		return "detail_page/board_detail";
 	}
+	
+	public String translateSale_credit(int sale_credit_score) {
+		String sale_credit = "";
+		if(sale_credit_score >= 150) {
+			sale_credit = "다이아몬드";
+		}else if(sale_credit_score >= 120){
+			sale_credit = "플레티넘";
+		}else if(sale_credit_score >= 100){
+			sale_credit = "골드";
+		}else if(sale_credit_score >= 80) {
+			sale_credit = "실버";
+		}else if(sale_credit_score >= 40) {
+			sale_credit = "브론즈";
+		}else {
+			sale_credit = "등급 없음";
+		}
+		
+		return sale_credit;
+	}
+	
+	
 }

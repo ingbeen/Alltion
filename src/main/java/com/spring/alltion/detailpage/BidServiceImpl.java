@@ -1,4 +1,4 @@
-package com.spring.alltion.hongsub;
+package com.spring.alltion.detailpage;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class BidServiceImpl {
 	//응찰 하기 서비스.
 	public int bidInsertService(BidVO bidvo) {
 		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
-		DetailMapper boardmapper = sqlSession.getMapper(DetailMapper.class);
+		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
 		int bid_product_number = bidvo.getBid_product_number();
 		int price = 0;
 		String product_top_bidder = " ";
@@ -59,19 +59,20 @@ public class BidServiceImpl {
 		
 		if(res==1) {
 			//첫 응찰시 현재가로 바로 응찰.
-			price = boardmapper.selectNowPrice(bid_product_number);
+			price = detailmapper.selectNowPrice(bid_product_number);
 			bidvo.setBid_price(price);
 		}else {
 			//응찰하기 클릭시 +1000원된 가격으로 응찰이 된다.
 			//두번째 응찰부터
 			price = bidmapper.selectNowPrice(bid_product_number);
-			price +=1000;
-			bidvo.setBid_price(price); 
+			price += bidmapper.getProduct_bidding_unit(bid_product_number);
+			
+			bidvo.setBid_price(price);
 		}
 		//상세보기의 현재가 갱신
 		product_top_bidder = bidvo.getBid_id();
 		System.out.println("product_top_bidder = "+product_top_bidder);
-		boardmapper.updateBoard(price,bid_product_number);
+		detailmapper.updateBoard(price,bid_product_number);
 		
 		return bidmapper.bidInsert(bidvo);
 	}
