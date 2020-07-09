@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%
 	String id = (String)session.getAttribute("userId");
@@ -8,15 +8,16 @@
 <html>
 <head>
  <meta charset="UTF-8">
+ 	<link rel="stylesheet" href="./resources/css/mypage.css">	
     <link rel="stylesheet" href="./resources/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>All-tion - ¸¶ÀÌ ÆäÀÌÁö</title>
+    <title>All-tion - ë§ˆì´ íŽ˜ì´ì§€</title>
     <style>
     </style>
 </head>
 <body>
-    <!-- ¸ðµç ÆäÀÌÁö °øÅë ¿µ¿ª by ÇÏ³ª  -->
+    <!-- ëª¨ë“  íŽ˜ì´ì§€ ê³µí†µ ì˜ì—­ by í•˜ë‚˜  -->
    
     <div class="header">
         <div class="upper_header">
@@ -29,10 +30,10 @@
                         <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="./logout.kj">·Î±×¾Æ¿ô</a>
+                        <a href="./logout.kj">ë¡œê·¸ì•„ì›ƒ</a>
                     </li>
                     <li>
-                        <a href="#">°í°´ ¼¾ÅÍ</a>
+                        <a href="#">ê³ ê° ì„¼í„°</a>
                     </li>
                 </ul>
             </div>
@@ -49,137 +50,137 @@
                 </div>
                 <div class="search">
                     <select class="search--select">
-                        <option value="">ÀüÃ¼</option>
-                        <option value="ÆÐ¼Ç">ÆÐ¼Ç</option>
-                        <option value="ºäÆ¼">ºäÆ¼</option>
-                        <option value="Ãâ»ê/À¯¾Æµ¿">Ãâ»ê/À¯¾Æµ¿</option>
-                        <option value="ÀüÀÚ±â±â">ÀüÀÚ±â±â</option>
-                        <option value="°¡ÀüÁ¦Ç°">°¡ÀüÁ¦Ç°</option>
-                        <option value="°¡±¸/ÀÎÅ×¸®¾î">°¡±¸/ÀÎÅ×¸®¾î</option>
-                        <option value="¹Ý·Áµ¿¹°/Ãë¹Ì">¹Ý·Áµ¿¹°/Ãë¹Ì</option>
-                        <option value="µµ¼­/À½¹Ý/¹®±¸">µµ¼­/À½¹Ý/¹®±¸</option>
-                        <option value="Æ¼ÄÏ/ÄíÆù">Æ¼ÄÏ/ÄíÆù</option>
-                        <option value="½ºÆ÷Ã÷">½ºÆ÷Ã÷</option>
-                        <option value="°ø±¸/»ê¾÷¿ëÇ°">°ø±¸/»ê¾÷¿ëÇ°</option>
-                        <option value="±âÅ¸ÀâÈ­">±âÅ¸ÀâÈ­</option>
+                        <option value="">ì „ì²´</option>
+                        <option value="cate01">íŒ¨ì…˜</option>
+                        <option value="cate02">ë·°í‹°</option>
+                        <option value="cate03">ì¶œì‚°/ìœ ì•„ë™</option>
+                        <option value="cate04">ì „ìžê¸°ê¸°</option>
+                        <option value="cate05">ê°€ì „ì œí’ˆ</option>
+                        <option value="cate06">ê°€êµ¬/ì¸í…Œë¦¬ì–´</option>
+                        <option value="cate07">ë°˜ë ¤ë™ë¬¼/ì·¨ë¯¸</option>
+                        <option value="cate08">ë„ì„œ/ìŒë°˜/ë¬¸êµ¬</option>
+                        <option value="cate09">í‹°ì¼“/ì¿ í°</option>
+                        <option value="cate10">ìŠ¤í¬ì¸ </option>
+                        <option value="cate11">ê³µêµ¬/ì‚°ì—…ìš©í’ˆ</option>
+                        <option value="cate12">ê¸°íƒ€ìž¡í™”</option>
                     </select>
-                    <input type="text" placeholder="Ã£À¸½Ã´Â »óÇ°À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä" class="search__input">
+                    <input type="text" placeholder="ì°¾ìœ¼ì‹œëŠ” ìƒí’ˆì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”" class="search__input">
                 </div>
                 <ul class="member_info">
                     <li>
                         <a href="../mypage/mypage.html">
                             <span class="material-icons">perm_identity</span>
-                            <span>¸¶ÀÌ ÆäÀÌÁö</span>
+                            <span>ë§ˆì´ íŽ˜ì´ì§€</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <span class="material-icons">turned_in_not</span>
-                            <span>Âò ¸ñ·Ï</span>
+                            <span>ì°œ ëª©ë¡</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <span class="material-icons">access_time</span>
-                            <span>Âü¿© °æ¸Å</span>
+                            <span>ì°¸ì—¬ ê²½ë§¤</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <!--  ¸¶ÀÌ ÆäÀÌÁö ¼±ÅÃ  -->
+    <!--  ë§ˆì´ íŽ˜ì´ì§€ ì„ íƒ  -->
     <div class="myPage__main">
-        <h3 class="myPage__title">¸¶ÀÌ ÆäÀÌÁö</h3>
+        <h3 class="myPage__title">ë§ˆì´ íŽ˜ì´ì§€</h3>
         <ul class="myPage__category">
             <li>
                 <a href="./memberinfo.kj">
                     <span class="material-icons">recent_actors</span><br>
-                    <span class="myPage__menu">È¸¿ø Á¤º¸</span>
+                    <span class="myPage__menu">íšŒì› ì •ë³´</span>
                     
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">receipt</span><br>
-                    <span class="myPage__menu">±¸¸Å ³»¿ª</span>
+                    <span class="myPage__menu">êµ¬ë§¤ ë‚´ì—­</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">list</span><br>
-                    <span class="myPage__menu">³«Âû ³»¿ª</span>
+                    <span class="myPage__menu">ë‚™ì°° ë‚´ì—­</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">forum</span><br>
-                    <span class="myPage__menu">È°µ¿ ³»¿ª</span>
+                    <span class="myPage__menu">í™œë™ ë‚´ì—­</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">credit_card</span><br>
-                    <span class="myPage__menu">e-¸Ó´Ï</span>
+                    <span class="myPage__menu">e-ë¨¸ë‹ˆ</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">bookmarks</span><br>
-                    <span class="myPage__menu">Âò ¸ñ·Ï</span>
+                    <span class="myPage__menu">ì°œ ëª©ë¡</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">money</span><br>
-                    <span class="myPage__menu">½Å¿ë µî±Þ</span>
+                    <span class="myPage__menu">ì‹ ìš© ë“±ê¸‰</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">poll</span><br>
-                    <span class="myPage__menu">Âü¿© °æ¸Å</span>
+                    <span class="myPage__menu">ì°¸ì—¬ ê²½ë§¤</span>
                 </a>
             </li>
         </ul>
     </div>
-    <!-- ÇªÅÍ ¿µ¿ª -->
+    <!-- í‘¸í„° ì˜ì—­ -->
     <div class="footer">
         <div class="upper_footer">
             <ul class="upper_footer--list">
                 <li>
                     <a href="#">
-                        ¿Ã¼Ç¼Ò°³
+                        ì˜¬ì…˜ì†Œê°œ
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        Ã¤¿ëÁ¤º¸
+                        ì±„ìš©ì •ë³´
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        °øÁö»çÇ×
+                        ê³µì§€ì‚¬í•­
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        ÀÌ¿ë¾à°ü
+                        ì´ìš©ì•½ê´€
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        °³ÀÎÁ¤º¸Ã³¸®¹æÄ§
+                        ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        ÀüÀÚ±ÝÀ¶°Å·¡¾à°ü
+                        ì „ìžê¸ˆìœµê±°ëž˜ì•½ê´€
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        Á¦ÈÞ¼­ºñ½º
+                        ì œíœ´ì„œë¹„ìŠ¤
                     </a>
                 </li>
             </ul>
@@ -189,68 +190,8 @@
         </div>        
     </div>
     
-    <!--  ½ºÅ©¸³Æ® ¿µ¿ª  -->
+    <!--  ìŠ¤í¬ë¦½íŠ¸ ì˜ì—­  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // ±¤°í ¾ø¾Ö±â
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // Çì´õ¿¡ ½Ã°£ ³Ö±â
-            let time = new Date();
-            
-            
-            // Çì´õ °íÁ¤
-            let header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                    header.addClass('sticky');
-                }else{
-                    header.removeClass('sticky');
-                }
-            })
-        });
-        
-        // 2020-06-23 pm 03:55 Ãß°¡
-        // ½Ç½Ã°£ ½Ã°£ ±¸ÇÏ±â
-        setInterval(function(){
-             
-            let nowDate = new Date();
-            let day = ['(ÀÏ)', '(¿ù)', '(È­)', '(¼ö)', '(¸ñ)', '(±Ý)', '(Åä)'];
-            let dayNum = nowDate.getDay();
-            let year = nowDate.getFullYear();
-            let month= nowDate.getMonth() + 1;
-            let date = nowDate.getDate();
-            let hour = nowDate.getHours();
-            let min = nowDate.getMinutes();
-            let sec = nowDate.getSeconds();
-            
-            /*
-            // ¿ÀÀü ¿ÀÈÄ·Î ³ª´©°í ½ÍÀ» ¶§
-            let amPm = '¿ÀÀü';
-            
-            if(hour >= 12) {
-                amPm = '¿ÀÈÄ';
-                hour = hour - 12;
-            }
-            
-            document.getElementById('clock').innerHTML = year + '³â' + '&nbsp;' + month + '¿ù' + '&nbsp;' + date + 'ÀÏ' + day[dayNum] + '&nbsp;' + amPm + '&nbsp;' + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec);
-            */
-            
-            document.getElementById('clock').innerHTML = year + '³â' + '&nbsp;' + month + '¿ù' + '&nbsp;' + date + 'ÀÏ' + day[dayNum] + '&nbsp;' + hour + ":" + addZero(min) + ":" + addZero(sec);
-        },1000);
-        
-        // ÀÏÀÇ ÀÚ¸® ¼ýÀÚÀÏ ¶§ 0 ºÙ¿© ÁÖ±â
-        function addZero(i) {
-            if (i < 10) {
-                i = '0' + i
-            };
-            return i;
-        } // 2020-06-23 pm 03:55 Ãß°¡
-        
-    </script>
-
+    <script src="./resources/js/common.js"></script>
 </body>
 </html>

@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	MemberVO membervo = (MemberVO)request.getAttribute("membervo");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Alltion 회원 정보 수정</title>
-    
 <!-- 주소 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -272,147 +270,147 @@ function checkpassword() {
         </div>
     </div>
     <!-- 회원 정보 수정 -->
-        <div class="member_update--form">
-            <h3>회원 정보 수정</h3>
-            <div class="member_update--content">
-                <ul class="update_form list">
-                    <li>
-                        <div class="update_form__list title">
-                            <span>아이디</span>
-                        </div>
-                        <div class="update_form__list content">
-                            <span><%=membervo.getMember_id() %></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="update_form__list title">
-                            <span>이름</span>
-                        </div>
-                        <div class="update_form__list content">
-                            <span><%=membervo.getMember_name() %></span>
-                        </div>
-                    </li>
-                    <form name = "updatePassword" action="./updatePassword.kj" method="post">
-                    <ul>
-                    <li>
-                        <div class="update_form__list title">
-                            <span>비밀번호 변경</span>
-                        </div>
-                        <div class="update_form__list content">
-                            <input type="password" id="member_password" name = "member_password" class= "int"><br>
-                            <input type="password" id="member_password2"  name = "member_password2" class = "int" onchange="checkpassword()">
-                            <span id="alert-success1" style="display: none; color: #1ec700;">비밀번호가 일치합니다.</span>
-    						<span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
-                           
-                        </div>
-                    </li>  
-                    </ul>
-                    </form>                  
-                    <form name="updateEmail" action="./updateEmail.kj" method="post">
-                    <ul>
-                    <li>
-                        <div class="update_form__list title">
-                            <span>이메일</span>
-                        </div>
-                        <div class="update_form__list content">
-                            <span><%=membervo.getEmail() %></span>&nbsp;&nbsp;&nbsp;
-                            	<input type ="button" onclick = "modal_display_email()"  value = "이메일 변경">                         
-                            		<div id="member_update_modal_email" class="modal">
-                               		 <div class="modal-content">
-                                   		 <span class="close">&times;</span>
-                                    		<fieldset id="member_update">
-                                       		 <legend>이메일 변경</legend>
-                                        		<ul>
-                                            		<li>
-                                                	 <label>이메일&nbsp;&nbsp;:&nbsp;</label>
-                                                  <input type="text"  id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="변경할 이메일을 입력하세요." required >     
-				                                  <a href="javascript:updateEmail.submit()" class="update_btn__submit">이메일 변경</a>&nbsp;&nbsp;
-                                            </li>   
-                                        </ul>
-                                   </fieldset>
-                                </div>
-                            </div>	
-            				</div> 
-            			</li>
-            			</ul>
-            			</form>	
-            			<form name = "updatePhone" action = "./updatePhone.kj" method = "post">
-                    	<ul>
-                    	<li>                   	
-                        <div class="update_form__list title">
-                            <span>휴대 전화 번호</span>
-                        </div>
-                        <div class="update_form__list content">
-                           <span><%=membervo.getMember_phone().substring(0,3) %>-<%=membervo.getMember_phone().substring(3,7) %>-<%=membervo.getMember_phone().substring(7) %></span>&nbsp;&nbsp;&nbsp;                
-                           <span>'-' 없이 입력해 주세요"</span>&nbsp;&nbsp;&nbsp;
-                           <input type ="button" onclick = "modal_display_phone()" value = "휴대전화 변경"> 
-                           <div id="member_update_modal_phone" class="modal">
-                           	<div class="modal-content">
-                                   		 <span class="close">&times;</span>
-                                    		<fieldset id="member_update">
-                                       		 <legend>휴대전화 변경</legend>
-                                        		<ul>
-                                            		<li>
-                                                	 <label>휴대전화&nbsp;&nbsp;:&nbsp;</label>
-                                                  <input type="text"  id="member_phone"  name ="member_phone"  placeholder="휴대전화를 입력하세요." maxlength = "11" >     
-				                                  <a href="javascript:updatePhone.submit()" class="update_btn__submit">휴대전화 변경</a>&nbsp;&nbsp;
-                                            </li>   
-                                        </ul>
-                                   </fieldset>
-                                </div>
-                       		 </div>         
-                        </div>               
+    <div class="member_update--form">
+        <h3>회원 정보 수정</h3>
+        <div class="member_update--content">
+            <ul class="update_form list">
+                <li>
+                    <div class="update_form__list title">
+                        <span>아이디</span>
+                    </div>
+                    <div class="update_form__list content">
+                        <span><%=membervo.getMember_id() %></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="update_form__list title">
+                        <span>이름</span>
+                    </div>
+                    <div class="update_form__list content">
+                        <span><%=membervo.getMember_name() %></span>
+                    </div>
+                </li>
+                <form name = "updatePassword" action="./updatePassword.kj" method="post">
+                <ul>
+                <li>
+                    <div class="update_form__list title">
+                        <span>비밀번호 변경</span>
+                    </div>
+                    <div class="update_form__list content">
+                        <input type="password" id="member_password" name = "member_password" class= "int"><br>
+                        <input type="password" id="member_password2"  name = "member_password2" class = "int" onchange="checkpassword()">
+                        <span id="alert-success1" style="display: none; color: #1ec700;">비밀번호가 일치합니다.</span>
+                        <span id="alert-danger1" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+                        
+                    </div>
+                </li>  
+                </ul>
+                </form>                  
+                <form name="updateEmail" action="./updateEmail.kj" method="post">
+                <ul>
+                <li>
+                    <div class="update_form__list title">
+                        <span>이메일</span>
+                    </div>
+                    <div class="update_form__list content">
+                        <span><%=membervo.getEmail() %></span>&nbsp;&nbsp;&nbsp;
+                            <input type ="button" onclick = "modal_display_email()"  value = "이메일 변경">                         
+                                <div id="member_update_modal_email" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <fieldset id="member_update">
+                                            <legend>이메일 변경</legend>
+                                            <ul>
+                                                <li>
+                                                    <label>이메일&nbsp;&nbsp;:&nbsp;</label>
+                                                <input type="text"  id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="변경할 이메일을 입력하세요." required >     
+                                                <a href="javascript:updateEmail.submit()" class="update_btn__submit">이메일 변경</a>&nbsp;&nbsp;
+                                        </li>   
+                                    </ul>
+                                </fieldset>
+                            </div>
+                        </div>	
+                        </div> 
                     </li>
                     </ul>
-                    </form>
-                    <form name = "updateAddress" action = "./updateAddress.kj" method = "post">
+                    </form>	
+                    <form name = "updatePhone" action = "./updatePhone.kj" method = "post">
                     <ul>
-                    <li>
-                        <div class="update_form__list title">
-                            <p class = "join_title" text-align = "left">주소</span>
-                        </div>
-                        <div class="update_form__list content">
-                            <span><%=membervo.getSample4_postcode() %></span>
-                            <span><%=membervo.getSample4_roadAddress() %>&nbsp;
-								  <%=membervo.getSample4_jibunAddress() %>&nbsp;                            
-	                              <%=membervo.getSample4_detailAddress() %>&nbsp;&nbsp;
-                            </span>
+                    <li>                   	
+                    <div class="update_form__list title">
+                        <span>휴대 전화 번호</span>
+                    </div>
+                    <div class="update_form__list content">
+                        <span><%=membervo.getMember_phone().substring(0,3) %>-<%=membervo.getMember_phone().substring(3,7) %>-<%=membervo.getMember_phone().substring(7) %></span>&nbsp;&nbsp;&nbsp;                
+                        <span>'-' 없이 입력해 주세요"</span>&nbsp;&nbsp;&nbsp;
+                        <input type ="button" onclick = "modal_display_phone()" value = "휴대전화 변경"> 
+                        <div id="member_update_modal_phone" class="modal">
+                        <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <fieldset id="member_update">
+                                            <legend>휴대전화 변경</legend>
+                                            <ul>
+                                                <li>
+                                                    <label>휴대전화&nbsp;&nbsp;:&nbsp;</label>
+                                                <input type="text"  id="member_phone"  name ="member_phone"  placeholder="휴대전화를 입력하세요." maxlength = "11" >     
+                                                <a href="javascript:updatePhone.submit()" class="update_btn__submit">휴대전화 변경</a>&nbsp;&nbsp;
+                                        </li>   
+                                    </ul>
+                                </fieldset>
+                            </div>
+                            </div>         
+                    </div>               
+                </li>
+                </ul>
+                </form>
+                <form name = "updateAddress" action = "./updateAddress.kj" method = "post">
+                <ul>
+                <li>
+                    <div class="update_form__list title">
+                        <p class = "join_title" text-align = "left">주소</span>
+                    </div>
+                    <div class="update_form__list content">
+                        <span><%=membervo.getSample4_postcode() %></span>
+                        <span><%=membervo.getSample4_roadAddress() %>&nbsp;
+                                <%=membervo.getSample4_jibunAddress() %>&nbsp;                            
+                                <%=membervo.getSample4_detailAddress() %>&nbsp;&nbsp;
+                        </span>
+                        
+                        <input type ="button" onclick = "modal_display_address()" value = "주소 변경"> 
+                        <div id="member_update_modal_address" class="modal">
+                            <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <fieldset id="member_update">
+                            <legend>주소 변경</legend>
                             
-                            <input type ="button" onclick = "modal_display_address()" value = "주소 변경"> 
-                            <div id="member_update_modal_address" class="modal">
-                            	<div class="modal-content">
-                                <span class="close">&times;</span>
-                                <fieldset id="member_update">
-                                <legend>주소 변경</legend>
-                                
-                                <li>
-                                <label>우편 번호</label>
-                                <input type="text" id="sample4_postcode" class = "int" name="sample4_postcode" placeholder="우편번호">                             
-                                <label>도로명 주소</label>
-                                <input type="text" class="int" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
-                                <label>지번 주소</label>
-                                <input type="text" class="int" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
-                                <label>상세 주소</label>
-                                <input type="text" class="int" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
-                                <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span id="guide" style="color:#999;display:none;"></span>
-                                <a href="javascript:updateAddress.submit()" class="update_btn__submit" >주소 변경</a>&nbsp;&nbsp;
-                                </li>
-                                          
+                            <li>
+                            <label>우편 번호</label>
+                            <input type="text" id="sample4_postcode" class = "int" name="sample4_postcode" placeholder="우편번호">                             
+                            <label>도로명 주소</label>
+                            <input type="text" class="int" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
+                            <label>지번 주소</label>
+                            <input type="text" class="int" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
+                            <label>상세 주소</label>
+                            <input type="text" class="int" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
+                            <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span id="guide" style="color:#999;display:none;"></span>
+                            <a href="javascript:updateAddress.submit()" class="update_btn__submit" >주소 변경</a>&nbsp;&nbsp;
+                            </li>
                                         
-                                   </fieldset>
-                                </div>
-                       		 </div>         
-                        </div>               
-                    </li>
-                    </ul>
-                    </form>
-            	<div class="member_update--btn">
-               	 <button class="update_btn__submit" onclick="history.back()">뒤로 가기</button>
-            	</div>
+                                    
+                                </fieldset>
+                            </div>
+                            </div>         
+                    </div>               
+                </li>
+                </ul>
+                </form>
+            <div class="member_update--btn">
+                <button class="update_btn__submit" onclick="history.back()">뒤로 가기</button>
+            </div>
         </div>
+    </div>
     		
-            	
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -455,13 +453,13 @@ function checkpassword() {
             </ul>
         </div>
         <div class="lower_footer">
+            
         </div>        
     </div>
 </div>
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
     <script src="./resources/js/update.js"></script>
 </c:when>
 <c:otherwise>
@@ -717,6 +715,7 @@ function checkpassword() {
             	<div class="member_update--btn">
                	 <button class="update_btn__submit" onclick="history.back()">뒤로 가기</button>
             	</div>
+            </div>
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -765,8 +764,8 @@ function checkpassword() {
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
     <script src="./resources/js/update.js"></script>
+    <script src="./resource/js/common.js"></script>
 </c:otherwise>
 </c:choose>
 </body>
