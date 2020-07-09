@@ -1,15 +1,4 @@
-// 헤더 고정
-var header = $('.lower_header');
-$(window).scroll(function () {
-    if ($(this).scrollTop() > 0) {
-
-        header.addClass('sticky');
-    } else {
-        header.removeClass('sticky');
-    }
-})
-
-/* 카테고리변경  시작 by.유빈 */
+/* 1차 카테고리 선택 시작 by.유빈 */
 function changeCategory(item) {
     let name = item.name; // 카테고리1, 카테고리2
     let value = item.value; // 선택한 카테고리
@@ -105,7 +94,7 @@ function changeCategory(item) {
         }
     }
 }
-/* 카테고리변경  끝 by.유빈 */
+/* 1차 카테고리 선택 끝 by.유빈 */
 
 // 2차 카테고리 체인지
 function changeCategory_2(value) {
@@ -165,7 +154,44 @@ function changeInput(item) {
             $('.purchasePrice').focus();
         }
     }
+    
 }
+
+/* 시작가, 즉시구매가 천단위쉼표, 숫자만입력 시작 by.유빈 */
+$(".product--form [name$='price']")
+	.on("focus", function () {
+		let value = $(this).val(); // 입력값
+		value = removeCommas(value); // 쉼표제거
+    	$(this).val(value); // 반환
+	})
+	.on("focusout", function () { 
+		let value = $(this).val(); // 입력값
+		if(value && value.length > 0) { // 데이터가 존재하면
+	        if(!$.isNumeric(value)) { // 숫자가 아닌것은 제거
+	        	value = value.replace(/[^0-9]/g, "");
+	        }
+	        value = addCommas(value); // 쉼표추가
+	        $(this).val(value); // 반환
+		}
+	})
+	.on("keyup", function () {
+    $(this).val($(this).val().replace(/[^0-9]/g, "")); // 숫자가 아닌것은 제거
+});
+
+//3자리 단위마다 콤마 생성
+function addCommas(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
+//모든 콤마 제거
+function removeCommas(value) {
+    if(!value || value.length == 0) {
+    	return "";
+    } else {
+    	return value.split(",").join("");
+    }
+}
+/* 시작가, 즉시구매가 천단위쉼표, 숫자만입력 끝 by.유빈 */
 
 // 경매기간에 따른 마감시간 계산 후 input태그에 삽입 by.유빈
 function changeEndDate(value) {
@@ -362,60 +388,105 @@ $("#thumbnails").on("click", ".close", (e) => {
 // 상품(경매) 등록 - 버튼눌렀을때(썸네일이미지 등록부터)
 function productSubmit() {
 	
-	if (formCheck()) {
+	if (formCheck()) { // 양식에 대한 유효성 검사
 		return;
 	}
 	
-//	let formData = new FormData(); 
-//    $.each(uploadFiles, (idx, file) => { // 이미지등록(썸네일)에 있는 파일들
-//        if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
-//            formData.append('file', file);
-//    });
-//    
-//    $.ajax({ // 상품 등록전 썸네일에 올라온 이미지들을 업로드한다
-//        url: 'thumbnailsUpload.yb',
-//        data: formData,
-//        type: 'post',
-//        contentType: false,
-//        processData: false,
-//        success: (imgSrcList) => { // 이미지경로를 담은 배열을 파라미터로 넘기고 상품등록 진행
-//        	productInsert(imgSrcList);
-//    	}, error: () => alert("이미지 업로드를 실패하였습니다")
-//    });
+	let formData = new FormData(); 
+    $.each(uploadFiles, (idx, file) => { // 이미지등록(썸네일)에 있는 파일들
+        if (file.upload != 'disable') // 삭제하지 않은 이미지만 업로드 항목으로 추가
+            formData.append('file', file);
+    });
+    
+    $.ajax({ // 상품 등록전 썸네일에 올라온 이미지들을 업로드한다
+        url: 'thumbnailsUpload.yb',
+        data: formData,
+        type: 'post',
+        contentType: false,
+        processData: false,
+        success: (imgSrcList) => { // 이미지경로를 담은 배열을 파라미터로 넘기고 상품등록 진행
+        	productInsert(imgSrcList);
+    	}, error: () => alert("이미지 업로드를 실패하였습니다")
+    });
 };
 
+// 양식에 대한 유효성 검사
 function formCheck() {
-	let category_2 = $('.category--select__02');
-	let subject = $('input[name=product_subject]');
-	let content = $('.note-editable');
+	let category_2 = $('.category--select__02'); // 2차카테고리
+	let subject = $('input[name=product_subject]'); // 상품제목
+	let content = $('.note-editable'); // 상품내용
+	let thumbnail = $('.thumb'); // 썸네일
+	let starting_price = $('input[name=product_starting_price]'); // 경매시작가
+	let bidding_unit = $('select[name=product_bidding_unit]'); // 입찰단위
+	let transaction_area = $('input[name=product_transaction_area]'); // 거래가능지역
+	let purchase_price = $('input[name=product_purchase_price]'); // 즉시구매가
 	
-	console.log();
-	
-//	if (!(category_2.length == 1 && category_2.val().startsWith('cate'))) {
-//		alert("카테고리를 선택해주세요");
-//	} else if (subject.val().trim().length < 3) {
-//		alert("상품제목을 최소 세글자 이상 입력해주세요");
-//	} else if (content.text().length < 10) {
-//		alert("상품설명을 최소 열글자 이상 입력해주세요");
-//	} else 
-		if (content.text().length < 10) {
+	/* 유효성 검사 */
+	// 2차카테고리
+	if (!(category_2.length == 1 && category_2.val().startsWith('cate'))) {
+		alert("카테고리를 선택해주세요");
+		return true;
+	} 
+	// 상품 제목
+	else if (subject.val().trim().length < 3) {
+		alert("상품제목을 최소 세글자 이상 입력해주세요");
+		return true;
+	} 
+	// 상품 내용
+	else if (content.text().trim().length < 10) {
 		alert("상품설명을 최소 열글자 이상 입력해주세요");
+		return true;
+	} 
+	// 썸네일 갯수
+	else if (thumbnail.length == 0) {
+		alert("이미지 등록은 최소 한장이상 해주세요");
+		return true;
+	} 
+	// 경매 시작가
+	else if (starting_price.val() < 1000) {
+		alert("경매 시작가는 최소 1,000원부터 입니다");
+		return true;
+	} 
+	// 입찰 단위
+	else if (bidding_unit.val() < 100) {
+		alert("입찰 단위는 최소 100원부터 입니다");
+		return true;
+	} 
+	// 직거래 가능지역
+	else if (transaction_area.attr('readonly') == undefined
+				&& transaction_area.val().trim().length < 2) {
+		alert("직거래 가능지역을 입력해주세요");
+		return true;
+	} 
+	// 즉시구매가
+	else if (purchase_price.attr('disabled') == undefined
+		&& purchase_price.val() < Number(starting_price.val()) + Number(bidding_unit.val())) {
+		alert("최소 즉시구매가는 '경매 시작가 + 입찰단위가' 입니다");
+		return true;
 	}
+	
+	// 유효성 검사 완료
+	return false;
 }
 
 // 상품(경매) 등록 - DB저장
 function productInsert(imgSrcList) {
+	
+	// 시작가, 즉사거래가 쉼표 없애기
+	let purchase_price = $(".product--form [name='product_purchase_price']");
+	let starting_price = $(".product--form [name='product_starting_price']");
+	purchase_price.val(removeCommas(purchase_price.val()));
+	starting_price.val(removeCommas(starting_price.val()));
+	
 	let formData = $('.product--form').serialize(); // 사용자가 입력한 내용
 	$.each(imgSrcList, (idx, imgSrc) => { // 이미지등록(썸네일)에 있는 이미지
 		formData += `&product_img_${idx + 1}=${imgSrc}`;
 	})
-	console.log(formData);
 	
 	$.ajax({ // 상품 등록전 썸네일에 올라온 이미지들을 업로드한다
         url: 'productInsert.yb',
         type: 'post',
         data: formData,
-//        dataType: "json",
         success: () => alert("성공"), 
         error: () => alert("경매 등록을 실패하였습니다")
     });
@@ -445,3 +516,5 @@ $('document').ready(() => {
     });
 
 })
+
+/* 1차 카테고리 선택 시작 by.유빈 */
