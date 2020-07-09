@@ -14,7 +14,7 @@ create table comment_list(
 );      
 */
 
-package com.spring.alltion.hongsub;
+package com.spring.alltion.detailpage;
 
 public class CommentVO {
 	private int comment_number;

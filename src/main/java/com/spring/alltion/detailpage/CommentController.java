@@ -1,4 +1,4 @@
-package com.spring.alltion.hongsub;
+package com.spring.alltion.detailpage;
 
 import java.util.List;
 
