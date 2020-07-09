@@ -1,36 +1,38 @@
 package com.spring.alltion.productRegistration;
 
 public class ProductVO {
-	int product_number; // 상품번호
-	String product_id; // 아이디
-	String product_category_1; // 카테고리 1차
-	String product_category_2; // 카테고리 2차
+	int product_number; // �긽�뭹踰덊샇
+	String product_id; // �븘�씠�뵒
+	String product_category_1; // 移댄뀒怨좊━ 1李�
+	String product_category_2; // 移댄뀒怨좊━ 2李�
 	
-	String product_subject; // 상품제목
-	String product_content; // 상품내용
-	String product_img_1; // 이미지(썸네일)_1
-	String product_img_2; // 이미지(썸네일)_2
-	String product_img_3; // 이미지(썸네일)_3
-	String product_img_4; // 이미지(썸네일)_4
-	String product_img_5; // 이미지(썸네일)_5
+	String product_subject; // �긽�뭹�젣紐�
+	String product_content; // �긽�뭹�궡�슜
+	String product_img_1; // �씠誘몄�(�뜽�꽕�씪)_1
+	String product_img_2; // �씠誘몄�(�뜽�꽕�씪)_2
+	String product_img_3; // �씠誘몄�(�뜽�꽕�씪)_3
+	String product_img_4; // �씠誘몄�(�뜽�꽕�씪)_4
+	String product_img_5; // �씠誘몄�(�뜽�꽕�씪)_5
 
-	int product_starting_price; // 경매시작가
-	int product_bidding_unit; // 입찰단위
-	String product_end_date; // 경매종료일
+	int product_starting_price; // 寃쎈ℓ�떆�옉媛�
+	int product_bidding_unit; // �엯李곕떒�쐞
+	String product_end_date; // 寃쎈ℓ醫낅즺�씪
 
-	String product_delivery; // 택배거래(비용)
-	String product_transaction_area; // 거래가능지역
+	String product_delivery; // �깮諛곌굅�옒(鍮꾩슜)
+	String product_transaction_area; // 嫄곕옒媛��뒫吏��뿭
 
-	int product_purchase_price; // 즉시구매가격
-	int product_re_auction; // 재경매
+	int product_purchase_price; // 利됱떆援щℓ媛�寃�
+	int product_re_auction; // �옱寃쎈ℓ
 	
-	int product_current_price; // 경매현재가
-	int product_bids; // 입찰수
-	int product_participants; // 참가자수
-	int product_credit_score; // 신용도
-	int product_views; // 조회수
-	String product_date; // 등록일
-	int product_progress; // 진행상태
+	int product_current_price; // 寃쎈ℓ�쁽�옱媛�
+	int product_bids; // �엯李곗닔
+	int product_participants; // 李멸��옄�닔
+	int product_credit_score; // �떊�슜�룄
+	int product_views; // 議고쉶�닔
+	String product_date; // �벑濡앹씪
+	int product_progress; // 吏꾪뻾�긽�깭
+	
+	
 	public int getProduct_number() {
 		return product_number;
 	}
@@ -181,7 +183,6 @@ public class ProductVO {
 	public void setProduct_progress(int product_progress) {
 		this.product_progress = product_progress;
 	}
-	
-	
+
 	
 }
