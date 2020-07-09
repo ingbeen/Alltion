@@ -3,11 +3,11 @@ package com.spring.alltion.productList;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.alltion.productRegistration.ProductVO;
 import com.spring.mapper.ProductListMapper;
 
 @Service
@@ -49,24 +49,32 @@ public class ProductlistServiceImpl implements ProductlistService {
 	}
 */
 	@Override
-	public List<ProductVOTest> list(String product_category_2, String product_category_1) throws Exception {
+	public List<ProductVO> list(String product_category_2, String product_category_1) throws Exception {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("product_category_2", product_category_2);
 		map.put("product_category_1", product_category_1);
-		List<ProductVOTest> productlist = productListMapper.list(product_category_2, product_category_1);
+		List<ProductVO> productlist = productListMapper.list(product_category_2, product_category_1);
 		
 		return productlist;
 		
 	}
 
 	@Override
-	public List<ProductVOTest> getproductList(HashMap<String, Integer> hashmap) {
+	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap) {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVOTest> productlist = productListMapper.getProductList(hashmap);
+		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
+		return productlist;
+	}
+	@Override
+	public List<ProductVO> getMainlist() {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getMainlist();
+		System.out.println(productlist.get(0).getProduct_number());
 		return productlist;
 	}
 

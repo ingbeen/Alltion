@@ -2,42 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.spring.alltion.productList.*" %>
+<%@ page import="com.spring.alltion.productRegistration.ProductVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
  <%
-  	List<ProductVOTest> productList=(List<ProductVOTest>)request.getAttribute("productlist");
-	
+  	List<ProductVO> mainlist=(List<ProductVO>)request.getAttribute("mainlist");
+	/*
   	int listcount=((Integer)request.getAttribute("listcount")).intValue();
   	int nowpage=((Integer)request.getAttribute("page")).intValue();
   	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
   	int startpage=((Integer)request.getAttribute("startpage")).intValue();
   	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-  	
+  	*/
   %>
 
 <!DOCTYPE html>
 <html>
-<script>
-	$(".submenu").click(function gocg(){
-		var params = $(".submenu").serialize();
-		$.ajax({
-			url:'/alltion/productList/gocategory.ms',
-			type:'GET',
-			data : params,
-			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-			success: function(retVal){
-				if(retVal.res == "OK")
-					alert("성공");
-				else
-					alert("실패");
-			},
-			error:function(){
-				alert("ajax 실패");
-			}
-		});
-	});
-</script>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
@@ -456,21 +438,22 @@
                     <option value="sort3">낮은 가격 순</option>
                     <option value="sort4">높은 가격 순</option>
                 </select>
+                
             <%
-            	for(int i=0; i<productList.size();i++){
-                    		ProductVOTest vo = (ProductVOTest)productList.get(i);
+            System.out.println(mainlist.size());
+            	for(int i=0; i<mainlist.size();i++){  		
+            		ProductVO vo = (ProductVO)mainlist.get(i);
             %>
                 <ul class="items__list product">
-                	<c:forEach items="${list}" var="list">
                     <li>
                         <a href="#">
                             <div class="product-box">
-                               <img src="<%=vo.getProduct_img_1()%>"><br>
+                               <img src=<%=vo.getProduct_img_1() %>><br>
                             </div>
                             <div class="items__product--info product">
-                                <p class="product_name"><%=vo.getProduct_subject()%></p>
+                                <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
+                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
                                     <p class="bookmark--count">99</p>
@@ -479,41 +462,14 @@
                                     <p class="price_text">현재가</p>
                                     <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999 원</p>
+                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    </c:forEach>
-                   <%} %>
-                    
-                </ul>
-                <ul class="page_number">
-                	<%if(nowpage<=1){ %>
-                	<li>&#60;</li>
-                	<%}else{ %>         	          
-                    <li>
-                        <a href="./productList.ms?page=<%=nowpage-1 %>">&#60;</a>
-                    </li>
-                    <%} %>
-                    <%for(int a=startpage;a<=endpage;a++){
-						if(a==nowpage){%>
-							<li><%=a %></li>
-						<%}else{ %>
-						<li>
-						<a href="./productList.ms?page=<%=a %>"><%=a %></a>
-						</li>
-						<%} %>
-					<%} %>
-
-                    <%if(nowpage>=maxpage){ %>
-                    	<li>&#62;</li>
-                    <%}else{ %>
-                    <li>
-                        <a href="./productList.ms?page=<%=nowpage+1 %>">&#62;</a>
-                    </li>
-                    <%} %>
-                </ul>
+                    </ul>   
+                 <%} %>
+                
             </div>
         </div>
     </div>  
