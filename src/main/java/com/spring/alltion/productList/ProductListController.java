@@ -31,6 +31,12 @@ public class ProductListController {
 		
 		return "productList/mainlist";
 	}
+	
+	@RequestMapping(value = "/goDetail.ms")
+	public String goDetail() {
+		
+		return "/boardetail.hs";
+	}
 
 	@RequestMapping(value = "/productList.ms", method = RequestMethod.GET)
 	public String getProductList(Model model, @RequestParam(value="page" , required=false, defaultValue="1") int page) throws Exception {

@@ -443,10 +443,12 @@
             System.out.println(mainlist.size());
             	for(int i=0; i<mainlist.size();i++){  		
             		ProductVO vo = (ProductVO)mainlist.get(i);
-            %>
+            %>	
+            <form action="/alltion/boarddetail.hs" id="detail">
+            	<input type="hidden" name="product_number" value=<%=vo.getProduct_number() %>>
                 <ul class="items__list product">
                     <li>
-                        <a href="#">
+                        <a onclick="document.getElementById('detail').submit();" >
                             <div class="product-box">
                                <img src=<%=vo.getProduct_img_1() %>><br>
                             </div>
@@ -467,7 +469,8 @@
                             </div>
                         </a>
                     </li>
-                    </ul>   
+                    </ul>
+             </form>   
                  <%} %>
                 
             </div>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.spring.mapper.ProductListMapper">
 
-	<resultMap type="ProductVOTest" id="productResultMap">
+	<resultMap type="ProductVO" id="productResultMap">
 		<result property="product_number" column="product_number" />
 		<result property="product_id" column="product_id" />
 		
