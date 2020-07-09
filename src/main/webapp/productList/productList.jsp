@@ -2,20 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.spring.alltion.productList.*" %>
+<%@ page import="com.spring.alltion.productRegistration.ProductVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
- <%
-  	List<ProductVOTest> productList=(List<ProductVOTest>)request.getAttribute("productlist");
-	
-  	int listcount=((Integer)request.getAttribute("listcount")).intValue();
-  	int nowpage=((Integer)request.getAttribute("page")).intValue();
-  	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
-  	int startpage=((Integer)request.getAttribute("startpage")).intValue();
-  	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-  	
-  %>
-
+ <% 
+ 	
+	List<ProductVO> productList=(List<ProductVO>)request.getAttribute("productlist");
+ 	
+	int listcount=((Integer)request.getAttribute("listcount")).intValue();
+	int nowpage=((Integer)request.getAttribute("page")).intValue();
+	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
+	int startpage=((Integer)request.getAttribute("startpage")).intValue();
+	int endpage=((Integer)request.getAttribute("endpage")).intValue();
+%>
 <!DOCTYPE html>
 <html>
 <script>
@@ -458,7 +458,7 @@
                 </select>
             <%
             	for(int i=0; i<productList.size();i++){
-                    		ProductVOTest vo = (ProductVOTest)productList.get(i);
+                    		ProductVO vo = (ProductVO)productList.get(i);
             %>
                 <ul class="items__list product">
                 	<c:forEach items="${list}" var="list">
