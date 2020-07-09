@@ -3,18 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
-    <link rel="stylesheet" href="./resources/css/member_join.css">
+    <link rel="stylesheet" href="./resources/css/buyer.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
-
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-    
+  
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
@@ -23,10 +21,10 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="loginForm.kj">로그인</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="#">회원 가입</a>
+                        <a href="./logout.kj">로그아웃</a>
                     </li>
                     <li>
                     	<a href="./registration.yb">판매하기</a>
@@ -64,19 +62,19 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="./loginForm.kj">
+                        <a href="./mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="./loginForm.kj">
+                        <a href="#">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
                     </li>
                     <li>
-                        <a href="./loginForm.kj">
+                        <a href="#">
                             <span class="material-icons">access_time</span>
                             <span>참여 경매</span>
                         </a>
@@ -85,40 +83,139 @@
             </div>
         </div>
     </div>
-    
-    <!-- 회원 가입 폼 -->
-    <div class = "joinWrap">
-        <h3>All-tion 통합회원가입</h3>
-        <p>
-        한 번의 통합회원가입으로
-        <br>
-        편리하게 All-tion을 이용하세요
-        </p>
-    <ul>
-        <li>
-            <dl>
-                <dt>기본 회원가입</dt>
-                    <dd>
-                        <p>
-                            <a href ="joinForm.kj" class = "base_btn">회원가입</a>
-                        </p>
-                    </dd>
-            </dl>
-        </li>    
-        <li>
-            <dl>
-                <dt>SNS 간편 회원가입</dt>
-                    <dd>
-                        
-                        <div id="naver_id_login" style="text-align:center"><a href="${url}" class = "base_btn1">
-                        N&nbsp;&nbsp;네이버 간편 회원가입</a></div>
-                        
-                    </dd>
-            </dl>
-        </li>
-    </ul>
+    <!--구매 중-->
+    <div class="buyer--form">
+        <h3>구매 중 경매</h3>
+            <div class="buyer--content">
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 가격</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>입금 기한</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>거래 방식</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>판매자</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>신용도</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul> 
+        </div>
+        <a href = "#"  class = "base_btn">거래 하기</a>
     </div>
-    
+    <!--구매 완료 -->
+        <div class="buyer--form">
+            <h3>구매 완료</h3>
+            <div class="buyer--content">
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 가격</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 날짜</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>판매자</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul> 
+        </div>
+    </div>
     
     <!-- 푸터 영역 -->
     <div class="footer">
