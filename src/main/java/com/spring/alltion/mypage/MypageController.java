@@ -27,7 +27,8 @@ public class MypageController {
 		if(userId == null)
 		{
 		return "member/login";
-		}else
+		}
+		else
 		
 		return "member/mypage";
 	}
@@ -69,8 +70,7 @@ public class MypageController {
 			writer.write("<script>alert('이메일 변경실패!!');"
 					+ "location.href='./memberinfo.kj';</script>");
 		}
-		return null;
-		
+		return null;		
 	}
 	//회원 수정 비밀번호		
 	@RequestMapping(value = "/updatePassword.kj", method = { RequestMethod.GET, RequestMethod.POST })
@@ -79,14 +79,12 @@ public class MypageController {
 	{
 		String userId = (String)session.getAttribute("userId");
 		membervo.setMember_id(userId);
-		int res = memberService.updatePassword(membervo);
-		
+		int res = memberService.updatePassword(membervo);		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (res != 0)
-		{
-			
+		{			
 			writer.write("<script>alert('비밀번호 변경 완료!!');"
 			+ "location.href='./loginForm.kj';</script>");
 			//비밀번호 변경시 로그아웃
@@ -97,10 +95,8 @@ public class MypageController {
 			writer.write("<script>alert('비밀번호 변경 실패!!');"
 					+ "location.href='./memberinfo.kj';</script>");
 		}
-		return null;
-		
-	}
-	
+		return null;	
+	}	
 	@RequestMapping(value = "/updatePhone.kj")
 	public String updatePhone(MemberVO membervo, HttpServletResponse response,HttpSession session)
 	throws Exception 
@@ -147,10 +143,8 @@ public class MypageController {
 			writer.write("<script>alert('주소 변경실패!!');"
 					+ "location.href='./memberinfo.kj';</script>");
 		}
-		return null;
-		
-	}
-	
+		return null;		
+	}	
 	@RequestMapping(value = "/delete.kj",  method = { RequestMethod.GET, RequestMethod.POST })
 	public String member_delete(MemberVO membervo, HttpServletResponse response,HttpSession session)
 	throws Exception 
@@ -192,23 +186,39 @@ public class MypageController {
 		
 		return "member/buyer";
 		}
-	}
-	
+	}	
+
 	@RequestMapping(value = "/buyer_deal.kj")
 	public String deal(Model model,HttpSession session)throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
-		if(userId ==null)
+		if(userId == null)
 		{
 			return "member/login";
-		}else{
+		}
+		else
+		{
 			MemberVO vo = memberService.selectMember(userId);
 			model.addAttribute("membervo",vo);
 			
 		    return "member/buyer_deal";
 		}
-	
-	
+	}	
+
+	/*
+	@RequestMapping(value = "/buyer_deal.kj")
+	public String paying(Model model, HttpSession session)throws Exception
+	{
+		String userId = (String)session.getAttribute("userId");
+		if(userId ==null)
+		{
+			return "member/login";
+		}
+		else 
+		{
+			return "pay/pay";
+		}
 	}
+	*/
 	
 }

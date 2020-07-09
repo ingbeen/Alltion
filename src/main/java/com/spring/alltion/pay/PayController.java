@@ -20,8 +20,8 @@ public class PayController {
 	//private MemberService memberService;
 	
 	@RequestMapping(value = "/pay.ms")
-	public String home() {
-	
+	public String home() 
+	{
 		return "pay/pay";
 	}
 	
