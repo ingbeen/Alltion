@@ -83,10 +83,7 @@ pageEncoding="UTF-8"%>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
-                    <!-- 테스트용 -->
-                    <li>
-                    	<a href="./boardlist.hs">상세페이지(테스트)</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -1995,10 +1992,6 @@ pageEncoding="UTF-8"%>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
-                    </li>
-                    <!-- 테스트용 -->
-                    <li>
-                    	<a href="./boardlist.hs">상세페이지(테스트)</a>
                     </li>
                 </ul>
             </div>
