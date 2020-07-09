@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.spring.mapper.BidMapper;
-import com.spring.mapper.BoardMapper;
+import com.spring.mapper.DetailMapper;
 
 @Service
 public class BidServiceImpl {
@@ -48,7 +48,7 @@ public class BidServiceImpl {
 	//응찰 하기 서비스.
 	public int bidInsertService(BidVO bidvo) {
 		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
-		BoardMapper boardmapper = sqlSession.getMapper(BoardMapper.class);
+		DetailMapper boardmapper = sqlSession.getMapper(DetailMapper.class);
 		int bid_product_number = bidvo.getBid_product_number();
 		int price = 0;
 		String product_top_bidder = " ";
@@ -79,7 +79,7 @@ public class BidServiceImpl {
 	//즉시 구매하기 서비스.
 	public int bidpurchaseService(BidVO bidvo) {
 		BidMapper bidmapper = sqlSession.getMapper(BidMapper.class);
-		BoardMapper boardmapper = sqlSession.getMapper(BoardMapper.class);
+		DetailMapper boardmapper = sqlSession.getMapper(DetailMapper.class);
 		int bid_product_number = bidvo.getBid_product_number();
 		int price = 0;
 		price = boardmapper.selectPurchasePrice(bid_product_number);

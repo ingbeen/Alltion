@@ -16,7 +16,7 @@ import com.spring.alltion.productRegistration.ProductVO;
 public class DetailController {
 	
 	@Autowired
-	private BoardServiceImpl boardService;
+	private DetailServiceImpl detailService;
 	
 	@Autowired
 	private CommentServiceImpl commentService;
@@ -31,7 +31,7 @@ public class DetailController {
 	//지워야됨. 필요없음. 테스트용으로 만듬
 	@RequestMapping("/boardlist.hs")
 	public String boardlist(HttpServletRequest request,Model model)throws Exception {
-		boardService.getBoardList(request,model);
+		detailService.getBoardList(request,model);
 		
 		return "detail_page/board_list";
 	}
@@ -41,7 +41,7 @@ public class DetailController {
 	@RequestMapping("/boarddetail.hs")
 	public String boardDetail(@RequestParam(value="product_number")int product_number,Model model) {
 		// 상품번호를 통해서 상품 상세 정보를 얻는다.
-		ProductVO productvo = boardService.getDetail(product_number);
+		ProductVO productvo = detailService.getDetail(product_number);
 		model.addAttribute("productvo",productvo);
 		
 		// 판매자 정보를 얻는다.

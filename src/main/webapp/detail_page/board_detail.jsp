@@ -170,9 +170,9 @@
             <div class="summary_information">
                 <div class="summary_info_nowPrice">
                     <div class="summary_info_category" style="display: inline-block;">
-                        <span><a href=""><%=productvo.getProduct_category_1() %></a></span>
+                        <span><font><%=productvo.getProduct_category_1() %></font></span>
                         <span>&nbsp;&nbsp;&#10095;&nbsp;&nbsp;</span>
-                        <span><a href=""><%=productvo.getProduct_category_2() %></a></span>
+                        <span><font><%=productvo.getProduct_category_2() %></font></span>
                     </div>
                     <ul>
                         <li>
@@ -188,7 +188,7 @@
                     <ul>
                        <li>
                             <label for="product_number">상품 번호</label>
-                            <p><%=productvo.getProduct_number() %></p>
+                            <p>NO <%=productvo.getProduct_number() %></p>
                         </li>
                         <li>
                             <label for="id">판매자</label>
@@ -234,7 +234,7 @@
                         </li>
                         <li>
                             <label for="boarddate">경매기간</label>
-                            <p><%=productvo.getProduct_issue_date().substring(0,19) %>&nbsp;&nbsp; ~ &nbsp;&nbsp;<%=productvo.getProduct_end_date().substring(0,19) %></p>
+                            <p><%=productvo.getProduct_issue_date().substring(0,16) %>&nbsp;&nbsp; ~ &nbsp;&nbsp;<%=productvo.getProduct_end_date().substring(0,16) %></p>
                         </li>
                         <li>
                             <label for="start_price">시작가</label>
@@ -818,6 +818,9 @@
 		}
       	
 		function bidInsert(){
+			
+			
+			
 			$.ajax({
 				url: '/alltion/bid_insert.hs',
 				type : 'POST',

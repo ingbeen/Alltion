@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.alltion.productRegistration.ProductVO;
 
-public interface BoardMapper {
+public interface DetailMapper {
 
 	ArrayList<ProductVO> getBoardList();
 
