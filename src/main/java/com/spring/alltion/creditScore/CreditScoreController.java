@@ -1,5 +1,8 @@
 package com.spring.alltion.creditScore;
 
-public class CreditScoreController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class CreditScoreController {
+	
 }

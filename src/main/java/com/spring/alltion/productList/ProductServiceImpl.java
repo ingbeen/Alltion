@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mapper.ProductListMapper;
 
-@Service("productService")
+@Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired(required=false)

@@ -200,6 +200,7 @@ function checkpassword() {
     <div id="topKey" class="topKey_btn" >
         <p class="material-icons">
             keyboard_arrow_up
+        </p>
     </div>
     <!-- 헤더 -->
     <div class="header">
@@ -456,6 +457,7 @@ function checkpassword() {
                     </ul>
                     </div>
                     </div>
+                </div>
             	</form>
  
             	
@@ -510,7 +512,6 @@ function checkpassword() {
 
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
     <script src="./resources/js/update.js"></script>
 </body>
 </html>
