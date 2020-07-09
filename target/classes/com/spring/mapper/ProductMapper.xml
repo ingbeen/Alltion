@@ -37,6 +37,16 @@
 		)
 	</insert>
 	
+	<select id="searchEndOfDeadline" resultType="ProductVO">>
+		select
+			product_number, <!-- 상품번호 -->
+			product_starting_price, <!-- 경매현재가 -->
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi'), <!-- 경매종료일 -->
+		where
+			product_end_date > sysdate and 
+    		product_progress = 0;
+	</select>
+	
 	<!-- test -->
 	<select id="productSelectTest" resultType="ProductVO">
 		select
