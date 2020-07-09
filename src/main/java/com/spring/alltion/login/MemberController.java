@@ -37,15 +37,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-<<<<<<< .merge_file_a18272
-=======
 	@RequestMapping("/")
 	public String main()
 	{
 		return "index";
 	}
-	
->>>>>>> .merge_file_a19560
+
 	@RequestMapping("/main.kj")
 	public String mainPage()
 	{
@@ -181,10 +178,8 @@ public class MemberController {
 			
 			return "member/update";
 		}
-<<<<<<< .merge_file_a18272
-=======
+
 		//회원 수정 이메일
->>>>>>> .merge_file_a19560
 		@RequestMapping(value = "/updateEmail.kj")
 		public String updateEmail(MemberVO membervo, HttpServletResponse response,HttpSession session)
 		throws Exception 
@@ -209,11 +204,8 @@ public class MemberController {
 			return null;
 			
 		}
-<<<<<<< .merge_file_a18272
-				
-=======
+
 		//회원 수정 비밀번호		
->>>>>>> .merge_file_a19560
 		@RequestMapping(value = "/updatePassword.kj", method = { RequestMethod.GET, RequestMethod.POST })
 		public String updatePassword(MemberVO membervo, HttpServletResponse response,HttpSession session)
 		throws Exception 
@@ -230,10 +222,8 @@ public class MemberController {
 				
 				writer.write("<script>alert('비밀번호 변경 완료!!');"
 				+ "location.href='./loginForm.kj';</script>");
-<<<<<<< .merge_file_a18272
-=======
+
 				//비밀번호 변경시 로그아웃
->>>>>>> .merge_file_a19560
 				session.invalidate();
 			}
 			else
@@ -245,9 +235,6 @@ public class MemberController {
 			
 		}
 		
-<<<<<<< .merge_file_a18272
-		
-=======
 		@RequestMapping(value = "/updatePhone.kj")
 		public String updatePhone(MemberVO membervo, HttpServletResponse response,HttpSession session)
 		throws Exception 
@@ -323,6 +310,5 @@ public class MemberController {
 			return null;
 			
 		}
->>>>>>> .merge_file_a19560
 		
 }

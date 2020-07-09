@@ -1,3 +1,4 @@
+-- by 하나
 -- 1. 구매 등급 테이블
 CREATE TABLE purchase_credit_score_list (
     purchase_id VARCHAR2(20),

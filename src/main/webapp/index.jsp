@@ -5,38 +5,12 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./resources/css/summernote/index_main.css">
+    <link rel="stylesheet" href="./resources/css/index_main.css">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link href="https://fonts.googleapis.com/css2?
     family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
-    <style>
-    .ad__banner {
-    width: 100%;
-    height: 90px;
-    background-color: #FFC300;
-    position: relative;
-    text-align: center;
-/*    opacity: 0.5;*/
-	}
-
-	.ad__banner--img {
-    width: 728px;
-    height: 90px;
-	/*    opacity: 0.5;*/
-	} /* 임의의 값 */
-
-	.ad__banner--closeBtn {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: url(./resources/img/header/close_btn.png);
-}
-    </style>
 </head>
 <body>
 <c:choose>
@@ -3756,97 +3730,8 @@ pageEncoding="UTF-8"%>
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // TOP 키
-            let sc = $(window).scrollTop(); // scroll이 제일 위에 있을 때 위치값
-            if(sc == 0){
-                $("#topKey").fadeOut();
-            }
-            
-            $("#topKey").click(function(){
-                $("html,body").animate({
-                    "scrollTop" : "0px"
-                });
-            })
-            
-            // scroll이 제일 위에 왔을 때 숨기기
-            $(window).scroll(function(){
-                sc = $(this).scrollTop();
-                
-                if(sc == 0){
-                    $("#topKey").fadeOut();
-                }
-                else {
-                    $("#topKey").fadeIn();
-                }
-                
-//                console.log(sc);
-            })
-            
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            let header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 인기 경매 - 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category > li").click(function(){
-                
-                let activeTab = $(this).attr('id');
-                
-				$('ul.deadline-items__category > li').removeClass('active');
-				$('.deadline-items--product').removeClass('active');
-				$(this).addClass('active');
-				$('div.deadline-items--product.' + activeTab).addClass('active');
-            })
-        });
-        
-        // 2020-06-23 pm 03:55 추가
-        // 실시간 시간 구하기
-        setInterval(function(){
-            let nowDate = new Date();
-            let day = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
-            let dayNum = nowDate.getDay();
-            let year = nowDate.getFullYear();
-            let month= nowDate.getMonth() + 1;
-            let date = nowDate.getDate();
-            let hour = nowDate.getHours();
-            let min = nowDate.getMinutes();
-            let sec = nowDate.getSeconds();
-            
-            /*
-            // 오전 오후로 나누고 싶을 때
-            let amPm = '오전';
-            
-            if(hour >= 12) {
-                amPm = '오후';
-                hour = hour - 12;
-            }
-            
-            document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + amPm + '&nbsp;' + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec);
-            */
-            
-            document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + hour + ":" + addZero(min) + ":" + addZero(sec);
-        },1000);
-        
-        // 일의 자리 숫자일 때 0 붙여 주기
-        function addZero(i) {
-            if (i < 10) {
-                i = '0' + i
-            };
-            return i;
-        } // 2020-06-23 pm 03:55 추가
-    </script>
+    <script src="./resources/js/common.js"></script>
+    <script src="./resources/js/index_main.js"></script>
 </c:otherwise>
 </c:choose>
 </body>
