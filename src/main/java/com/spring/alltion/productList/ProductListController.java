@@ -72,7 +72,7 @@ public class ProductListController {
 		return "productList/productList";
 	}
 	@RequestMapping(value = "/categoryCheck.ms", method = RequestMethod.GET)
-	public String goCategory(HttpServletRequest request, ProductVOTest vo) {
+	public String goCategory(HttpServletRequest request, ProductVO vo) {
 		vo.setProduct_category_1(request.getParameter(""));
 		return "redirect:/productList.ms";
 	}
