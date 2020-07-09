@@ -422,6 +422,13 @@ input.text1{
     height: 15px;
 }
 
+.text3 {
+    border: 1px solid #ccc;
+    padding: 1px 5px;
+    width: 300px;
+    height: 15px;
+}
+
 .chargePageBox .tbl_money label {
     vertical-align: middle;
     margin-right: 10px;

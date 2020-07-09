@@ -25,26 +25,26 @@ public class PaymentCheck {
 	public static final String IMPORT_CANCEL_URL = "https://api.iamport.kr/payments/cancel"; 
 	//public static final String IMPORT_PREPARE_URL = "https://api.iamport.kr/payments/prepare"; 
 	public static final String KEY = "6166467829481273"; 
-	public static final String SECRET = "kB1OsOX8XCOrgxfxtEkBS3UmiFijnvHI6JwzxuIu6wWm4bTxQe9Ji45AKoU7TCP0lmzSQhnWOjjSucql"; // ¾ÆÀÓÆ÷Æ® ÀÎÁõ(ÅäÅ«)À» ¹Ş¾ÆÁÖ´Â ÇÔ¼ö 
+	public static final String SECRET = "kB1OsOX8XCOrgxfxtEkBS3UmiFijnvHI6JwzxuIu6wWm4bTxQe9Ji45AKoU7TCP0lmzSQhnWOjjSucql"; // ì•„ì„í¬íŠ¸ ì¸ì¦(í† í°)ì„ ë°›ì•„ì£¼ëŠ” í•¨ìˆ˜ 
 	
 	
-	// Á¢±ÙÀ» À§ÇÑ access token »ı¼ºÈÄ ¹İÈ¯
+	// ì ‘ê·¼ì„ ìœ„í•œ access token ìƒì„±í›„ ë°˜í™˜
 	public String getImportToken() { 
 		String result = ""; 
 		
-		HttpClient client = HttpClientBuilder.create().build(); //Å¬¶óÀÌ¾ğÆ® »ı¼º
-		HttpPost post = new HttpPost(IMPORT_TOKEN_URL); // post¸Ş¼Òµå URL»ı¼º
+		HttpClient client = HttpClientBuilder.create().build(); //í´ë¼ì´ì–¸íŠ¸ ìƒì„±
+		HttpPost post = new HttpPost(IMPORT_TOKEN_URL); // postë©”ì†Œë“œ URLìƒì„±
 		Map<String,String> m =new HashMap<String,String>(); 
 		m.put("imp_key", KEY); 
 		m.put("imp_secret", SECRET); 
 		try { 
-			// UrlEncodedFormEntity °´Ã¼´Â ÄÜÅÙÃ÷ À¯ÇüÀ» "x-www-form-urlencoded"·Î ¼³Á¤ ÇÔ
+			// UrlEncodedFormEntity ê°ì²´ëŠ” ì½˜í…ì¸  ìœ í˜•ì„ "x-www-form-urlencoded"ë¡œ ì„¤ì • í•¨
 			post.setEntity(new UrlEncodedFormEntity(convertParameter(m))); 
-			HttpResponse res = client.execute(post); // Å¬¶óÀÌ¾ğÆ®·Î °á°ú Àü¼Û 
+			HttpResponse res = client.execute(post); // í´ë¼ì´ì–¸íŠ¸ë¡œ ê²°ê³¼ ì „ì†¡ 
 			ObjectMapper mapper = new ObjectMapper(); 
 			String body = EntityUtils.toString(res.getEntity()); 
 			System.out.println("body=" + body);
-			JsonNode rootNode = mapper.readTree(body); // body³»¿ëÀ» jsonÇü½ÄÀ¸·Î º¯È¯
+			JsonNode rootNode = mapper.readTree(body); // bodyë‚´ìš©ì„ jsoní˜•ì‹ìœ¼ë¡œ ë³€í™˜
 			System.out.println("rootNode=" + rootNode);
 			JsonNode resNode = rootNode.get("response"); 
 			System.out.println("resNode=" + resNode);
@@ -56,7 +56,7 @@ public class PaymentCheck {
 		} return result; 
 	} 
 	
-	// MapÀ» »ç¿ëÇØ¼­ Http¿äÃ» ÆÄ¶ó¹ÌÅÍ¸¦ ¸¸µé¾î ÁÖ´Â ÇÔ¼ö 
+	// Mapì„ ì‚¬ìš©í•´ì„œ Httpìš”ì²­ íŒŒë¼ë¯¸í„°ë¥¼ ë§Œë“¤ì–´ ì£¼ëŠ” í•¨ìˆ˜ 
 	private List<NameValuePair> convertParameter(Map<String,String> paramMap){ 
 		List<NameValuePair> paramList = new ArrayList<NameValuePair>(); 
 		Set<Entry<String,String>> entries = paramMap.entrySet(); 
@@ -68,7 +68,7 @@ public class PaymentCheck {
 		return paramList; 
 	} 
 	
-	// °áÁ¦Ãë¼Ò 
+	// ê²°ì œì·¨ì†Œ 
 	public int cancelPayment(String token, String mid) { 
 		HttpClient client = HttpClientBuilder.create().build(); 
 		HttpPost post = new HttpPost(IMPORT_CANCEL_URL); 
@@ -89,9 +89,9 @@ public class PaymentCheck {
 		} 
 		
 		if (asd.equals("null")) { 
-			System.err.println("È¯ºÒ½ÇÆĞ"); return -1; 
+			System.err.println("í™˜ë¶ˆì‹¤íŒ¨"); return -1; 
 		} else { 
-			System.err.println("È¯ºÒ¼º°ø"); return 1; 
+			System.err.println("í™˜ë¶ˆì„±ê³µ"); return 1; 
 		} 
 	}
 

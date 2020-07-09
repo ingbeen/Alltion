@@ -3,27 +3,27 @@ package com.spring.alltion.productList;
 import java.util.Date;
 
 public class ProductVOTest {
-	int product_number;  //»óÇ°¹øÈ£
-	String product_id;   //¾ÆÀÌµğ
-	String product_subject; //»óÇ°Á¦¸ñ
-	String product_category_1; //Ä«Å×°í¸® 1Â÷
-	String product_category_2; //Ä«Å×°í¸® 2Â÷
-	String product_content; //»óÇ°³»¿ë
-	Date product_end_date; //°æ¸ÅÁ¾·áÀÏ
-	int product_starting_price; //°æ¸Å½ÃÀÛ°¡
-	int product_re_auction; //Àç°æ¸Å
-	int product_purchare_price; //Áï½Ã±¸¸Å°¡°İ
-	int product_bidding_unit; //ÀÔÂû´ÜÀ§
-	String product_transaction_area; //Á÷°Å·¡°¡´ÉÁö¿ª
-	String product_delivery; //ÅÃ¹è°Å·¡(ºñ¿ë)
-	int product_current_price;// °æ¸ÅÇöÀç°¡
-	int product_bids; //ÀÔÂû¼ö
-	int product_participants; //Âü°¡ÀÚ¼ö
-	int product_credit_score; //½Å¿ëµµ
-	int product_views; //Á¶È¸¼ö
-	Date product_date; //µî·ÏÀÏ
-	String product_progress; //ÁøÇà»óÅÂ
-	String product_img_1; //ÀÌ¹ÌÁö¼Ò½º
+	int product_number;  //ìƒí’ˆë²ˆí˜¸
+	String product_id;   //ì•„ì´ë””
+	String product_subject; //ìƒí’ˆì œëª©
+	String product_category_1; //ì¹´í…Œê³ ë¦¬ 1ì°¨
+	String product_category_2; //ì¹´í…Œê³ ë¦¬ 2ì°¨
+	String product_content; //ìƒí’ˆë‚´ìš©
+	Date product_end_date; //ê²½ë§¤ì¢…ë£Œì¼
+	int product_starting_price; //ê²½ë§¤ì‹œì‘ê°€
+	int product_re_auction; //ì¬ê²½ë§¤
+	int product_purchare_price; //ì¦‰ì‹œêµ¬ë§¤ê°€ê²©
+	int product_bidding_unit; //ì…ì°°ë‹¨ìœ„
+	String product_transaction_area; //ì§ê±°ë˜ê°€ëŠ¥ì§€ì—­
+	String product_delivery; //íƒë°°ê±°ë˜(ë¹„ìš©)
+	int product_current_price;// ê²½ë§¤í˜„ì¬ê°€
+	int product_bids; //ì…ì°°ìˆ˜
+	int product_participants; //ì°¸ê°€ììˆ˜
+	int product_credit_score; //ì‹ ìš©ë„
+	int product_views; //ì¡°íšŒìˆ˜
+	Date product_date; //ë“±ë¡ì¼
+	String product_progress; //ì§„í–‰ìƒíƒœ
+	String product_img_1; //ì´ë¯¸ì§€ì†ŒìŠ¤
 	
 	public String getProduct_img_1() {
 		return product_img_1;

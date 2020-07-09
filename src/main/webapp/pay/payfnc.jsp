@@ -80,11 +80,11 @@ function makeid() {
             //m_redirect_url : 'https://localhost:8080/payments/complete' / 
         }, function(rsp) {
             if ( rsp.success ) { // 결제 성공시 
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
+                var msg = '결제가 완료되었습니다. ';
+                //msg += '고유ID : ' + rsp.imp_uid;
+                //msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액은 ' + rsp.paid_amount + '입니다. ';
+                msg += '결제주문번호는 ' + rsp.merchant_uid +'입니다. 해당 주문번호는 환불요청 시에 필요하니 기억해주시기 바랍니다.';
                 
                 var payVO = { 
                 //dfkek : rsp.imp_uid,

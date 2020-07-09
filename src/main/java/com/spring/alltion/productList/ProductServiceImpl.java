@@ -20,8 +20,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductVO> getproductList(int page, int limit) {
 		// TODO Auto-generated method stub
-		int startrow=(page-1)*5+1; //읽기 시작할 row 번호.
-		int endrow=startrow+limit-1; //읽을 마지막 row 번호.
+		int startrow=(page-1)*5+1; 
+		int endrow=startrow+limit-1; 
 		HashMap<String, Integer> params = new HashMap<String, Integer>();
 		params.put("start", startrow);
 		params.put("end", endrow);

@@ -27,7 +27,7 @@ public class PayController {
 	
 	@RequestMapping(value = "/cancel.bo", method = RequestMethod.POST)
 	@ResponseBody
-	public String cancel(@RequestParam(value="merchant_uid") String merchant_uid) {  // °áÁ¦¹øÈ£ : merchant_uid
+	public String cancel(@RequestParam(value="merchant_uid") String merchant_uid) {  // ê²°ì œë²ˆí˜¸ : merchant_uid
 		System.out.println("merchant_uid=" + merchant_uid);
 		PaymentCheck obj = new PaymentCheck();
 		String token = obj.getImportToken();
@@ -44,9 +44,9 @@ public class PayController {
 		try {
 			System.out.println("goOracle");
 			payService.insertPay(payVO);
-			System.out.println("µ¥ÀÌÅÍ»ğÀÔ ¿Ï·á");
+			System.out.println("ë°ì´í„°ì‚½ì… ì™„ë£Œ");
 		}catch(Exception e) {
-			System.out.println("½ÇÆĞ");
+			System.out.println("ì‹¤íŒ¨");
 		}
 			
 	}
@@ -60,7 +60,7 @@ public class PayController {
 		vo.setMerchant_uid(vo.getMerchant_uid());
 		//vo.setName(vo.getName());
 		vo.setAmount(vo.getAmount());
-		vo.setStatus("°áÁ¦Ãë¼Ò");
+		vo.setStatus("ê²°ì œì·¨ì†Œ");
 		//vo.setBuyer_email(vo.buyer_email);
 		vo.setBuyer_name(vo.getBuyer_name());
 		//vo.setBuyer_tel(vo.getBuyer_tel());

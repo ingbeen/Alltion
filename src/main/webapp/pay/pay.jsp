@@ -205,7 +205,7 @@ date = getFormatDate(date);
 							<tbody>
 								<tr>
 									<th>결제 주문번호</th>
-									<td><input class="text2" type="text" name="merchant_uid"
+									<td><input class="text3" type="text" name="merchant_uid"
 										title="결제 주문번호"></td>
 
 									<th>현재 사이버머니</th>

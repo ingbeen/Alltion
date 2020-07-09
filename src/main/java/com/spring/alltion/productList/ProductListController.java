@@ -26,7 +26,7 @@ public class ProductListController {
 	}
 	*/
 	@RequestMapping(value = "/productList.ms", method = RequestMethod.GET)
-	public String getProductList(Model model, @RequestParam(value="page", required=false, defaultValue="1") int page) throws Exception {
+	public String getProductList(Model model, @RequestParam(value="page" , required=false, defaultValue="1") int page) throws Exception {
 		int limit = 9;
 		int listcount = productService.getListCount();
 		int startrow = (page - 1) * 5 + 1;
@@ -36,11 +36,11 @@ public class ProductListController {
 		hashmap.put("endrow", endrow);
 		List<ProductVOTest> productlist = productService.getproductList(hashmap);
 		
-		// ÃÑ ÆäÀÌÁö ¼ö
+		// ì´ íŽ˜ì´ì§€ ìˆ˜
 		int maxpage=(int)((double)listcount/limit+0.95);
-		//ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ½ÃÀÛ ÆäÀÌÁö¼ö(1, 6, 11 µî...)
+		// íŽ˜ì´ì§€ ì²« ì‹œìž‘ ìˆ«ìž(1, 6, 11 ï¿½ï¿½...)
    		int startpage = (((int) ((double)page / 10 + 0.9)) - 1) * 5 + 1;
-   		//ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö ¼ö(5, 10, 15 µî...)
+   		// íŽ˜ì´ì§€ ë§ˆì§€ë§‰ ìˆ«ìž(5, 10, 15 ï¿½ï¿½...)
    		int endpage = maxpage;
    		
    		if (endpage>startpage+5-1) endpage=startpage+5-1;
