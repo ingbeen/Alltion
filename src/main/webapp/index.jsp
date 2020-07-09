@@ -125,7 +125,7 @@ pageEncoding="UTF-8"%>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="wishList.yb">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
