@@ -178,7 +178,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "/buyer.kj")
-	public String history(Model model,HttpSession session)throws Exception
+	public String buyer(Model model,HttpSession session)throws Exception
 	{	
 		String userId = (String)session.getAttribute("userId");
 		if(userId ==null)
@@ -191,6 +191,24 @@ public class MypageController {
 		model.addAttribute("membervo",vo);
 		
 		return "member/buyer";
+		}
 	}
+	
+	@RequestMapping(value = "/buyer_deal.kj")
+	public String deal(Model model,HttpSession session)throws Exception
+	{
+		String userId = (String)session.getAttribute("userId");
+		if(userId ==null)
+		{
+			return "member/login";
+		}else{
+			MemberVO vo = memberService.selectMember(userId);
+			model.addAttribute("membervo",vo);
+			
+		    return "member/buyer_deal";
+		}
+	
+	
 	}
+	
 }
