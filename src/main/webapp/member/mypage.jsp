@@ -106,13 +106,13 @@
             <li>
                 <a href="./buyer.kj">
                     <span class="material-icons">receipt</span><br>
-                    <span class="myPage__menu">구매 내역</span>
+                    <span class="myPage__menu">구매 정보</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <span class="material-icons">list</span><br>
-                    <span class="myPage__menu">낙찰 내역</span>
+                    <span class="myPage__menu">판매 정보</span>
                 </a>
             </li>
             <li>

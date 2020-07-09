@@ -5,66 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/buyer.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
-    <style>
-.btn_style{
-    height: 40px;
-    min-width: 80px;
-    line-height: 40px;
-    background: #FFAE36;
-    font-size: 14px;
-    color: #fff;
-    text-align: center;
-    font-family: "맑은 고딕","Malgun Gothic";
-    border-radius: 7px;
-}
-.buyer_title  {
-            font-size: 25px;
-        }
-.buyer h2 {
-            line-height: 30px;
-            margin-bottom: 50px;
-            margin-left: 250px;
-            font-size: 24px;
-            margin-top: 50px;
-        } 
-.buyer_name h3{
-			line-height: 30px;
-            margin-bottom: 50px;
-            margin-left: 250px;
-            margin-top: 20px;
-            font-size: 24px;
-} 
-.table {
-      border-collapse: collapse;
-      border-top: 3px solid  #F9A825;
-      width: 1200px;
-      margin : auto;
-    }  
-.table th {
-      color:  #F9A825;
-      background: #f0f6f9;
-      text-align: left;
-      font-size: 18px;
-    }
-.table td {
-      padding: 5px;
-      border: 1px solid  #F9A825;
-      text-align: center;
-    }
-.table th:first-child, .table td:first-child {
-      border-left: 0;
-    }
-.table th:last-child, .table td:last-child {
-      border-right: 0;
-    }
-.table tr td:first-child{
-      text-align: center;
-    }
-.table caption{caption-side: bottom; display: none;}
-    </style>
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
@@ -139,42 +83,139 @@
             </div>
         </div>
     </div>
-    <!--구매자 현황 -->
-   <div class = "buyer">
-       <div class = "buyer_list">
-           <div class = "buyer_list--list">
-           	<div class = "buyer_name">
-           	<h3>${userId}&nbsp;님</h3>
-           	</div>
-               <div class = "buyer_title">
-                <h2># 구매 중</h2>                 
-                </div>
-                <table class="table">
-                <tr><th colspan = "6">구매중 경매</th><th style = "text-align:right;"><button type = "submit" class = "btn_style">관리</button></th></tr>
-                <tr><td>구분</td><td>상품 번호</td><td>상품명</td><td>구매 가격</td><td>입금 기한</td><td>거래 방식</td><td>판매자</td></tr>
-                <tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                </table>  
-                <div class = "buyer_title">
-                <h2># 구매 완료</h2>
-                </div>
-                <table class="table">
-                <tr><th colspan = "7">구매 완료 경매</tr>
-                <tr><td>구분</td><td>상품 번호</td><td>상품명</td><td>구매 가격</td><td>구매한 날짜</td><td>구매 확정일</td><td>판매자</td></tr>
-                <tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                </table>  
-           </div>    
-       </div>       
-   </div>
-    <!-- 경매 규칙 및 회원 등급 제도 설명 -->
-    <div class="rules">
-        <div class="rules__content">
-            <ul class="rules__content">
-                <li></li>
-                <li></li>
-            </ul>
+    <!--구매 중-->
+    <div class="buyer--form">
+        <h3>구매 중 경매</h3>
+            <div class="buyer--content">
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 가격</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>입금 기한</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>거래 방식</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>판매자</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>신용도</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul> 
+        </div>
+        <a href = "#"  class = "base_btn">거래 하기</a>
+    </div>
+    <!--구매 완료 -->
+        <div class="buyer--form">
+            <h3>구매 완료</h3>
+            <div class="buyer--content">
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 가격</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 날짜</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>판매자</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <h4></h4>
+                        </div>    
+                    </li>
+                </ul> 
         </div>
     </div>
-    <!-- !! 메인 페이지 내용(지워서 사용함) !! end -->
     
     <!-- 푸터 영역 -->
     <div class="footer">
