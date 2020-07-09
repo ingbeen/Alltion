@@ -30,8 +30,7 @@ public class PaymentCheck {
 	
 	// 접근을 위한 access token 생성후 반환
 	public String getImportToken() { 
-		String result = ""; 
-		
+		String result = ""; 	
 		HttpClient client = HttpClientBuilder.create().build(); //클라이언트 생성
 		HttpPost post = new HttpPost(IMPORT_TOKEN_URL); // post메소드 URL생성
 		Map<String,String> m =new HashMap<String,String>(); 
@@ -56,7 +55,9 @@ public class PaymentCheck {
 		} return result; 
 	} 
 	
+
 	// Map을 사용해서 Http요청 파라미터를 만들어 주는 함수 
+
 	private List<NameValuePair> convertParameter(Map<String,String> paramMap){ 
 		List<NameValuePair> paramList = new ArrayList<NameValuePair>(); 
 		Set<Entry<String,String>> entries = paramMap.entrySet(); 
@@ -68,7 +69,9 @@ public class PaymentCheck {
 		return paramList; 
 	} 
 	
+
 	// 결제취소 
+
 	public int cancelPayment(String token, String mid) { 
 		HttpClient client = HttpClientBuilder.create().build(); 
 		HttpPost post = new HttpPost(IMPORT_CANCEL_URL); 

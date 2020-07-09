@@ -25,12 +25,6 @@ public class ProductVOTest {
 	String product_progress; //진행상태
 	String product_img_1; //이미지소스
 	
-	public String getProduct_img_1() {
-		return product_img_1;
-	}
-	public void setProduct_img_1(String product_img_1) {
-		this.product_img_1 = product_img_1;
-	}
 	public int getProduct_number() {
 		return product_number;
 	}
@@ -151,6 +145,12 @@ public class ProductVOTest {
 	public void setProduct_progress(String product_progress) {
 		this.product_progress = product_progress;
 	}
-	
+	public String getProduct_img_1() {
+		return product_img_1;
+	}
+	public void setProduct_img_1(String product_img_1) {
+		this.product_img_1 = product_img_1;
+	}
+
 	
 }
