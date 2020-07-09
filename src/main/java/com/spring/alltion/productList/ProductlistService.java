@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public interface ProductService {
+public interface ProductlistService {
 	//public List<ProductVO> getproductList(int page,int limit);
 	public int getListCount();
 	public List<ProductVOTest> getproductList(HashMap<String, Integer> hashmap);

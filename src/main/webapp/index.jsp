@@ -39,6 +39,7 @@ pageEncoding="UTF-8"%>
     </style>
 </head>
 <body>
+<a href="productList.ms">리스트Test</a>
 <c:choose>
 
 <c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->

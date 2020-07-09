@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mapper.ProductListMapper;
 
-@Service("productService")
-public class ProductServiceImpl implements ProductService {
+@Service
+public class ProductlistServiceImpl implements ProductlistService {
 
 	@Autowired(required=false)
 	private SqlSession sqlSession;
