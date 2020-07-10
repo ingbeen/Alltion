@@ -158,7 +158,7 @@
                     </li>
                 </ul> 
         </div>
-        <a href = "#"  class = "base_btn">거래 하기</a>
+        <a href = "./buyer_deal.kj"  class = "base_btn">거래 하기</a>
     </div>
     <!--구매 완료 -->
         <div class="buyer--form">

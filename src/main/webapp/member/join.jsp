@@ -168,34 +168,7 @@
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category a").click(function(){
-//                
-//                var activeTab = $(this).attr('id');
-//                
-//				$('ul.deadline-items__category a').removeClass('active');
-//				$('.menu-box').removeClass('active');
-//				$(this).prop('checked', true);
-//				$('div#' + activeTab).addClass('active');
-            })
-        });
-    </script>
+    <script type="text/javascript"></script>
+    <script src="./resources/js/join.js"></script>
 </body>
 </html>

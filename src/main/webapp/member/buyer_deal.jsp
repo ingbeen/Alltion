@@ -1,21 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="./resources/css/style.css">
-	<link rel="stylesheet" href="./resources/css/member_login.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./resources/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
-
+   
 </head>
 <body>
-
-<!-- 모든 페이지 공통 영역 by 하나  -->
-    
+    <!-- 모든 페이지 공통 영역 by 하나  -->
+  
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
@@ -24,10 +21,10 @@ pageEncoding="UTF-8"%>
                 </p>
                 <ul>
                     <li>
-                        <a href="#">로그인</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="./naverjoin.kj">회원 가입</a>
+                        <a href="./logout.kj">로그아웃</a>
                     </li>
                     <li>
                     	<a href="./registration.yb">판매하기</a>
@@ -65,7 +62,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="#">
+                        <a href="./mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
@@ -86,40 +83,6 @@ pageEncoding="UTF-8"%>
             </div>
         </div>
     </div>
-
-<form name = "login" action = "./login.kj" method = "post">    
-    <!-- 로그인 영역 by 계정 -->
-	<div class="login">
-        <div class="login-screen">
-            <div class="app-title">
-                <h2>로그인</h2>
-            </div>
-
-            <div class="login-form">
-                <div class="control-group id">
-                    <label class="login-field-icon fui-user" for="login-name">아이디</label><br>
-                    <input type="text" name = "member_id" class="login-field" id="member_id"  placeholder="아이디를 입력해 주세요" >
-                </div>
-
-                <div class="control-group pw">
-                    <label class="login-field-icon fui-lock" for="login-pass">비밀번호</label><br>
-                    <input type="password" name = "member_password" class="login-field" id="member_password"  placeholder="비밀번호를 입력해 주세요" >
-                </div>
-
-                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()" onkeyup="enterkey();">로그인</a>
-                <p>아직 회원이 아니신가요?&nbsp;
-                    <a class="login-link" href = "./naverjoin.kj">회원가입 바로 가기</a>
-                </p>
-                
-                
-            </div>
-        </div>
-    </div>
-	
- <script>
-
-</script>   
-</form>    
     
     <!-- 푸터 영역 -->
     <div class="footer">
@@ -169,10 +132,34 @@ pageEncoding="UTF-8"%>
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript"></script>
-    <script src="./resources/js/login.js"></script>
-      
-
-
+    <script type="text/javascript">
+        $(function(){
+            // 광고 없애기
+            $(".ad__banner--closeBtn").click(function(){
+                $(".ad__banner").hide();
+			})
+            
+            // 헤더 고정
+            var header = $('.lower_header');
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 0){
+                        header.addClass('sticky');
+                   }else{
+                        header.removeClass('sticky');
+                   }
+            })
+            
+            // 카테고리 누를 때마다 이동
+            $("ul.deadline-items__category a").click(function(){
+//                
+//                var activeTab = $(this).attr('id');
+//                
+//				$('ul.deadline-items__category a').removeClass('active');
+//				$('.menu-box').removeClass('active');
+//				$(this).prop('checked', true);
+//				$('div#' + activeTab).addClass('active');
+            })
+        });
+    </script>
 </body>
 </html>
