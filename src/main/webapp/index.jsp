@@ -41,7 +41,6 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 <a href="Mainlist.ms">리스트Test</a>
-<c:choose>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <!-- top 키 -->
     <div id="topKey" class="topKey_btn" >
