@@ -67,6 +67,7 @@ pageEncoding="UTF-8"%>
                     <a href="" id="clock"></a>
                 </p>
                 <ul>
+                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
                 	<c:choose>
 
 					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         

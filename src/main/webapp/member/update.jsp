@@ -200,6 +200,7 @@
                             <p class = "join_title" text-align = "left">주소</span>
                         </div>
                         <div class="update_form__list content">
+                        	<!-- jstl바뀐점 주소있을때와 주소없을떄 -by계정 -->
                         	<c:choose>
 
 							<c:when test ="${sample4_postcode != null}">

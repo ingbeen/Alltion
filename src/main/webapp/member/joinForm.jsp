@@ -127,6 +127,7 @@
 			
             <div class = "join_row">
                 <label class = "join_title" text-align = "left">이메일</label>
+            <!-- jstl 바뀐점 일반 회원가입, 네이버 회원가입 이메일 -by계정 -->
             <c:choose>
 
 			<c:when test="${email != null}"><!-- naver 연동시 email 값이 있을때 -->    
