@@ -2,11 +2,13 @@ package com.spring.mapper;
 
 import java.util.List;
 
-import com.spring.alltion.hongsub.BidVO;
+import org.apache.ibatis.annotations.Param;
+
+import com.spring.alltion.detailpage.BidVO;
 
 public interface BidMapper {
 
-	List<BidVO> bidList(int bno);
+	List<BidVO> bidList(@Param(value="bno")int bno,@Param(value="bid_startrow") int bid_startrow,@Param(value="bid_endrow") int bid_endrow);
 
 	int countBidList(int bid_product_number);
 
@@ -14,5 +16,8 @@ public interface BidMapper {
 
 	int bidInsert(BidVO bidvo);
 
+	String getTop_bidder_id(int bid_product_number);
+
+	int getProduct_bidding_unit(int bid_product_number);
 
 }

@@ -219,5 +219,4 @@ public class ProductVO {
 	public void setProduct_progress(int product_progress) {
 		this.product_progress = product_progress;
 	}
-	
 }

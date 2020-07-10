@@ -7,6 +7,7 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/index_main.css">
     <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/index_main.css">
     <link href="https://fonts.googleapis.com/css2?
     family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -39,7 +40,8 @@ pageEncoding="UTF-8"%>
     </style>
 </head>
 <body>
-
+<a href="Mainlist.ms">리스트Test</a>
+<c:choose>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <!-- top 키 -->
     <div id="topKey" class="topKey_btn" >
@@ -92,6 +94,7 @@ pageEncoding="UTF-8"%>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -151,7 +154,9 @@ pageEncoding="UTF-8"%>
     </div>
     
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
+    
     <!--  메뉴 카테고리  -->
+    
     <div class="menu">
         <div class="menu__tab">
             <input type="radio" name="menu--name" id="popular-items" checked>

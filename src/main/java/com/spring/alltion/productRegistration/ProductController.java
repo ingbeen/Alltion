@@ -19,11 +19,14 @@ public class ProductController {
 	@RequestMapping(value = "/registration.yb")
 	public String home(HttpSession session, MemberVO membervo) {
 		String userId = (String)session.getAttribute("userId");
-		membervo.setMember_id(userId);
-		session.setAttribute("userId", membervo.getMember_id());
+        if(userId ==null)
+        {
+           return "member/login";
+        }
+        
 		return "productRegistration/productRegistration";
 	}
-	
+
 	/* test */
 	@RequestMapping(value = "productSelectTest.yb")
 	public String productSelectTest(Model model) {
