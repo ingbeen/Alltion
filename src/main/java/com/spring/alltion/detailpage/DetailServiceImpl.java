@@ -1,13 +1,8 @@
 package com.spring.alltion.detailpage;
 
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.spring.alltion.productRegistration.ProductVO;
 import com.spring.mapper.DetailMapper;
@@ -18,14 +13,7 @@ public class DetailServiceImpl {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public void getBoardList(HttpServletRequest request, Model model) {
-		ArrayList<ProductVO> boardlist = new ArrayList<ProductVO>();
-		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
-		boardlist = detailmapper.getBoardList();
-		model.addAttribute("boardlist",boardlist);
-		
-	}
-
+	//경매 상품 정보 불러오기
 	public ProductVO getDetail(int product_number) {
 		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
 		ProductVO productvo = detailmapper.getDetail(product_number);
@@ -59,6 +47,7 @@ public class DetailServiceImpl {
 		return productvo;
 	}
 	
+	// 판매자 신용정보 불러오기
 	public Seller_Credit_Score_TestVO seller_credit_score_test(String sale_id) {
 		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
 		Seller_Credit_Score_TestVO scstvo = detailmapper.sellerTest(sale_id);
@@ -66,6 +55,16 @@ public class DetailServiceImpl {
 		return scstvo;
 	}
 	
+	/*
+	// 남은 시간이 완료되었을때 경매가 종료되고
+	// product테이블의 product_progress 가 1로바뀜 (경매진행중일때는 0임)
+	public int update_product_progress(int product_number) {
+		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
+		
+		return detailmapper.update_product_progress(product_number);
+	}
+	*/
+	// 1차 카테고리 한글 변환 (저장은 영어로되어있음)
 	public String TranslateCate_1(String product_category_1) {
 		
 		switch(product_category_1) {
@@ -113,6 +112,7 @@ public class DetailServiceImpl {
 		return product_category_1;
 	}
 	
+	// 2차 카테고리 한글 변환 (저장은 영어로되어있음)
 	public String TranslateCate_2(String product_category_2) {
 		// 2차 카테고리 (출산/유아동) 까지만 만들었음.
 		
@@ -193,5 +193,7 @@ public class DetailServiceImpl {
 		
 		return product_category_2;
 	}
+
+	
 
 }

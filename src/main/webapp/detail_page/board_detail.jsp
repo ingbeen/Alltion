@@ -22,7 +22,7 @@
 	int bid_startpage=(int)request.getAttribute("bid_startpage");
 	int bid_endpage=(int)request.getAttribute("bid_endpage");
 	
-	int comment_listcount = (int)request.getAttribute("comment_listcount")-1;
+	int comment_listcount = (int)request.getAttribute("comment_listcount");
 	int comment_nowpage = (int)request.getAttribute("comment_page");
 	int comment_maxpage=(int)request.getAttribute("comment_maxpage");
 	int comment_startpage=(int)request.getAttribute("comment_startpage");
@@ -194,7 +194,7 @@
                         </li>
                         <li>
                             <label for="id">판매자</label>
-                            <font><%=productvo.getProduct_id() %>&nbsp;님</font>&nbsp;&nbsp; 
+                            <font><%=productvo.getProduct_id().substring(0,3) %>****&nbsp;님</font>&nbsp;&nbsp; 
                             <button id="seller_check_btn" onclick="modal_display(1)" style="background-color: #616161; color:white;">
                                 	판매자 정보 확인하기
                             </button>
@@ -207,7 +207,7 @@
                                         <ul>
                                             <li>
                                                 <label>아이디</label>
-                                                <font><%=productvo.getProduct_id() %></font>
+                                                <font><%=productvo.getProduct_id().substring(0,3) %>****</font>
                                             </li>
                                             <li>
                                                 <label>이메일</label>
@@ -261,7 +261,13 @@
 
                         <li>
                             <label for="boarddate">남은시간</label>
-                            <p style="font-weight:bold;font-size:18px;">20:19:49</p>
+                            
+                            <p style="font-weight:bold;font-size:18px;">
+                            	<span class="auction_countdown"
+									data-endTime="<%=productvo.getProduct_end_date() %>"
+									data-complete="<%=productvo.getProduct_progress() %>">&nbsp;
+								</span>
+							</p>
                         </li>
                         <li>
                             <label for="boarddate">응찰단위</label>
@@ -316,15 +322,16 @@
                 </div>
                 <div class="btns" align="center">
                 <%if(productvo.getProduct_progress()==1) {%>
-                	<font style="color: red;">마감 종료된 경매입니다.</font>
-                <%}else if(id!=null){ %>
+                	<font style="color: red;">마감 종료된 경매입니다.</font><br>
+                <%}else if(id!=null&&!id.equals(productvo.getProduct_id())){ %>
                     <button type="button" id="bid_btn" onclick="bidInsert()">응찰하기</button>
                     <button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
-<!--                            <button type="button" id="bid_btn3">문의하기</button>-->
-				<%}else {%>
-					<font><a href="" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font>
+                    <button type="button" id="bid_btn4">찜하기</button>
+                    <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
+				<%}else if(id==null){%>
+					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
 				<%} %>
-                </div>
+				</div>
 
             </div>
         </div>
@@ -346,9 +353,7 @@
 
         <!-- ↓↓응찰자 리스트↓↓ -->
         <div class="bid_list" align="center">
-			
-			 
-            <div class="bid_list_column">
+			<div class="bid_list_column">
                 <div class="bid_list_no">응찰 번호</div>
                 <div class="bid_price">응찰 가격</div>
                 <div class="bidder_id">응찰자</div>
@@ -356,7 +361,7 @@
             </div>
             
             <div class="bidder">
-                
+               
             </div>
            	
 			
@@ -474,7 +479,7 @@
         <div class="comment_div">
             <div class="comment_title">댓 글 <font size="2"> |악의적인 비방글이나 욕설글은 무통보 삭제 되오니 이점 유의바랍니다</font>&nbsp;&nbsp;<input type="checkbox" id="secret"><font size="3" style="color:cornflowerblue;"> 비밀글</font></div>
             <textarea id="comment_content_input" placeholder="<%if(id!=null){ %>  *댓글을 작성해주세요..
-  *비밀글 입력시 판매자와 관리자만 볼 수 있습니다.<%}else{%>댓글은 로그인후 이용 가능합니다<%}%>"></textarea>
+  *비밀글 입력시 판매자와 관리자만 볼 수 있습니다.<%}else{%>댓글은 로그인 후 이용 가능합니다<%}%>" <%if(id==null){ %>onclick="togologin()" style="cursor:pointer;"<%} %>></textarea>
             <br>
             <%if(id!=null){ %>
             <button type="button" id="comment_btn" onclick="commentInsert()">작 성</button>
@@ -780,11 +785,12 @@
             }
         }
         
-        // ↓↓응찰관련
+        // ↓↓페이지시작할때 실행되는 함수들
         $(document).ready(function(){
 			bidList(1); //페이지 로딩시 응찰 목록 출력 
 			commentList(1); //페이지 로딩시 댓글 목록 출력
 			classcolor(); //페이지로딩시 등급제 색깔주기
+			start(); //카운팅 세팅
 		});
         
         //경매 번호
@@ -812,12 +818,6 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
-						//응찰하다가 응찰가격이 즉시구매가랑 동일하게 될때 
-						//응찰리스트 추가 후 응찰하기 버튼(bid_btn),즉시구매하기 버튼(bid_btn2) 비활성화
-						if(value.bid_price==limit_price){
-							document.getElementById("bid_btn").disabled = true;
-							document.getElementById("bid_btn2").disabled = true;
-						}
 					});
 					
 					$(".bidder").html(a);
@@ -829,9 +829,6 @@
 		}
       	
 		function bidInsert(){
-			
-			
-			
 			$.ajax({
 				url: '/alltion/bid_insert.hs',
 				type : 'POST',
@@ -892,7 +889,7 @@
 							a += '<span class="replyre">┕ </span>';
 						}
 						a += '<span class="comment_id"> 작성자 |&nbsp;'+value.comment_id.substring(0,3)+'****</span>';
-						a += '<span class="comment_date">'+value.comment_date+'</span>';
+						a += '<span class="comment_date">'+value.comment_date.substring(0,16)+'</span>';
 					
 						if(value.comment_is_deleted==="1"){
 							a += '<div class="comment_content">삭제된 글 입니다.</div>';
@@ -1103,6 +1100,108 @@
 				$('#sale_credit').css("color","black");
 			}
 		}
+		
+		//로그인이 안된상태에서 댓글 textarea를 클릭시
+		function togologin(){
+			var togologin = confirm("로그인 하시겠습니까?");
+			if(togologin==true){
+				location.href = "./loginForm.kj"
+			}else{
+				return false;
+			}
+		}
+		
+		//남은시간 카운팅
+		var _second = 1000; // 1초
+		var _minute = _second * 60; // 1분
+		var _hour = _minute * 60; // 1시간
+		var _day = _hour * 24; // 1일
+		var timer;
+        
+		function auctionConutDown() {
+			// 상품의 마감여부
+			var complete = $('.auction_countdown').attr("data-complete");
+			
+			if (complete == 0) {
+				// 현재시간을 얻어온다
+				var now = new Date();
+				// "auction_countdown" 클래스의 "data"속성의 값을 가져온다
+				var endTime = new Date($('.auction_countdown').attr("data-endTime"));
+				
+				// 마감시간에서 현재시간을 차감해준다
+				var subtractTime = endTime - now;
+				// 남은시간이 들어갈 변수
+				var resultTime = "";
+				
+				// 남은시간이 마이너스라면 실행
+				if(subtractTime < 0) {
+					$('.auction_countdown').html("종료되었습니다");
+					clearInterval(timer);
+					window.reload = "true";
+					// 컴플리트를 0으로 바꾸는 함수 실행해야됨
+					return;
+				}
+				
+				// 소수점버림(남은시간 / 1일)
+				// 예) 1일 1시간 1분 / 1일 = 1일 1시간 1분
+				// 소수점을 버리기에 "1일"이 된다
+				var days = Math.floor(subtractTime / _day);
+				if (days > 0) {
+					resultTime += days + "일 "
+				}
+				
+				// 소수점버림(남은시간 % 1일 / 1시간)
+				// 예) 1일 1시간 1분 % 1일 = 1시간 1분
+				// 1시간 1분 / 1시간 = 1시간 1분 
+				// 소수점을 버리기에 "1시간"이 된다
+				var hours = Math.floor((subtractTime % _day) / _hour);
+				if (hours > 0) {
+					resultTime += hours + "시간 "
+				}
+				var minutes = Math.floor((subtractTime % _hour) / _minute);
+				if (minutes > 0) {
+					resultTime += minutes + "분 "
+				}
+				
+				var seconds = Math.floor((subtractTime % _minute) / _second);
+				if (seconds >= 0) {
+					resultTime += seconds + "초"
+				}
+				
+				// "auction_countdown" 클래스 안에 태그형식으로 삽입한다
+				$('.auction_countdown').html(resultTime);
+			}else{
+				$('.auction_countdown').html("종료되었습니다");
+			}
+		}
+		
+		function start() {
+			// 1초마다 재실행하고 그것에 대한 정보를 timer에 담는다
+			timer = setInterval(auctionConutDown, 1000);
+		}
+		
+		/*
+		//남은시간이 종료되었을 때 product_progress 를 1로 바꿔준다.
+		function update_product_progress(){
+			$.ajax({
+				url: '/alltion/update_product_progress.hs',
+				type : 'POST',
+				data : {'product_number':bno},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success:function(data){
+					if(data==1){
+						
+						alert("ajax통신 성공(update_product_progress)");
+						window.reload="true";
+					}
+				},
+				error:function(){
+					alert("ajax통신 실패(update_product_progress)");
+				}
+			});
+		}
+		*/
 		
     </script>
 </body>

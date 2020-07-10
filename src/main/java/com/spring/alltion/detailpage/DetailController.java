@@ -1,7 +1,5 @@
 package com.spring.alltion.detailpage;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,19 +25,11 @@ public class DetailController {
 	@Autowired
 	private BidServiceImpl bidService;
 	
-	//상세페이지 들어가기전 리스트 보는 화면
-	//지워야됨. 필요없음. 테스트용으로 만듬
-	@RequestMapping("/boardlist.hs")
-	public String boardlist(HttpServletRequest request,Model model)throws Exception {
-		detailService.getBoardList(request,model);
-		
-		return "detail_page/board_list";
-	}
-	
 	//상세페이지로 들어가기위한 작업
 	//필요함 지우면안됨. 받아올때 파라미터 product_number값 같이 받아와야됨 
 	@RequestMapping("/boarddetail.hs")
 	public String boardDetail(@RequestParam(value="product_number")int product_number,Model model) {
+		
 		// 상품번호를 통해서 상품 상세 정보를 얻는다.
 		ProductVO productvo = detailService.getDetail(product_number);
 		model.addAttribute("productvo",productvo);
@@ -78,8 +68,6 @@ public class DetailController {
 		int comment_page = (int)(double)(comment_listcount/10+0.9);
 		commentService.commentListService(comment_product_number, comment_page, model);
 		
-		
-		
 		return "detail_page/board_detail";
 	}
 	
@@ -102,5 +90,14 @@ public class DetailController {
 		return sale_credit;
 	}
 	
-	
+	/*
+	@RequestMapping(value="/update_product_progress.hs",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int update_Product_Progress(@RequestParam(value="product_number")int product_number) {
+		
+		int res = detailService.update_product_progress(product_number);
+		
+		return res;
+	}
+	*/
 }
