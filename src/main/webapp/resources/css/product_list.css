@@ -72,7 +72,7 @@
 }
 
 .items__list.list li, .items__list.product li {
-    flex-basis: 33.33%;
+    flex-basis: 33.33%;   
 }
 
 .hot_item {

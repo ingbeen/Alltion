@@ -75,6 +75,13 @@ public class ProductlistServiceImpl implements ProductlistService {
 		return productlist;
 	}
 	
+	@Override
+	public List<ProductVO> getOrderbylist(String sort_list) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getOrderbylist(sort_list);
+		return productlist;
+	}
 	
 	public String TranslateCate_1(String product_category_1) {
 		

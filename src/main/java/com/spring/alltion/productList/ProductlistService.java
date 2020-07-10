@@ -12,5 +12,6 @@ public interface ProductlistService {
 	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap);
 	public List<ProductVO> getCategorylist(String product_category_2);
 	public List<ProductVO> getMainlist();
+	public List<ProductVO> getOrderbylist(String sort_list);
 	//public List<ProductVO> getproductList(HashMap<String, Integer> hashmap, ProductVO vo);
 }	

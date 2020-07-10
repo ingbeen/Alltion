@@ -71,8 +71,21 @@
 		where product_category_2 = #{product_category_2}
 		order by product_issue_date desc
 	</select>
-
-	
+		
+	<select id="getOrderbylist" resultType="com.spring.alltion.productRegistration.ProductVO">
+		select 
+			product_number, 
+			product_subject, 
+			product_img_1,
+			product_category_1, 
+			product_category_2,
+			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			product_current_price, 
+			product_purchase_price 
+		from product 
+		where product_category_2 = #{product_category_2}
+		order by #{sort_list} desc
+	</select>
 	<select id="getListCount" parameterType="int" resultType="int">
 		SELECT count(*) FROM product where product_category_2 = #{product_category_2, jdbcType=VARCHAR}
 	</select>
