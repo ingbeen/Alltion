@@ -11,6 +11,7 @@ create table bid_list(
 
 package com.spring.alltion.detailpage;
 
+
 public class BidVO {
 	private int bid_number;
 	private int bid_product_number;
