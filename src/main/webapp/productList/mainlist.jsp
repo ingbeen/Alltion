@@ -428,9 +428,7 @@
             <!-- 경매 목록 -->
             <div class="product_li">
                 <div class="product_li-category">
-                    <h4>패션</h4>
-                    <span>&#62;</span>
-                    <span>수입 명품</span>
+                    <h4>전체</h4>
                 </div>
                 <select class="sort_list">
                     <option value="sort1">최신 순</option>
