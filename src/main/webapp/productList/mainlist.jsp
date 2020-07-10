@@ -118,77 +118,77 @@
                 <li class="mainmenu" style="cursor:pointer" value="1">패션</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="/categoryCheck.ms" onclick="document.getElemnetById('fashion').submit();" value="a">여성의류</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0101">여성의류</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=b&product_category_1=1">남성의류</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0102">남성의류</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=c&product_category_1=1">여성신발</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0103">여성신발</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=d&product_category_1=1">남성신발</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0104">남성신발</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=e&product_category_1=1">악세서리</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0105">악세서리</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=f&product_category_1=1">귀금속</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0106">귀금속</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=g&product_category_1=1">모자</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0107">모자</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=h&product_category_1=1">기타잡화/관련용품</a>
+                        <a href="./getCategory.ms?product_category_2=cate0108">기타잡화/관련용품</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=i&product_category_1=1">수입명품</a>
+                        <a href="./getCategory.ms?product_category_2=cate0109">수입명품</a>
                     </li>
                 </ul>
                 </form>
                 <li class="mainmenu" style="cursor:pointer">뷰티</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="./productList.ms?product_category_2=a&product_category_1=2">스킨케어</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0201">스킨케어</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=b&product_category_1=2">메이크업</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0202">메이크업</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=c&product_category_1=2">헤어/바디</a>
+                        <a href="./getCategory.ms?product_category_2=cate0203">헤어/바디</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=d&product_category_1=2">향수</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0204">향수</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=e&product_category_1=2">네일케어</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0205">네일케어</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=f&product_category_1=2">남성 화장품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0206">남성 화장품</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=g&product_category_1=2">가발/기타용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0207">가발/기타용품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">출산/유아동</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="#">출산/육아용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0301">출산/육아용품</a>
                     </li>
                     <li>
-                        <a href="#">유아동안전/실내용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0302">유아동안전/실내용품</a>
                     </li>
                     <li>
-                        <a href="#">유아동의류</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0303">유아동의류</a>
                     </li>
                     <li>
-                        <a href="#">유아동잡화</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0304">유아동잡화</a>
                     </li>
                     <li>
-                        <a href="#">유아동가구</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0305">유아동가구</a>
                     </li>
                     <li>
-                        <a href="#">기타 유아동용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0306">기타 유아동용품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">전자기기</li>

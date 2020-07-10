@@ -68,12 +68,12 @@ public class ProductListController {
 		return "productList/productList";
 	}
 	
-	@RequestMapping(value = "/gocategory.ms", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-	public String getList(@RequestParam(value = "product_category_2") String product_category_2, @RequestParam(value = "product_category_1") String product_category_1, Model model) throws Exception{
+	@RequestMapping(value = "/getCategorylist.ms", method = RequestMethod.GET)
+	public String getCategorylist(@RequestParam(value = "product_category_2") String product_category_2, Model model) {
 		
-		List<ProductVO> productlist = null;
-		productlist = productlistService.list(product_category_2, product_category_1);
-		model.addAttribute("productlist", productlist);
+		List<ProductVO> categorylist = null;
+		categorylist = productlistService.getCategorylist(product_category_2);
+		model.addAttribute("categorylist", categorylist);
 		
 		return "productList/productList";
 	}
