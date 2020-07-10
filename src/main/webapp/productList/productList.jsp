@@ -19,6 +19,7 @@
 %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
@@ -27,7 +28,6 @@
     <link href="<c:url value="https://fonts.googleapis.com/icon?family=Material+Icons"/>" rel="stylesheet">
     <title>All-tion</title>
 </head>
-
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <!-- top 키 -->
@@ -108,13 +108,11 @@
         </div>
     </div>
     <!-- 목록 페이지 -->
-    
     <div class="product_list">
         <!-- 카테고리 영역 -->
         <div class="left_session cate">
             <div class="list_sidebar">
-            <form id="fashion">
-                <li class="mainmenu" style="cursor:pointer" value="1">패션</li>
+                <li class="mainmenu" style="cursor:pointer">패션</li>
                 <ul class="submenu" style="display:none;">
                     <li>
                         <a href="./getCategorylist.ms?product_category_2=cate0101">여성의류</a>
@@ -144,7 +142,6 @@
                         <a href="./getCategory.ms?product_category_2=cate0109">수입명품</a>
                     </li>
                 </ul>
-                </form>
                 <li class="mainmenu" style="cursor:pointer">뷰티</li>
                 <ul class="submenu" style="display:none;">
                     <li>
@@ -203,7 +200,6 @@
             </div>
         </div>
         <!-- 상품 목록 영역 -->
-
         <div class="right_session slideshow-container">
             <!-- 인기 경매 영역 -->
             <div class="hot_item">
@@ -437,18 +433,19 @@
                     <option value="sort3">낮은 가격 순</option>
                     <option value="sort4">높은 가격 순</option>
                 </select>
-            <%
+
+                <ul class="items__list product">
+                <%
             	for(int i=0; i<categorylist.size();i++){
                     		ProductVO vo = (ProductVO)categorylist.get(i);
-            %>
-                <ul class="items__list product">
+            	%>
                     <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src="<%=vo.getProduct_img_1()%>"><br>
+                               <img src="./resources/img/product/product_ex.png"><br>
                             </div>
                             <div class="items__product--info product">
-                                <p class="product_name"><%=vo.getProduct_subject()%></p>
+                                <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
                                 <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
@@ -464,8 +461,7 @@
                             </div>
                         </a>
                     </li>
-                   <%} %>
-                    
+                    <%} %>
                 </ul>
                 
             </div>
