@@ -30,7 +30,7 @@ public class MypageController {
 		}
 		else
 		
-		return "member/mypage";
+		return "mypage/mypage";
 	}
 	@RequestMapping(value = "/memberinfo.kj")
 	public String updateForm(Model model,HttpSession session)throws Exception
@@ -184,7 +184,7 @@ public class MypageController {
 		MemberVO vo = memberService.selectMember(userId);
 		model.addAttribute("membervo",vo);
 		
-		return "member/buyer";
+		return "mypage/buyer";
 		}
 	}	
 
@@ -201,24 +201,10 @@ public class MypageController {
 			MemberVO vo = memberService.selectMember(userId);
 			model.addAttribute("membervo",vo);
 			
-		    return "member/buyer_deal";
+		    return "mypage/buyer_deal";
 		}
 	}	
 
-	/*
-	@RequestMapping(value = "/buyer_deal.kj")
-	public String paying(Model model, HttpSession session)throws Exception
-	{
-		String userId = (String)session.getAttribute("userId");
-		if(userId ==null)
-		{
-			return "member/login";
-		}
-		else 
-		{
-			return "pay/pay";
-		}
-	}
-	*/
+	
 	
 }

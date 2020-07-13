@@ -128,7 +128,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="mypage.kj">
+                        <a href="./mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
