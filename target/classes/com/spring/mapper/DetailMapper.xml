@@ -67,6 +67,16 @@
 		select * from sale_credit_score_list where sale_id = #{sale_id}
 	</select>
 	
+	<!-- 판매자 리뷰를 구한다. -->
+	<select id="getReviewList" parameterType="String" resultType="ReviewVO">
+		select
+		review_number,review_id,review_evaluator,review_evaluate,review_image,review_subject,
+		review_content,to_char(review_date,'YYYY-MM-dd') as review_date,review_no
+		from review 
+		where review_id = #{review_id}
+		order by review_no
+	</select>
+	
 	
 	
 	<!-- 상품진행중 1로 바꿈(진행중:0 , 마감: 1) 남은 시간이 끝날때 실행됨 

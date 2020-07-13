@@ -1,8 +1,11 @@
 package com.spring.alltion.detailpage;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.spring.alltion.productRegistration.ProductVO;
 import com.spring.mapper.DetailMapper;
@@ -193,7 +196,13 @@ public class DetailServiceImpl {
 		
 		return product_category_2;
 	}
-
 	
+	public void getReviewList(String review_id, Model model) {
+		ArrayList<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
+		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
+		reviewlist = detailmapper.getReviewList(review_id);
+		model.addAttribute("reviewlist",reviewlist);
+		
+	}
 
 }

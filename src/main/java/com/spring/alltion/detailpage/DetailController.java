@@ -1,10 +1,13 @@
 package com.spring.alltion.detailpage;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.alltion.login.MemberService;
 import com.spring.alltion.login.MemberVO;
@@ -67,6 +70,10 @@ public class DetailController {
 		int comment_product_number = product_number;
 		int comment_page = (int)(double)(comment_listcount/10+0.9);
 		commentService.commentListService(comment_product_number, comment_page, model);
+		
+		// 리뷰 리스트를 얻는다.
+		String review_id = productvo.getProduct_id();
+		detailService.getReviewList(review_id,model);
 		
 		return "detail_page/board_detail";
 	}

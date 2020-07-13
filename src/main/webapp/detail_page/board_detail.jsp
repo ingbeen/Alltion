@@ -3,6 +3,7 @@
 <%@ page import="com.spring.alltion.detailpage.*" %>
 <%@ page import="com.spring.alltion.productRegistration.*" %>
 <%@ page import="com.spring.alltion.login.*" %>
+<%@ page import="java.util.*" %>
 <%
 	// 로그인한 세션 아이디
 	String id = (String)session.getAttribute("userId");
@@ -28,6 +29,7 @@
 	int comment_startpage=(int)request.getAttribute("comment_startpage");
 	int comment_endpage=(int)request.getAttribute("comment_endpage");
 	
+	ArrayList<ReviewVO> reviewlist = (ArrayList<ReviewVO>)request.getAttribute("reviewlist");	
 %>
 <!DOCTYPE html>
 <html>
@@ -244,7 +246,7 @@
                         </li>
                         <li>
                             <label for="purchase_price">즉시 구매가</label>
-                            <p style="color:#F9A825;font-weight:bold;font-size:18px;"><%=productvo.getProduct_purchase_price() %>원</p>
+                            <p style="color:#F9A825;font-weight:bold;font-size:18px;"><%if(productvo.getProduct_purchase_price()!=0){%><%=productvo.getProduct_purchase_price() %>원<%} %>&nbsp;</p>
                         </li>
                         <li>
                             <label for="top_bidder_id">최고 응찰자</label>
@@ -252,16 +254,14 @@
                         </li>
                         <li>
                             <label for="sale_credit">판매자 등급</label>
-                            <p id="sale_credit"><%=sale_credit %></p>
+                            <p id="sale_credit"><%=sale_credit %> </p>
                         </li>
                         <li>
                             <label for="howtotransaction">거래방법</label>
                             <p>택배: <%=productvo.getProduct_delivery() %>/ 직거래:<%=productvo.getProduct_transaction_area() %> </p>
                         </li>
-
                         <li>
                             <label for="boarddate">남은시간</label>
-                            
                             <p style="font-weight:bold;font-size:18px;">
                             	<span class="auction_countdown"
 									data-endTime="<%=productvo.getProduct_end_date() %>"
@@ -317,7 +317,56 @@
                                 </div>
                             </div>
                         </li>
-
+                        <li>
+                        	<label>판매자 구매후기</label>
+                        	<p> <%=reviewlist.size() %>건 &nbsp; &nbsp; &nbsp;<button class="review_viewer" onclick="modal_display(3);">더보기 &nbsp;&gt;</button></p>
+                        	<!-- 판매자 구매후기 더보기 클릭시 -->
+                        	<div id="seller_review_modal" class="modal">
+                        		
+                        		<div class="modal_content">
+                        			<div class="review_top">	
+                        				<span>구매 후기</span>
+                        				<span class="close">&times;</span>
+                        			</div>
+                        			<div class="review_title" align="center">
+                        				<div class="review_no">번호</div>
+                       					<div class="review_evaluate">평가</div>
+                       					<div class="review_image">이미지</div>
+                       					<div class="review_subject">물품명</div>
+                       					<div class="review_content">구매후기</div>
+                       					<div class="review_writer">작성자</div>
+                       					<div class="review_date">작성일</div>
+                       				</div>
+                       				<%for(int k=0;k<reviewlist.size();k++){
+                       						ReviewVO reviewvo = (ReviewVO)reviewlist.get(k);
+                       					%>
+                       				<div class="review_list">
+                       					<div class="review_no"><%=k+1 %></div>
+                       					<div class="review_evaluate"><%=reviewvo.getReview_evaluate() %></div>
+                       					<div class="review_image"><img src="<%=reviewvo.getReview_image()%>"></div>
+                       					<div class="review_subject"><%=reviewvo.getReview_subject() %></div>
+                       					<div class="review_content"><%=reviewvo.getReview_content() %></div>
+                       					<div class="review_writer"><%=reviewvo.getReview_evaluator() %></div>
+                       					<div class="review_date"><%=reviewvo.getReview_date() %></div>	
+                       				</div>
+                       				<%} %>
+                       				<div align="center">
+                       				<%int t = 0;
+                       				for(int p=0;p<reviewlist.size();p++){
+                       					
+                       					if(p%5==0){
+                       						t++;
+                       					
+                       					%>
+                       					<span>
+                       					[<%=t %>]
+                       					</span>
+                       				<%}} %>
+                       				</div>
+                        		</div>
+                        	</div>
+                        </li>
+						
                     </ul>
                 </div>
                 <div class="btns" align="center">
@@ -325,11 +374,15 @@
                 	<font style="color: red;">마감 종료된 경매입니다.</font><br>
                 <%}else if(id!=null&&!id.equals(productvo.getProduct_id())){ %>
                     <button type="button" id="bid_btn" onclick="bidInsert()">응찰하기</button>
-                    <button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
-                    <button type="button" id="bid_btn4">찜하기</button>
+                    <%if(productvo.getProduct_purchase_price()!=0) {%>
+                    	<button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
+                    <%} %>
+                    <a href=""><button type="button" id="bid_btn4">찜하기</button></a>
                     <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
 					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
+				<%}else if(id.equals(productvo.getProduct_id())){ %>
+					<a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%} %>
 				</div>
 
@@ -389,10 +442,11 @@
 
         <!-- ↓↓경매의 사진들 펼쳐놓음.↓↓ -->
         <div class="product_information">
-
+			<!-- 
             <div class="product_information_text">
-
+				<%=productvo.getProduct_content()%>
             </div>
+             -->
             <div class="img_1">
                 <div align="center">
                     <img src="<%=productvo.getProduct_img_1() %>"></div>
@@ -772,6 +826,15 @@
                 close1.onclick = function(event) {
                     bid_notify_modal.style.display = "none";
                 }
+            // ↓↓판매자 구매후기
+            }else if(n==3){
+            	var seller_review_modal = document.getElementById('seller_review_modal');
+            	var close2 = document.getElementsByClassName('close')[2];
+            	seller_review_modal.style.display = "block";
+            	close2.onclick = function(){
+            		seller_review_modal.style.display = "none";
+            	}
+            	
             }
 
             // ↓↓모달창 외부 클릭시 모달창 닫아짐.
@@ -782,6 +845,9 @@
                 if (event.target == bid_notify_modal) {
                     bid_notify_modal.style.display = "none";
                 }
+                if(event.target == seller_review_modal){
+                	seller_review_modal.style.display = "none";
+                }
             }
         }
         
@@ -791,6 +857,7 @@
 			commentList(1); //페이지 로딩시 댓글 목록 출력
 			classcolor(); //페이지로딩시 등급제 색깔주기
 			start(); //카운팅 세팅
+			
 		});
         
         //경매 번호
@@ -1202,6 +1269,8 @@
 			});
 		}
 		*/
+		
+		
 		
     </script>
 </body>

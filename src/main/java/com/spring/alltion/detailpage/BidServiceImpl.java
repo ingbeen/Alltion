@@ -27,7 +27,7 @@ public class BidServiceImpl {
 		}
 		int bid_listcount = 0;
 		bid_listcount = bidmapper.countBidList(bno) - 1; // 상품번호에 대한 응찰리스트 갯수
-		int bid_endrow = bid_listcount - (page-1)*10;  // 읽을 마지막 응찰리스트 마지막 row번호
+		int bid_endrow = bid_listcount - (bid_page-1)*10;  // 읽을 마지막 응찰리스트 마지막 row번호
 		int bid_startrow = bid_endrow - bid_limit + 1; // 읽기 시작할 응찰리스트 시작할 row번호
 		
 		int bid_maxpage = (int)((double)bid_listcount/bid_limit+0.9); // 총 페이지 수
@@ -66,7 +66,7 @@ public class BidServiceImpl {
 			// 두번째 응찰부터
 			price = bidmapper.selectNowPrice(bid_product_number);
 			price += bidmapper.getProduct_bidding_unit(bid_product_number);
-			if(price >= detailmapper.selectPurchasePrice(bid_product_number)) {
+			if(detailmapper.selectPurchasePrice(bid_product_number)!=0 && price >= detailmapper.selectPurchasePrice(bid_product_number)) {
 				price = detailmapper.selectPurchasePrice(bid_product_number);
 			}
 			
