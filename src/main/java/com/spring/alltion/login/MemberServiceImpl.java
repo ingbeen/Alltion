@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO vo = memberMapper.selectMember(userId);
 		//회원 가입시 주소를 기입 하지 않아
 		//회원 정보에 null값이 떠서 null 이면 공백으로 보이게함
-		if(vo.getSample4_postcode()==null) {
+		if(vo.getSample4_postcode() == null) {
 			vo.setSample4_postcode("");
 			vo.setSample4_roadAddress("");
 			vo.setSample4_jibunAddress("");
