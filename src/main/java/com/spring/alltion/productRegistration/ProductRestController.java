@@ -20,10 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @RestController
-public class ProductDAOController {
+public class ProductRestController {
 	
 	@Autowired
-	private ProductService productService;
+	private ProductServiceImpl productService;
 	
 	// 에디터 이미지 업로드
 	@RequestMapping(value = "editorImgUpload.yb", produces="application/json;charset=UTF-8")
