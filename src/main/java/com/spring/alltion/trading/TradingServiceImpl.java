@@ -38,11 +38,14 @@ public class TradingServiceImpl implements TradingService {
 			tradingMapper = sqlSession.getMapper(TradingMapper.class);
 			bidMapper = sqlSession.getMapper(BidMapper.class);
 			
+//			System.out.println("마감된 상품 검색중");
+			
 			// 마감시간이 지난 상품을의 대한 정보를 가져와서 배열에 넣는다
 			productEndList = producMapper.searchForDeadline();
 			
 			// 'productEndList'에 담은 상품갯수가 없다면 함수종료
 			if (productEndList.size() == 0) {
+//				System.out.println("검색결과 없음");
 				return;
 			}
 			
@@ -53,17 +56,22 @@ public class TradingServiceImpl implements TradingService {
 				
 				// 응찰수가 1 이상이면 거래테이블 생성
 				if (productBids >= 1) {
+//					System.out.println("응찰횟수 1");
 					tradingInsert(productVO, producMapper, tradingMapper, bidMapper);
 				} 
 				// 응찰수가 0이고 재경매를 설정을 안했다면 상품 마감
 				else if (productBids == 0 && productReAuction == 0) {
+//					System.out.println("재경매 안하고 마감");
 					finishProduct(productVO, producMapper);
 				} 
 				// 응찰수가 0이고 재경매를 설정 했다면 상품 재등록
 				else if (productBids == 0 && productReAuction == 1) {
+//					System.out.println("재경매");
 					reAuction(productVO, producMapper);
 				}
 			}
+			
+//			System.out.println("마감된 상품 검색 완료");
 		} catch(Exception e) {
 			System.out.println("seachEndOfProduct 에러");
 			e.printStackTrace();
