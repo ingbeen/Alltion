@@ -438,11 +438,13 @@
                 </select>
                 
             <%
-            System.out.println(mainlist.size());
-            	for(int i=0; i<mainlist.size();i++){  		
-            		ProductVO vo = (ProductVO)mainlist.get(i);
+            	loop : for(int i=0; i<mainlist.size();i++){  		
             %>	       	
                 <ul class="items__list product">
+                <%for(int j=i; j<i+3;j++) {
+                	if(j == mainlist.size()) {break loop;}
+                	ProductVO vo = (ProductVO)mainlist.get(j);
+                %>
                     <li>
                     	<a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
@@ -465,8 +467,12 @@
                             </div>
                         </a>
                     </li>
-                    </ul>
-                 <%} %>
+                    <% if(j==i+2){
+                    i=j;
+                    break;}
+                    }%>
+                </ul>
+              <%} %>
                 
             </div>
         </div>

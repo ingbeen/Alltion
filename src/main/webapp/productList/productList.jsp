@@ -7,23 +7,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
  <% 
- 	
-	List<ProductVO> categorylist=(List<ProductVO>)request.getAttribute("categorylist");
- 	/*
+
+	 List<ProductVO> categorylist=(List<ProductVO>)request.getAttribute("categorylist");
+
+ /*	
 	int listcount=((Integer)request.getAttribute("listcount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
 	int startpage=((Integer)request.getAttribute("startpage")).intValue();
 	int endpage=((Integer)request.getAttribute("endpage")).intValue();
 	*/
+	
+	String category1 = (String) request.getAttribute("category1");
+	String category2 = (String) request.getAttribute("category2");
 %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product_list.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     <link href="<c:url value="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"/>" rel="stylesheet">
     <link href="<c:url value="https://fonts.googleapis.com/icon?family=Material+Icons"/>" rel="stylesheet">
     <title>All-tion</title>
@@ -112,7 +116,7 @@
         <!-- 카테고리 영역 -->
         <div class="left_session cate">
             <div class="list_sidebar">
-                <li class="mainmenu" style="cursor:pointer">패션</li>
+                <li class="mainmenu" id="mainmenu1" style="cursor:pointer">패션</li>
                 <ul class="submenu" style="display:none;">
                     <li>
                         <a href="./getCategorylist.ms?product_category_2=cate0101">여성의류</a>
@@ -136,10 +140,10 @@
                         <a href="./getCategorylist.ms?product_category_2=cate0107">모자</a>
                     </li>
                     <li>
-                        <a href="./getCategory.ms?product_category_2=cate0108">기타잡화/관련용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0108">기타잡화/관련용품</a>
                     </li>
                     <li>
-                        <a href="./getCategory.ms?product_category_2=cate0109">수입명품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0109">수입명품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">뷰티</li>
@@ -423,9 +427,7 @@
             <!-- 경매 목록 -->
             <div class="product_li">
                 <div class="product_li-category">
-                    <h4><%=categorylist.get(0).getProduct_category_1() %></h4>
-                    <span>&#62;</span>
-                    <%=categorylist.get(0).getProduct_category_2() %>
+                
                 </div>
                 <select class="sort_list">
                     <option value="sort1">최신 순</option>
@@ -433,16 +435,18 @@
                     <option value="sort3">낮은 가격 순</option>
                     <option value="sort4">높은 가격 순</option>
                 </select>
-
+				<% if(!categorylist.isEmpty()){
+				loop : for(int i=0; i<categorylist.size();i++){ %>
                 <ul class="items__list product">
                 <%
-            	for(int i=0; i<categorylist.size();i++){
-                    		ProductVO vo = (ProductVO)categorylist.get(i);
+            	for(int j=i; j<i+3;j++){
+            		if(j == categorylist.size()) {break loop;}
+                    		ProductVO vo = (ProductVO)categorylist.get(j);
             	%>
                     <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
+                               <img src=<%=vo.getProduct_img_1() %>><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
@@ -461,8 +465,14 @@
                             </div>
                         </a>
                     </li>
-                    <%} %>
+                    <%if(j==i+2){
+                    i=j;
+                    break;}
+                    }%>
                 </ul>
+                <%}
+				} %>
+                
                 
             </div>
         </div>
@@ -516,5 +526,14 @@
     <script src="<c:url value="https://code.jquery.com/jquery-3.5.1.min.js" />"></script>
     <script src="<c:url value="/resources/js/common.js" />"></script>
     <script src="<c:url value="/resources/js/product_detail.js" />"></script>
+    
+    <!-- 리스트쪽 카테고리 1차 > 카테고리 2차 부분 js -->
+    <script>
+	var category1 = '<%=category1 %>';
+	var category2 = '<%=category2 %>';
+	$(document).ready(function () {
+		$(".product_li-category").html("<h4>"+ category1 +"</h4> <span>&#62;</span> " + category2);
+	})
+	</script>
 </body>
 </html>
