@@ -21,11 +21,11 @@
 		<result property="purchase_success_rate" column="purchase_success_rate" />
 	</resultMap>
 	
-	<select id="getSaleCreditScore" parameterType="String">
+	<select id="getSaleCreditScore" parameterType="String" resultType="SaleCreditScoreVO">
 		SELECT * FROM sale_credit_score_list WHERE sale_id=#{sale_id}
 	</select>
 	
-	<select id="getPurchaseCreditScore" parameterType="String">
+	<select id="getPurchaseCreditScore" parameterType="String" resultType="PurchaseCreditScoreVO">
 		SELECT * FROM purchase_credit_score_list WHERE purchase_id=#{purchase_id}
 	</select>
 </mapper>

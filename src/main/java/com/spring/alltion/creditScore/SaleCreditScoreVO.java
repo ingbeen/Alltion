@@ -64,4 +64,9 @@ public class SaleCreditScoreVO {
 	public void setSale_success_rate(int sale_success_rate) {
 		this.sale_success_rate = sale_success_rate;
 	}
+
+	public void saleScoreProcess() {
+		int saleScoreCount = (sale_normal * 10) - (sale_denial * 5) - (sale_undelivered * 5) - (sale_return * 5);	
+		sale_success_rate = saleScoreCount;
+	}
 }

@@ -64,4 +64,9 @@ public class PurchaseCreditScoreVO {
 	public void setPurchase_success_rate(int purchase_success_rate) {
 		this.purchase_success_rate = purchase_success_rate;
 	}
+	
+	public void purchaseScoreProcess() {
+		int purchaseScoreCount = (purchase_normal * 10) - (purchase_denial * 5) - (purchase_undelivered * 5) - (purchase_return * 5);	
+		purchase_success_rate = purchaseScoreCount;
+	}
 }
