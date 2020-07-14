@@ -45,7 +45,7 @@ public class MypageController {
 		System.out.println(vo.getMember_id());
 		model.addAttribute("membervo",vo);
 		
-		return "member/update";
+		return "mypage/update";
 		}
 	}
 	//회원 수정 이메일
@@ -170,7 +170,7 @@ public class MypageController {
 		return null;
 		
 	}
-	
+	/*
 	@RequestMapping(value = "/buyer.kj")
 	public String buyer(Model model,HttpSession session)throws Exception
 	{	
@@ -187,7 +187,7 @@ public class MypageController {
 		return "mypage/buyer";
 		}
 	}	
-
+	
 	@RequestMapping(value = "/buyer_deal.kj")
 	public String deal(Model model,HttpSession session)throws Exception
 	{
@@ -204,7 +204,7 @@ public class MypageController {
 		    return "mypage/buyer_deal";
 		}
 	}	
-
+*/
 	
 	
 }
