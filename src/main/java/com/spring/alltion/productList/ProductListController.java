@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class ProductListController {
 	@RequestMapping(value = "/Mainlist.ms", method = RequestMethod.GET)
 	public String getMainlist(Model model) {
 		model.addAttribute("mainlist", productlistService.getMainlist());
+		model.addAttribute("pricelist", productlistService.getfamousPricelist2());
+		model.addAttribute("participantslist", productlistService.getfamousParticipantslist2());
+		model.addAttribute("viewslist", productlistService.getfamousViewslist2());
 		
 		return "productList/mainlist";
 	}
@@ -69,12 +73,33 @@ public class ProductListController {
 	}
 	
 	@RequestMapping(value = "/getCategorylist.ms", method = RequestMethod.GET)
-	public String getCategorylist(@RequestParam(value = "product_category_2") String product_category_2, Model model) {
-		
+	public String getCategorylist(HttpServletRequest res,@RequestParam(value = "product_category_2") String product_category_2, @RequestParam(value = "sortD", defaultValue="sort1") String sortD, Model model) {
+		String category = res.getParameter("product_category_2");
+		String sort = res.getParameter("sortD");
 		List<ProductVO> categorylist = null;
+		List<ProductVO> pricelist = null;
+		List<ProductVO> participantslist = null;
+		List<ProductVO> viewslist = null;
+		if(sortD.equals("sort1")) {
 		categorylist = productlistService.getCategorylist(product_category_2);
-		model.addAttribute("categorylist", categorylist);
+		pricelist = productlistService.getfamousPricelist(product_category_2);
+		participantslist = productlistService.getfamousPricelist(product_category_2);
+		viewslist = productlistService.getfamousPricelist(product_category_2);
 		
+		model.addAttribute("categorylist", categorylist);
+		model.addAttribute("pricelist", pricelist);
+		model.addAttribute("participantslist", participantslist);
+		model.addAttribute("viewslist", viewslist);
+		}else {
+			categorylist = productlistService.getOrderbylist(category, sort);
+			pricelist = productlistService.getfamousPricelist(product_category_2);
+			participantslist = productlistService.getfamousPricelist(product_category_2);
+			viewslist = productlistService.getfamousPricelist(product_category_2);
+			model.addAttribute("categorylist", categorylist);
+			model.addAttribute("pricelist", pricelist);
+			model.addAttribute("participantslist", participantslist);
+			model.addAttribute("viewslist", viewslist);
+		}
 		String category1 = TranslateCate_1(product_category_2.substring(0, 6));
 		String category2 = TranslateCate_2(product_category_2);
 		model.addAttribute("category1", category1);
@@ -87,11 +112,26 @@ public class ProductListController {
 		*/
 		return "productList/productList";
 	}
-	@RequestMapping(value = "/categoryCheck.ms", method = RequestMethod.GET)
-	public String goCategory(HttpServletRequest request, ProductVO vo) {
-		vo.setProduct_category_1(request.getParameter(""));
-		return "redirect:/productList.ms";
+	
+	@RequestMapping(value = "/getOrderbylist.bo", method = RequestMethod.POST)
+	public String getOrderbylist(HttpServletRequest req, @RequestParam(value = "product_category_2") String product_category_2, @RequestParam(value = "sortD", defaultValue="sort1") String sortD) {
+		System.out.println("getOrderbylist.bo 도착");
+		//Parameter
+		String sort_list = sortD;
+		if(sort_list.equals("sort1")) {
+			sort_list = "product_issue_date";
+		}else if(sort_list.equals("sort2")) {
+			sort_list = "product_views";
+		}else if(sort_list.equals("sort3")) {
+			sort_list = "product_current_price";
+		}else {
+			sort_list = "product_current_price";
+		}
+		req.setAttribute("sortD", sort_list);
+		req.setAttribute("product_category_2", product_category_2);
+		return "forward:/getCategorylist.ms";
 	}
+	
 	
 public String TranslateCate_1(String product_category_1) {
 		
