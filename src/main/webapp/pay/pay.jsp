@@ -49,28 +49,46 @@ date = getFormatDate(date);
 <body>
 	<!-- 모든 페이지 공통 영역 by 하나  -->
 	<!-- 광고 배너 및 헤더 -->
-	<div class="ad__banner">
-		<a href="#" class="ad__banner--link"> <img
-			src="./resources/img/header/adEx.png" class="ad__banner--img">
-			<button class="ad__banner--closeBtn"></button>
-		</a>
-	</div>
 	<div class="header">
 		<div class="upper_header">
 			<div class="upper_header--nav">
-				<p>
-					<a href="">고객 센터</a>
-				</p>
-				<ul>
-					<li><a href="#">로그인</a></li>
-					<li><a href="#">회원 가입</a></li>
-				</ul>
-			</div>
+                <p>
+                    <a href="" id="clock"></a>
+                </p>
+                <ul>
+                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
+                    <li>
+                        <a href="./mypage.kj">${userId}</a>
+                    </li>
+                    <li>
+                        <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
+                    </li>
+                    <li>
+                        <a href="#">고객 센터</a>
+                    </li>
+                </ul>
+            </div>
 		</div>
 		<div class="lower_header">
 			<div class="lower_header--nav">
 				<h1 class="logo">
-					<a href="#">ALL-TION</a>
+					<a href="/alltion/">ALL-TION</a>
 				</h1>
 				<div class="category">
 					<a class="category--drop"> <img
@@ -96,16 +114,25 @@ date = getFormatDate(date);
 						class="search__input">
 				</div>
 				<ul class="member_info">
-					<li><a href="#"> <span class="material-icons">perm_identity</span>
-							<span>마이 페이지</span>
-					</a></li>
-					<li><a href="#"> <span class="material-icons">turned_in_not</span>
-							<span>찜 목록</span>
-					</a></li>
-					<li><a href="#"> <span class="material-icons">access_time</span>
-							<span>참여 경매</span>
-					</a></li>
-				</ul>
+                    <li>
+                        <a href="mypage.kj">
+                            <span class="material-icons">perm_identity</span>
+                            <span>마이 페이지</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="wishList.yb">
+                            <span class="material-icons">turned_in_not</span>
+                            <span>찜 목록</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-icons">access_time</span>
+                            <span>참여 경매</span>
+                        </a>
+                    </li>
+                </ul>
 			</div>
 		</div>
 	</div>
