@@ -29,7 +29,12 @@
 	int comment_startpage=(int)request.getAttribute("comment_startpage");
 	int comment_endpage=(int)request.getAttribute("comment_endpage");
 	
-	ArrayList<ReviewVO> reviewlist = (ArrayList<ReviewVO>)request.getAttribute("reviewlist");	
+	int review_listcount = (int)request.getAttribute("review_listcount");
+	int review_nowpage = (int)request.getAttribute("review_page");
+	int review_maxpage=(int)request.getAttribute("review_maxpage");
+	int review_startpage=(int)request.getAttribute("review_startpage");
+	int review_endpage=(int)request.getAttribute("review_endpage");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -319,7 +324,7 @@
                         </li>
                         <li>
                         	<label>판매자 구매후기</label>
-                        	<p> <%=reviewlist.size() %>건 &nbsp; &nbsp; &nbsp;<button class="review_viewer" onclick="modal_display(3);">더보기 &nbsp;&gt;</button></p>
+                        	<%=review_listcount %> 건 &nbsp;&nbsp; <button class="review_viewer" onclick="modal_display(3)">더보기 ></button>
                         	<!-- 판매자 구매후기 더보기 클릭시 -->
                         	<div id="seller_review_modal" class="modal">
                         		
@@ -328,40 +333,26 @@
                         				<span>구매 후기</span>
                         				<span class="close">&times;</span>
                         			</div>
-                        			<div class="review_title" align="center">
-                        				<div class="review_no">번호</div>
-                       					<div class="review_evaluate">평가</div>
-                       					<div class="review_image">이미지</div>
-                       					<div class="review_subject">물품명</div>
-                       					<div class="review_content">구매후기</div>
-                       					<div class="review_writer">작성자</div>
-                       					<div class="review_date">작성일</div>
-                       				</div>
-                       				<%for(int k=0;k<reviewlist.size();k++){
-                       						ReviewVO reviewvo = (ReviewVO)reviewlist.get(k);
-                       					%>
-                       				<div class="review_list">
-                       					<div class="review_no"><%=k+1 %></div>
-                       					<div class="review_evaluate"><%=reviewvo.getReview_evaluate() %></div>
-                       					<div class="review_image"><img src="<%=reviewvo.getReview_image()%>"></div>
-                       					<div class="review_subject"><%=reviewvo.getReview_subject() %></div>
-                       					<div class="review_content"><%=reviewvo.getReview_content() %></div>
-                       					<div class="review_writer"><%=reviewvo.getReview_evaluator() %></div>
-                       					<div class="review_date"><%=reviewvo.getReview_date() %></div>	
-                       				</div>
-                       				<%} %>
+                        			<table class="review_list">
+                        			<thead>
+	                        			<tr class="review_title" align="center">
+	                        				<th class="review_no">번호</th>
+	                       					<th class="review_evaluate">평가</th>
+	                       					<th class="review_image">이미지</th>
+	                       					<th class="review_subject">물품명</th>
+	                       					<th class="review_content">구매후기</th>
+	                       					<th class="review_writer">작성자</th>
+	                       					<th class="review_date">작성일</th>
+	                       				</tr>
+                       				</thead>
+                       				<tbody id="review_list_content">
+                       					
+                       				</tbody>	
+                       				</table>
                        				<div align="center">
-                       				<%int t = 0;
-                       				for(int p=0;p<reviewlist.size();p++){
-                       					
-                       					if(p%5==0){
-                       						t++;
-                       					
-                       					%>
-                       					<span>
-                       					[<%=t %>]
-                       					</span>
-                       				<%}} %>
+	                       				<%for(int i=review_startpage;i<=review_endpage;i++){%>
+											<a type="button" onclick="reviewList(<%=i%>)">[<%=i %>]</a>
+										<%}%>
                        				</div>
                         		</div>
                         	</div>
@@ -425,6 +416,7 @@
 				<a type="button" onclick="bidList(<%=i%>)">[<%=i %>]</a>
 			<%}%>
 		</div>
+		
         <ul class="detail_page_nav">
             <li>
                 <a type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
@@ -857,7 +849,7 @@
 			commentList(1); //페이지 로딩시 댓글 목록 출력
 			classcolor(); //페이지로딩시 등급제 색깔주기
 			start(); //카운팅 세팅
-			
+			reviewList(1);
 		});
         
         //경매 번호
@@ -885,6 +877,10 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
+						if(key>=5 * (bid_nowpage - 1) && key<=4){
+							console.log(value);
+							
+						}
 					});
 					
 					$(".bidder").html(a);
@@ -1269,7 +1265,35 @@
 			});
 		}
 		*/
-		
+		function reviewList(review_nowpage){
+			$.ajax({
+				url : '/alltion/review_list.hs',
+				type : 'post',
+				data : {'review_id':writerId,'page':review_nowpage},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success : function(data){
+					var a = '';
+					$.each(data,function(key,value){
+						a += '<tr class="review_list1">';
+						a += '<td class="review_no">'+value.review_no+'</td>';
+						a += '<td class="review_evaluate">'+value.review_evaluate+'</td>';
+						a += '<td class="review_image"><img src="'+value.review_image+'"></td>';
+						a += '<td class="review_subject">'+value.review_subject+'</td>';
+						a += '<td class="review_content">'+value.review_content+'</td>';
+						a += '<td class="review_writer">'+value.review_id+'</td>';
+						a += '<td class="review_date">'+value.review_date+'</td>';
+						a += '</tr>';
+						
+							
+					});
+					$("#review_list_content").html(a);
+				},
+				error:function(){
+					alert("ajax통신 실패(list)!!!");		
+				}
+			});
+		}
 		
 		
     </script>

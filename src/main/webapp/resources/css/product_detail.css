@@ -514,43 +514,6 @@
     width: 50%;
 }
 
-/* 판매자 구매후기 */
-.modal_content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 10px 20px 30px 20px;
-    border: 1px solid #888;
-    width: 1300px;
-}
-.modal_content span:first-child{
-	font-weight:bold;
-	font-style:italic;
-	font-size: 20px;
-}
-.review_top{
-	display: flex;
-	justify-content: space-between;
-}
-.review_title{border-top:1px solid darkgray;background-color:darkgray;}
-.review_titie,.review_list{border-bottom: 1px solid darkgray;}
-
-.review_title div,
-.review_list div{
-	display:inline-block;
-	padding: 5px 15px;
-	height: 60px;
-	veritical-align: middle;
-}
-
-.review_no,.review_evaluate{width:100px;}
-.review_image,.review_writer,.review_date{width: 150px;}
-.review_subject{width:200px;}
-.review_content{width:300px;}
-.review_image img{width:50px; height:50px;}
-.review_list{
-	padding-left: 70px;
-}
-/* 여기까지 판매자 구매후기 */
 .close {
     color: #BBBBBB;
     float: right;
@@ -594,4 +557,52 @@
 #bid_notify legend{
     font-size: 20px;
     color: cornflowerblue;
+}
+
+/* 판매자 구매후기 */
+.modal_content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px 20px 30px 20px;
+    border: 1px solid #888;
+    width: 1200px;
+}
+.modal_content span:first-child{
+	font-weight:bold;
+	font-style:italic;
+	font-size: 20px;
+}
+.review_top{
+	display: flex;
+	justify-content: space-between;
+}
+.review_title{border-top:1px solid darkgray;background-color:darkgray;}
+.review_titie,.review_list{border-bottom: 1px solid darkgray;}
+
+.review_title div,
+.review_list div,
+.review_list1 div{
+	display:inline-block;
+	padding: 5px 15px;
+	height: 60px;
+}
+.review_no,.review_evaluate{width:100px;}
+.review_image,.review_writer,.review_date{width: 150px;}
+.review_subject{width:200px;}
+.review_content{width:300px;}
+.review_image img{width:50px; height:50px;}
+.review_list{
+	padding-left: 70px;
+}
+/* 여기까지 판매자 구매후기 */
+
+table{
+	text-align: center;
+	border: thin solid darkgray;
+	border-collapse: collapse;
+}
+td{
+	border-bottom:thin solid darkgray;
+	padding-top: 10px;
+	veritical-align: middle;
 }

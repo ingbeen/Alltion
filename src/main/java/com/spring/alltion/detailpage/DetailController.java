@@ -71,9 +71,10 @@ public class DetailController {
 		int comment_page = (int)(double)(comment_listcount/10+0.9);
 		commentService.commentListService(comment_product_number, comment_page, model);
 		
-		// 리뷰 리스트를 얻는다.
+		// 초기 (페이지1)리뷰 리스트를 얻는다.
 		String review_id = productvo.getProduct_id();
-		detailService.getReviewList(review_id,model);
+		int review_page = 1;
+		detailService.reviewListService(review_id, review_page, model);
 		
 		return "detail_page/board_detail";
 	}
@@ -97,6 +98,13 @@ public class DetailController {
 		return sale_credit;
 	}
 	
+	@RequestMapping(value="/review_list.hs",produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<ReviewVO> reviewList(@RequestParam String review_id,@RequestParam int page,Model model)throws Exception{
+		List<ReviewVO> review_list = detailService.reviewListService(review_id,page,model);
+		
+		return review_list;
+	}
 	/*
 	@RequestMapping(value="/update_product_progress.hs",produces="application/json;charset=UTF-8")
 	@ResponseBody

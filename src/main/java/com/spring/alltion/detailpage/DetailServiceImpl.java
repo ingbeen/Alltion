@@ -1,6 +1,7 @@
 package com.spring.alltion.detailpage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,12 +198,37 @@ public class DetailServiceImpl {
 		return product_category_2;
 	}
 	
-	public void getReviewList(String review_id, Model model) {
-		ArrayList<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
+	public List<ReviewVO> reviewListService(String review_id, int page, Model model) {
 		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
-		reviewlist = detailmapper.getReviewList(review_id);
-		model.addAttribute("reviewlist",reviewlist);
 		
+		int review_page = 1;
+		int review_limit = 5;
+		if(page!=0) {
+			review_page = page;
+		}
+		int review_listcount = 0;
+		review_listcount = reviewListCount(review_id);
+		int review_endrow = review_listcount - (review_page-1)*5;
+		int review_startrow = review_endrow - review_limit +1;
+		
+		int review_maxpage = (int)((double)review_listcount/review_limit+0.9);
+		int review_startpage = (((int)((double)review_page/10+0.9))-1)*10+1;
+		int review_endpage = review_maxpage;
+		if(review_endpage>review_startpage+10-1) {
+			review_endpage = review_startpage+10-1;
+		}
+		model.addAttribute("review_page",review_page);
+		model.addAttribute("review_maxpage",review_maxpage);
+		model.addAttribute("review_startpage",review_startpage);
+		model.addAttribute("review_endpage",review_endpage);
+		model.addAttribute("review_listcount",review_listcount);
+		
+		return detailmapper.reviewList(review_id,review_startrow,review_endrow);
 	}
-
+	
+	public int reviewListCount(String review_id) {
+		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
+		
+		return detailmapper.getReviewCount(review_id);
+	}
 }

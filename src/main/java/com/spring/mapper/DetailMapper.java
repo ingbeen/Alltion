@@ -1,6 +1,5 @@
 package com.spring.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -23,8 +22,10 @@ public interface DetailMapper {
 
 	void updateProductProgress(@Param(value="bid_product_number") int bid_product_number);
 
-	ArrayList<ReviewVO> getReviewList(String review_id);
+	int getReviewCount(String review_id);
 
+	List<ReviewVO> reviewList(@Param(value="review_id")String review_id,@Param(value="review_startrow") int review_startrow,@Param(value="review_endrow") int review_endrow);
+	
 //	int update_product_progress(int product_number);
 
 }
