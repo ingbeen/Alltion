@@ -12,7 +12,8 @@ pageEncoding="UTF-8"%>
     <title>All-tion</title>
 
 </head>
-<body>
+<!-- 로그인 화면시 아이디에 포커스 -->
+<body onload="document.getElementById('member_id').focus();">
 
 <!-- 모든 페이지 공통 영역 by 하나  -->
     
@@ -87,7 +88,8 @@ pageEncoding="UTF-8"%>
         </div>
     </div>
 
-<form name = "login" action = "./login.kj" method = "post">    
+<form name = "login" action = "./login.kj" method = "post">   
+
     <!-- 로그인 영역 by 계정 -->
 	<div class="login">
         <div class="login-screen">
@@ -106,7 +108,7 @@ pageEncoding="UTF-8"%>
                     <input type="password" name = "member_password" class="login-field" id="member_password"  placeholder="비밀번호를 입력해 주세요" >
                 </div>
 
-                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()" onkeyup="enterkey();">로그인</a>
+                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()" id = "enterkey">로그인</a>
                 <p>아직 회원이 아니신가요?&nbsp;
                     <a class="login-link" href = "./naverjoin.kj">회원가입 바로 가기</a>
                 </p>
