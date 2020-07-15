@@ -68,7 +68,6 @@ pageEncoding="UTF-8"%>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
