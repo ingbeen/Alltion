@@ -39,23 +39,23 @@ public class CreditScoreController {
         }
 	}
 	
-	@RequestMapping(value = "creditScore.hn")
-	public void saleNormalCount(Model model, HttpSession session) throws Exception {
-		
-		String userId = (String)session.getAttribute("userId");
-		
-        if(userId == null) {
-        	return "member/login";
-        } else {
-        	SaleCreditScoreVO salevo = creditScoreService.getSaleCreditScore(userId);
-        	System.out.println(salevo.getSale_id());
-        	model.addAttribute("saleCreditVO", salevo);
-        	
-        	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
-        	System.out.println(purchasevo.getPurchase_id());
-        	model.addAttribute("purchaseCreditVO", purchasevo);
-        
-        	return "mypage/creditScore";
-        }
-	}
+//	@RequestMapping(value = "creditScore.hn")
+//	public String saleNormalCount(Model model, HttpSession session) throws Exception {
+//		
+//		String userId = (String)session.getAttribute("userId");
+//		
+//        if(userId == null) {
+//        	return "member/login";
+//        } else {
+//        	SaleCreditScoreVO salevo = creditScoreService.getSaleCreditScore(userId);
+//        	System.out.println(salevo.getSale_id());
+//        	model.addAttribute("saleCreditVO", salevo);
+//        	
+//        	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
+//        	System.out.println(purchasevo.getPurchase_id());
+//        	model.addAttribute("purchaseCreditVO", purchasevo);
+//        
+//        	return "mypage/creditScore";
+//        }
+//	}
 }
