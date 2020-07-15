@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +24,6 @@
             keyboard_arrow_up
         </span>
     </div>
-    <!-- 헤더 -->
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
@@ -32,18 +31,33 @@
                     <a href="" id="clock"></a>
                 </p>
                 <ul>
+                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
                     <li>
                         <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
                     </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
                     <li>
                     	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -54,7 +68,7 @@
                 </h1>
                 <div class="category">
                     <a class="category--drop">
-                        <img src="resources/img/header/category_tab.png">
+                        <img src="./resources/img/header/category_tab.png">
                     </a>
                 </div>
                 <div class="search">
@@ -77,13 +91,13 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="./mypage.kj">
+                        <a href="mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="wishList.yb">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
@@ -98,7 +112,11 @@
             </div>
         </div>
     </div>
-    <!-- !! 기재해야 될 코드 여기에서부터 입력 start -->
+    <!-- 배너 영역 -->
+    <div class="banner">
+    </div>
+    
+    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
 
     <!-- 찜목록 시작 -->
 
@@ -119,13 +137,13 @@
                     물품정보가 변경되었을 수 있으니 입찰하시기전에 반드시 경매정보 및 물품정보를 재확인하시기 바랍니다.
                 </li>
                 <li>
-                    마감된 자료는 최대 7일간 저장됩니다.
+                    해당 자료는 최대 10일간 저장됩니다.
                 </li>
             </ul>
 
             <div class="wishList--caption">
-                <p><span class="wishList--conut">관심물품</span>에 대해서 모두 <span class="wishList--conut">2</span>개가 검색되었습니다</p>
-                <button class="wishList--TimeOuptBtn" type="button">남은시간 표기</button>
+                <p><span class="wishList--conut">찜목록</span>에 대해서 모두 <span class="wishList--conut">2</span>개가 검색되었습니다</p>
+                <button class="wishList--ChangeEndDateFormBtn" type="button">남은시간 표기</button>
             </div>
 
             <div class="wishList--tableWarp">
@@ -158,21 +176,24 @@
                             </div>
                             <div class="wishList--description">
                                 <p class="wishList--description__category">출산/유아동 > 유아동의류</p>
-                                <a class="wishList--description__subject">기저귀 100개 저렴하게 판매합니다</a>
+                                <p class="wishList--description__subject"><a>기저귀 100개 저렴하게 판매합니다</a></p>
                                 <p class="wishList--description__seller">ingbeen / 실버(신용도 클릭할때 뜨게할건지 정해야됨)</p>
                             </div>
                         </div>
                         <div class="wishList--currentPrice">
                             <p class="wishList--currentPrice__currentPrice">45,000</p>
-                            <p class="wishList--currentPrice__purchase_price">즉시구매가 : 55,000</p>
-                            <p class="wishList--currentPrice__bids">입찰 : 13</p>
+                            <div class="wishList--purchase_priceWarp">
+                                <p class="wishList--purchase_priceWarp__purchase_price">즉시구매가 : 55,000</p>
+                                <p class="wishList--purchase_priceWarp__bids">입찰 : 13</p>
+                            </div>
                         </div>
                         <div class="wishList--delivery">
                             <p class="wishList--delivery__delivery">착불</p>
                             <p class="wishList--delivery__transactionArea">직거래가능지역 : 없음</p>
                         </div>
                         <div class="wishList--endDate">
-                            <p>2020.07.09 13시 14분</p>
+                            <p class="wishList--endDate__endDate" data-endDate="2020-07-15 13:14">2020-07-15 13:14</p>
+                            <button class="wishList--bidBtn" type="button">응찰하기</button>
                         </div>
                     </div>
                     
@@ -182,28 +203,52 @@
                         </div>
                         <div class="wishList--info">
                             <div class="wishList--thumbnail">
-                                <img src="resources/img/product/1.jpg">
+                                <img src="resources/img/product/pier-5086290_1920.jpg">
                             </div>
                             <div class="wishList--description">
-                                <p>(카테고리)</p>
-                                <p>(상품명)</p>
-                                <p>(판매자)</p>
-                                <p>(신용도)</p>
+                                <p class="wishList--description__category">출산/유아동 > 유아동의류</p>
+                                <p class="wishList--description__subject"><a>기저귀 100개 저렴하게 판매합니다</a></p>
+                                <p class="wishList--description__seller">ingbeen / 실버(신용도 클릭할때 뜨게할건지 정해야됨)</p>
                             </div>
                         </div>
                         <div class="wishList--currentPrice">
-                            <p>(현재가격)</p>
-                            <p>입찰 : (입찰수)</p>
-                            <p>즉시구매가 : (즉시구매가)</p>
+                            <p class="wishList--currentPrice__currentPrice">45,000</p>
+                            <div class="wishList--purchase_priceWarp">
+                                <p class="wishList--purchase_priceWarp__purchase_price">즉시구매가 : 55,000</p>
+                                <p class="wishList--purchase_priceWarp__bids">입찰 : 13</p>
+                            </div>
                         </div>
                         <div class="wishList--delivery">
-                            <p>(배송비여부)</p>
-                            <p>직거래가능지역 : (직거래가능지역)</p>
+                            <p class="wishList--delivery__delivery">착불</p>
+                            <p class="wishList--delivery__transactionArea">직거래가능지역 : 없음</p>
+                        </div>
+                        <div class="wishList--endDate">
+                            <p class="wishList--endDate__endDate" data-endDate="2020-07-16 13:14">2020-07-16 13:14</p>
+                            <button class="wishList--bidBtn" type="button">응찰하기</button>
                         </div>
                     </div>
                 </div>
+                <button class="wishList--delete" type="button">선택상품 삭제</button>
+                <div class="wishList--pageWarp">
+                    <ul class="wishList--page">
+                        <li>
+                            <a><span class="material-icons">keyboard_arrow_left</span></a>
+                        </li>
+                        <li class="active">
+                            <a><span>1</span></a>
+                        </li>
+                        <li>
+                            <a><span>2</span></a>
+                        </li>
+                        <li>
+                            <a><span>3</span></a>
+                        </li>
+                        <li>
+                            <a><span class="material-icons">keyboard_arrow_right</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            
             
         </div>
             
