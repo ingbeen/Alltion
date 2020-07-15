@@ -1,6 +1,6 @@
 /* 찜목록 시작 by.유빈 */
 
-let endDateFormStatus = false; // form의 현재상태
+let endDateFormStatus = true; // form의 현재상태
 const _second = 1000; // 1초
 const _minute = _second * 60; // 1분
 const _hour = _minute * 60; // 1시간
@@ -91,8 +91,8 @@ function chanageTimeLeftToEndDate(element) {
 
 function getWishList() {
     $.ajax({
-        url : "getWishList.yb", // test.jsp 에서 받아옴
-        dataType :"json", // 데이터타입을 json 으로 받아옴
+        url : "getWishList.yb",
+        dataType :"json",
         success : (wishList) => wishListOutput(wishList),
         error : () => $('.wishList--conut').last().html(0)
     });
@@ -106,8 +106,8 @@ function wishListOutput (wishList) {
 		wishListCount += 1;
 		wishListContents += `
 <div class="wishList--contents">
-    <div class="wishList--deletCheck">
-        <input type="checkbox">
+    <div class="wishList--deleteCheck">
+        <input class="wishList--deleteCheck__deleteCheck" type="checkbox" value="${vo.product_number}">
     </div>
     <div class="wishList--info">
         <div class="wishList--thumbnail">
@@ -141,6 +141,32 @@ function wishListOutput (wishList) {
 	$('.wishList--contentsWarp').html(wishListContents);
 	$('.wishList--conut').last().html(wishListCount)
 	chageEndDate();
+}
+
+/* 체크박스 전체선택, 전체해제 */
+function checkAll() {
+	if( $(".wishList--deleteCheck__allDeleteCheck").is(':checked') ){
+		$(".wishList--deleteCheck__deleteCheck").prop("checked", true);
+	} else {
+		$(".wishList--deleteCheck__deleteCheck").prop("checked", false);
+	}
+}
+
+function wishListDelete() {
+	let wishList = new Array();
+	
+	$('.wishList--deleteCheck__deleteCheck:checked').each((idx, element) => {
+		wishList.push(element.value);
+	});
+	
+	$.ajax({
+        url : "wishListDelete.yb",
+        type : "POST",
+        data : { "wishList" : wishList },
+        success : () => {},
+        error : () => {}
+    });
+	
 }
 
 $('document').ready(() => {

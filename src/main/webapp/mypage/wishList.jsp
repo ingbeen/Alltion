@@ -146,8 +146,8 @@
 
             <div class="wishList--tableWarp">
                 <div class="wishList--columnTitle">
-                    <div class="wishList--deletCheck">
-                        <input type="checkbox">
+                    <div class="wishList--deleteCheck">
+                        <input class="wishList--deleteCheck__allDeleteCheck" type="checkbox" onclick="checkAll()">
                     </div>
                     <div class="wishList--info">
                         <p>상품정보</p>
@@ -165,7 +165,7 @@
     
                 <div class="wishList--contentsWarp"></div>
                 
-                <button class="wishList--delete" type="button">선택상품 삭제</button>
+                <button class="wishList--delete" type="button" onclick="wishListDelete()">선택상품 삭제</button>
                 <div class="wishList--pageWarp">
                     <ul class="wishList--page">
                         <li>

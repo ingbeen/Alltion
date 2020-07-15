@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.spring.alltion.detailpage.DetailServiceImpl;
 import com.spring.alltion.productRegistration.ProductVO;
@@ -22,7 +21,7 @@ public class WishListServiceImpl implements WishListService {
 	private DetailServiceImpl detailServiceImpl;
 
 	@Override
-	public List<ProductVO> getWishList(String userId, Model model) {
+	public List<ProductVO> getWishList(String userId) {
 		WishListMapper wishListMapper; // 마이바티스 찜목록맵퍼
 		ProductMapper productMapper; // 마이바티스 상품맵퍼
 		List<Integer> ProductNumberList; // 찜목록에 있는 상품번호 리스트
