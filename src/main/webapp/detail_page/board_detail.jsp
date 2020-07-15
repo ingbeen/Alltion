@@ -396,7 +396,7 @@
                     <%if(productvo.getProduct_purchase_price()!=0) {%>
                     	<button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
                     <%} %>
-                    <a href=""><button type="button" id="bid_btn4">찜하기</button></a>
+                    <button type="button" id="bid_btn4" onclick="insertWishList()">찜하기</button>
                     <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
 					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
@@ -462,25 +462,11 @@
 
         <!-- ↓↓경매의 사진들 펼쳐놓음.↓↓ -->
         <div class="product_information">
-			<!-- 
+			
             <div class="product_information_text">
 				<%=productvo.getProduct_content()%>
             </div>
-             -->
-            <div class="img_1">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_1() %>"></div>
-            </div>
-            <div class="img_2">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_2() %>">
-                </div>
-            </div>
-            <div class="img_3">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_3() %>">
-                </div>
-            </div>
+            
 
             <ul class="detail_page_nav">
                 <li>
@@ -1253,6 +1239,28 @@
 			});
 		}
 		
+		// 찜버튼 클릭시 wish리스트에 해당항목 추가
+		function insertWishList(){
+			$.ajax({
+				url : '/alltion/wish_list.hs',
+				type : 'post',
+				data : {'wish_product_number':bno,'wish_id':sessionid},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success : function(data){
+					if(data==0){
+						alert('찜목록에 추가 되었습니다.');
+					}else{
+						alert('이미 찜목록에 등록되어있는 경매 입니다.');
+					}
+					
+					
+				},
+				error:function(){
+					alert("ajax통신 실패(insertWishList)!!!");		
+				}
+			});
+		}
 		
     </script>
 </body>
