@@ -3,6 +3,8 @@
 <%@ page import="com.spring.alltion.detailpage.*" %>
 <%@ page import="com.spring.alltion.productRegistration.*" %>
 <%@ page import="com.spring.alltion.login.*" %>
+<%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	// 로그인한 세션 아이디
 	String id = (String)session.getAttribute("userId");
@@ -22,11 +24,17 @@
 	int bid_startpage=(int)request.getAttribute("bid_startpage");
 	int bid_endpage=(int)request.getAttribute("bid_endpage");
 	
-	int comment_listcount = (int)request.getAttribute("comment_listcount")-1;
+	int comment_listcount = (int)request.getAttribute("comment_listcount");
 	int comment_nowpage = (int)request.getAttribute("comment_page");
 	int comment_maxpage=(int)request.getAttribute("comment_maxpage");
 	int comment_startpage=(int)request.getAttribute("comment_startpage");
 	int comment_endpage=(int)request.getAttribute("comment_endpage");
+	
+	int review_listcount = (int)request.getAttribute("review_listcount");
+	int review_nowpage = (int)request.getAttribute("review_page");
+	int review_maxpage=(int)request.getAttribute("review_maxpage");
+	int review_startpage=(int)request.getAttribute("review_startpage");
+	int review_endpage=(int)request.getAttribute("review_endpage");
 	
 %>
 <!DOCTYPE html>
@@ -51,36 +59,47 @@
             keyboard_arrow_up
         </span>
     </div>
-    <!-- 광고 배너 및 헤더 -->
-    <div class="ad__banner">
-        <a href="#" class="ad__banner--link">
-            <img src="./resources/img/header/adEx.png" class="ad__banner--img">
-            <button class="ad__banner--closeBtn"></button>
-        </a>
-    </div>
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
                 <p>
-                    <a href="" id="clock"></a>
+                    <a id="clock"></a>
                 </p>
                 <ul>
+                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
                     <li>
-                        <a href="loginForm.html">로그인</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="joinForm.html">회원 가입</a>
+                        <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="index.html">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -107,13 +126,13 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="mypage.html">
+                        <a href="mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="wishList.yb">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
@@ -129,6 +148,7 @@
         </div>
     </div>
 
+
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     <!--  !! 여기에 내용 넣기 !!  by.Hong  -->
     <div align="center">
@@ -140,29 +160,44 @@
                     <div class="mySlides fade">
                         <img class="target1" src="<%=productvo.getProduct_img_1() %>" data-zoom="2">
                     </div>
+                    <%if(productvo.getProduct_img_2()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target2" src="<%=productvo.getProduct_img_2() %>" data-zoom="2">
                     </div>
+                    <%} %>
+                    <%if(productvo.getProduct_img_3()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target3" src="<%=productvo.getProduct_img_3() %>" data-zoom="2">
                     </div>
+                    <%} %>
+                    <%if(productvo.getProduct_img_4()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target4" src="<%=productvo.getProduct_img_4() %>" data-zoom="2">
                     </div>
+                    <%} %>
+                    <%if(productvo.getProduct_img_5()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target5" src="<%=productvo.getProduct_img_5() %>" data-zoom="2">
                     </div>
+                    <%} %>
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
                 <br>
                 <div class="dot_group">
                     <span class="dot" onclick="currentSlide(1)"><img src="<%=productvo.getProduct_img_1() %>" style="width:100px; height:100px;"></span>
+                    <%if(productvo.getProduct_img_2()!=null){ %>
                     <span class="dot" onclick="currentSlide(2)"><img src="<%=productvo.getProduct_img_2() %>" style="width:100px; height:100px;"></span>
+                    <%} %>
+                    <%if(productvo.getProduct_img_3()!=null){ %>
                     <span class="dot" onclick="currentSlide(3)"><img src="<%=productvo.getProduct_img_3() %>" style="width:100px; height:100px;"></span>
+                    <%} %>
+                    <%if(productvo.getProduct_img_4()!=null){ %>
                     <span class="dot" onclick="currentSlide(4)"><img src="<%=productvo.getProduct_img_4() %>" style="width:100px; height:100px;"></span>
+                    <%} %>
+                    <%if(productvo.getProduct_img_5()!=null){ %>
                     <span class="dot" onclick="currentSlide(5)"><img src="<%=productvo.getProduct_img_5() %>" style="width:100px; height:100px;"></span>
-                 
+                 	<%} %>
                  
                 </div>
                 <button type="button" class="mag_btn"><img src="./resources/img/product/magicon.png"></button>&nbsp;&nbsp;&nbsp;
@@ -194,7 +229,7 @@
                         </li>
                         <li>
                             <label for="id">판매자</label>
-                            <font><%=productvo.getProduct_id() %>&nbsp;님</font>&nbsp;&nbsp; 
+                            <font><%=productvo.getProduct_id().substring(0,3) %>****&nbsp;님</font>&nbsp;&nbsp; 
                             <button id="seller_check_btn" onclick="modal_display(1)" style="background-color: #616161; color:white;">
                                 	판매자 정보 확인하기
                             </button>
@@ -207,7 +242,7 @@
                                         <ul>
                                             <li>
                                                 <label>아이디</label>
-                                                <font><%=productvo.getProduct_id() %></font>
+                                                <font><%=productvo.getProduct_id().substring(0,3) %>****</font>
                                             </li>
                                             <li>
                                                 <label>이메일</label>
@@ -244,7 +279,7 @@
                         </li>
                         <li>
                             <label for="purchase_price">즉시 구매가</label>
-                            <p style="color:#F9A825;font-weight:bold;font-size:18px;"><%=productvo.getProduct_purchase_price() %>원</p>
+                            <p style="color:#F9A825;font-weight:bold;font-size:18px;"><%if(productvo.getProduct_purchase_price()!=0){%><%=productvo.getProduct_purchase_price() %>원<%} %>&nbsp;</p>
                         </li>
                         <li>
                             <label for="top_bidder_id">최고 응찰자</label>
@@ -252,16 +287,20 @@
                         </li>
                         <li>
                             <label for="sale_credit">판매자 등급</label>
-                            <p id="sale_credit"><%=sale_credit %></p>
+                            <p id="sale_credit"><%=sale_credit %> </p>
                         </li>
                         <li>
                             <label for="howtotransaction">거래방법</label>
                             <p>택배: <%=productvo.getProduct_delivery() %>/ 직거래:<%=productvo.getProduct_transaction_area() %> </p>
                         </li>
-
                         <li>
                             <label for="boarddate">남은시간</label>
-                            <p style="font-weight:bold;font-size:18px;">20:19:49</p>
+                            <p style="font-weight:bold;font-size:18px;">
+                            	<span class="auction_countdown"
+									data-endTime="<%=productvo.getProduct_end_date() %>"
+									data-complete="<%=productvo.getProduct_progress() %>">&nbsp;
+								</span>
+							</p>
                         </li>
                         <li>
                             <label for="boarddate">응찰단위</label>
@@ -311,20 +350,60 @@
                                 </div>
                             </div>
                         </li>
-
+                        <li>
+                        	<label>판매자 구매후기</label>
+                        	<%=review_listcount %> 건 &nbsp;&nbsp; <button class="review_viewer" onclick="modal_display(3)">더보기 ></button>
+                        	<!-- 판매자 구매후기 더보기 클릭시 -->
+                        	<div id="seller_review_modal" class="modal">
+                        		
+                        		<div class="modal_content">
+                        			<div class="review_top">	
+                        				<span>구매 후기</span>
+                        				<span class="close">&times;</span>
+                        			</div>
+                        			<table class="review_list">
+                        			<thead>
+	                        			<tr class="review_title" align="center">
+	                        				<th class="review_no">번호</th>
+	                       					<th class="review_evaluate">평가</th>
+	                       					<th class="review_image">이미지</th>
+	                       					<th class="review_subject">물품명</th>
+	                       					<th class="review_content">구매후기</th>
+	                       					<th class="review_writer">작성자</th>
+	                       					<th class="review_date">작성일</th>
+	                       				</tr>
+                       				</thead>
+                       				<tbody id="review_list_content">
+                       					
+                       				</tbody>	
+                       				</table>
+                       				<div align="center">
+	                       				<%for(int i=review_startpage;i<=review_endpage;i++){%>
+											<a type="button" onclick="reviewList(<%=i%>)">[<%=i %>]</a>
+										<%}%>
+                       				</div>
+                        		</div>
+                        	</div>
+                        </li>
+						
                     </ul>
                 </div>
                 <div class="btns" align="center">
                 <%if(productvo.getProduct_progress()==1) {%>
-                	<font style="color: red;">마감 종료된 경매입니다.</font>
-                <%}else if(id!=null){ %>
+                	<font style="color: red;">마감 종료된 경매입니다.</font><br>
+                <%}else if(id!=null&&!id.equals(productvo.getProduct_id())){ %>
                     <button type="button" id="bid_btn" onclick="bidInsert()">응찰하기</button>
-                    <button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
-<!--                            <button type="button" id="bid_btn3">문의하기</button>-->
-				<%}else {%>
-					<font><a href="" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font>
+                    <%if(productvo.getProduct_purchase_price()!=0) {%>
+                    	<button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
+                    <%} %>
+                    <a href=""><button type="button" id="bid_btn4">찜하기</button></a>
+                    <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
+				<%}else if(id==null){%>
+					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
+				<%}else if(id.equals(productvo.getProduct_id())){ %>
+					<a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%} %>
-                </div>
+				</div>
 
             </div>
         </div>
@@ -346,9 +425,7 @@
 
         <!-- ↓↓응찰자 리스트↓↓ -->
         <div class="bid_list" align="center">
-			
-			 
-            <div class="bid_list_column">
+			<div class="bid_list_column">
                 <div class="bid_list_no">응찰 번호</div>
                 <div class="bid_price">응찰 가격</div>
                 <div class="bidder_id">응찰자</div>
@@ -356,7 +433,7 @@
             </div>
             
             <div class="bidder">
-                
+               
             </div>
            	
 			
@@ -367,6 +444,7 @@
 				<a type="button" onclick="bidList(<%=i%>)">[<%=i %>]</a>
 			<%}%>
 		</div>
+		
         <ul class="detail_page_nav">
             <li>
                 <a type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
@@ -384,10 +462,11 @@
 
         <!-- ↓↓경매의 사진들 펼쳐놓음.↓↓ -->
         <div class="product_information">
-
+			<!-- 
             <div class="product_information_text">
-
+				<%=productvo.getProduct_content()%>
             </div>
+             -->
             <div class="img_1">
                 <div align="center">
                     <img src="<%=productvo.getProduct_img_1() %>"></div>
@@ -474,7 +553,7 @@
         <div class="comment_div">
             <div class="comment_title">댓 글 <font size="2"> |악의적인 비방글이나 욕설글은 무통보 삭제 되오니 이점 유의바랍니다</font>&nbsp;&nbsp;<input type="checkbox" id="secret"><font size="3" style="color:cornflowerblue;"> 비밀글</font></div>
             <textarea id="comment_content_input" placeholder="<%if(id!=null){ %>  *댓글을 작성해주세요..
-  *비밀글 입력시 판매자와 관리자만 볼 수 있습니다.<%}else{%>댓글은 로그인후 이용 가능합니다<%}%>"></textarea>
+  *비밀글 입력시 판매자와 관리자만 볼 수 있습니다.<%}else{%>댓글은 로그인 후 이용 가능합니다<%}%>" <%if(id==null){ %>onclick="togologin()" style="cursor:pointer;"<%} %>></textarea>
             <br>
             <%if(id!=null){ %>
             <button type="button" id="comment_btn" onclick="commentInsert()">작 성</button>
@@ -495,7 +574,7 @@
     <!-- !! 메인 페이지 내용(지워서 사용함) !! end -->
 
     <!-- 푸터 영역 -->
-    <div class="footer" style="margin-top: 100px;">
+    <div class="footer">
         <div class="upper_footer">
             <ul class="upper_footer--list">
                 <li>
@@ -536,7 +615,17 @@
             </ul>
         </div>
         <div class="lower_footer">
-
+            <ul class="lower_footer__content">
+                <li>
+                    <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
+                    <p>Tel: 02-000-0000 Fax : 02-000-0000 메일 : master@alltion.co.kr</p>
+                    <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
+                </li>
+                <li>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
+                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -544,90 +633,10 @@
 
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./resources/js/common.js"></script>
     <script type="text/javascript">
         var check = false;
 
-        $(function() {
-            // TOP 키
-            // 현재 브라우저 y스크롤 위치를 sc 변수에 저장
-            let sc = $(window).scrollTop();
-            if(sc == 0){
-                $("#topKey").fadeOut();
-            }
-            
-            $("#topKey").click(function(){
-                $("html,body").animate({
-                    "scrollTop" : "0px"
-                });
-            })
-            
-            // scroll이 제일 위에 왔을 때 숨기기
-            $(window).scroll(function(){
-                sc = $(this).scrollTop();
-                
-                if(sc == 0){
-                    $("#topKey").fadeOut();
-                }
-                else {
-                    $("#topKey").fadeIn();
-                }
-                
-//                console.log(sc);
-            })
-            
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function() {
-                $(".ad__banner").hide();
-            })
-
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 0) {
-                    header.addClass('sticky');
-                } else {
-                    header.removeClass('sticky');
-                }
-            })
-        });
-
-         // 2020-06-23 pm 03:55 추가
-        // 실시간 시간 구하기
-        setInterval(function(){
-
-            let nowDate = new Date();
-            let day = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
-            let dayNum = nowDate.getDay();
-            let year = nowDate.getFullYear();
-            let month= nowDate.getMonth() + 1;
-            let date = nowDate.getDate();
-            let hour = nowDate.getHours();
-            let min = nowDate.getMinutes();
-            let sec = nowDate.getSeconds();
-
-            /*
-            // 오전 오후로 나누고 싶을 때
-            let amPm = '오전';
-
-            if(hour >= 12) {
-                amPm = '오후';
-                hour = hour - 12;
-            }
-
-            document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + amPm + '&nbsp;' + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec);
-            */
-
-            document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + hour + ":" + addZero(min) + ":" + addZero(sec);
-        },1000);
-
-        // 일의 자리 숫자일 때 0 붙여 주기
-        function addZero(i) {
-            if (i < 10) {
-                i = '0' + i
-            };
-            return i;
-        } // 2020-06-23 pm 03:55 추가
-        
         // ↓↓ 이미지 슬라이드. ↓↓ by.HONG
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -767,6 +776,15 @@
                 close1.onclick = function(event) {
                     bid_notify_modal.style.display = "none";
                 }
+            // ↓↓판매자 구매후기
+            }else if(n==3){
+            	var seller_review_modal = document.getElementById('seller_review_modal');
+            	var close2 = document.getElementsByClassName('close')[2];
+            	seller_review_modal.style.display = "block";
+            	close2.onclick = function(){
+            		seller_review_modal.style.display = "none";
+            	}
+            	
             }
 
             // ↓↓모달창 외부 클릭시 모달창 닫아짐.
@@ -777,14 +795,19 @@
                 if (event.target == bid_notify_modal) {
                     bid_notify_modal.style.display = "none";
                 }
+                if(event.target == seller_review_modal){
+                	seller_review_modal.style.display = "none";
+                }
             }
         }
         
-        // ↓↓응찰관련
+        // ↓↓페이지시작할때 실행되는 함수들
         $(document).ready(function(){
 			bidList(1); //페이지 로딩시 응찰 목록 출력 
 			commentList(1); //페이지 로딩시 댓글 목록 출력
 			classcolor(); //페이지로딩시 등급제 색깔주기
+			start(); //카운팅 세팅
+			reviewList(1);
 		});
         
         //경매 번호
@@ -812,11 +835,9 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
-						//응찰하다가 응찰가격이 즉시구매가랑 동일하게 될때 
-						//응찰리스트 추가 후 응찰하기 버튼(bid_btn),즉시구매하기 버튼(bid_btn2) 비활성화
-						if(value.bid_price==limit_price){
-							document.getElementById("bid_btn").disabled = true;
-							document.getElementById("bid_btn2").disabled = true;
+						if(key>=5 * (bid_nowpage - 1) && key<=4){
+							console.log(value);
+							
 						}
 					});
 					
@@ -829,9 +850,6 @@
 		}
       	
 		function bidInsert(){
-			
-			
-			
 			$.ajax({
 				url: '/alltion/bid_insert.hs',
 				type : 'POST',
@@ -892,7 +910,7 @@
 							a += '<span class="replyre">┕ </span>';
 						}
 						a += '<span class="comment_id"> 작성자 |&nbsp;'+value.comment_id.substring(0,3)+'****</span>';
-						a += '<span class="comment_date">'+value.comment_date+'</span>';
+						a += '<span class="comment_date">'+value.comment_date.substring(0,16)+'</span>';
 					
 						if(value.comment_is_deleted==="1"){
 							a += '<div class="comment_content">삭제된 글 입니다.</div>';
@@ -1103,6 +1121,138 @@
 				$('#sale_credit').css("color","black");
 			}
 		}
+		
+		//로그인이 안된상태에서 댓글 textarea를 클릭시
+		function togologin(){
+			var togologin = confirm("로그인 하시겠습니까?");
+			if(togologin==true){
+				location.href = "./loginForm.kj"
+			}else{
+				return false;
+			}
+		}
+		
+		//남은시간 카운팅
+		var _second = 1000; // 1초
+		var _minute = _second * 60; // 1분
+		var _hour = _minute * 60; // 1시간
+		var _day = _hour * 24; // 1일
+		var timer;
+        
+		function auctionConutDown() {
+			// 상품의 마감여부
+			var complete = $('.auction_countdown').attr("data-complete");
+			
+			if (complete == 0) {
+				// 현재시간을 얻어온다
+				var now = new Date();
+				// "auction_countdown" 클래스의 "data"속성의 값을 가져온다
+				var endTime = new Date($('.auction_countdown').attr("data-endTime"));
+				
+				// 마감시간에서 현재시간을 차감해준다
+				var subtractTime = endTime - now;
+				// 남은시간이 들어갈 변수
+				var resultTime = "";
+				
+				// 남은시간이 마이너스라면 실행
+				if(subtractTime < 0) {
+					$('.auction_countdown').html("종료되었습니다");
+					clearInterval(timer);
+					window.reload = "true";
+					// 컴플리트를 0으로 바꾸는 함수 실행해야됨
+					return;
+				}
+				
+				// 소수점버림(남은시간 / 1일)
+				// 예) 1일 1시간 1분 / 1일 = 1일 1시간 1분
+				// 소수점을 버리기에 "1일"이 된다
+				var days = Math.floor(subtractTime / _day);
+				if (days > 0) {
+					resultTime += days + "일 "
+				}
+				
+				// 소수점버림(남은시간 % 1일 / 1시간)
+				// 예) 1일 1시간 1분 % 1일 = 1시간 1분
+				// 1시간 1분 / 1시간 = 1시간 1분 
+				// 소수점을 버리기에 "1시간"이 된다
+				var hours = Math.floor((subtractTime % _day) / _hour);
+				if (hours > 0) {
+					resultTime += hours + "시간 "
+				}
+				var minutes = Math.floor((subtractTime % _hour) / _minute);
+				if (minutes > 0) {
+					resultTime += minutes + "분 "
+				}
+				
+				var seconds = Math.floor((subtractTime % _minute) / _second);
+				if (seconds >= 0) {
+					resultTime += seconds + "초"
+				}
+				
+				// "auction_countdown" 클래스 안에 태그형식으로 삽입한다
+				$('.auction_countdown').html(resultTime);
+			}else{
+				$('.auction_countdown').html("종료되었습니다");
+			}
+		}
+		
+		function start() {
+			// 1초마다 재실행하고 그것에 대한 정보를 timer에 담는다
+			timer = setInterval(auctionConutDown, 1000);
+		}
+		
+		/*
+		//남은시간이 종료되었을 때 product_progress 를 1로 바꿔준다.
+		function update_product_progress(){
+			$.ajax({
+				url: '/alltion/update_product_progress.hs',
+				type : 'POST',
+				data : {'product_number':bno},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success:function(data){
+					if(data==1){
+						
+						alert("ajax통신 성공(update_product_progress)");
+						window.reload="true";
+					}
+				},
+				error:function(){
+					alert("ajax통신 실패(update_product_progress)");
+				}
+			});
+		}
+		*/
+		function reviewList(review_nowpage){
+			$.ajax({
+				url : '/alltion/review_list.hs',
+				type : 'post',
+				data : {'review_id':writerId,'page':review_nowpage},
+				dataType : 'json',
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success : function(data){
+					var a = '';
+					$.each(data,function(key,value){
+						a += '<tr class="review_list1">';
+						a += '<td class="review_no">'+value.review_no+'</td>';
+						a += '<td class="review_evaluate">'+value.review_evaluate+'</td>';
+						a += '<td class="review_image"><img src="'+value.review_image+'"></td>';
+						a += '<td class="review_subject">'+value.review_subject+'</td>';
+						a += '<td class="review_content">'+value.review_content+'</td>';
+						a += '<td class="review_writer">'+value.review_id+'</td>';
+						a += '<td class="review_date">'+value.review_date+'</td>';
+						a += '</tr>';
+						
+							
+					});
+					$("#review_list_content").html(a);
+				},
+				error:function(){
+					alert("ajax통신 실패(list)!!!");		
+				}
+			});
+		}
+		
 		
     </script>
 </body>
