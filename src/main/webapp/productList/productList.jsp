@@ -12,15 +12,16 @@
 	 List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
 	 List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
 	 List<ProductVO> viewslist=(List<ProductVO>)request.getAttribute("viewslist");
+	 String product_category_2 = (String)request.getAttribute("product_category_2");
  	
 
- /*	
+ 	
 	int listcount=((Integer)request.getAttribute("listcount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
 	int startpage=((Integer)request.getAttribute("startpage")).intValue();
 	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-	*/
+	
 	
 	String category1 = (String) request.getAttribute("category1");
 	String category2 = (String) request.getAttribute("category2");
@@ -233,6 +234,7 @@
                  <% if(!pricelist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
+							if(i == pricelist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)pricelist.get(i);	%>
                         <li> 
                             <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -255,7 +257,7 @@
                                 </div>
                             </a>
                         </li>
-                       <% if(i == pricelist.size()) {break;}
+                       <% 
                        } %>
                     </ul>
                 <%} %>
@@ -264,6 +266,7 @@
                     <% if(!participantslist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
+							if(i == participantslist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)participantslist.get(i);	%>
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -286,7 +289,7 @@
                             </div>
                         </a>
                     	</li>
-                        <% if(i == participantslist.size()) {break;}
+                        <% 
                        } %>
                     </ul>
                     <%} %>
@@ -295,6 +298,7 @@
                     <% if(!viewslist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
+							if(i == viewslist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)viewslist.get(i);	%>
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -317,7 +321,7 @@
                             </div>
                         </a>
                     	</li>
-                        <% if(i == viewslist.size()) {break;}
+                        <% 
                        } %>
                     </ul>
                     <%} %>
@@ -375,6 +379,36 @@
                 </ul>
                 <%}
 				} %>
+			<ul class="page_number">
+                    <li>
+                    <%if(nowpage<=1){ %>
+                    &#60;
+                    <%}else{ %>
+                        <a href="./getCategorylist.ms?product_category_2=<%=category2 %>&page=<%=nowpage-1 %>">&#60;</a>
+                    <%} %>
+                    </li>
+                    <%for(int a=startpage;a<=endpage;a++){
+						if(a==nowpage){%>
+						<li>
+						<%=a %>
+						</li>
+						<%}else{ %>
+						<li>
+						<a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=a %>"><%=a %></a>
+						</li>
+						<%} %>
+					<%} %>
+                    
+                    <%if(nowpage>=maxpage){ %>
+                    <li>
+                    &#62;
+                    </li>
+                    <%}else{ %>
+                    <li>
+                        <a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=nowpage+1 %>">&#62;</a>
+                    </li>
+                    <%} %>
+                </ul>
             </div>
         </div>
     </div>  
@@ -463,6 +497,7 @@ function sortlist(){
     <script>
 	var category1 = '<%=category1 %>';
 	var category2 = '<%=category2 %>';
+	
 	$(document).ready(function () {
 		$(".product_li-category").html("<h4>"+ category1 +"</h4> <span>&#62;</span> " + category2);
 	})

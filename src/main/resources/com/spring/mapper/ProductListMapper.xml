@@ -40,27 +40,23 @@
 	<select id="getMainlist" parameterType="Hashmap" resultType="com.spring.alltion.productRegistration.ProductVO">
 		<![CDATA[
 		select 
-			product_number,
-			product_id,
-			product_subject,
-			product_category_1,
-			product_category_2,
-			product_starting_price,
-			product_re_auction,
-			product_progress,
+			product_number, 
+			product_subject, 
 			product_img_1,
-			product_issue_date 
+			product_category_1, 
+			product_category_2,
+			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			product_current_price, 
+			product_purchase_price 
         from (select rownum rnum,
-        	product_number,
-        	product_id,
-       		product_subject,
-        	product_category_1,
-        	product_category_2,
-        	product_starting_price,
-        	product_re_auction,
-        	product_progress,
-        	product_img_1,
-        	product_issue_date 
+        	product_number, 
+			product_subject, 
+			product_img_1,
+			product_category_1, 
+			product_category_2,
+			product_issue_date, 
+			product_current_price, 
+			product_purchase_price 
         from (select * from product order by product_issue_date desc)) 
         where rnum>=#{startrow} and rnum<=#{endrow}
 		]]>
@@ -73,10 +69,11 @@
         where rnum>=#{startrow} and rnum<=#{endrow}
      	]]>
 	</select>
-	<!-- 
+
 	<select id="getCategorylist" resultType="com.spring.alltion.productRegistration.ProductVO">
-		select 
-			product_number, 
+	<![CDATA[
+	select 
+	product_number, 
 			product_subject, 
 			product_img_1,
 			product_category_1, 
@@ -84,21 +81,17 @@
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
 			product_current_price, 
 			product_purchase_price 
-		from product 
-		where product_category_2 = #{product_category_2}
-		order by product_issue_date desc
-	</select>
-	-->
-	<select id="getCategorylist" resultType="com.spring.alltion.productRegistration.ProductVO">>
-	<![CDATA[
-	select 
-	product_number,
-	product_id,
-	product_subject,
-	product_category_1,product_category_2,product_starting_price,product_re_auction,product_progress,product_img_1,product_issue_date 
-        from (select rownum rnum,product_number,product_id,product_subject,product_category_1,product_category_2,product_starting_price,product_re_auction,product_progress,product_img_1,product_issue_date 
-              from (select * from product order by product_issue_date desc)) 
-        where product_category_2 = #{product_category_2} and rnum>=#{startrow} and rnum<=#{endrow};
+        from (select rownum rnum,
+        	product_number, 
+			product_subject, 
+			product_img_1,
+			product_category_1, 
+			product_category_2,
+			product_issue_date, 
+			product_current_price, 
+			product_purchase_price 
+        from (select * from product order by product_issue_date desc) where product_category_2 = #{product_category_2}) 
+        where rnum>=#{startrow} and rnum<=#{endrow}
     ]]>
 	</select>	
 	<select id="getOrderbylist" resultType="com.spring.alltion.productRegistration.ProductVO">
@@ -115,7 +108,7 @@
 		where product_category_2 = #{product_category_2}
 		order by #{sort_list} desc
 	</select>
-	<select id="getCategorylistCount" parameterType="int" resultType="int">
+	<select id="getCategorylistCount" parameterType="String" resultType="int">
 		SELECT count(*) FROM product where product_category_2 = #{product_category_2, jdbcType=VARCHAR}
 	</select>
 	
@@ -209,6 +202,5 @@
 	<select id="getListCount" resultType="int">
 		SELECT count(*) FROM product
 	</select>
-	
 	
 </mapper>

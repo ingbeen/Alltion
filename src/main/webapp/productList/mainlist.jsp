@@ -233,6 +233,7 @@
                  <% if(!pricelist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
+							if(i == pricelist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)pricelist.get(i);	%>
                         <li> 
                             <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -255,7 +256,7 @@
                                 </div>
                             </a>
                         </li>
-                       <% if(i == pricelist.size()) {break;}
+                       <% 
                        } %>
                     </ul>
                 <%} %>
@@ -264,6 +265,7 @@
                     <% if(!participantslist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
+							if(i == participantslist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)participantslist.get(i);	%>
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -286,7 +288,7 @@
                             </div>
                         </a>
                     	</li>
-                        <% if(i == participantslist.size()) {break;}
+                        <% 
                        } %>
                     </ul>
                     <%} %>
@@ -295,6 +297,7 @@
                     <% if(!viewslist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
+							if(i == viewslist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)viewslist.get(i);	%>
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -317,7 +320,7 @@
                             </div>
                         </a>
                     	</li>
-                        <% if(i == viewslist.size()) {break;}
+                        <% 
                        } %>
                     </ul>
                     <%} %>
@@ -380,7 +383,7 @@
                     <%if(nowpage<=1){ %>
                     &#60;
                     <%}else{ %>
-                        <a href="./mainlist.ms?page=<%=nowpage-1 %>">&#60;</a>
+                        <a href="./Mainlist.ms?page=<%=nowpage-1 %>">&#60;</a>
                     <%} %>
                     </li>
                     <%for(int a=startpage;a<=endpage;a++){
@@ -390,7 +393,7 @@
 						</li>
 						<%}else{ %>
 						<li>
-						<a href="./mainlist.ms?page=<%=a %>"><%=a %></a>
+						<a href="./Mainlist.ms?page=<%=a %>"><%=a %></a>
 						</li>
 						<%} %>
 					<%} %>
@@ -401,7 +404,7 @@
                     </li>
                     <%}else{ %>
                     <li>
-                        <a href="./mainlist.ms?page=<%=nowpage+1 %>">&#62;</a>
+                        <a href="./Mainlist.ms?page=<%=nowpage+1 %>">&#62;</a>
                     </li>
                     <%} %>
                 </ul>
