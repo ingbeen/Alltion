@@ -173,8 +173,6 @@ pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript"></script>
     <script src="./resources/js/login.js"></script>
-      
-
 
 </body>
 </html>
