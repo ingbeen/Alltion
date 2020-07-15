@@ -104,33 +104,9 @@
                 </a>
             </li>
             <li>
-                <a href="./buyer.kj">
-                    <span class="material-icons">receipt</span><br>
-                    <span class="myPage__menu">구매 정보</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <span class="material-icons">list</span><br>
-                    <span class="myPage__menu">판매 정보</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <span class="material-icons">poll</span><br>
-                    <span class="myPage__menu">참여 경매</span>
-                </a>
-            </li>
-            <li>
                 <a href="">
                     <span class="material-icons">credit_card</span><br>
                     <span class="myPage__menu">e-머니</span>
-                </a>
-            </li>
-            <li>
-                <a href="wishList.yb">
-                    <span class="material-icons">bookmarks</span><br>
-                    <span class="myPage__menu">찜 목록</span>
                 </a>
             </li>
             <li>
@@ -145,7 +121,30 @@
                     <span class="myPage__menu">활동 내역</span>
                 </a>
             </li>
-
+            <li>
+                <a href="./buyer.kj">
+                    <span class="material-icons">receipt</span><br>
+                    <span class="myPage__menu">구매 내역</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="material-icons">list</span><br>
+                    <span class="myPage__menu">판매 내역</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="material-icons">poll</span><br>
+                    <span class="myPage__menu">참여 중 경매</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span class="material-icons">done_all</span><br>
+                    <span class="myPage__menu">판매 중 경매</span>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- 푸터 영역 -->
@@ -190,72 +189,22 @@
             </ul>
         </div>
         <div class="lower_footer">
-            
-        </div>        
+            <ul class="lower_footer__content">
+                <li>
+                    <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
+                    <p>Tel: 02-000-0000 Fax : 02-000-0000 메일 : master@alltion.co.kr</p>
+                    <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
+                </li>
+                <li>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
+                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                </li>
+            </ul>
+        </div>          
     </div>
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더에 시간 넣기
-            let time = new Date();
-            
-            
-            // 헤더 고정
-            let header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                    header.addClass('sticky');
-                }else{
-                    header.removeClass('sticky');
-                }
-            })
-        });
-        
-        // 2020-06-23 pm 03:55 추가
-        // 실시간 시간 구하기
-        setInterval(function(){
-             
-            let nowDate = new Date();
-            let day = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
-            let dayNum = nowDate.getDay();
-            let year = nowDate.getFullYear();
-            let month= nowDate.getMonth() + 1;
-            let date = nowDate.getDate();
-            let hour = nowDate.getHours();
-            let min = nowDate.getMinutes();
-            let sec = nowDate.getSeconds();
-            
-            /*
-            // 오전 오후로 나누고 싶을 때
-            let amPm = '오전';
-            
-            if(hour >= 12) {
-                amPm = '오후';
-                hour = hour - 12;
-            }
-            
-            document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + amPm + '&nbsp;' + addZero(hour) + ":" + addZero(min) + ":" + addZero(sec);
-            */
-            
-            document.getElementById('clock').innerHTML = year + '년' + '&nbsp;' + month + '월' + '&nbsp;' + date + '일' + day[dayNum] + '&nbsp;' + hour + ":" + addZero(min) + ":" + addZero(sec);
-        },1000);
-        
-        // 일의 자리 숫자일 때 0 붙여 주기
-        function addZero(i) {
-            if (i < 10) {
-                i = '0' + i
-            };
-            return i;
-        } // 2020-06-23 pm 03:55 추가
-        
-    </script>
-
+    <script src="./resources/js/common.js"></script>
 </body>
 </html>

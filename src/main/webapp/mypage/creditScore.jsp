@@ -199,7 +199,7 @@
                             <label>판매 신용도</label>
                         </div>
                         <div class="sale_credit_score-form content">
-                            <span><%=purchaseCreditVO.getPurchase_credit_score() %> 급</span>
+                            <span><%=purchaseCreditVO.getPurchase_credit_score() %> 점</span>
                         </div>
                     </li>
                 </ul>
@@ -207,6 +207,7 @@
         </ul>
         <div class="credit_score-btn">
             <button class="back_to_myPage" onclick="history.back()">뒤로 가기</button>
+            <a href="" onclick="#">테스트</a>
         </div>
     </div>
 
@@ -251,7 +252,18 @@
                 </li>
             </ul>
         </div>
-        <div class="lower_footer">           
+		<div class="lower_footer">
+            <ul class="lower_footer__content">
+                <li>
+                    <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
+                    <p>Tel: 02-000-0000 Fax : 02-000-0000 메일 : master@alltion.co.kr</p>
+                    <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
+                </li>
+                <li>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
+                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                </li>
+            </ul>
         </div>
     </div>       
     

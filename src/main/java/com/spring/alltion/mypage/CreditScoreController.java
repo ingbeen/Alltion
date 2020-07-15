@@ -1,4 +1,4 @@
-package com.spring.alltion.creditScore;
+package com.spring.alltion.mypage;
 
 import javax.servlet.http.HttpSession;
 
@@ -6,6 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.spring.alltion.creditScore.CreditScoreService;
+import com.spring.alltion.creditScore.PurchaseCreditScoreVO;
+import com.spring.alltion.creditScore.SaleCreditScoreVO;
+
+
 
 @Controller
 public class CreditScoreController {
@@ -29,7 +35,7 @@ public class CreditScoreController {
         	System.out.println(purchasevo.getPurchase_id());
         	model.addAttribute("purchaseCreditVO", purchasevo);
         
-        	return "creditScore/creditScore";
+        	return "mypage/creditScore";
         }
 	}
 }
