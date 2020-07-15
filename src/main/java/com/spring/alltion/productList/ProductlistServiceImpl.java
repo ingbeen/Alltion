@@ -69,7 +69,6 @@ public class ProductlistServiceImpl implements ProductlistService {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		List<ProductVO> productlist = productListMapper.getMainlist();
-		System.out.println(productlist.get(0).getProduct_number());
 		return productlist;
 	}
 	

@@ -392,7 +392,15 @@ $("#thumbnails").on("click", ".close", (e) => {
 // 상품(경매) 등록 - 버튼눌렀을때(썸네일이미지 등록부터)
 function productSubmit() {
 	
+	// 시작가, 즉사거래가 쉼표 없애기
+	let purchase_price = $(".product--form [name='product_purchase_price']");
+	let starting_price = $(".product--form [name='product_starting_price']");
+	purchase_price.val(removeCommas(purchase_price.val()));
+	starting_price.val(removeCommas(starting_price.val()));
+	
 	if (formCheck()) { // 양식에 대한 유효성 검사
+		purchase_price.val(addCommas(purchase_price.val()));
+		starting_price.val(addCommas(starting_price.val()));
 		return;
 	}
 	
@@ -493,13 +501,6 @@ function formCheck() {
 
 // 상품(경매) 등록 - DB저장
 function productInsert(imgSrcList) {
-	
-	// 시작가, 즉사거래가 쉼표 없애기
-	let purchase_price = $(".product--form [name='product_purchase_price']");
-	let starting_price = $(".product--form [name='product_starting_price']");
-	purchase_price.val(removeCommas(purchase_price.val()));
-	starting_price.val(removeCommas(starting_price.val()));
-	
 	let formData = $('.product--form').serialize(); // 사용자가 입력한 내용
 	$.each(imgSrcList, (idx, imgSrc) => { // 이미지등록(썸네일)에 있는 이미지
 		formData += `&product_img_${idx + 1}=${imgSrc}`;

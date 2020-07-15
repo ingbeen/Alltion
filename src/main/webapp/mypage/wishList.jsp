@@ -140,7 +140,7 @@
             </ul>
 
             <div class="wishList--caption">
-                <p><span class="wishList--conut">찜목록</span>에 대해서 모두 <span class="wishList--conut">2</span>개가 검색되었습니다</p>
+                <p><span class="wishList--conut">찜목록</span>에 대해서 모두 <span class="wishList--conut"></span>개가 검색되었습니다</p>
                 <button class="wishList--ChangeEndDateFormBtn" type="button">남은시간 표기</button>
             </div>
 

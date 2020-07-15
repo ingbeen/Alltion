@@ -94,14 +94,16 @@ function getWishList() {
         url : "getWishList.yb", // test.jsp 에서 받아옴
         dataType :"json", // 데이터타입을 json 으로 받아옴
         success : (wishList) => wishListOutput(wishList),
-        error : () => alert("찜목록 불러오기에 실패했습니다")
+        error : () => $('.wishList--conut').last().html(0)
     });
 }
 
 function wishListOutput (wishList) {
 	let wishListContents = "";
+	let wishListCount = 0;
+	
 	$.each(wishList, (idx, vo) => {
-		console.log(vo);
+		wishListCount += 1;
 		wishListContents += `
 <div class="wishList--contents">
     <div class="wishList--deletCheck">
@@ -137,6 +139,7 @@ function wishListOutput (wishList) {
 	})
 	
 	$('.wishList--contentsWarp').html(wishListContents);
+	$('.wishList--conut').last().html(wishListCount)
 	chageEndDate();
 }
 

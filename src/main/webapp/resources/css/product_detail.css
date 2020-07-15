@@ -338,12 +338,9 @@
 
 
 
-.img_1 img,
-.img_2 img,
-.img_3 img,
 .product_information_text {
     width: 1000px;
-    height: 800px;
+    height: 100%;
     margin-top: 20px;
 }
 
