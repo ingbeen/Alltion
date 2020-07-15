@@ -4,6 +4,7 @@
 <%@ page import="com.spring.alltion.productRegistration.*" %>
 <%@ page import="com.spring.alltion.login.*" %>
 <%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	// 로그인한 세션 아이디
 	String id = (String)session.getAttribute("userId");
@@ -58,36 +59,47 @@
             keyboard_arrow_up
         </span>
     </div>
-    <!-- 광고 배너 및 헤더 -->
-    <div class="ad__banner">
-        <a href="#" class="ad__banner--link">
-            <img src="./resources/img/header/adEx.png" class="ad__banner--img">
-            <button class="ad__banner--closeBtn"></button>
-        </a>
-    </div>
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
                 <p>
-                    <a href="" id="clock"></a>
+                    <a id="clock"></a>
                 </p>
                 <ul>
+                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
                     <li>
-                        <a href="loginForm.html">로그인</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="joinForm.html">회원 가입</a>
+                        <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="index.html">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -114,13 +126,13 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="mypage.html">
+                        <a href="mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="wishList.yb">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
@@ -136,6 +148,7 @@
         </div>
     </div>
 
+
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     <!--  !! 여기에 내용 넣기 !!  by.Hong  -->
     <div align="center">
@@ -147,29 +160,44 @@
                     <div class="mySlides fade">
                         <img class="target1" src="<%=productvo.getProduct_img_1() %>" data-zoom="2">
                     </div>
+                    <%if(productvo.getProduct_img_2()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target2" src="<%=productvo.getProduct_img_2() %>" data-zoom="2">
                     </div>
+                    <%} %>
+                    <%if(productvo.getProduct_img_3()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target3" src="<%=productvo.getProduct_img_3() %>" data-zoom="2">
                     </div>
+                    <%} %>
+                    <%if(productvo.getProduct_img_4()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target4" src="<%=productvo.getProduct_img_4() %>" data-zoom="2">
                     </div>
+                    <%} %>
+                    <%if(productvo.getProduct_img_5()!=null){ %>
                     <div class="mySlides fade">
                         <img class="target5" src="<%=productvo.getProduct_img_5() %>" data-zoom="2">
                     </div>
+                    <%} %>
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
                 <br>
                 <div class="dot_group">
                     <span class="dot" onclick="currentSlide(1)"><img src="<%=productvo.getProduct_img_1() %>" style="width:100px; height:100px;"></span>
+                    <%if(productvo.getProduct_img_2()!=null){ %>
                     <span class="dot" onclick="currentSlide(2)"><img src="<%=productvo.getProduct_img_2() %>" style="width:100px; height:100px;"></span>
+                    <%} %>
+                    <%if(productvo.getProduct_img_3()!=null){ %>
                     <span class="dot" onclick="currentSlide(3)"><img src="<%=productvo.getProduct_img_3() %>" style="width:100px; height:100px;"></span>
+                    <%} %>
+                    <%if(productvo.getProduct_img_4()!=null){ %>
                     <span class="dot" onclick="currentSlide(4)"><img src="<%=productvo.getProduct_img_4() %>" style="width:100px; height:100px;"></span>
+                    <%} %>
+                    <%if(productvo.getProduct_img_5()!=null){ %>
                     <span class="dot" onclick="currentSlide(5)"><img src="<%=productvo.getProduct_img_5() %>" style="width:100px; height:100px;"></span>
-                 
+                 	<%} %>
                  
                 </div>
                 <button type="button" class="mag_btn"><img src="./resources/img/product/magicon.png"></button>&nbsp;&nbsp;&nbsp;
@@ -546,7 +574,7 @@
     <!-- !! 메인 페이지 내용(지워서 사용함) !! end -->
 
     <!-- 푸터 영역 -->
-    <div class="footer" style="margin-top: 100px;">
+    <div class="footer">
         <div class="upper_footer">
             <ul class="upper_footer--list">
                 <li>
@@ -587,8 +615,8 @@
             </ul>
         </div>
         <div class="lower_footer">
-
-        </div>
+            
+        </div>        
     </div>
 
 
