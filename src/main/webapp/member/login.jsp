@@ -20,9 +20,9 @@ pageEncoding="UTF-8"%>
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
-                <p>
-                    <a href="">고객 센터</a>
-                </p>
+                <span>
+                    <a href="" id="clock"></a>
+                </span>
                 <ul>
                     <li>
                         <a href="#">로그인</a>
@@ -172,7 +172,7 @@ pageEncoding="UTF-8"%>
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript"></script>
-    <script src="./resources/js/login.js"></script>
+    <script src="./resources/js/update.js"></script>
 
 </body>
 </html>
