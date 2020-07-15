@@ -232,8 +232,7 @@
                 <div class="slide1 fade" id="1">
                  <% if(!pricelist.isEmpty()) { %>
                     <ul class="items__list list">
-						<% for(int i=0; i<3;i++) { 
-							if(i == pricelist.size()) {break;}
+						<%	for(int i=0; i<3;i++) { 
 		                    	ProductVO vo = (ProductVO)pricelist.get(i);	%>
                         <li> 
                             <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -256,8 +255,8 @@
                                 </div>
                             </a>
                         </li>
-
-                     <%} %>
+                       <% if(i == pricelist.size()) {break;}
+                       } %>
                     </ul>
                 <%} %>
                 </div>
@@ -265,7 +264,6 @@
                     <% if(!participantslist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
-							if(i == participantslist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)participantslist.get(i);	%>
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -288,15 +286,15 @@
                             </div>
                         </a>
                     	</li>
-                    	<%} %>
+                        <% if(i == participantslist.size()) {break;}
+                       } %>
                     </ul>
-                <%} %>  
+                    <%} %>
                 </div>
                 <div class="slide1 fade" id="3">
                     <% if(!viewslist.isEmpty()) { %>
                     <ul class="items__list list">
 						<%	for(int i=0; i<3;i++) { 
-							if(i == viewslist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)viewslist.get(i);	%>
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
@@ -319,23 +317,16 @@
                             </div>
                         </a>
                     	</li>
-                      <%} %>
+                        <% if(i == viewslist.size()) {break;}
+                       } %>
                     </ul>
                     <%} %>
                 </div>
-                <% if(!categorylist.isEmpty()){%>
                 <div style="text-align:center">
-                    <% if(!pricelist.isEmpty()) { %>
                     <span class="dot"></span>
-                    <%} %>
-                    <% if(!participantslist.isEmpty()) { %>
                     <span class="dot"></span>
-                    <%} %>
-                    <% if(!viewslist.isEmpty()) { %>
                     <span class="dot"></span>
-                    <%} %>
                 </div>
-                <%}%>
             </div>
             <!-- 경매 목록 -->
             <div class="product_li">
