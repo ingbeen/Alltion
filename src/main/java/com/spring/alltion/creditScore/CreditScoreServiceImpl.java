@@ -14,9 +14,16 @@ public class CreditScoreServiceImpl implements CreditScoreService {
 	
 	public SaleCreditScoreVO getSaleCreditScore(String sale_id) {
 		SaleCreditScoreVO saleCreditScorevo = new SaleCreditScoreVO();
-		saleCreditScorevo.saleScoreRate();
 		CreditScoreMapper scoreMapper = sqlSession.getMapper(CreditScoreMapper.class);
 		saleCreditScorevo = scoreMapper.getSaleCreditScore(sale_id);
+		
+		return saleCreditScorevo;
+	}
+	
+	public SaleCreditScoreVO saleNormalCount(String sale_id) {
+		SaleCreditScoreVO saleCreditScorevo = new SaleCreditScoreVO();
+		CreditScoreMapper scoreMapper = sqlSession.getMapper(CreditScoreMapper.class);
+		saleCreditScorevo = scoreMapper.saleNormalCount(sale_id);
 		
 		return saleCreditScorevo;
 	}

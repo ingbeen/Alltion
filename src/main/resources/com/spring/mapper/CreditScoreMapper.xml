@@ -30,7 +30,7 @@
 	</select>
 	
 	<update id="saleNormalCount" parameterType="String">
-		UPDATE sale_credit_score_list SET sale_normal=#{sale_normal} WHERE sale_id=#{sale_id}
+		UPDATE sale_credit_score_list SET sale_normal=#{sale_normal}+1, sale_success_rate=#{sale_success_rate} WHERE sale_id=#{sale_id}
 	</update>
 	
 	<update id="saleDenialCount" parameterType="String">
@@ -59,7 +59,7 @@
 	</select>
 	
 	<update id="purchaseNormalCount" parameterType="String">
-		UPDATE purchase_credit_score_list SET purchase_normal=#{purchase_normal} WHERE purchase_id=#{purchase_id}
+		UPDATE purchase_credit_score_list SET purchase_normal=#{purchase_normal}, purchase_success_rate=#{purchase_success_rate}, purchase_credit_score=#{purchase_credit_score} WHERE purchase_id=#{purchase_id}
 	</update>
 	
 	<update id="purchaseDenialCount" parameterType="String">
