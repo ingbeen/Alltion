@@ -5,99 +5,12 @@
 <head>
  <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/member_join.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <title>All-tion</title>
-     
-    <style>
-.joinWrap {
-    padding: 100px;
-    text-align: center;
-    font-family: "맑은 고딕","Malgun Gothic";
-}
-.joinWrap h3 {
-    font-size: 26px;
-    font-weight: bold;
-    text-align: center;
-    color: #393939;
-    margin-bottom: 30px;
-}
-.joinWrap p {
-    font-size: 18px;
-    text-align: center;
-    color: #666;
-}
-.joinWrap ul {
-    overflow: hidden;
-    width: 660px;
-    margin: 40px auto 0;
-    border: 3px solid #e8e8e8;
-    box-sizing: border-box;
-}
-.joinWrap ul li:first-child {
-    border-right: 1px solid #e8e8e8;
-    box-sizing: border-box;
-}
-.joinWrap ul li dl dt {
-    padding-bottom: 20px;
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-    line-height: 16px;
-}
-.joinWrap ul li dl dd {
-    display: table;
-    width: 100%;
-    height: 44px;
-    vertical-align: top;
-}
-.joinWrap ul li {
-    float: left;
-    width: 327px;
-    padding: 40px 0;
-    text-align: center;
-}
-.joinWrap .sns_joinbtn {
-    display: table-cell;
-    vertical-align: middle;
-    height: 175px;
-}
-.joinWrap .sns_joinbtn a.naver {
-    background: #1ec700;
-}
-body a.base_btn {
-    display: inline-block;
-    height: 44px;
-    padding: 0 60px;
-    min-width: 118px;
-    line-height: 43px;
-    background: #FFAE36;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    vertical-align: middle;
-    font-family: "맑은 고딕","Malgun Gothic";
-    border-radius: 7px;
-}
-body a.base_btn1 {
-    display: inline-block;
-    height: 44px;
-    padding: 0 20px;
-    min-width: 118px;
-    line-height: 43px;
-    background: #1ec700;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    vertical-align: middle;
-    font-family: "맑은 고딕","Malgun Gothic";
-    border-radius: 7px;
-}
-        
-    </style>
+
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
@@ -105,9 +18,9 @@ body a.base_btn1 {
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
-                <p>
-                    <a href="">고객 센터</a>
-                </p>
+                <span>
+                    <a href="" id="clock"></a>
+                </span>
                 <ul>
                     <li>
                         <a href="loginForm.kj">로그인</a>
@@ -134,18 +47,18 @@ body a.base_btn1 {
                 <div class="search">
                     <select class="search--select">
                         <option value="">전체</option>
-                        <option value="패션">패션</option>
-                        <option value="뷰티">뷰티</option>
-                        <option value="출산/유아동">출산/유아동</option>
-                        <option value="전자기기">전자기기</option>
-                        <option value="가전제품">가전제품</option>
-                        <option value="가구/인테리어">가구/인테리어</option>
-                        <option value="반려동물/취미">반려동물/취미</option>
-                        <option value="도서/음반/문구">도서/음반/문구</option>
-                        <option value="티켓/쿠폰">티켓/쿠폰</option>
-                        <option value="스포츠">스포츠</option>
-                        <option value="공구/산업용품">공구/산업용품</option>
-                        <option value="기타잡화">기타잡화</option>
+                        <option value="cate01">패션</option>
+                        <option value="cate02">뷰티</option>
+                        <option value="cate03">출산/유아동</option>
+                        <option value="cate04">전자기기</option>
+                        <option value="cate05">가전제품</option>
+                        <option value="cate06">가구/인테리어</option>
+                        <option value="cate07">반려동물/취미</option>
+                        <option value="cate08">도서/음반/문구</option>
+                        <option value="cate09">티켓/쿠폰</option>
+                        <option value="cate10">스포츠</option>
+                        <option value="cate11">공구/산업용품</option>
+                        <option value="cate12">기타잡화</option>
                     </select>
                     <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
                 </div>
@@ -249,40 +162,23 @@ body a.base_btn1 {
             </ul>
         </div>
         <div class="lower_footer">
-            
-        </div>        
+            <ul class="lower_footer__content">
+                <li>
+                    <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
+                    <p>Tel: 02-000-0000 Fax : 02-000-0000 메일 : master@alltion.co.kr</p>
+                    <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
+                </li>
+                <li>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
+                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                </li>
+            </ul>
+        </div>s    
     </div>
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category a").click(function(){
-//                
-//                var activeTab = $(this).attr('id');
-//                
-//				$('ul.deadline-items__category a').removeClass('active');
-//				$('.menu-box').removeClass('active');
-//				$(this).prop('checked', true);
-//				$('div#' + activeTab).addClass('active');
-            })
-        });
-    </script>
+    <script type="text/javascript"></script>
+    <script src="./resources/js/join.js"></script>
 </body>
 </html>

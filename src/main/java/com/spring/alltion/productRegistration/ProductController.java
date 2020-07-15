@@ -7,14 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.alltion.login.MemberService;
 import com.spring.alltion.login.MemberVO;
+import com.spring.alltion.trading.TradingServiceImpl;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
-	private ProductService productService;
+	private ProductServiceImpl productService;
+	
+	@Autowired
+	private TradingServiceImpl tradingService;
 	
 	@RequestMapping(value = "/registration.yb")
 	public String home(HttpSession session, MemberVO membervo) {
@@ -29,9 +32,13 @@ public class ProductController {
 
 	/* test */
 	@RequestMapping(value = "productSelectTest.yb")
-	public String productSelectTest(Model model) {
+	public String productSelectTest(int product_number, Model model) {
 		
-		ProductVO productVO = productService.productSelectTest();
+		/* 마감된 상품 test */
+//		tradingService.seachEndOfProduct();
+		tradingService.endOfAuction(product_number);
+		
+		ProductVO productVO = productService.productSelectTest(product_number);
 		
 		model.addAttribute("productVO", productVO);
 		

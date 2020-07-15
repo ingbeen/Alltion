@@ -107,16 +107,20 @@ function changeCategory_2(value) {
     selectOutput = `<select class="category--select__02" 
     	name="product_category_2" size="7" onchange="changeCategory(this)">
             <option value="">- 선택해주세요 -</option>`;
-    
-        for(var i = 1; i < arguments.length; i ++){ // 2차 카테고리 갯수만큼 루프
-            if (i < 10) { // 2차 카테고리 넘버가 한자리 수이면 앞에 0 붙이기. 예) 0 + 1 = 01
-                categoryNumber = 0 + String(i);
+    	
+    	// arguments는 해당 함수를 호출할때의 파라미터 데이터를 의미한다
+    	// js에서는 호출할때 지정된 것 외의 파라미터를 받을 수 있다
+        $.each(arguments, (idx, argument) => { // 2차 카테고리 갯수만큼 루프
+        	if(idx == 0) {
+        		return true;
+        	}
+        	if (idx < 10) { // 2차 카테고리 넘버가 한자리 수이면 앞에 0 붙이기. 예) 0 + 1 = 01
+                categoryNumber = 0 + String(idx);
             }
             // 함수의 0번쨰 파라미터를 제외한 나머지 갯수만큼 option태그 생성
             selectOutput += `<option value="${value}${categoryNumber}">
-            	${arguments[i]}</option>`;
-        }
-        
+            	${argument}</option>`;
+        });
     selectOutput += `</select>`;
     /* 2차 카테고리 태그 작성 끝 */
 
@@ -404,9 +408,9 @@ function productSubmit() {
         type: 'post',
         contentType: false,
         processData: false,
-        success: (imgSrcList) => { // 이미지경로를 담은 배열을 파라미터로 넘기고 상품등록 진행
-        	productInsert(imgSrcList);
-    	}, error: () => alert("이미지 업로드를 실패하였습니다")
+        // 이미지경로를 담은 배열을 파라미터로 넘기고 상품등록 진행
+        success: (imgSrcList) => productInsert(imgSrcList),
+        error: () => alert("이미지 업로드를 실패하였습니다")
     });
 };
 
@@ -420,6 +424,8 @@ function formCheck() {
 	let bidding_unit = $('select[name=product_bidding_unit]'); // 입찰단위
 	let transaction_area = $('input[name=product_transaction_area]'); // 거래가능지역
 	let purchase_price = $('input[name=product_purchase_price]'); // 즉시구매가
+	let delivery = $('input[name=product_delivery]:checked'); // 택배거래
+	let direct = $('input[name=direct]:checked'); // 택배거래
 	
 	/* 유효성 검사 */
 	// 2차카테고리
@@ -447,6 +453,11 @@ function formCheck() {
 		alert("경매 시작가는 최소 1,000원부터 입니다");
 		return true;
 	} 
+	// 경매 시작가 100원 단위
+	else if (starting_price.val().substr(-2) != '00') {
+		alert("경매 시작가의 최소 단위는 100원입니다");
+		return true;
+	} 
 	// 입찰 단위
 	else if (bidding_unit.val() < 100) {
 		alert("입찰 단위는 최소 100원부터 입니다");
@@ -463,8 +474,19 @@ function formCheck() {
 		&& purchase_price.val() < Number(starting_price.val()) + Number(bidding_unit.val())) {
 		alert("최소 즉시구매가는 '경매 시작가 + 입찰단위가' 입니다");
 		return true;
+	} 
+	// 즉시구매가 100원 단위
+	else if (purchase_price.attr('disabled') == undefined
+			&& purchase_price.val().substr(-2) != '00') {
+		alert("즉시구매가의 최소 단위는 100원입니다");
+		return true;
 	}
-	
+	// 택배, 직거래 중 최소 1개 선택 여부
+	else if (delivery.val() == 'none' && direct.val() == 0) {
+		alert("택배거래와 직거래 중 최소 1개의 방법을 선택해주세요");
+		return true;
+	}
+		
 	// 유효성 검사 완료
 	return false;
 }
@@ -487,7 +509,7 @@ function productInsert(imgSrcList) {
         url: 'productInsert.yb',
         type: 'post',
         data: formData,
-        success: () => alert("성공"), 
+        success: () => alert("성공(alert창 삭제예정 : 마이페이지 - 판매관리로 이동)"), 
         error: () => alert("경매 등록을 실패하였습니다")
     });
 }

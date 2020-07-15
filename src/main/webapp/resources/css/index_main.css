@@ -1,20 +1,8 @@
-/* CSS RESET */
-* {
-    padding: 0;
-    border: 0;
-    margin: 0;
-    box-sizing: border-box;
-    color: #000000;
-    font-family: 'Noto Sans', 'Nanum Gothic', sans-serif;
-    letter-spacing: -1px;
-/*    border: 1px solid;*/
-}
-
-a {
-    text-decoration: none;
-    cursor: pointer;
-}
-li {list-style: none;}
+/* 메인 카테고리 css 깨짐 방지 */
+/*
+.lower_header .category .category--drop img {margin-top: -3px;}
+.lower_header.sticky .category .category--drop img {margin-top: -4px;}
+*/
 
 /* 메인 페이지 - index.html */
 /* desktop-size(min:1280) */
@@ -41,7 +29,7 @@ li {list-style: none;}
     position: absolute;
     top: 12px;
     right: 12px;
-    background: url(img/header/close_btn.png);
+    z-index: 999;
 }
 
 /* -- 배너 영역 */

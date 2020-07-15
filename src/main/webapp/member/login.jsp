@@ -5,108 +5,24 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 	<link rel="stylesheet" href="./resources/css/style.css">
+	<link rel="stylesheet" href="./resources/css/member_login.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <title>All-tion</title>
-    
 
-   <style >
-.login {
-    margin: 160px auto;
-    width: 490px;
-    border: 1px solid #FEE7C5;
-    border-radius: 4px;
-    }
-       
-    .login-screen {
-        width: 356px;
-        margin: 0 auto;
-    }
-       
-    .app-title {text-align: center;}
-       
-    .app-title h2 {
-        margin-top: 24px;
-        margin-bottom: 70px;
-        font-size: 28px;
-    }
-        
-    .login-form {
-    text-align: center;
-    }
-       
-    .control-group {
-        margin: 0 auto;
-        margin-bottom: 42px;
-        text-align: left;
-    }
-
-    .control-group input {
-        margin-top: 14px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        font-size: 16px;
-        width: 100%;
-        padding: 4px;
-        transition: border .2s;
-    }
-
-    input:focus {
-    border: 2px solid  #F9A825;
-    box-shadow: none;
-    }
-       
-    .btn {
-        background: #F8C436;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 25px;
-        padding: 12px 0;
-        text-decoration: none;
-        text-shadow: none;
-        border-radius: 3px;
-        box-shadow: none;
-        transition: 0.25s;
-        display: block;
-        width: 100%;
-        margin-top: 76px;
-        margin-bottom: 16px;
-        height: auto;
-    }
-
-    .btn:hover {
-      background-color:  #F9A825;
-    }
-    
-    .login-form p {
-       font-size: 14px; 
-       margin-bottom:  18px;
-    }
-       
-    .login-link {color: #A77731}
-    
-    .login-link:hover {font-weight: bold;}
-    </style>
-<script>
-function enterkey() {
-        if (window.event.keyCode == 13) {
- 
-             // 엔터키가 눌렸을 때 실행할 내용
-             login();
-        }
-}
-</script>
 </head>
-<body>
+<!-- 로그인 화면시 아이디에 포커스 -->
+<body onload="document.getElementById('member_id').focus();">
 
 <!-- 모든 페이지 공통 영역 by 하나  -->
     
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
-                <p>
-                    <a href="">고객 센터</a>
-                </p>
+                <span>
+                    <a href="" id="clock"></a>
+                </span>
                 <ul>
                     <li>
                         <a href="#">로그인</a>
@@ -127,24 +43,24 @@ function enterkey() {
                 </h1>
                 <div class="category">
                     <a class="category--drop">
-                        <img src="./resources/img/header/category_tab.png">
+                        <img style="margin-top:-4px;" src="./resources/img/header/category_tab.png">
                     </a>
                 </div>
                 <div class="search">
                     <select class="search--select">
                         <option value="">전체</option>
-                        <option value="패션">패션</option>
-                        <option value="뷰티">뷰티</option>
-                        <option value="출산/유아동">출산/유아동</option>
-                        <option value="전자기기">전자기기</option>
-                        <option value="가전제품">가전제품</option>
-                        <option value="가구/인테리어">가구/인테리어</option>
-                        <option value="반려동물/취미">반려동물/취미</option>
-                        <option value="도서/음반/문구">도서/음반/문구</option>
-                        <option value="티켓/쿠폰">티켓/쿠폰</option>
-                        <option value="스포츠">스포츠</option>
-                        <option value="공구/산업용품">공구/산업용품</option>
-                        <option value="기타잡화">기타잡화</option>
+                        <option value="cate01">패션</option>
+                        <option value="cate02">뷰티</option>
+                        <option value="cate03">출산/유아동</option>
+                        <option value="cate04">전자기기</option>
+                        <option value="cate05">가전제품</option>
+                        <option value="cate06">가구/인테리어</option>
+                        <option value="cate07">반려동물/취미</option>
+                        <option value="cate08">도서/음반/문구</option>
+                        <option value="cate09">티켓/쿠폰</option>
+                        <option value="cate10">스포츠</option>
+                        <option value="cate11">공구/산업용품</option>
+                        <option value="cate12">기타잡화</option>
                     </select>
                     <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
                 </div>
@@ -172,7 +88,8 @@ function enterkey() {
         </div>
     </div>
 
-<form name = "login" action = "./login.kj" method = "post">    
+	<form name = "login" action = "./login.kj" method = "post">   
+
     <!-- 로그인 영역 by 계정 -->
 	<div class="login">
         <div class="login-screen">
@@ -191,7 +108,7 @@ function enterkey() {
                     <input type="password" name = "member_password" class="login-field" id="member_password"  placeholder="비밀번호를 입력해 주세요" >
                 </div>
 
-                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()" onkeyup="enterkey();">로그인</a>
+                <a class="btn btn-primary btn-large btn-block" onclick = "check_input()">로그인</a>
                 <p>아직 회원이 아니신가요?&nbsp;
                     <a class="login-link" href = "./naverjoin.kj">회원가입 바로 가기</a>
                 </p>
@@ -201,61 +118,6 @@ function enterkey() {
         </div>
     </div>
 	
- <script>
-function check_input()
-{
-	var str, i, ch;
-	// 아이디 체크 ---->
-	if (document.login.member_id.value == "")
-	{
-		alert("아이디를 입력하세요!!!");
-		document.login.member_id.focus();
-		return;
-	}
-	else
-	{
-		str = document.login.member_id.value;
-		
-		for (i=0; i<str.length; i++)
-		{
-			ch = str.substring(i, i+1);
-			if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z") 
-					|| (ch >= "A" && ch <= "Z")))
-			{
-				alert("특수문자가 포함, 다시 입력!!!");
-				document.login.member_id.focus();
-				return;
-			}
-		}
-	} // 아이디 체크 <------
-	
-	// 패스워드 체크 ------>
-	if (document.login.member_password.value == "")
-	{
-		alert("패스워드를 입력하세요!!!");
-		document.login.member_password.focus();
-		return;
-	}
-	else
-	{
-		str = document.login.member_password.value;
-		
-		for (i=0; i<str.length; i++)
-		{
-			ch = str.substring(i, i+1);
-			if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z") 
-					|| (ch >= "A" && ch <= "Z")))
-			{
-				alert("특수문자가 포함, 다시 입력!!!");
-				document.login.member_password.focus();
-				return;
-			}
-		}
-	} // 패스워드 체크 <------
-	
-	login.submit();
-}
-</script>   
 </form>    
     
     <!-- 푸터 영역 -->
@@ -300,42 +162,24 @@ function check_input()
             </ul>
         </div>
         <div class="lower_footer">
-            
+            <ul class="lower_footer__content">
+                <li>
+                    <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
+                    <p>Tel: 02-000-0000 Fax : 02-000-0000 메일 : master@alltion.co.kr</p>
+                    <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
+                </li>
+                <li>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
+                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                </li>
+            </ul>
         </div>        
     </div>
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category a").click(function(){
-//                
-//                var activeTab = $(this).attr('id');
-//                
-//				$('ul.deadline-items__category a').removeClass('active');
-//				$('.menu-box').removeClass('active');
-//				$(this).prop('checked', true);
-//				$('div#' + activeTab).addClass('active');
-            })
-        });
-    </script>
-
+    <script type="text/javascript"></script>
+    <script src="./resources/js/login.js"></script>
 
 </body>
 </html>

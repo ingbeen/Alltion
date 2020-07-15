@@ -35,14 +35,13 @@
 	
 	<!-- 최고응찰자를 구함(상품번호를 통해서) -->
 	<select id="getTop_bidder_id" parameterType="int" resultType="String">
-		select 
-		bid_id 
-		from bid_list 
-		where bid_price = (select 
-		            nvl(max(bid_price),0) as max_bid_price 
-		            from bid_list 
-		            where bid_product_number = #{bid_product_number}) 
-		            	and bid_product_number = #{bid_product_number}
+		select bid_id 
+      	from bid_list 
+      	where bid_price = (select 
+                  nvl(max(bid_price),0) as max_bid_price 
+                  from bid_list 
+                  where bid_product_number = #{bid_product_number}) and 
+                  bid_product_number = #{bid_product_number}
 	</select>
 	
 	<!-- 현재가를 구함(응찰하기에서 사용) -->
