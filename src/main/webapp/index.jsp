@@ -27,101 +27,96 @@ pageEncoding="UTF-8"%>
         <a href="https://coupa.ng/bEUWFN" target="_blank">
             <img src="https://ads-partners.coupang.com/banners/263827?subId=&traceId=V0-301-969b06e95b87326d-I263827&w=728&h=90" >
         </a>
-        <button class="ad__banner--closeBtn"></button>
-<!--
-        <a href="#" class="ad__banner--link">
-            <img src="img/header/adEx.png" class="ad__banner--img">
-            <button class="ad__banner--closeBtn"></button>
-        </a>
--->
+        <button class="ad__banner--closeBtn">
+        	<img src="./resources/img/header/close_btn.png">
+        </button>
     </div>
-    <div class="header">
-        <div class="upper_header">
-            <div class="upper_header--nav">
-                <p>
-                    <a href="" id="clock"></a>
-                </p>
-                <ul>
-                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
-                	<c:choose>
-
-					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
-                    <li>
-                        <a href="./mypage.kj">${userId}</a>
-                    </li>
-                    <li>
-                        <a href="./logout.kj">로그아웃</a>
-                    </li>
-                    </c:when>
-                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
-                    <li>
-                        <a href="./loginForm.kj">로그인</a>
-                    </li>
-                    <li>
-                        <a href="./naverjoin.kj">회원 가입</a>
-                    </li>
-                    </c:otherwise>
-                    </c:choose>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                    <li>
-                        <a href="#">고객 센터</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="lower_header">
-            <div class="lower_header--nav">
-                <h1 class="logo">
-                    <a href="/alltion/">ALL-TION</a>
-                </h1>
-                <div class="category">
-                    <a class="category--drop">
-                        <img src="./resources/img/header/category_tab.png">
-                    </a>
-                </div>
-                <div class="search">
-                    <select class="search--select">
-                        <option value="">전체</option>
-                        <option value="cate01">패션</option>
-                        <option value="cate02">뷰티</option>
-                        <option value="cate03">출산/유아동</option>
-                        <option value="cate04">전자기기</option>
-                        <option value="cate05">가전제품</option>
-                        <option value="cate06">가구/인테리어</option>
-                        <option value="cate07">반려동물/취미</option>
-                        <option value="cate08">도서/음반/문구</option>
-                        <option value="cate09">티켓/쿠폰</option>
-                        <option value="cate10">스포츠</option>
-                        <option value="cate11">공구/산업용품</option>
-                        <option value="cate12">기타잡화</option>
-                    </select>
-                    <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
-                </div>
-                <ul class="member_info">
-                    <li>
-                        <a href="mypage.kj">
-                            <span class="material-icons">perm_identity</span>
-                            <span>마이 페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishList.yb">
-                            <span class="material-icons">turned_in_not</span>
-                            <span>찜 목록</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-icons">access_time</span>
-                            <span>참여 경매</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+	<div class="header">
+	    <div class="upper_header">
+	        <div class="upper_header--nav">
+	            <p>
+	                <a href="" id="clock"></a>
+	            </p>
+	            <ul>
+	            <!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+	            <c:choose>
+	                <c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
+	                <li>
+	                    <a href="./mypage.kj">${userId}</a>
+	                </li>
+	                <li>
+	                    <a href="./logout.kj">로그아웃</a>
+	                </li>
+	                </c:when>
+	                <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+	                <li>
+	                    <a href="./loginForm.kj">로그인</a>
+	                </li>
+	                <li>
+	                    <a href="./naverjoin.kj">회원 가입</a>
+	                </li>
+	                </c:otherwise>
+	            </c:choose>
+	                <li>
+	                    <a href="./registration.yb">판매하기</a>
+	                </li>
+	                <li>
+	                    <a href="#">고객 센터</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="lower_header">
+	        <div class="lower_header--nav">
+	            <h1 class="logo">
+	                <a href="/alltion/">ALL-TION</a>
+	            </h1>
+	            <div class="category">
+	                <a class="category--drop">
+	                    <img src="./resources/img/header/category_tab.png">
+	                </a>
+	            </div>
+	            <div class="search">
+	                <select class="search--select">
+	                    <option value="">전체</option>
+	                    <option value="cate01">패션</option>
+	                    <option value="cate02">뷰티</option>
+	                    <option value="cate03">출산/유아동</option>
+	                    <option value="cate04">전자기기</option>
+	                    <option value="cate05">가전제품</option>
+	                    <option value="cate06">가구/인테리어</option>
+	                    <option value="cate07">반려동물/취미</option>
+	                    <option value="cate08">도서/음반/문구</option>
+	                    <option value="cate09">티켓/쿠폰</option>
+	                    <option value="cate10">스포츠</option>
+	                    <option value="cate11">공구/산업용품</option>
+	                    <option value="cate12">기타잡화</option>
+	                </select>
+	                <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
+	            </div>
+	            <ul class="member_info">
+	                <li>
+	                    <a href="mypage.kj">
+	                        <span class="material-icons">perm_identity</span>
+	                        <span>마이 페이지</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="#">
+	                        <span class="material-icons">turned_in_not</span>
+	                        <span>찜 목록</span>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="#">
+	                        <span class="material-icons">access_time</span>
+	                        <span>참여 경매</span>
+	                    </a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
     <!-- 배너 영역 -->
     <div class="banner">
     </div>
@@ -1838,8 +1833,18 @@ pageEncoding="UTF-8"%>
             </ul>
         </div>
         <div class="lower_footer">
-            
-        </div>        
+            <ul class="lower_footer__content">
+                <li>
+                    <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
+                    <p>Tel: 02-000-0000 Fax : 02-000-0000 메일 : master@alltion.co.kr</p>
+                    <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
+                </li>
+                <li>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
+                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                </li>
+            </ul>
+        </div>    
     </div>
     
     <!--  스크립트 영역  -->
