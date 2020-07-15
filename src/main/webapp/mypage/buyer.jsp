@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.spring.alltion.login.MemberVO" %>
+<%@ page import = "com.spring.alltion.test.Product_kjVO" %>
+<%@ page import = "java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%	
+	ArrayList<Product_kjVO> product_list =
+			(ArrayList<Product_kjVO>)request.getAttribute("product_list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +92,19 @@
         </div>
     </div>
     <!--구매 중-->
-    <div class="buyer--form">
+    	<%if(product_list.size()==0) {%>
+    	<div class="buyer--form">
+    	<h3>구매 중 경매가 없습니다.</h3>
+    	</div>
+    	<%}else{ %>
+    	<%
+        	for(int i = 0; i < product_list.size(); i++)
+        	{
+        		Product_kjVO vo = (Product_kjVO)product_list.get(i);
+        	
+        %> 
+       
+        <div class="buyer--form">
         <h3>구매 중 경매</h3>
             <div class="buyer--content">
                 <ul class="buyer_form list">
@@ -93,7 +113,7 @@
                             <span>상품 번호</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                        <span><%=vo.getProduct_number() %></span>
                         </div>    
                     </li>
                 </ul>
@@ -103,7 +123,7 @@
                             <span>상품명</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                        <span><%=vo.getProduct_subject() %></span>
                         </div>    
                     </li>
                 </ul>
@@ -113,7 +133,7 @@
                             <span>구매 가격</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                        <span><%=vo.getProduct_purchase_price() %></span>
                         </div>    
                     </li>
                 </ul>
@@ -123,7 +143,7 @@
                             <span>입금 기한</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                        <span><%=vo.getTrading_deposit_deadline() %></span>
                         </div>    
                     </li>
                 </ul>
@@ -133,7 +153,7 @@
                             <span>거래 방식</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                        <span><%=vo.getTrading_transaction_method() %></span>
                         </div>    
                     </li>
                 </ul>
@@ -143,23 +163,18 @@
                             <span>판매자</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                        	<span><%=vo.getProduct_id() %></span>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
-                    <li>
-                        <div class="buyer_form__list title">
-                            <span>신용도</span>
-                        </div>
-                        <div class="buyer_form__list content">
-                            <h4></h4>
-                        </div>    
-                    </li>
-                </ul> 
+               
         </div>
         <a href = "./buyer_deal.kj"  class = "base_btn">거래 하기</a>
     </div>
+    <%
+        	}}
+    %>
+    
     <!--구매 완료 -->
         <div class="buyer--form">
             <h3>구매 완료</h3>
@@ -170,7 +185,7 @@
                             <span>상품 번호</span>
                         </div>
                         <div class="buyer_form__list content">
-                            <h4></h4>
+                            
                         </div>    
                     </li>
                 </ul>

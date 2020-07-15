@@ -3,6 +3,7 @@
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%
 	String id = (String)session.getAttribute("userId");
+	
 %>
 <!DOCTYPE html>
 <html>

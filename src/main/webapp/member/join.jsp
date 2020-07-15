@@ -18,9 +18,9 @@
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
-                <p>
-                    <a href="">고객 센터</a>
-                </p>
+                <span>
+                    <a href="" id="clock"></a>
+                </span>
                 <ul>
                     <li>
                         <a href="loginForm.kj">로그인</a>
