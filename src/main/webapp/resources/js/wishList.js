@@ -6,8 +6,10 @@ const _minute = _second * 60; // 1분
 const _hour = _minute * 60; // 1시간
 const _day = _hour * 24; // 1일
 
-$('.wishList--ChangeEndDateFormBtn').on('click', () => {
-    // 'wishList--endDate__endDate' 태그 갯수만큼 반복실행한다
+$('.wishList--ChangeEndDateFormBtn').on('click', chageEndDate)
+
+function chageEndDate() {
+	// 'wishList--endDate__endDate' 태그 갯수만큼 반복실행한다
     $('.wishList--endDate__endDate').each(function () {
         if (!endDateFormStatus) {
             chanageEndDateToTimeLeft($(this)); // 종료시간 -> 남은시간
@@ -25,10 +27,10 @@ $('.wishList--ChangeEndDateFormBtn').on('click', () => {
 
     // form의 현재상태를 바꿔준다
     endDateFormStatus = !endDateFormStatus;
-})
+}
 
 // 종료시간 -> 남은시간
-function chanageEndDateToTimeLeft (element) {
+function chanageEndDateToTimeLeft(element) {
     let now = new Date(); // 현재시간
     let endDate = new Date(element.attr("data-endDate")); // 마감시간
     let resultTime = ""; // 남은시간
@@ -68,7 +70,7 @@ function chanageEndDateToTimeLeft (element) {
 }
 
 // 남은시간 -> 종료시간
-function chanageTimeLeftToEndDate (element) {
+function chanageTimeLeftToEndDate(element) {
     // 현재시간을 얻어온다
     let now = new Date();
     let dataEndDate = element.attr("data-endDate"); // 태그에 저장된 마감시간
@@ -97,7 +99,45 @@ function getWishList() {
 }
 
 function wishListOutput (wishList) {
-	console.log(wishList[0]);
+	let wishListContents = "";
+	$.each(wishList, (idx, vo) => {
+		console.log(vo);
+		wishListContents += `
+<div class="wishList--contents">
+    <div class="wishList--deletCheck">
+        <input type="checkbox">
+    </div>
+    <div class="wishList--info">
+        <div class="wishList--thumbnail">
+            <img src="${vo.product_img_1}">
+        </div>
+        <div class="wishList--description">
+            <p class="wishList--description__category">${vo.product_category_1} &gt; ${vo.product_category_2}</p>
+            <p class="wishList--description__subject"><a>${vo.product_subject}</a></p>
+            <p class="wishList--description__seller">${vo.product_id} / ${vo.product_credit_score}(수정 : 클릭여부, 신용도등급변환)</p>
+        </div>
+    </div>
+    <div class="wishList--currentPrice">
+        <p class="wishList--currentPrice__currentPrice">${vo.product_current_price}</p>
+        <div class="wishList--purchase_priceWarp">
+            <p class="wishList--purchase_priceWarp__purchase_price">즉시구매가 : ${vo.product_purchase_price}</p>
+            <p class="wishList--purchase_priceWarp__bids">입찰 : ${vo.product_bids}</p>
+        </div>
+    </div>
+    <div class="wishList--delivery">
+        <p class="wishList--delivery__delivery">${vo.product_delivery}</p>
+        <p class="wishList--delivery__transactionArea">직거래가능지역 : ${vo.product_transaction_area}</p>
+    </div>
+    <div class="wishList--endDate">
+        <p class="wishList--endDate__endDate" data-endDate="${vo.product_end_date}">${vo.product_end_date}</p>
+        <button class="wishList--bidBtn" type="button" onclick="location.href='./boarddetail.hs?product_number=${vo.product_number}'">응찰하기</button>
+    </div>
+</div>
+		`;
+	})
+	
+	$('.wishList--contentsWarp').html(wishListContents);
+	chageEndDate();
 }
 
 $('document').ready(() => {

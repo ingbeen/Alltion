@@ -165,69 +165,8 @@
                     </div>
                 </div>
     
-                <div class="wishList--contentsWarp">
-                    <div class="wishList--contents">
-                        <div class="wishList--deletCheck">
-                            <input type="checkbox">
-                        </div>
-                        <div class="wishList--info">
-                            <div class="wishList--thumbnail">
-                                <img src="resources/img/product/1.jpg">
-                            </div>
-                            <div class="wishList--description">
-                                <p class="wishList--description__category">출산/유아동 > 유아동의류</p>
-                                <p class="wishList--description__subject"><a>기저귀 100개 저렴하게 판매합니다</a></p>
-                                <p class="wishList--description__seller">ingbeen / 실버(신용도 클릭할때 뜨게할건지 정해야됨)</p>
-                            </div>
-                        </div>
-                        <div class="wishList--currentPrice">
-                            <p class="wishList--currentPrice__currentPrice">45,000</p>
-                            <div class="wishList--purchase_priceWarp">
-                                <p class="wishList--purchase_priceWarp__purchase_price">즉시구매가 : 55,000</p>
-                                <p class="wishList--purchase_priceWarp__bids">입찰 : 13</p>
-                            </div>
-                        </div>
-                        <div class="wishList--delivery">
-                            <p class="wishList--delivery__delivery">착불</p>
-                            <p class="wishList--delivery__transactionArea">직거래가능지역 : 없음</p>
-                        </div>
-                        <div class="wishList--endDate">
-                            <p class="wishList--endDate__endDate" data-endDate="2020-07-15 13:14">2020-07-15 13:14</p>
-                            <button class="wishList--bidBtn" type="button">응찰하기</button>
-                        </div>
-                    </div>
-                    
-                    <div class="wishList--contents">
-                        <div class="wishList--deletCheck">
-                            <input type="checkbox">
-                        </div>
-                        <div class="wishList--info">
-                            <div class="wishList--thumbnail">
-                                <img src="resources/img/product/pier-5086290_1920.jpg">
-                            </div>
-                            <div class="wishList--description">
-                                <p class="wishList--description__category">출산/유아동 > 유아동의류</p>
-                                <p class="wishList--description__subject"><a>기저귀 100개 저렴하게 판매합니다</a></p>
-                                <p class="wishList--description__seller">ingbeen / 실버(신용도 클릭할때 뜨게할건지 정해야됨)</p>
-                            </div>
-                        </div>
-                        <div class="wishList--currentPrice">
-                            <p class="wishList--currentPrice__currentPrice">45,000</p>
-                            <div class="wishList--purchase_priceWarp">
-                                <p class="wishList--purchase_priceWarp__purchase_price">즉시구매가 : 55,000</p>
-                                <p class="wishList--purchase_priceWarp__bids">입찰 : 13</p>
-                            </div>
-                        </div>
-                        <div class="wishList--delivery">
-                            <p class="wishList--delivery__delivery">착불</p>
-                            <p class="wishList--delivery__transactionArea">직거래가능지역 : 없음</p>
-                        </div>
-                        <div class="wishList--endDate">
-                            <p class="wishList--endDate__endDate" data-endDate="2020-07-16 13:14">2020-07-16 13:14</p>
-                            <button class="wishList--bidBtn" type="button">응찰하기</button>
-                        </div>
-                    </div>
-                </div>
+                <div class="wishList--contentsWarp"></div>
+                
                 <button class="wishList--delete" type="button">선택상품 삭제</button>
                 <div class="wishList--pageWarp">
                     <ul class="wishList--page">
