@@ -105,7 +105,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="./pay.ms">
                     <span class="material-icons">credit_card</span><br>
                     <span class="myPage__menu">e-머니</span>
                 </a>
