@@ -91,9 +91,13 @@ function getWishList() {
     $.ajax({
         url : "getWishList.yb", // test.jsp 에서 받아옴
         dataType :"json", // 데이터타입을 json 으로 받아옴
-        success : (wishList) => console.log(wishList),
+        success : (wishList) => wishListOutput(wishList),
         error : () => alert("찜목록 불러오기에 실패했습니다")
     });
+}
+
+function wishListOutput (wishList) {
+	console.log(wishList[0]);
 }
 
 $('document').ready(() => {

@@ -107,16 +107,20 @@ function changeCategory_2(value) {
     selectOutput = `<select class="category--select__02" 
     	name="product_category_2" size="7" onchange="changeCategory(this)">
             <option value="">- 선택해주세요 -</option>`;
-    
-        for(var i = 1; i < arguments.length; i ++){ // 2차 카테고리 갯수만큼 루프
-            if (i < 10) { // 2차 카테고리 넘버가 한자리 수이면 앞에 0 붙이기. 예) 0 + 1 = 01
-                categoryNumber = 0 + String(i);
+    	
+    	// arguments는 해당 함수를 호출할때의 파라미터 데이터를 의미한다
+    	// js에서는 호출할때 지정된 것 외의 파라미터를 받을 수 있다
+        $.each(arguments, (idx, argument) => { // 2차 카테고리 갯수만큼 루프
+        	if(idx == 0) {
+        		return true;
+        	}
+        	if (idx < 10) { // 2차 카테고리 넘버가 한자리 수이면 앞에 0 붙이기. 예) 0 + 1 = 01
+                categoryNumber = 0 + String(idx);
             }
             // 함수의 0번쨰 파라미터를 제외한 나머지 갯수만큼 option태그 생성
             selectOutput += `<option value="${value}${categoryNumber}">
-            	${arguments[i]}</option>`;
-            
-        }
+            	${argument}</option>`;
+        });
     selectOutput += `</select>`;
     /* 2차 카테고리 태그 작성 끝 */
 

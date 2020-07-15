@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +24,6 @@
             keyboard_arrow_up
         </span>
     </div>
-    <!-- 헤더 -->
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
@@ -32,18 +31,33 @@
                     <a href="" id="clock"></a>
                 </p>
                 <ul>
+                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
                     <li>
                         <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
                     </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
                     <li>
                     	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -54,7 +68,7 @@
                 </h1>
                 <div class="category">
                     <a class="category--drop">
-                        <img src="resources/img/header/category_tab.png">
+                        <img src="./resources/img/header/category_tab.png">
                     </a>
                 </div>
                 <div class="search">
@@ -77,13 +91,13 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="./mypage.kj">
+                        <a href="mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="wishList.yb">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
@@ -98,7 +112,11 @@
             </div>
         </div>
     </div>
-    <!-- !! 기재해야 될 코드 여기에서부터 입력 start -->
+    <!-- 배너 영역 -->
+    <div class="banner">
+    </div>
+    
+    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
 
     <!-- 찜목록 시작 -->
 
