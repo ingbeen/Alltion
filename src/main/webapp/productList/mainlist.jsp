@@ -11,13 +11,13 @@
 	List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
  	List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
 	List<ProductVO> viewslist=(List<ProductVO>)request.getAttribute("viewslist");
-	/*
+	
   	int listcount=((Integer)request.getAttribute("listcount")).intValue();
   	int nowpage=((Integer)request.getAttribute("page")).intValue();
   	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
   	int startpage=((Integer)request.getAttribute("startpage")).intValue();
   	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-  	*/
+  	
   %>
 
 <!DOCTYPE html>
@@ -375,6 +375,36 @@
                     }%>
                 </ul>
               <%} %>
+              <ul class="page_number">
+                    <li>
+                    <%if(nowpage<=1){ %>
+                    &#60;
+                    <%}else{ %>
+                        <a href="./mainlist.ms?page=<%=nowpage-1 %>">&#60;</a>
+                    <%} %>
+                    </li>
+                    <%for(int a=startpage;a<=endpage;a++){
+						if(a==nowpage){%>
+						<li>
+						<%=a %>
+						</li>
+						<%}else{ %>
+						<li>
+						<a href="./mainlist.ms?page=<%=a %>"><%=a %></a>
+						</li>
+						<%} %>
+					<%} %>
+                    
+                    <%if(nowpage>=maxpage){ %>
+                    <li>
+                    &#62;
+                    </li>
+                    <%}else{ %>
+                    <li>
+                        <a href="./mainlist.ms?page=<%=nowpage+1 %>">&#62;</a>
+                    </li>
+                    <%} %>
+                </ul>
             </div>
         </div>
     </div>  

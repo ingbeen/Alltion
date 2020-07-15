@@ -27,8 +27,29 @@ public class ProductListController {
 		return "productList/productList";
 	}
 	@RequestMapping(value = "/Mainlist.ms", method = RequestMethod.GET)
-	public String getMainlist(Model model) {
-		model.addAttribute("mainlist", productlistService.getMainlist());
+	public String getMainlist(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+		int limit = 5;
+		int listcount = productlistService.getListCount();
+		int startrow = (page - 1) * 5 + 1;
+		int endrow = startrow + limit - 1;
+		
+		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+		hashmap.put("startrow", startrow);
+		hashmap.put("endrow", endrow);
+		List<ProductVO> mainlist = productlistService.getMainlist(hashmap);
+		
+		int maxpage = (int) ((double) listcount / limit + 0.95);
+		int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 5 + 1;
+		int endpage = maxpage;
+		if (endpage > startpage + 5 - 1)
+			endpage = startpage + 5 - 1;
+		
+		//model.addAttribute("mainlist", productlistService.getMainlist());
+		model.addAttribute("page", page);
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("maxpage", maxpage);
+		model.addAttribute("startpage", startpage);
+		model.addAttribute("endpage", endpage);
 		model.addAttribute("pricelist", productlistService.getfamousPricelist2());
 		model.addAttribute("participantslist", productlistService.getfamousParticipantslist2());
 		model.addAttribute("viewslist", productlistService.getfamousViewslist2());

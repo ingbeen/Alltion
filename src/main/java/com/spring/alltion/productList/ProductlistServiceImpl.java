@@ -64,15 +64,16 @@ public class ProductlistServiceImpl implements ProductlistService {
 		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
 		return productlist;
 	}
+	/*
 	@Override
 	public List<ProductVO> getMainlist() {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		List<ProductVO> productlist = productListMapper.getMainlist();
-		System.out.println(productlist.get(0).getProduct_number());
+		//System.out.println(productlist.get(0).getProduct_number());
 		return productlist;
 	}
-	
+	*/
 	@Override
 	public List<ProductVO> getOrderbylist(String product_category_2, String sort_list) {
 		// TODO Auto-generated method stub
@@ -120,6 +121,20 @@ public class ProductlistServiceImpl implements ProductlistService {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		List<ProductVO> productlist = productListMapper.getfamousViewslist2();
+		return productlist;
+	}
+	@Override
+	public List<ProductVO> getMainlist(HashMap<String, Integer> hashmap) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getMainlist(hashmap);
+		return productlist;
+	}
+	@Override
+	public List<ProductVO> getCategorylist(String product_category_2, HashMap<String, Integer> hashmap) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getCategorylist(product_category_2, hashmap);
 		return productlist;
 	}
 }
