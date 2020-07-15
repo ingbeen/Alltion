@@ -8,6 +8,9 @@
  
  <%
   	List<ProductVO> mainlist=(List<ProductVO>)request.getAttribute("mainlist");
+	List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
+ 	List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
+	List<ProductVO> viewslist=(List<ProductVO>)request.getAttribute("viewslist");
 	/*
   	int listcount=((Integer)request.getAttribute("listcount")).intValue();
   	int nowpage=((Integer)request.getAttribute("page")).intValue();
@@ -45,11 +48,28 @@
                     <a href="" id="clock"></a>
                 </p>
                 <ul>
+                    <!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
                     <li>
-                        <a href="loginForm.html">로그인</a>
+                        <a href="./mypage.kj">${userId}</a>
                     </li>
                     <li>
-                        <a href="joinForm.html">회원 가입</a>
+                        <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                     <li>
                         <a href="#">고객 센터</a>
@@ -60,7 +80,7 @@
         <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
-                    <a href="index.html">ALL-TION</a>
+                    <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
                     <a class="category--drop">
@@ -87,13 +107,13 @@
                 </div>
                 <ul class="member_info">
                     <li>
-                        <a href="mypage.html">
+                        <a href="mypage.kj">
                             <span class="material-icons">perm_identity</span>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="wishList.yb">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
@@ -118,77 +138,77 @@
                 <li class="mainmenu" style="cursor:pointer" value="1">패션</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="/categoryCheck.ms" onclick="document.getElemnetById('fashion').submit();" value="a">여성의류</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0101">여성의류</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=b&product_category_1=1">남성의류</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0102">남성의류</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=c&product_category_1=1">여성신발</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0103">여성신발</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=d&product_category_1=1">남성신발</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0104">남성신발</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=e&product_category_1=1">악세서리</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0105">악세서리</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=f&product_category_1=1">귀금속</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0106">귀금속</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=g&product_category_1=1">모자</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0107">모자</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=h&product_category_1=1">기타잡화/관련용품</a>
+                        <a href="./getCategory.ms?product_category_2=cate0108">기타잡화/관련용품</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=i&product_category_1=1">수입명품</a>
+                        <a href="./getCategory.ms?product_category_2=cate0109">수입명품</a>
                     </li>
                 </ul>
                 </form>
                 <li class="mainmenu" style="cursor:pointer">뷰티</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="./productList.ms?product_category_2=a&product_category_1=2">스킨케어</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0201">스킨케어</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=b&product_category_1=2">메이크업</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0202">메이크업</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=c&product_category_1=2">헤어/바디</a>
+                        <a href="./getCategory.ms?product_category_2=cate0203">헤어/바디</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=d&product_category_1=2">향수</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0204">향수</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=e&product_category_1=2">네일케어</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0205">네일케어</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=f&product_category_1=2">남성 화장품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0206">남성 화장품</a>
                     </li>
                     <li>
-                        <a href="./productList.ms?product_category_2=g&product_category_1=2">가발/기타용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0207">가발/기타용품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">출산/유아동</li>
                 <ul class="submenu" style="display:none;">
                     <li>
-                        <a href="#">출산/육아용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0301">출산/육아용품</a>
                     </li>
                     <li>
-                        <a href="#">유아동안전/실내용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0302">유아동안전/실내용품</a>
                     </li>
                     <li>
-                        <a href="#">유아동의류</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0303">유아동의류</a>
                     </li>
                     <li>
-                        <a href="#">유아동잡화</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0304">유아동잡화</a>
                     </li>
                     <li>
-                        <a href="#">유아동가구</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0305">유아동가구</a>
                     </li>
                     <li>
-                        <a href="#">기타 유아동용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0306">기타 유아동용품</a>
                     </li>
                 </ul>
                 <li class="mainmenu" style="cursor:pointer">전자기기</li>
@@ -210,214 +230,97 @@
             <div class="hot_item">
                 <h4>인기 경매</h4>
                 <div class="slide1 fade" id="1">
+                 <% if(!pricelist.isEmpty()) { %>
                     <ul class="items__list list">
-                        <li>
-                            <a href="#">
+						<%	for(int i=0; i<3;i++) { 
+		                    	ProductVO vo = (ProductVO)pricelist.get(i);	%>
+                        <li> 
+                            <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                                 <div class="product-box">
-                                   <img src="./resources/img/product/product_ex.png"><br>
+                                   <img src=<%=vo.getProduct_img_1() %>><br>
                                 </div>
                                 <div class="items__product--info list">
-                                    <p class="product_name">품목 이름</p>
+                                    <p class="product_name"><%=vo.getProduct_subject() %></p>
                                     <span class="material-icons timer">timer</span>
-                                    <span class="countdown">2020/06/15 00:00</span>
+                                    <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
                                     <div class="bookmark">
                                         <span class="material-icons bookmark_border">bookmark_border</span>
-                                        <p class="bookmark--count">99</p>
                                     </div>
                                     <div class="price-txt">
                                         <p class="price_text">현재가</p>
-                                        <p class="current_price">8,888,888,888,888,888 원</p>
+                                        <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                         <p class="price_text">즉시 구매가</p>
-                                        <p class="direct_price">8,888,888,888,888,888 원</p>
+                                        <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="product-box">
-                                   <img src="./resources/img/product/product_ex.png"><br>
-                                </div>
-                                <div class="items__product--info list">
-                                    <p class="product_name">품목 이름</p>
-                                    <span class="material-icons timer">timer</span>
-                                    <span class="countdown">2020/06/15 00:00</span>
-                                    <div class="bookmark">
-                                        <span class="material-icons bookmark_border">bookmark_border</span>
-                                        <p class="bookmark--count">99</p>
-                                    </div>
-                                    <div class="price-txt">
-                                        <p class="price_text">현재가</p>
-                                        <p class="current_price">8,888,888,888,888,888 원</p>
-                                        <p class="price_text">즉시 구매가</p>
-                                        <p class="direct_price">8,888,888,888,888,888 원</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="product-box">
-                                   <img src="./resources/img/product/product_ex.png"><br>
-                                </div>
-                                <div class="items__product--info list">
-                                    <p class="product_name">품목 이름</p>
-                                    <span class="material-icons timer">timer</span>
-                                    <span class="countdown">2020/06/15 00:00</span>
-                                    <div class="bookmark">
-                                        <span class="material-icons bookmark_border">bookmark_border</span>
-                                        <p class="bookmark--count">99</p>
-                                    </div>
-                                    <div class="price-txt">
-                                        <p class="price_text">현재가</p>
-                                        <p class="current_price">8,888,888,888,888,888 원</p>
-                                        <p class="price_text">즉시 구매가</p>
-                                        <p class="direct_price">8,888,888,888,888,888 원</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                       <% if(i == pricelist.size()) {break;}
+                       } %>
                     </ul>
+                <%} %>
                 </div>
                 <div class="slide1 fade" id="2">
+                    <% if(!participantslist.isEmpty()) { %>
                     <ul class="items__list list">
+						<%	for(int i=0; i<3;i++) { 
+		                    	ProductVO vo = (ProductVO)participantslist.get(i);	%>
                         <li>
-                        <a href="#">
+                        <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
+                               <img src=<%=vo.getProduct_img_1() %>><br>
                             </div>
                             <div class="items__product--info list">
-                                <p class="product_name">품목 이름</p>
+                                <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
+                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
                                 </div>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999 원</p>
+                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999 원</p>
+                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
-                    </li>
-                        <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info list">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                        <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info list">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    	</li>
+                        <% if(i == participantslist.size()) {break;}
+                       } %>
                     </ul>
+                    <%} %>
                 </div>
                 <div class="slide1 fade" id="3">
+                    <% if(!viewslist.isEmpty()) { %>
                     <ul class="items__list list">
+						<%	for(int i=0; i<3;i++) { 
+		                    	ProductVO vo = (ProductVO)viewslist.get(i);	%>
                         <li>
-                        <a href="#">
+                        <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
+                               <img src=<%=vo.getProduct_img_1() %>><br>
                             </div>
                             <div class="items__product--info list">
-                                <p class="product_name">품목 이름</p>
+                                <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
+                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
                                 </div>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
-                                    <p class="current_price">1,111,111,111,111,111 원</p>
+                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">1,111,111,111,111,111 원</p>
+                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
-                    </li>
-                        <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info list">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">1,111,111,111,111,111 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">1,111,111,111,111,111 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                        <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info list">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">1,111,111,111,111,111 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">1,111,111,111,111,111 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    	</li>
+                        <% if(i == viewslist.size()) {break;}
+                       } %>
                     </ul>
+                    <%} %>
                 </div>
                 <div style="text-align:center">
                     <span class="dot"></span>
@@ -428,9 +331,7 @@
             <!-- 경매 목록 -->
             <div class="product_li">
                 <div class="product_li-category">
-                    <h4>패션</h4>
-                    <span>&#62;</span>
-                    <span>수입 명품</span>
+                    <h4>전체</h4>
                 </div>
                 <select class="sort_list">
                     <option value="sort1">최신 순</option>
@@ -440,11 +341,13 @@
                 </select>
                 
             <%
-            System.out.println(mainlist.size());
-            	for(int i=0; i<mainlist.size();i++){  		
-            		ProductVO vo = (ProductVO)mainlist.get(i);
+            	loop : for(int i=0; i<mainlist.size();i++){  		
             %>	       	
                 <ul class="items__list product">
+                <%for(int j=i; j<i+3;j++) {
+                	if(j == mainlist.size()) {break loop;}
+                	ProductVO vo = (ProductVO)mainlist.get(j);
+                %>
                     <li>
                     	<a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
@@ -456,7 +359,6 @@
                                 <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
                                 </div>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
@@ -467,9 +369,12 @@
                             </div>
                         </a>
                     </li>
-                    </ul>
-                 <%} %>
-                
+                    <% if(j==i+2){
+                    i=j;
+                    break;}
+                    }%>
+                </ul>
+              <%} %>
             </div>
         </div>
     </div>  
