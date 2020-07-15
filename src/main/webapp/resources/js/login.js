@@ -77,16 +77,6 @@ function addZero(i) {
     return i;
 } // 2020-06-23 pm 03:55 추가
 
-function enterkey() {
-	$("#enterkey").keydown(function(key) {
-
-		if (key.keyCode == 13) {
-
-		}
-
-		});
-}
-
 function check_input()
 {
 	var str, i, ch;
