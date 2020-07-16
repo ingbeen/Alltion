@@ -207,7 +207,7 @@
         </ul>
         <div class="credit_score-btn">
             <button class="back_to_myPage" onclick="history.back()">뒤로 가기</button>
-            <a href="" onclick="#">테스트</a>
+            <a onclick="updateForm('<%=saleCreditVO.getSale_id() %>>')">테스트</a>
         </div>
     </div>
 

@@ -7,25 +7,24 @@ import org.springframework.stereotype.Service;
 import com.spring.mapper.CreditScoreMapper;
 
 @Service
-public class CreditScoreServiceImpl implements CreditScoreService {
+public class CreditScoreServiceImpls implements CreditScoreService {
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	public SaleCreditScoreVO getSaleCreditScore(String sale_id) {
 		SaleCreditScoreVO saleCreditScorevo = new SaleCreditScoreVO();
+		saleCreditScorevo.saleSuccessRateProcess();
+		saleCreditScorevo.saleCreditScoreProcess();
 		CreditScoreMapper scoreMapper = sqlSession.getMapper(CreditScoreMapper.class);
 		saleCreditScorevo = scoreMapper.getSaleCreditScore(sale_id);
 		
 		return saleCreditScorevo;
 	}
 	
-	public SaleCreditScoreVO saleNormalCount(String sale_id) {
-		SaleCreditScoreVO saleCreditScorevo = new SaleCreditScoreVO();
+	public void saleNormalCount(String sale_id) {
 		CreditScoreMapper scoreMapper = sqlSession.getMapper(CreditScoreMapper.class);
-		saleCreditScorevo = scoreMapper.saleNormalCount(sale_id);
-		
-		return saleCreditScorevo;
+		scoreMapper.saleNormalCount(sale_id);
 	}
 	
 //	public int saleNormalCount(String sale_id) {

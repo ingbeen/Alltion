@@ -62,13 +62,22 @@ public class SaleCreditScoreVO {
 	}
 	
 	public void setSale_success_rate(int sale_success_rate) {
-		
+		this.sale_success_rate = sale_success_rate;
+	}
+	
+	public void saleSuccessRateProcess() {
 		if(sale_normal == 0 && sale_denial == 0 && sale_undelivered == 0 && sale_return == 0) {
 			sale_success_rate = 0;
 		} else {
 			sale_success_rate = (100 / (sale_normal + sale_denial + sale_undelivered + sale_return)) * sale_normal;
 		}
-		
-		this.sale_success_rate = sale_success_rate;
+	}
+	
+	public void saleCreditScoreProcess() {
+		if(sale_normal == 0 && sale_denial == 0 && sale_undelivered == 0 && sale_return == 0) {
+			sale_credit_score = 0;
+		} else {
+			sale_credit_score = (100 / (sale_normal + sale_denial + sale_undelivered + sale_return)) * sale_normal;
+		}
 	}
 }

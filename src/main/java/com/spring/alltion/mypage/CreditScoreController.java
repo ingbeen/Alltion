@@ -14,7 +14,7 @@ import com.spring.alltion.creditScore.SaleCreditScoreVO;
 
 
 @Controller
-public class CreditScoreController {
+public class CreditScoreController  {
 	
 	@Autowired
 	private CreditScoreService creditScoreService;
@@ -28,34 +28,35 @@ public class CreditScoreController {
         	return "member/login";
         } else {
         	SaleCreditScoreVO salevo = creditScoreService.getSaleCreditScore(userId);
-        	System.out.println(salevo.getSale_id());
+        	
         	model.addAttribute("saleCreditVO", salevo);
+        	System.out.println(salevo.getSale_success_rate());
+        	System.out.println(salevo.getSale_credit_score());
         	
         	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
-        	System.out.println(purchasevo.getPurchase_id());
         	model.addAttribute("purchaseCreditVO", purchasevo);
         
         	return "mypage/creditScore";
         }
 	}
 	
-//	@RequestMapping(value = "creditScore.hn")
-//	public String saleNormalCount(Model model, HttpSession session) throws Exception {
-//		
-//		String userId = (String)session.getAttribute("userId");
-//		
-//        if(userId == null) {
-//        	return "member/login";
-//        } else {
-//        	SaleCreditScoreVO salevo = creditScoreService.getSaleCreditScore(userId);
-//        	System.out.println(salevo.getSale_id());
-//        	model.addAttribute("saleCreditVO", salevo);
-//        	
-//        	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
-//        	System.out.println(purchasevo.getPurchase_id());
-//        	model.addAttribute("purchaseCreditVO", purchasevo);
-//        
-//        	return "mypage/creditScore";
-//        }
-//	}
+	@RequestMapping(value = "/saleNormalCount.hn")
+	public String saleNormalCount(Model model, HttpSession session) throws Exception {
+		
+		String userId = (String)session.getAttribute("userId");
+		
+        if(userId == null) {
+        	return "member/login";
+        } else {
+        	SaleCreditScoreVO salevo = creditScoreService.saleNormalCount(userId);
+        	model.addAttribute("saleCreditVO", salevo);
+        	System.out.println(salevo.getSale_success_rate());
+        	System.out.println(salevo.getSale_credit_score());
+        	
+        	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
+        	model.addAttribute("purchaseCreditVO", purchasevo);
+        	
+        	return "mypage/creditScore";
+        }
+	}
 }

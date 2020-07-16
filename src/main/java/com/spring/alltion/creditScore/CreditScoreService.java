@@ -3,7 +3,7 @@ package com.spring.alltion.creditScore;
 public interface CreditScoreService {
 	public SaleCreditScoreVO getSaleCreditScore(String sale_id);
 //	public SaleCreditScoreVO getSaleScoreInfo(String sale_id);
-	public SaleCreditScoreVO saleNormalCount(String sale_id);
+	public void saleNormalCount(String sale_id);
 //	public int saleDenialCount(String sale_id);
 //	public int saleReturnCount(String sale_id);
 //	public int saleUndeliveredCount(String sale_id);
