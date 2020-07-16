@@ -239,12 +239,12 @@
                         <li> 
                             <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                                 <div class="product-box">
-                                   <img src=<%=vo.getProduct_img_1() %>><br>
+                                   <img src="<%=vo.getProduct_img_1() %>"><br>
                                 </div>
                                 <div class="items__product--info list">
                                     <p class="product_name"><%=vo.getProduct_subject() %></p>
                                     <span class="material-icons timer">timer</span>
-                                    <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                    <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
                                     <div class="bookmark">
                                         <span class="material-icons bookmark_border">bookmark_border</span>
                                     </div>
@@ -271,12 +271,12 @@
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=vo.getProduct_img_1() %>><br>
+                               <img src="<%=vo.getProduct_img_1() %>"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
                                 </div>
@@ -303,12 +303,12 @@
                         <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=vo.getProduct_img_1() %>><br>
+                               <img src="<%=vo.getProduct_img_1() %>"><br>
                             </div>
                             <div class="items__product--info list">
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
                                 </div>
@@ -354,12 +354,12 @@
                     <li>
                         <a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=vo.getProduct_img_1() %>><br>
+                               <img src="<%=vo.getProduct_img_1() %>"><br>
                             </div>
                             <div class="items__product--info product">
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                <span class="countdown" data-endTime="<%=vo.getProduct_end_date() %>" data-complete="<%=vo.getProduct_progress() %>"><%=vo.getProduct_issue_date() %> 00:00</span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
                                 </div>
@@ -502,5 +502,62 @@ function sortlist(){
 		$(".product_li-category").html("<h4>"+ category1 +"</h4> <span>&#62;</span> " + category2);
 	})
 	</script>
+	<script>
+    //남은시간 카운팅
+		var _second = 1000; // 1초
+		var _minute = _second * 60; // 1분
+		var _hour = _minute * 60; // 1시간
+		var _day = _hour * 24; // 1일
+        
+		$(document).ready(function auctionConutDown() {
+			$('.countdown').each(function(idx, element){
+				// 상품의 마감여부
+				var complete = element.getAttribute("data-complete");
+				
+				if (complete == 0) {
+					// 현재시간을 얻어온다
+					var now = new Date();
+					// ".countdown" 클래스의 "data"속성의 값을 가져온다
+					var endTime = new Date(element.getAttribute("data-endTime"));
+					// 마감시간에서 현재시간을 차감해준다
+					var subtractTime = endTime - now;
+					// 남은시간이 들어갈 변수
+					var resultTime = "";
+				
+					// 남은시간이 마이너스라면 실행
+					if(subtractTime < 0) {
+						$(element).html("종료되었습니다");
+					
+						// 컴플리트를 0으로 바꾸는 함수 실행해야됨
+						return;
+				}
+				
+				// 소수점버림(남은시간 / 1일)
+				// 예) 1일 1시간 1분 / 1일 = 1일 1시간 1분
+				// 소수점을 버리기에 "1일"이 된다
+				var days = Math.floor(subtractTime / _day);
+				if (days > 0) {
+					resultTime += days + "일 "
+				}
+				
+				// 소수점버림(남은시간 % 1일 / 1시간)
+				// 예) 1일 1시간 1분 % 1일 = 1시간 1분
+				// 1시간 1분 / 1시간 = 1시간 1분 
+				// 소수점을 버리기에 "1시간"이 된다
+				var hours = Math.floor((subtractTime % _day) / _hour);
+				if (hours > 0) {
+					resultTime += hours + "시간 "
+				}
+				var minutes = Math.floor((subtractTime % _hour) / _minute);
+				if (minutes > 0) {
+					resultTime += minutes + "분 "
+				}
+				$(element).html(resultTime);
+			}else{
+				$(element).html("종료되었습니다");
+			}
+			})
+		})
+		</script>
 </body>
 </html>

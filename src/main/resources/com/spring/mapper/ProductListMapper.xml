@@ -46,8 +46,10 @@
 			product_category_1, 
 			product_category_2,
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
         from (select rownum rnum,
         	product_number, 
 			product_subject, 
@@ -55,8 +57,10 @@
 			product_category_1, 
 			product_category_2,
 			product_issue_date, 
+			product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
         from (select * from product order by product_issue_date desc)) 
         where rnum>=#{startrow} and rnum<=#{endrow}
 		]]>
@@ -79,8 +83,10 @@
 			product_category_1, 
 			product_category_2,
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
         from (select rownum rnum,
         	product_number, 
 			product_subject, 
@@ -88,8 +94,10 @@
 			product_category_1, 
 			product_category_2,
 			product_issue_date, 
+			product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
         from (select * from product order by product_issue_date desc) where product_category_2 = #{product_category_2}) 
         where rnum>=#{startrow} and rnum<=#{endrow}
     ]]>
@@ -101,9 +109,11 @@
 			product_img_1,
 			product_category_1, 
 			product_category_2,
-			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date,
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		where product_category_2 = #{product_category_2}
 		order by #{sort_list} desc
@@ -120,8 +130,10 @@
 			product_category_1, 
 			product_category_2,
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		where product_category_2 = #{product_category_2}
 		order by product_current_price desc
@@ -135,8 +147,10 @@
 			product_category_1, 
 			product_category_2,
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		where product_category_2 = #{product_category_2}
 		order by product_participants desc
@@ -150,8 +164,10 @@
 			product_category_1, 
 			product_category_2,
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		where product_category_2 = #{product_category_2}
 		order by product_views desc
@@ -165,8 +181,10 @@
 			product_category_1, 
 			product_category_2,
 			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		order by product_current_price desc
 	</select>
@@ -178,9 +196,11 @@
 			product_img_1,
 			product_category_1, 
 			product_category_2,
-			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date,
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		order by product_participants desc
 	</select>
@@ -192,9 +212,11 @@
 			product_img_1,
 			product_category_1, 
 			product_category_2,
-			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date,
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
 			product_current_price, 
-			product_purchase_price 
+			product_purchase_price,
+			product_progress 
 		from product 
 		order by product_views desc
 	</select>
