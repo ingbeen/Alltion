@@ -19,26 +19,52 @@ create table pay(
 );
 -->
 <!-- 
-create table payobject(
-    objnum number(30),
-    selid VARCHAR2(20),
-    objname VARCHAR2(20),
-    aucinsbuymoney number(30) 
+create table pay(
+	merchant_uid VARCHAR2(60),  결제주문번호
+ 	amount VARCHAR2(100),  결제금액
+ 	status VARCHAR2(20),  결제상태(paid:결제, 결제취소 : 결제취소)
+    pay_id VARCHAR2(20),  구매자 id -> member_id 외래키 추가
+    current_money varchar2(1000)
 );
+ALTER TABLE pay
+ADD CONSTRAINT FK_pay_name
+FOREIGN KEY (pay_id)
+REFERENCES member(member_id);  외래키 부여
  -->
 <mapper namespace="com.spring.mapper.PayMapper">
  
  	<!--  id는 Mapper.java(여기선 MemberMapper.java)에 동일하게 사용해야 된다. -->
 	<select id="getPayList" resultType="PayVO">
-		SELECT * FROM pay where merchant_uid = #{merchant_uid, jdbcType=VARCHAR}
+		SELECT * FROM pay where pay_merchant_uid = #{pay_merchant_uid, jdbcType=VARCHAR}
 	</select>
 	
 	<insert id="insertPay" parameterType="PayVO" >
-		INSERT INTO pay VALUES (#{merchant_uid, jdbcType=VARCHAR}, #{amount, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{buyer_name, jdbcType=VARCHAR})
+		INSERT INTO pay (
+			pay_merchant_uid,
+			pay_amount,
+			pay_status,
+			pay_id)
+		VALUES (
+		#{pay_merchant_uid, jdbcType=VARCHAR}, 
+		#{pay_amount, jdbcType=VARCHAR}, 
+		#{pay_status, jdbcType=VARCHAR}, 
+		#{pay_id, jdbcType=VARCHAR})
 	</insert>
 	
 	<delete id="deletePay" parameterType="String">
-		Delete FROM pay WHERE merchant_uid = #{merchant_uid}
+		Delete FROM pay WHERE pay_merchant_uid = #{pay_merchant_uid}
 	</delete>
+	
+	<update id="chargePay" parameterType="String">
+		UPDATE pay SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
+	</update>
+	
+	<update id="cancelPay" parameterType="String">
+		UPDATE pay SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
+	</update>
+	
+	<select id="getCurrentmoney" parameterType="String">
+		SELECT pay_current_money FROM pay WHERE pay_id = #{pay_id}
+	</select>
 	
 </mapper>

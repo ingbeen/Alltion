@@ -175,7 +175,7 @@ date = getFormatDate(date);
 								<tr>
 									<th>아이디</th>
 									<td><input class="text1" type="text" name="buyer_name"
-										title="입금인" size="20"></td>
+										title="입금인" size="20" value="${userId}"></td>
 									<th>현재 사이버 머니</th>
 									<td>￦ 0000</td>
 								</tr>
