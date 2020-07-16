@@ -54,17 +54,25 @@ REFERENCES member(member_id);  외래키 부여
 	<delete id="deletePay" parameterType="String">
 		Delete FROM pay WHERE pay_merchant_uid = #{pay_merchant_uid}
 	</delete>
-	
+	<!-- 
 	<update id="chargePay" parameterType="String">
 		UPDATE pay SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
 	</update>
-	
+	-->
 	<update id="cancelPay" parameterType="String">
-		UPDATE pay SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
+		UPDATE paylist SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
 	</update>
 	
-	<select id="getCurrentmoney" parameterType="String">
-		SELECT pay_current_money FROM pay WHERE pay_id = #{pay_id}
+	<insert id="insertPaylist" parameterType="String">
+		INSERT INTO paylist (pay_id) values (#{pay_id})
+	</insert>
+	<update id="chargePay" parameterType="String">
+		UPDATE paylist SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
+	</update>
+	<select id="findCurrentMoney" resultType="String">
+		SELECT pay_current_money FROM paylist WHERE pay_id = #{pay_id, jdbcType=VARCHAR}
 	</select>
-	
+	<select id="findPayid" resultType="String">
+		SELECT pay_id FROM paylist WHERE pay_id = #{pay_id, jdbcType=VARCHAR}
+	</select>
 </mapper>

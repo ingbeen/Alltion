@@ -5,7 +5,6 @@ public class PayVO {
 	String pay_amount;
 	String pay_status;
 	String pay_id;
-	String pay_current_money;
 	
 	public String getPay_merchant_uid() {
 		return pay_merchant_uid;
@@ -30,12 +29,6 @@ public class PayVO {
 	}
 	public void setPay_id(String pay_id) {
 		this.pay_id = pay_id;
-	}
-	public String getPay_current_money() {
-		return pay_current_money;
-	}
-	public void setPay_current_money(String pay_current_money) {
-		this.pay_current_money = pay_current_money;
 	}
 	
 }

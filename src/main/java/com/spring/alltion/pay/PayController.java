@@ -61,11 +61,20 @@ public class PayController {
 			vo.setPay_status(payVO.getPay_status());
 			vo.setPay_id(payVO.getPay_id());
 			
+			System.out.println("Payid 값  = " + vo.getPay_id());
+			String id = payService.findPayid(vo.getPay_id());
+			
+			if(id == null) {
+				payService.insertPaylist(vo.getPay_id());;
+			}
+			
 			System.out.println("insert 전");
 			payService.insertPay(vo);
 			System.out.println("insert 후");
 			
-			String currentMoney = payService.getCurrentmoney(vo.getPay_id());
+			
+			String pay_id = vo.getPay_id();
+			String currentMoney = payService.findCurrentMoney(pay_id);
 			System.out.println("currentMoney = " + currentMoney);
 			if(currentMoney == null) {
 				currentMoney = "0";
@@ -74,11 +83,7 @@ public class PayController {
 			Integer chargeMoney = Integer.parseInt(currentMoney) + Integer.parseInt(plusMoney);
 			String convertChargeMoney = Integer.toString(chargeMoney);
 			System.out.println("successdata pay_convertChareMoney = " + convertChargeMoney);
-			String pay_id = vo.getPay_id();
 			System.out.println("pay_id = " + pay_id);
-			PayVO pay = new PayVO();
-			pay.setPay_id(pay_id);
-			pay.setPay_amount(convertChargeMoney);
 			System.out.println("chargePay 전");
 			payService.chargePay(convertChargeMoney, pay_id);
 			System.out.println("chargePay 후");
@@ -86,6 +91,7 @@ public class PayController {
 			System.out.println("데이터삽입 완료");
 		}catch(Exception e) {
 			System.out.println("데이터삽입 실패");
+			e.printStackTrace();
 		}
 			
 	}
@@ -104,7 +110,7 @@ public class PayController {
 		vo.setPay_id(vo.getPay_id());
 		//vo.setBuyer_tel(vo.getBuyer_tel());
 		payService.insertPay(vo);
-		String currentMoney = payService.getCurrentmoney(vo.getPay_id());
+		String currentMoney = payService.findCurrentMoney(vo.getPay_id());
 		if(currentMoney == null) {
 			currentMoney = "0";
 		}

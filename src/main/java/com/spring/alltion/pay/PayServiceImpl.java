@@ -21,7 +21,6 @@ public class PayServiceImpl implements PayService {
 		// TODO Auto-generated method stub
 		PayMapper payMapper = sqlSession.getMapper(PayMapper.class);
 		payMapper.insertPay(vo);
-		return;
 	}
 	
 	@Override
@@ -72,11 +71,26 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public String getCurrentmoney(String pay_id) {
+	public void insertPaylist(String pay_id) {
 		// TODO Auto-generated method stub
 		PayMapper payMapper = sqlSession.getMapper(PayMapper.class);
-		String currentMoney = payMapper.getCurrentmoney(pay_id);
+		payMapper.insertPaylist(pay_id);
+	}
+
+	@Override
+	public String findCurrentMoney(String pay_id) {
+		// TODO Auto-generated method stub
+		PayMapper payMapper = sqlSession.getMapper(PayMapper.class);
+		String currentMoney = payMapper.findCurrentMoney(pay_id);
 		return currentMoney;
+	}
+
+	@Override
+	public String findPayid(String pay_id) {
+		// TODO Auto-generated method stub
+		PayMapper payMapper = sqlSession.getMapper(PayMapper.class);
+		String id = payMapper.findPayid(pay_id);
+		return id;
 	}
 
 }

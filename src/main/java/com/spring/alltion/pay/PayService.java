@@ -9,6 +9,8 @@ public interface PayService {
 	PayVO getPayList(String merchant_uid);
 	PayVO charge(PayVO payVO);
 	void cancelPay(String convertChargeMoney, String pay_id);
-	String getCurrentmoney(String pay_merchant_uid);
 	void chargePay(String convertChargeMoney, String pay_id);
+	void insertPaylist(String pay_id);
+	String findCurrentMoney(String pay_id);
+	String findPayid(String pay_id);
 }
