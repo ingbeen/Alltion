@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="resources/css/wishList.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <script defer src="resources/js/wishList.js"></script>
+    
     <title>All-tion</title>
 </head>
 
@@ -175,12 +177,14 @@
                         <li class="active">
                             <a><span>1</span></a>
                         </li>
+                        <!-- 
                         <li>
                             <a><span>2</span></a>
                         </li>
                         <li>
                             <a><span>3</span></a>
                         </li>
+                         -->
                         <li>
                             <a><span class="material-icons">keyboard_arrow_right</span></a>
                         </li>

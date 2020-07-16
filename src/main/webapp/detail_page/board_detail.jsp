@@ -783,7 +783,6 @@
 				success : function(data){
 					if(data==1){
 						bidList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
 					}
 					
 				},

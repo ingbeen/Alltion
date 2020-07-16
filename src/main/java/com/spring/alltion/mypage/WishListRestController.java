@@ -1,5 +1,6 @@
 package com.spring.alltion.mypage;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,11 +19,11 @@ public class WishListRestController {
 	private WishListServiceImpl wishListServiceImpl;
 	
 	@RequestMapping(value = "getWishList.yb")
-	public List<ProductVO> getWishList(HttpSession session) {
+	public HashMap<String, Object> getWishList(HttpSession session, int page) {
 		String userId = (String)session.getAttribute("userId");
-		List<ProductVO> wishList = wishListServiceImpl.getWishList(userId);
+		HashMap<String, Object> contentsData = wishListServiceImpl.getContentsData(userId, page);
         
-		return wishList;
+		return contentsData;
 	}
 	
 	@RequestMapping(value = "wishListDelete.yb")
