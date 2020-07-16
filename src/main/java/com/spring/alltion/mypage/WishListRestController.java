@@ -26,9 +26,9 @@ public class WishListRestController {
 	}
 	
 	@RequestMapping(value = "wishListDelete.yb")
-	public void wishListDelete(@RequestParam(value="wishList[]") List<String> wishList) {
-	
-		System.out.println(wishList.size());
+	public void wishListDelete(HttpSession session, @RequestParam(value="deleteWishList[]") List<String> deleteWishList) {
+		String userId = (String)session.getAttribute("userId");
+		wishListServiceImpl.deleteWishList(deleteWishList, userId);
 		
 	}
 	

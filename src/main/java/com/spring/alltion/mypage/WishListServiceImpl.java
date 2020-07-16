@@ -1,5 +1,6 @@
 package com.spring.alltion.mypage;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -51,6 +52,19 @@ public class WishListServiceImpl implements WishListService {
 		}
 		
 		return wishList;
+	}
+
+	@Override
+	public void deleteWishList(List<String> deleteWishList, String userId) {
+		WishListMapper wishListMapper; // 마이바티스 찜목록맵퍼
+		wishListMapper = sqlSession.getMapper(WishListMapper.class);
+		
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("userId", userId);
+		hm.put("deleteWishList", deleteWishList);
+		
+		wishListMapper.deleteWishList(hm);
+		
 	}
 	
 	// 카테고리 한글로 다듬기

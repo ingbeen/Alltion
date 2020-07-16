@@ -8,4 +8,13 @@
 		where wish_id = #{userId}
 	</select>
 	
+	<delete id="deleteWishList" parameterType="hashmap">
+		delete from wish_list
+		where wish_product_number in (
+		<foreach collection="deleteWishList" item="item" separator=",">
+			#{item}
+		</foreach>
+		) and wish_id = #{userId}
+	</delete>
+	
 </mapper>
