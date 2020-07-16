@@ -30,6 +30,11 @@ public class PayController {
         {
            return "member/login";
         }
+        String currentMoney = payService.findCurrentMoney(userId);
+        if(currentMoney == null) {
+			currentMoney = "0";
+		}
+        session.setAttribute("currentMoney", currentMoney);
 		return "pay/pay";
 	}
 	

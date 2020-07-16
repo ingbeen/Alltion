@@ -1,35 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 
-create table paymember(
-    id VARCHAR2(20),
-    pw VARCHAR2(20),
-    email VARCHAR2(20),
-    tel VARCHAR2(20),
-    signdate date,
-    ad number(2)
+create table paylist(
+    pay_id VARCHAR(60) primary key, 구매자 id
+    pay_current_money varchar2(1000)  구매자가 보유한 사이버머니
 );
--->
- <!-- 
 create table pay(
-	merchant_uid VARCHAR2(60),
- 	amount VARCHAR2(100),
- 	status VARCHAR2(20),
-    buyer_name VARCHAR2(60)
-);
--->
-<!-- 
-create table pay(
-	merchant_uid VARCHAR2(60),  결제주문번호
- 	amount VARCHAR2(100),  결제금액
- 	status VARCHAR2(20),  결제상태(paid:결제, 결제취소 : 결제취소)
-    pay_id VARCHAR2(20),  구매자 id -> member_id 외래키 추가
-    current_money varchar2(1000)
+	pay_merchant_uid VARCHAR2(60),  결제주문번호
+ 	pay_amount VARCHAR2(100),  결제금액
+ 	pay_status VARCHAR2(20),  결제상태(paid:결제, 결제취소 : 결제취소)
+    pay_id VARCHAR2(20)  구매자 id -> member_id 외래키 추가
 );
 ALTER TABLE pay
 ADD CONSTRAINT FK_pay_name
 FOREIGN KEY (pay_id)
-REFERENCES member(member_id);  외래키 부여
+REFERENCES member(member_id); 외래키 부여
  -->
 <mapper namespace="com.spring.mapper.PayMapper">
  
