@@ -113,7 +113,7 @@
                     </ul>                   
                     </div>  
                      <div class="buyer_update--btn">
-						<a href = "./buyer_deal.kj" class = "base_btn">결재 진행</a>
+						<a href = "./buyer_deal.kj" class = "base_btn">결제 진행</a>
        					<a href = "./pay.ms"  class = "base_btn">이머니 충전</a>    
 					</div>                
      			 </div>
