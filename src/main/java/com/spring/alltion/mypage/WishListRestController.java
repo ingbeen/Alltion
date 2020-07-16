@@ -25,11 +25,11 @@ public class WishListRestController {
 		return wishList;
 	}
 	
-@RequestMapping(value = "wishListDelete.yb")
-public void wishListDelete(@RequestParam(value="wishList[]") List<String> wishList) {
-
-	System.out.println(wishList.size());
+	@RequestMapping(value = "wishListDelete.yb")
+	public void wishListDelete(@RequestParam(value="wishList[]") List<String> wishList) {
 	
-}
+		System.out.println(wishList.size());
+		
+	}
 	
 }
