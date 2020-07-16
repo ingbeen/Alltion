@@ -108,9 +108,10 @@
                     <li>
                     	<div class="update_form__list title">
                     		<span>운송장 번호</span>
+                    		
                     	</div>
                     	<div class="update_form__list content">
-                    		<span>##</span>		
+                    		<span><input type = "text" class = "input_border"></span>
                     	</div>
 					</li>    
                 </ul>

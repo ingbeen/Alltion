@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <!--  -->
+    <!-- 이머니 확인 페이지by.계정 -->
     <div class="eomney_update--form">
             <h3>이머니 입금</h3>
             <div class="eomney_update--content">
@@ -113,7 +113,7 @@
                     </ul>                   
                     </div>  
                      <div class="buyer_update--btn">
-						<a href = "./buyer_deal.kj" class = "base_btn">결재 진행</a>
+						<a href = "./buyer_deal.kj" class = "base_btn">결제	 진행</a>
        					<a href = "./pay.ms"  class = "base_btn">이머니 충전</a>    
 					</div>                
      			 </div>
