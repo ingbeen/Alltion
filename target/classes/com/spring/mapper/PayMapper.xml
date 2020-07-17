@@ -60,4 +60,47 @@ REFERENCES member(member_id); 외래키 부여
 	<select id="findPayid" resultType="String">
 		SELECT pay_id FROM paylist WHERE pay_id = #{pay_id, jdbcType=VARCHAR}
 	</select>
+	
+	<select id="findChargelist" resultType="PayVO">
+	<![CDATA[
+		SELECT  
+			pay_merchant_uid,
+			pay_amount,
+			pay_status,
+			pay_id 
+		from
+			(select rownum rnum,
+			pay_merchant_uid,
+			pay_amount,
+			pay_status,
+			pay_id
+		from (select * from pay) 
+		where pay_id = #{pay_id} and pay_status = #{pay_status}) 
+		where rnum>=#{startrow1} and rnum<=#{endrow1}
+	]]>
+	</select>
+
+	<select id="findCancellist" resultType="PayVO">
+	<![CDATA[
+		SELECT  
+			pay_merchant_uid,
+			pay_amount,
+			pay_status,
+			pay_id 
+		from
+			(select rownum rnum,
+			pay_merchant_uid,
+			pay_amount,
+			pay_status,
+			pay_id
+		from (select * from pay) 
+		where pay_id = #{pay_id} and pay_status = #{pay_status}) 
+		where rnum>=#{startrow2} and rnum<=#{endrow2}
+	]]>
+	</select>
+	
+	<select id="getPaycount" parameterType="String" resultType="int">
+		SELECT count(*) FROM pay where pay_status = #{pay_status}
+	</select>
+	
 </mapper>

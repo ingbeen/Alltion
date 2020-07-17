@@ -392,6 +392,7 @@ li {
     padding: 8px 0 8px 10px;
     vertical-align: middle;
     height: 19px;
+    width: 600px;
 }
 
 .chargePageBox .tbl_money .won img {
@@ -408,24 +409,24 @@ li {
     height: 15px;
 }*/
 
-input.text1{
-    border: 1px solid #ccc;
+input.text1 {
+    border-bottom: 1px solid #ccc;
     padding: 1px 5px;
-    width: 300px;
+    width: 170px;
     height: 15px;
 }
 
 .text2 {
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     padding: 1px 5px;
-    width: 300px;
+    width: 270px;
     height: 15px;
 }
 
 .text3 {
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     padding: 1px 5px;
-    width: 300px;
+    width: 270px;
     height: 15px;
 }
 
@@ -469,6 +470,23 @@ input.text1{
 }
 input[id="charge"]:checked ~ #charge_1 {display: block;}
 input[id="back"]:checked ~ #charge_2 {display: block;}
+
+
+.paylist {
+    background-color: rgba(230, 115, 17, 0.8);
+    box-sizing: border-box;
+    border-radius: 2px;
+    color: #ffffff;
+    width: 12%;
+    padding: 3px 0;
+}
+
+.paylist:hover {
+    background-color: rgb(245, 114, 114);
+    color: #ffffff;
+    cursor: pointer;
+}
+
 
 /*--------------------------------------------------------*/
 
