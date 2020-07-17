@@ -1,5 +1,8 @@
 package com.spring.alltion.mypage;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +31,7 @@ public class CreditScoreController  {
         	return "member/login";
         } else {
         	SaleCreditScoreVO salevo = creditScoreService.getSaleCreditScore(userId);
-        	
         	model.addAttribute("saleCreditVO", salevo);
-        	System.out.println(salevo.getSale_success_rate());
-        	System.out.println(salevo.getSale_credit_score());
         	
         	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
         	model.addAttribute("purchaseCreditVO", purchasevo);
@@ -41,22 +41,21 @@ public class CreditScoreController  {
 	}
 	
 	@RequestMapping(value = "/saleNormalCount.hn")
-	public String saleNormalCount(Model model, HttpSession session) throws Exception {
+	public void saleNormalCount(SaleCreditScoreVO salevo, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		String userId = (String)session.getAttribute("userId");
+		salevo.setSale_id(userId);
+
+		int result = creditScoreService.saleNormalCount(salevo);
 		
-        if(userId == null) {
-        	return "member/login";
-        } else {
-        	SaleCreditScoreVO salevo = creditScoreService.saleNormalCount(userId);
-        	model.addAttribute("saleCreditVO", salevo);
-        	System.out.println(salevo.getSale_success_rate());
-        	System.out.println(salevo.getSale_credit_score());
-        	
-        	PurchaseCreditScoreVO purchasevo = creditScoreService.getPurchaseCreditScore(userId);
-        	model.addAttribute("purchaseCreditVO", purchasevo);
-        	
-        	return "mypage/creditScore";
-        }
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		
+		if (result != 0) {
+			writer.write("<script>alert('테스트');location.href='./creditScore.hn';</script>");
+		} else {
+			writer.write("<script>alert('-_-');location.href='./creditScore.hn';</script>");
+		}
 	}
 }

@@ -14,7 +14,6 @@ pageEncoding="UTF-8"%>
     <title>All-tion</title>
 </head>
 <body>
-<a href="Mainlist.ms">리스트Test</a>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <!-- top 키 -->
     <div id="topKey" class="topKey_btn" >
@@ -78,7 +77,7 @@ pageEncoding="UTF-8"%>
                     <a href="/alltion/">ALL-TION</a>
                 </h1>
                 <div class="category">
-                    <a class="category--drop">
+                    <a class="category--drop" href="Mainlist.ms">
                         <img src="./resources/img/header/category_tab.png">
                     </a>
                 </div>

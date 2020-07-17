@@ -67,9 +67,9 @@ public class SaleCreditScoreVO {
 	
 	public void saleSuccessRateProcess() {
 		if(sale_normal == 0 && sale_denial == 0 && sale_undelivered == 0 && sale_return == 0) {
-			sale_success_rate = 0;
+			sale_success_rate = 0.0;
 		} else {
-			sale_success_rate = (100 / (sale_normal + sale_denial + sale_undelivered + sale_return)) * sale_normal;
+			sale_success_rate = ((100.0 / (sale_normal + sale_denial + sale_undelivered + sale_return)) * sale_normal);
 		}
 	}
 	
