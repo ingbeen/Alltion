@@ -802,6 +802,8 @@
         let limit_price = <%=productvo.getProduct_purchase_price()%>;
         //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
+        //중복 클릭 방지
+        var click = true;
         
         // ↓↓응찰하기 버튼 클릭시
       	function bidList(bid_nowpage){
@@ -834,43 +836,61 @@
 		}
       	
       	$("#bid_btn").off("click").on('click',function(){
-			$.ajax({
-				url: '/alltion/bid_insert.hs',
-				type : 'POST',
-				data : {'bid_product_number':bno,'bid_id':sessionid},
-				success : function(data){
-					if(data==1){
-						alert('성공적으로 응찰되었습니다.');
-						bidList(1); //페이지 로딩시 응찰 목록 갱신
-					}else if(data==2){
-						bidList(1);
-						$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+			if(click){
+				click = !click;
+				$.ajax({
+					url: '/alltion/bid_insert.hs',
+					type : 'POST',
+					data : {'bid_product_number':bno,'bid_id':sessionid},
+					success : function(data){
+						if(data==1){
+							alert('성공적으로 응찰되었습니다.');
+							bidList(1); //페이지 로딩시 응찰 목록 갱신
+						}else if(data==2){
+							bidList(1);
+							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(insert)");
 					}
-				},
-				error:function(){
-					alert("ajax통신 실패(insert)");
-				}
-			});
+				});
+	      		//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
 		});
 		
       	$("#bid_btn2").off("click").on('click',function(){
-			$.ajax({
-				url: '/alltion/now_purchase.hs',
-				type : 'POST',
-				data : {'bid_product_number':bno,'bid_id':sessionid},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success:function(data){
-					if(data==1){
-						alert('성공적으로 응찰되었습니다.');
-						bidList(1); //페이지 로딩시 응찰 목록 갱신
-						$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+			if(click){	
+				click = !click;
+      			$.ajax({
+					url: '/alltion/now_purchase.hs',
+					type : 'POST',
+					data : {'bid_product_number':bno,'bid_id':sessionid},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success:function(data){
+						if(data==1){
+							alert('성공적으로 응찰되었습니다.');
+							bidList(1); //페이지 로딩시 응찰 목록 갱신
+							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(nowpurchase)");
 					}
-				},
-				error:function(){
-					alert("ajax통신 실패(nowpurchase)");
-				}
-			});
+				});
+      			//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
 		});
 		
 		//경매등록자 아이디
@@ -963,32 +983,41 @@
 		let comment_secret_value="";
 		
 		$("#comment_btn").off("click").on('click',function(){
-			if(comment_secret.checked==true){
-				comment_secret_value = "1";
-			}else{
-				comment_secret_value = "0";
-			}
-			if(comment_content_input.value==""){
-				alert('내용을 입력해 주세요.');
-				return false;
-			}
-			$.ajax({
-				url: '/alltion/commentinsert.hs',
-				type : 'POST',
-				data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success:function(data){
-					if(data==1){
-						comment_content_input.value='';
-						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						
-					}
-				},
-				error:function(){
-					alert("ajax통신 실패(commentinsert)");
+			if(click){	
+				click = !click;
+				if(comment_secret.checked==true){
+					comment_secret_value = "1";
+				}else{
+					comment_secret_value = "0";
 				}
-			});
+				if(comment_content_input.value==""){
+					alert('내용을 입력해 주세요.');
+					return false;
+				}
+				$.ajax({
+					url: '/alltion/commentinsert.hs',
+					type : 'POST',
+					data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success:function(data){
+						if(data==1){
+							comment_content_input.value='';
+							commentList(1); //페이지 로딩시 응찰 목록 갱신
+							
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(commentinsert)");
+					}
+				});
+				//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
 		});
 		
 		// ↓↓댓글 수정
@@ -1252,25 +1281,34 @@
 		
 		// 찜버튼 클릭시 wish리스트에 해당항목 추가
 		$("#bid_btn4").off("click").on('click',function(){
-			$.ajax({
-				url : '/alltion/wish_list.hs',
-				type : 'post',
-				data : {'wish_product_number':bno,'wish_id':sessionid},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success : function(data){
-					if(data==0){
-						alert('찜목록에 추가 되었습니다.');
-					}else{
-						alert('이미 찜목록에 등록되어있는 경매 입니다.');
+			if(click){
+				click = !click;
+				$.ajax({
+					url : '/alltion/wish_list.hs',
+					type : 'post',
+					data : {'wish_product_number':bno,'wish_id':sessionid},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success : function(data){
+						if(data==0){
+							alert('찜목록에 추가 되었습니다.');
+						}else{
+							alert('이미 찜목록에 등록되어있는 경매 입니다.');
+						}
+						
+						
+					},
+					error:function(){
+						alert("ajax통신 실패(insertWishList)!!!");		
 					}
-					
-					
-				},
-				error:function(){
-					alert("ajax통신 실패(insertWishList)!!!");		
-				}
-			});
+				});
+				//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
 		});
 		
     </script>

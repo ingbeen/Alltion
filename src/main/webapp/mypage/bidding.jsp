@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/bidding.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
@@ -89,8 +90,34 @@
         </div>
     </div>
     <!-- 메인 내용 -->
-    <div class="mian_body" align="center">
-    
+    <div class="main_body">
+    	<div class="bidding_title">
+    		<h1>참여 중 경매</h1>
+    	</div>
+    	<div class="bidding_notify">
+    		<ul>
+    			<li>&#9679;회원님께서 현재 응찰 참여중인 물품의 리스트입니다.<li>
+    			<li>&#9679;물품정보가 변경되었을 수 있으니 입찰하시기전에 반드시 경매정보 및 물품정보를 재확인하시기 바랍니다.</li>
+    			<li>&#9679;해당 물품이 낙찰이 되거나 경매시간이 종료될 경우 해당 물품의 정보는 확인하실 수 없습니다.</li>
+    		</ul>
+    	</div>
+    	<div class="table_title">
+    		<p>현재 참여중인 경매에 대해서 모두 ?개가 검색되었습니다.</p>
+    	</div>
+    	<table class="bidding_list">
+			<thead>
+				<tr>
+					<th class="product_info">상품 정보</th>
+					<th class="current_price">현재가</th>
+					<th class="product_delivery">배송</th>
+					<th class="bid_deadline">마감 시간</th>
+				</tr>
+			</thead>
+    		<tbody id="bidding_content">
+    			
+    		</tbody>
+    	</table>
+    	
     </div>
    
     <!-- 푸터 영역 -->
