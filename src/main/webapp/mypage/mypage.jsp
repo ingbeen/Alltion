@@ -135,7 +135,7 @@
                 </a>
             </li>
             <li>
-                <a href="./bidding.hs">
+                <a href="./bidding.hs?page=1">
                     <span class="material-icons">poll</span><br>
                     <span class="myPage__menu">참여 중 경매</span>
                 </a>

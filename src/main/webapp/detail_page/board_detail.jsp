@@ -822,9 +822,6 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
-						if(key>=5 * (bid_nowpage - 1) && key<=4){
-							
-						}
 					});
 					
 					$(".bidder").html(a);

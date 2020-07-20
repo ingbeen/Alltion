@@ -1,18 +1,29 @@
 package com.spring.alltion.mypage;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.alltion.productRegistration.ProductVO;
+
 @Controller
 public class BiddingController {
 	
 	@Autowired
-	private BiddingServiceImple biddingService;
+	private BiddingServiceImpl biddingService;
 	
 	@RequestMapping("/bidding.hs")
-	public String bidding_page(Model model)throws Exception{
+	public String bidding_page(HttpSession session,Model model,HttpServletRequest request)throws Exception{
+		String userId = (String)session.getAttribute("userId");
+		List<ProductVO> productvolist = biddingService.getBidding_Product_Info(userId, model,request);
+		model.addAttribute("page",Integer.parseInt(request.getParameter("page")));
+		model.addAttribute("productvolist",productvolist);
 		
 		return "mypage/bidding";
 	}

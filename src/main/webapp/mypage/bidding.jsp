@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.spring.alltion.productRegistration.*" %>
 <%@ page import = "java.util.*" %>
+<%@ page import = "com.spring.alltion.productRegistration.ProductVO" %>
 <%
-	
+	List<ProductVO> productvolist = (List<ProductVO>)request.getAttribute("productvolist");
+	List<Integer> Bidding_bidvo = (List<Integer>)request.getAttribute("bidding_bidvo");
+	int nowpage = (int)request.getAttribute("page");
+	int maxpage = (int)((double)productvolist.size()/5.0 + 0.99);
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +22,6 @@
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-  
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
@@ -91,33 +94,86 @@
     </div>
     <!-- 메인 내용 -->
     <div class="main_body">
-    	<div class="bidding_title">
-    		<h1>참여 중 경매</h1>
-    	</div>
-    	<div class="bidding_notify">
-    		<ul>
-    			<li>&#9679;회원님께서 현재 응찰 참여중인 물품의 리스트입니다.<li>
-    			<li>&#9679;물품정보가 변경되었을 수 있으니 입찰하시기전에 반드시 경매정보 및 물품정보를 재확인하시기 바랍니다.</li>
-    			<li>&#9679;해당 물품이 낙찰이 되거나 경매시간이 종료될 경우 해당 물품의 정보는 확인하실 수 없습니다.</li>
-    		</ul>
-    	</div>
-    	<div class="table_title">
-    		<p>현재 참여중인 경매에 대해서 모두 ?개가 검색되었습니다.</p>
-    	</div>
-    	<table class="bidding_list">
-			<thead>
-				<tr>
-					<th class="product_info">상품 정보</th>
-					<th class="current_price">현재가</th>
-					<th class="product_delivery">배송</th>
-					<th class="bid_deadline">마감 시간</th>
-				</tr>
-			</thead>
-    		<tbody id="bidding_content">
-    			
-    		</tbody>
-    	</table>
-    	
+        <div class="bidding_title">
+            <h1>참여 중 경매</h1>
+        </div>
+        <div class="bidding_notify">
+            <ul>
+                <li>
+                    회원님께서 현재 응찰 참여중인 물품의 리스트입니다.
+                <li>
+                <li>
+                    물품정보가 변경되었을 수 있으니 입찰하시기전에 반드시 경매정보 및 물품정보를 재확인하시기 바랍니다.
+                </li>
+                <li>
+                    해당 물품이 낙찰이 되거나 경매시간이 종료될 경우 해당 물품의 정보는 확인하실 수 없습니다.
+                </li>
+            </ul>
+        </div>
+        <div class="table_title">
+            <p>현재 참여중인 경매에 대해서 모두 <%=productvolist.size()%>개가 검색되었습니다.</p>
+        </div>
+        <div class="bidding_list">
+            <div class="bidding_list_header">
+                <div class="product_info">상품 정보</div>
+                <div class="current_price">현재가</div>
+                <div class="product_delivery">배송</div>
+                <div class="bid_deadline">마감 시간</div>
+            </div>
+            <%for(int i=0;i<productvolist.size();i++){  
+  				ProductVO productvo = productvolist.get(i);
+  				int Bidding_bid_price = Bidding_bidvo.get(i);
+  				if(i>=5 * (nowpage - 1) && i<=4 + (nowpage - 1) ){
+  				%>
+            <div class="bidding_list_content">
+                <div class="product_info">
+                    <img src="<%=productvo.getProduct_img_1()%>">
+                    <div class="product_info_content">
+                    <p> <%=productvo.getProduct_category_1()%>> <%=productvo.getProduct_category_2()%></p>
+                    <p><%=productvo.getProduct_subject()%></p>
+                    <p>판매자: <%=productvo.getProduct_id() %> / 시작가: <%=productvo.getProduct_starting_price()%>원</p>
+                    </div>
+                </div>
+                <div class="current_price">
+                   <div class="current_price_content">
+                    <p>경매 현재가 : <%=productvo.getProduct_current_price()%> 원</p>
+                    <p>즉시 구매가 : <%=productvo.getProduct_purchase_price()%> 원</p>
+                    <p>나의 입찰가 : <%=Bidding_bid_price %> 원</p>
+                    <p>입찰 : <%=productvo.getProduct_bids()%> 건</p>
+                    </div>
+                </div>
+                <div class="product_delivery">
+                    <div class="product_delivery_content1">
+                    <p><%=productvo.getProduct_delivery() %></p>
+                    </div>  
+                    <div class="product_delivery_content2">
+                    <p>직거래 가능지역:<br> <%=productvo.getProduct_transaction_area() %></p>
+                    </div>  
+                </div>
+                <div class="bid_deadline">
+                    <div class="bid_deadline_content">
+                    <p><%=productvo.getProduct_end_date()%></p>
+                    <p><a href="./boarddetail.hs?product_number=<%=productvo.getProduct_number()%>"><button>페이지로 이동하기</button></a></p>
+                    </div>
+                </div>
+            </div>
+            <%}} %>
+        </div>
+        <div class="page_btns" align="center">
+        	<%if(nowpage!=1){ %>
+	        <a href="./bidding.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
+	        <%}else{%>
+	        <a><button>&#171;</button></a>
+	        <% }
+	        for(int i=1;i<=maxpage;i++){ %>
+	        	<a href="./bidding.hs?page=<%=i %>"><button><%=i %></button></a>
+	        <%} %>
+	        <%if(nowpage!=maxpage){ %>
+	        <a href="./bidding.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
+        	<%}else{ %>
+        	<a><button>&#187;</button></a>
+        	<%} %>
+        </div>
     </div>
    
     <!-- 푸터 영역 -->
