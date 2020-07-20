@@ -67,16 +67,19 @@ public class PayController {
 			if(id == null) {
 				payService.insertPaylist(vo.getPay_id());
 			}
-			payService.insertPay(vo);
+			//payService.insertPay(vo);
 			
 			String pay_id = vo.getPay_id();
 			String currentMoney = payService.findCurrentMoney(pay_id);
 			if(currentMoney == null) {
 				currentMoney = "0";
 			}
+			vo.setPay_lastmoney(currentMoney);
 			String plusMoney = payVO.getPay_amount();
 			Integer chargeMoney = Integer.parseInt(currentMoney) + Integer.parseInt(plusMoney);
 			String convertChargeMoney = Integer.toString(chargeMoney);
+			vo.setPay_nowmoney(convertChargeMoney);
+			payService.insertPay(vo);
 			payService.chargePay(convertChargeMoney, pay_id);
 		}catch(Exception e) {
 			System.out.println("데이터삽입 실패");
@@ -98,14 +101,17 @@ public class PayController {
 		//vo.setBuyer_email(vo.buyer_email);
 		vo.setPay_id(vo.getPay_id());
 		//vo.setBuyer_tel(vo.getBuyer_tel());
-		payService.insertPay(vo);
+		
 		String currentMoney = payService.findCurrentMoney(vo.getPay_id());
 		if(currentMoney == null) {
 			currentMoney = "0";
 		}
+		vo.setPay_lastmoney(currentMoney);
 		String minusMoney = vo.getPay_amount();
 		Integer cancelMoney = Integer.parseInt(currentMoney) - Integer.parseInt(minusMoney);
 		String convertCancelMoney = Integer.toString(cancelMoney);
+		vo.setPay_nowmoney(convertCancelMoney);
+		payService.insertPay(vo);
 		String pay_id = vo.getPay_id();
 		payService.cancelPay(convertCancelMoney, pay_id);
 	}

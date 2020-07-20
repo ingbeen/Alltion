@@ -1,15 +1,16 @@
 @charset "UTF-8";
 .pay{
-    display:inline-block;
-    padding: 2% 0 0 23%;
-    width: 1190px;
+	position: relative;
+	display: inline-block;
+    padding: 2% 0 0 30%;
+    /*width: 1190px;*/
     min-height: 500px;
     margin:0 auto;
 }
 .chargehistory{
-    min-width: 362px;
+    /*min-width: 362px;*/
+    width: 100%;
     min-height: 300px;
-    float: left;
     align-content: center;
 }
 
@@ -18,8 +19,8 @@
 }
 
 .cancelhistory{
-    float:right;
-    min-width: 362px;
+    /*min-width: 362px;*/
+    width: 100%;
     min-height: 300px;
     align-content: center;
 }

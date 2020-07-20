@@ -116,6 +116,16 @@
 					</li>
 					<li>
 						<div class="charge__list title">
+							<span>이전 금액	</span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list title">
+							<span>변동 후 금액	</span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list title">
 							<span>결제 상태</span>
 						</div>
 					</li>
@@ -141,6 +151,16 @@
 					<li>
 						<div class="charge__list content">
 							<span><%=vo.getPay_amount()%></span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list content">
+							<span><%=vo.getPay_lastmoney()%></span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list content">
+							<span><%=vo.getPay_nowmoney()%></span>
 						</div>
 					</li>
 					<li>
@@ -210,6 +230,16 @@
 						</div>
 					</li>
 					<li>
+						<div class="charge__list title">
+							<span>이전 금액	</span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list title">
+							<span>변동 후 금액	</span>
+						</div>
+					</li>
+					<li>
 						<div class="cancel__list title">
 							<span>결제 상태</span>
 						</div>
@@ -236,6 +266,16 @@
 					<li>
 						<div class="cancel__list content">
 							<span><%=vo.getPay_amount()%></span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list content">
+							<span><%=vo.getPay_lastmoney()%></span>
+						</div>
+					</li>
+					<li>
+						<div class="charge__list content">
+							<span><%=vo.getPay_nowmoney()%></span>
 						</div>
 					</li>
 					<li>
