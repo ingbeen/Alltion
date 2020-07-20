@@ -378,10 +378,12 @@
                     }%>
                 </ul>
               <%} %>
+              </div>
+              <div class="paging">
               <ul class="page_number">
                     <li>
                     <%if(nowpage<=1){ %>
-                    &#60;
+                    <!-- &#60; -->
                     <%}else{ %>
                         <a href="./Mainlist.ms?page=<%=nowpage-1 %>">&#60;</a>
                     <%} %>
@@ -389,21 +391,18 @@
                     <%for(int a=startpage;a<=endpage;a++){
 						if(a==nowpage){%>
 						<li>
-						<%=a %>
+						<a href="" class="active num"><%=a %></a>
 						</li>
 						<%}else{ %>
 						<li>
-						<a href="./Mainlist.ms?page=<%=a %>"><%=a %></a>
+						<a href="./Mainlist.ms?page=<%=a %>" class="num"><%=a %></a>
 						</li>
 						<%} %>
 					<%} %>
-                    
+                    <li>
                     <%if(nowpage>=maxpage){ %>
-                    <li>
-                    &#62;
-                    </li>
+                    <!-- &#62; -->
                     <%}else{ %>
-                    <li>
                         <a href="./Mainlist.ms?page=<%=nowpage+1 %>">&#62;</a>
                     </li>
                     <%} %>
