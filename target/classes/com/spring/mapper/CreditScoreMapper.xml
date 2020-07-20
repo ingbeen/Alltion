@@ -25,7 +25,7 @@
 		SELECT * FROM sale_credit_score_list WHERE sale_id=#{sale_id}
 	</select>
 	
-	<select id="getSaleScoreInfo" parameterType="String">
+	<select id="getSaleScoreInfo" parameterType="SaleCreditScoreVO">
 		SELECT sale_normal, sale_denial, sale_undelivered, sale_return FROM sale_credit_score_list WHERE sale_id=#{sale_id}
 	</select>
 	
@@ -33,19 +33,19 @@
 		UPDATE sale_credit_score_list SET sale_normal=sale_normal+1 WHERE sale_id=#{sale_id}
 	</update>
 	
-	<update id="saleDenialCount" parameterType="String">
+	<update id="saleDenialCount" parameterType="SaleCreditScoreVO">
 		UPDATE sale_credit_score_list SET sale_denial=sale_denial+1 WHERE sale_id=#{sale_id}
 	</update>
 	
-	<update id="saleUndeliveredCount" parameterType="String">
+	<update id="saleUndeliveredCount" parameterType="SaleCreditScoreVO">
 		UPDATE sale_credit_score_list SET sale_undelivered=sale_undelivered+1 WHERE sale_id=#{sale_id}
 	</update>
 	
-	<update id="saleReturnCount" parameterType="String">
+	<update id="saleReturnCount" parameterType="SaleCreditScoreVO">
 		UPDATE sale_credit_score_list SET sale_return=sale_return+1 WHERE sale_id=#{sale_id}
 	</update>
 	
-	<update id="saleRateScoreCount" parameterType="String">
+	<update id="saleRateScoreCount" parameterType="SaleCreditScoreVO">
 		UPDATE sale_credit_score_list SET sale_success_rate=#{sale_success_rate}, sale_credit_score=#{sale_credit_score} WHERE sale_id=#{sale_id}
 	</update>
 	
@@ -55,27 +55,27 @@
 		SELECT * FROM purchase_credit_score_list WHERE purchase_id=#{purchase_id}
 	</select>
 	
-	<select id="getPurchaseScoreInfo" parameterType="String">
+	<select id="getPurchaseScoreInfo" parameterType="PurchaseCreditScoreVO">
 		SELECT purchase_normal, purchase_denial, purchase_undelivered, purchase_return FROM purchase_credit_score_list WHERE purchase_id=#{purchase_id}
 	</select>
 	
-	<update id="purchaseNormalCount" parameterType="String">
+	<update id="purchaseNormalCount" parameterType="PurchaseCreditScoreVO">
 		UPDATE purchase_credit_score_list SET purchase_normal=purchase_normal+1 WHERE purchase_id=#{purchase_id}
 	</update>
 	
-	<update id="purchaseDenialCount" parameterType="String">
+	<update id="purchaseDenialCount" parameterType="PurchaseCreditScoreVO">
 		UPDATE purchase_credit_score_list SET purchase_denial=purchase_denial+1 WHERE purchase_id=#{purchase_id}
 	</update>
 	
-	<update id="purchaseUndeliveredCount" parameterType="String">
+	<update id="purchaseUndeliveredCount" parameterType="PurchaseCreditScoreVO">
 		UPDATE purchase_credit_score_list SET purchase_undelivered=purchase_undelivered+1 WHERE purchase_id=#{purchase_id}
 	</update>
 	
-	<update id="purchaseReturnCount" parameterType="String">
+	<update id="purchaseReturnCount" parameterType="PurchaseCreditScoreVO">
 		UPDATE purchase_credit_score_list SET purchase_return=purchase_return+1 WHERE purchase_id=#{purchase_id}
 	</update>
 	
-	<update id="purchaseRateScoreCount" parameterType="String">
-		UPDATE purchase_credit_score_list SET ${purchase_success_rate}, ${purchase_credit_score} WHERE purchase_id=#{purchase_id}
+	<update id="purchaseRateScoreCount" parameterType="PurchaseCreditScoreVO">
+		UPDATE purchase_credit_score_list SET purchase_success_rate=#{purchase_success_rate}, purchase_credit_score=#{purchase_credit_score} WHERE purchase_id=#{purchase_id}
 	</update>
 </mapper>

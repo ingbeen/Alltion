@@ -74,10 +74,10 @@ public class SaleCreditScoreVO {
 	}
 	
 	public void saleCreditScoreProcess() {
-		if(sale_normal == 0 && sale_denial == 0 && sale_undelivered == 0 && sale_return == 0) {
-			sale_credit_score = 0;
+		if (sale_normal >= 30) {
+			sale_credit_score = ((int)(sale_success_rate * 2.0)) - ((sale_denial + sale_undelivered + sale_return) * 2);
 		} else {
-			sale_credit_score = (100 / (sale_normal + sale_denial + sale_undelivered + sale_return)) * sale_normal;
+			sale_credit_score = (sale_normal * 5) - ((sale_denial + sale_undelivered + sale_return) * 2);
 		}
 	}
 }
