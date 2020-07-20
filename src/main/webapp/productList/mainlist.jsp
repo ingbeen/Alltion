@@ -17,7 +17,7 @@
   	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
   	int startpage=((Integer)request.getAttribute("startpage")).intValue();
   	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-  	
+  	String sort=(String)request.getAttribute("sort");
   %>
 
 <!DOCTYPE html>
@@ -336,13 +336,14 @@
                 <div class="product_li-category">
                     <h4>전체</h4>
                 </div>
-                <select class="sort_list">
-                    <option value="sort1">최신 순</option>
-                    <option value="sort2">조회수 높은 순</option>
-                    <option value="sort3">낮은 가격 순</option>
-                    <option value="sort4">높은 가격 순</option>
+                <form name="form">
+                <select class="sort_list" name = "sort_list" onChange="getSelectValue(this.form)">
+                    <option value="./Mainlist.ms?sort=1" <%=sort.equals("1") ? "selected" : "" %>>최신 순</option>
+                    <option value="./Mainlist.ms?sort=2" <%=sort.equals("2") ? "selected" : "" %>>조회수 높은 순</option>
+                    <option value="./Mainlist.ms?sort=3" <%=sort.equals("3") ? "selected" : "" %>>낮은 가격 순</option>
+                    <option value="./Mainlist.ms?sort=4" <%=sort.equals("4") ? "selected" : "" %>>높은 가격 순</option>
                 </select>
-                
+                </form>
             <%
             	loop : for(int i=0; i<mainlist.size();i++){  		
             %>	       	
@@ -385,7 +386,7 @@
                     <%if(nowpage<=1){ %>
                     <!-- &#60; -->
                     <%}else{ %>
-                        <a href="./Mainlist.ms?page=<%=nowpage-1 %>">&#60;</a>
+                        <a href="./Mainlist.ms?page=<%=nowpage-1 %>&sort=<%=sort%>">&#60;</a>
                     <%} %>
                     </li>
                     <%for(int a=startpage;a<=endpage;a++){
@@ -395,7 +396,7 @@
 						</li>
 						<%}else{ %>
 						<li>
-						<a href="./Mainlist.ms?page=<%=a %>" class="num"><%=a %></a>
+						<a href="./Mainlist.ms?page=<%=a %>&sort=<%=sort%>" class="num"><%=a %></a>
 						</li>
 						<%} %>
 					<%} %>
@@ -403,7 +404,7 @@
                     <%if(nowpage>=maxpage){ %>
                     <!-- &#62; -->
                     <%}else{ %>
-                        <a href="./Mainlist.ms?page=<%=nowpage+1 %>">&#62;</a>
+                        <a href="./Mainlist.ms?page=<%=nowpage+1 %>&sort=<%=sort%>">&#62;</a>
                     </li>
                     <%} %>
                 </ul>
@@ -527,6 +528,13 @@
 				}
 				})
 		})
-		</script>
+	</script>
+	<script>
+	function getSelectValue(frm) {
+		if(frm.sort_list.options.selectedIndex != 0) {
+			location.href = frm.sort_list.options[frm.sort_list.selectedIndex].value;
+		}
+	}
+	</script>
 </body>
 </html>

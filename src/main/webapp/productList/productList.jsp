@@ -12,19 +12,17 @@
 	 List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
 	 List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
 	 List<ProductVO> viewslist=(List<ProductVO>)request.getAttribute("viewslist");
-	 String product_category_2 = (String)request.getAttribute("product_category_2");
- 	
-
- 	
+	 
 	int listcount=((Integer)request.getAttribute("listcount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
 	int startpage=((Integer)request.getAttribute("startpage")).intValue();
 	int endpage=((Integer)request.getAttribute("endpage")).intValue();
 	
-	
+	String sort = (String)request.getAttribute("sort");
 	String category1 = (String) request.getAttribute("category1");
 	String category2 = (String) request.getAttribute("category2");
+	String product_category_2 = (String)request.getAttribute("product_category_2");
 %>
 <!DOCTYPE html>
 <html>
@@ -337,14 +335,18 @@
                 <div class="product_li-category">
                 
                 </div>
-                <select class="sort_list">
-                    <option value="sort1">최신 순</option>
-                    <option value="sort2">조회수 높은 순</option>
-                    <option value="sort3">낮은 가격 순</option>
-                    <option value="sort4">높은 가격 순</option>
+                <form name="form">
+                <select class="sort_list" name = "sort_list" onChange="getSelectValue(this.form)">
+                    <option value="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&sort=1" <%=sort.equals("1") ? "selected" : "" %>>최신 순</option>
+                    <option value="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&sort=2" <%=sort.equals("2") ? "selected" : "" %>>조회수 높은 순</option>
+                    <option value="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&sort=3" <%=sort.equals("3") ? "selected" : "" %>>낮은 가격 순</option>
+                    <option value="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&sort=4" <%=sort.equals("4") ? "selected" : "" %>>높은 가격 순</option>
                 </select>
-				<% if(!categorylist.isEmpty()){
-				loop : for(int i=0; i<categorylist.size();i++){ %>
+                </form>
+				<%
+				if(!categorylist.isEmpty()){
+				loop : for(int i=0; i<categorylist.size();i++){ 
+				%>
                 <ul class="items__list product">
                 <%
             	for(int j=i; j<i+3;j++){
@@ -386,7 +388,7 @@
                     <%if(nowpage<=1){ %>
                     <!-- &#60; -->
                     <%}else{ %>
-                        <a href="./getCategorylist.ms?product_category_2=<%=category2 %>&page=<%=nowpage-1 %>">&#60;</a>
+                        <a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=nowpage-1 %>&sort=<%=sort%>">&#60;</a>
                     </li>
                     <%} %>
                     
@@ -397,7 +399,7 @@
 						</li>
 						<%}else{ %>
 						<li>
-						<a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=a %>" class="num"><%=a %></a>
+						<a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=a %>&sort=<%=sort%>" class="num"><%=a %></a>
 						</li>
 						<%} %>
 					<%} %>
@@ -405,7 +407,7 @@
                     <%if(nowpage>=maxpage){ %>
                     <!-- &#62; -->
                     <%}else{ %>
-                        <a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=nowpage+1 %>">&#62;</a>
+                        <a href="./getCategorylist.ms?product_category_2=<%=product_category_2 %>&page=<%=nowpage+1 %>&sort=<%=sort%>">&#62;</a>
                     </li>
                     <%} %>
                 </ul>
@@ -473,26 +475,6 @@
     <script src="<c:url value="/resources/js/common.js" />"></script>
     <script src="<c:url value="/resources/js/product_detail.js" />"></script>
     
-    <script>
-function sortlist(){
-	var sortSelect = document.getElementByClassName("sort_list");
-
-	// 선택된 option의 value값
-	var sortD = sortSelect.options[sortSelect.selectedIndex].value;
-
-	$.ajax({
-		url: "/alltion/getOrderbylist.bo",
-		method:"POST",
-		data: sortD,
-		success: function(res) {
-			console.log(suuuucuccucucueesseses);
-		},error: function(resval){
-			console.log(errrrorrrrrrrrrr);
-		}
-	});
-}
-</script>
-    
     <!-- 리스트쪽 카테고리 1차 > 카테고리 2차 부분 js -->
     <script>
 	var category1 = '<%=category1 %>';
@@ -558,6 +540,13 @@ function sortlist(){
 			}
 			})
 		})
-		</script>
+	</script>
+	<script>
+	function getSelectValue(frm) {
+		/*if(frm.sort_list.options.selectedIndex != 0) {*/
+			location.href = frm.sort_list.options[frm.sort_list.selectedIndex].value;
+		/*}*/
+	}
+	</script>
 </body>
 </html>

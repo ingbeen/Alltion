@@ -65,7 +65,7 @@ public class PayController {
 			String id = payService.findPayid(vo.getPay_id());
 			
 			if(id == null) {
-				payService.insertPaylist(vo.getPay_id());;
+				payService.insertPaylist(vo.getPay_id());
 			}
 			payService.insertPay(vo);
 			
