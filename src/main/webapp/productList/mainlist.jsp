@@ -159,10 +159,10 @@
                         <a href="./getCategorylist.ms?product_category_2=cate0107">모자</a>
                     </li>
                     <li>
-                        <a href="./getCategory.ms?product_category_2=cate0108">기타잡화/관련용품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0108">기타잡화/관련용품</a>
                     </li>
                     <li>
-                        <a href="./getCategory.ms?product_category_2=cate0109">수입명품</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0109">수입명품</a>
                     </li>
                 </ul>
                 </form>
@@ -175,7 +175,7 @@
                         <a href="./getCategorylist.ms?product_category_2=cate0202">메이크업</a>
                     </li>
                     <li>
-                        <a href="./getCategory.ms?product_category_2=cate0203">헤어/바디</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0203">헤어/바디</a>
                     </li>
                     <li>
                         <a href="./getCategorylist.ms?product_category_2=cate0204">향수</a>
