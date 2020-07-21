@@ -3,6 +3,7 @@ package com.spring.alltion.pay;
 import java.util.Date;
 
 public class PayVO {
+	int rnum;
 	String pay_merchant_uid;
 	String pay_amount;
 	String pay_status;
@@ -11,6 +12,13 @@ public class PayVO {
 	String pay_nowmoney;
 	Date pay_date;
 	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public String getPay_merchant_uid() {
 		return pay_merchant_uid;
 	}

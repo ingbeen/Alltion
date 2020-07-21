@@ -29,7 +29,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="<c:url value="/resources/css/product_list.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/product_list.css?after" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     <link href="<c:url value="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"/>" rel="stylesheet">
     <link href="<c:url value="https://fonts.googleapis.com/icon?family=Material+Icons"/>" rel="stylesheet">
@@ -175,7 +175,7 @@
                         <a href="./getCategorylist.ms?product_category_2=cate0202">메이크업</a>
                     </li>
                     <li>
-                        <a href="./getCategory.ms?product_category_2=cate0203">헤어/바디</a>
+                        <a href="./getCategorylist.ms?product_category_2=cate0203">헤어/바디</a>
                     </li>
                     <li>
                         <a href="./getCategorylist.ms?product_category_2=cate0204">향수</a>

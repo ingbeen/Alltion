@@ -54,7 +54,7 @@ REFERENCES member(member_id); 외래키 부여
 	</update>
 	-->
 	<update id="cancelPay" parameterType="String">
-		UPDATE paylist SET pay_current_money = #{convertChargeMoney} where pay_id=#{pay_id}
+		UPDATE paylist SET pay_current_money = #{convertCancelMoney} where pay_id=#{pay_id}
 	</update>
 	
 	<insert id="insertPaylist" parameterType="String">
@@ -72,56 +72,62 @@ REFERENCES member(member_id); 외래키 부여
 	
 	<select id="findChargelist" resultType="PayVO">
 	<![CDATA[
-		SELECT  
-			pay_merchant_uid,
-			pay_amount,
-			pay_status,
-			pay_id,
-			pay_lastmoney,
-			pay_nowmoney,
-			pay_date 
-		from
-			(select rownum rnum,
-			pay_merchant_uid,
-			pay_amount,
-			pay_status,
-			pay_id,
-			pay_lastmoney,
-			pay_nowmoney,
-			pay_date
-		from (select * from pay order by pay_date desc) 
-		where pay_id = #{pay_id} and pay_status = #{pay_status}) 
+		select * 
+		from(select row_number() over(order by p.pay_date desc) as rnum, p.* 
+    		from pay p 
+    		where pay_id = #{pay_id} and pay_status = #{pay_status})
 		where rnum>=#{startrow1} and rnum<=#{endrow1}
 	]]>
 	</select>
 
 	<select id="findCancellist" resultType="PayVO">
 	<![CDATA[
-		SELECT  
-			pay_merchant_uid,
-			pay_amount,
-			pay_status,
-			pay_id,
-			pay_lastmoney,
-			pay_nowmoney,
-			pay_date
-		from
-			(select rownum rnum,
-			pay_merchant_uid,
-			pay_amount,
-			pay_status,
-			pay_id,
-			pay_lastmoney,
-			pay_nowmoney,
-			pay_date
-		from (select * from pay order by pay_date desc) 
-		where pay_id = #{pay_id} and pay_status = #{pay_status}) 
+		select * 
+		from(select row_number() over(order by p.pay_date desc) as rnum, p.* 
+    		from pay p 
+    		where pay_id = #{pay_id} and pay_status = #{pay_status})
 		where rnum>=#{startrow2} and rnum<=#{endrow2}
 	]]>
 	</select>
 	
 	<select id="getPaycount" parameterType="String" resultType="int">
-		SELECT count(*) FROM pay where pay_status = #{pay_status}
+		SELECT count(*) FROM pay where pay_status = #{pay_status} and pay_id=#{pay_id}
 	</select>
 	
+	<update id="changeMoney" parameterType="String">
+		UPDATE paylist SET pay_current_money = #{amount} where pay_id=#{userId}
+	</update>
+	
+	<select id="getPaymentlist" resultType="PaymentVO">
+	<![CDATA[
+		select * 
+		from(select row_number() over(order by rownum desc) as rnum, p.* 
+    		from payment p 
+    		where payment_userId = #{payment_userId}) 
+		where rnum>=#{startrow3} and rnum<=#{endrow3}
+	]]>
+	</select>
+	
+	<insert id="insertPayment" parameterType="PaymentVO" >
+		INSERT INTO payment (
+			payment_userId,
+			payment_product_subject,
+			payment_amount,
+			payment_lastmoney,
+			payment_nowmoney,
+			payment_status,
+			payment_date)
+		VALUES (
+		#{payment_userId, jdbcType=VARCHAR}, 
+		#{payment_product_subject, jdbcType=VARCHAR}, 
+		#{payment_amount, jdbcType=VARCHAR}, 
+		#{payment_lastmoney, jdbcType=VARCHAR},
+		#{payment_nowmoney, jdbcType=VARCHAR}, 
+		#{payment_status, jdbcType=VARCHAR}, 
+		sysdate)
+	</insert>
+	
+	<select id="getPaymentcount" parameterType="String" resultType="int">
+		SELECT count(*) FROM payment where payment_userId = #{payment_userId}
+	</select>
 </mapper>
