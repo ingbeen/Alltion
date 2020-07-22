@@ -157,3 +157,7 @@
     background-color: white;
     cursor: pointer;
 }
+.page_btns button:hover,
+.page_btns button:active{
+	background-color: darkgray;
+}

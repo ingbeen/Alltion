@@ -173,8 +173,11 @@
 	        <a><button>&#171;</button></a>
 	        <% }
 	        for(int i=1;i<=maxpage;i++){ %>
+	        	<%if(i==nowpage){ %>
+        		<a href="./selling.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
+	        <%}else{%>
 	        	<a href="./selling.hs?page=<%=i %>"><button><%=i %></button></a>
-	        <%} %>
+	        <%}} %>
 	        <%if(nowpage<maxpage){ %>
 	        <a href="./selling.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
         	<%}else{ %>
