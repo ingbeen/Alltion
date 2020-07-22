@@ -231,7 +231,7 @@
                 <div class="slide1 fade" id="1">
                  <% if(!pricelist.isEmpty()) { %>
                     <ul class="items__list list">
-						<%	for(int i=0; i<3;i++) { 
+						<% for(int i=0; i<3;i++) { 
 							if(i == pricelist.size()) {break;}
 		                    	ProductVO vo = (ProductVO)pricelist.get(i);	%>
                         <li> 
@@ -255,8 +255,9 @@
                                 </div>
                             </a>
                         </li>
-                       <% 
-                       } %>
+
+
+                     <%} %>
                     </ul>
                 <%} %>
                 </div>
@@ -287,8 +288,8 @@
                             </div>
                         </a>
                     	</li>
-                        <% 
-                       } %>
+
+                    	<%} %>
                     </ul>
                 <%} %>  
                 </div>
@@ -319,8 +320,7 @@
                             </div>
                         </a>
                     	</li>
-                        <% 
-                       } %>
+                      <%} %>
                     </ul>
                     <%} %>
                 </div>
