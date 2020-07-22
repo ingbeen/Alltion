@@ -141,6 +141,7 @@
                     <li>
                         <div class="update_form__list title">
                             <span>이메일</span>
+                            
                         </div>
                         <div class="update_form__list content">
                             <span><%=membervo.getEmail() %></span>&nbsp;&nbsp;&nbsp;
@@ -150,13 +151,13 @@
                                    		 <span class="close">&times;</span>
                                     		<fieldset id="member_update">
                                        		 <legend>이메일 변경</legend>
-                                        		<ul>
+                                        			<br>	
                                             		<li>
                                                 	 <label>이메일&nbsp;&nbsp;:&nbsp;</label>
-                                                  <input type="text"  id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="변경할 이메일을 입력하세요." required >     
+                                                  <input type="text" class = "input_border" id="email"  name ="email" style="ime-mode:inactive; width:356px;" placeholder="변경할 이메일을 입력하세요." required >     
 				                                  <a href="javascript:updateEmail.submit()" class="update_btn__submit">이메일 변경</a>&nbsp;&nbsp;
                                             </li>   
-                                        </ul>
+                                        
                                    </fieldset>
                                 </div>
                             </div>	
@@ -169,6 +170,7 @@
                     	<li>                   	
                         <div class="update_form__list title">
                             <span>휴대 전화 번호</span>
+                            
                         </div>
                         <div class="update_form__list content">
                            <span><%=membervo.getMember_phone().substring(0,3) %>-<%=membervo.getMember_phone().substring(3,7) %>-<%=membervo.getMember_phone().substring(7) %></span>&nbsp;&nbsp;&nbsp;                
@@ -179,13 +181,13 @@
                                    		 <span class="close">&times;</span>
                                     		<fieldset id="member_update">
                                        		 <legend>휴대전화 변경</legend>
-                                        		<ul>
+                                        			<br>
                                             		<li>
                                                 	 <label>휴대전화&nbsp;&nbsp;:&nbsp;</label>
-                                                  <input type="text"  id="member_phone"  name ="member_phone"  placeholder="휴대전화를 입력하세요." maxlength = "11" >     
+                                                  <input type="text" class = "input_border"  id="member_phone"  name ="member_phone"  placeholder="휴대전화를 입력하세요." maxlength = "11" style="ime-mode:inactive; width:356px;">     
 				                                  <a href="javascript:updatePhone.submit()" class="update_btn__submit">휴대전화 변경</a>&nbsp;&nbsp;
                                             </li>   
-                                        </ul>
+                                        
                                    </fieldset>
                                 </div>
                        		 </div>         
@@ -225,16 +227,17 @@
                                 <span class="close">&times;</span>
                                 <fieldset id="member_update">
                                 <legend>주소 변경</legend>
+                                <br>
                                 
                                 <li>
                                 <label>우편 번호</label>
-                                <input type="text" id="sample4_postcode" class = "int" name="sample4_postcode" placeholder="우편번호">                             
+                                <input type="text" id="sample4_postcode" class = "input_border" name="sample4_postcode" placeholder="우편번호">                             
                                 <label>도로명 주소</label>
-                                <input type="text" class="int" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
+                                <input type="text" class = "input_border" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
                                 <label>지번 주소</label>
-                                <input type="text" class="int" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
+                                <input type="text" class = "input_border" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
                                 <label>상세 주소</label>
-                                <input type="text" class="int" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
+                                <input type="text" class = "input_border" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
                                 <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span id="guide" style="color:#999;display:none;"></span>
                                 <a href="javascript:updateAddress.submit()" class="update_btn__submit" >주소 변경</a>&nbsp;&nbsp;
