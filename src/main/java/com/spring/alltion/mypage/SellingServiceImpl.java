@@ -1,5 +1,6 @@
 package com.spring.alltion.mypage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,37 +10,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.spring.alltion.detailpage.BidServiceImpl;
 import com.spring.alltion.detailpage.DetailServiceImpl;
 import com.spring.alltion.productRegistration.ProductVO;
-import com.spring.mapper.BiddingMapper;
+import com.spring.mapper.SellingMapper;
 
 @Service
-public class BiddingServiceImpl {
-	
+public class SellingServiceImpl {
+
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Autowired
+	private BidServiceImpl bidService;
+	
+	@Autowired
 	private DetailServiceImpl detailserviceImpl;
 	
-	public List<ProductVO> getBidding_Product_Info(String userId,Model model,HttpServletRequest request){
-		BiddingMapper biddingmapper = sqlSession.getMapper(BiddingMapper.class);
+	public List<ProductVO> getSelling_product_Info(String userId, Model model, HttpServletRequest request) {
+		SellingMapper sellingmapper = sqlSession.getMapper(SellingMapper.class);
 		
-		// 참여중인 경매 리스트 구하기.
-		List<Integer> product_numberList = biddingmapper.getProduct_numberList(userId);
-		List<ProductVO> Bidding_productvo = biddingmapper.getBidding_productvo(product_numberList);
+		List<ProductVO> productvolist = sellingmapper.getProductVOList(userId);
+		List<String> top_bidder_idlist = new ArrayList<String>();
 		
-		// 나의 입찰가 구하기
-		List<Integer> bid_product_numberList = biddingmapper.getBid_product_numberList(userId);
-		
-		if(bid_product_numberList.size()!=0){
-			List<Integer> bidding_bidvo = biddingmapper.getBidding_bidvo(bid_product_numberList,userId);
-			model.addAttribute("bidding_bidvo",bidding_bidvo);
-		}
-		
-		for(int i=0;i<Bidding_productvo.size();i++) {
-			ProductVO productvo = Bidding_productvo.get(i);
-			//카테고리 한글변환
+		for(int i=0;i<productvolist.size();i++) {
+			ProductVO productvo = productvolist.get(i);
+			
+			int product_number = productvo.getProduct_number();
+			
+			//최고응찰자 구하기.
+			String top_bidder_id = bidService.getTop_bidderService(product_number);
+			top_bidder_idlist.add(i,top_bidder_id); 
+			
+			//카테고리 한글 변환
 			String product_category_1 = productvo.getProduct_category_1();
 			productvo.setProduct_category_1(detailserviceImpl.TranslateCate_1(product_category_1));
 			String product_category_2 = productvo.getProduct_category_2();
@@ -61,8 +64,10 @@ public class BiddingServiceImpl {
 				productvo.setProduct_transaction_area("불가능");
 			}
 		}
-		return Bidding_productvo;
+		
+		model.addAttribute("top_bidder_idlist",top_bidder_idlist);
+		
+		return productvolist;
 	}
 
-	
 }

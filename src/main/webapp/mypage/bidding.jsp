@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.spring.alltion.productRegistration.*" %>
 <%@ page import = "java.util.*" %>
-<%@ page import = "com.spring.alltion.productRegistration.ProductVO" %>
 <%
 	List<ProductVO> productvolist = (List<ProductVO>)request.getAttribute("productvolist");
 	List<Integer> Bidding_bidvo = (List<Integer>)request.getAttribute("bidding_bidvo");
@@ -123,7 +122,7 @@
             <%for(int i=0;i<productvolist.size();i++){  
   				ProductVO productvo = productvolist.get(i);
   				int Bidding_bid_price = Bidding_bidvo.get(i);
-  				if(i>=5 * (nowpage - 1) && i<=4 + (nowpage - 1) ){
+  				if(i>=5 * (nowpage - 1) && i<=4 + 5 * (nowpage - 1) ){
   				%>
             <div class="bidding_list_content">
                 <div class="product_info">
@@ -160,7 +159,7 @@
             <%}} %>
         </div>
         <div class="page_btns" align="center">
-        	<%if(nowpage!=1){ %>
+        	<%if(nowpage>1){ %>
 	        <a href="./bidding.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
 	        <%}else{%>
 	        <a><button>&#171;</button></a>
@@ -168,7 +167,7 @@
 	        for(int i=1;i<=maxpage;i++){ %>
 	        	<a href="./bidding.hs?page=<%=i %>"><button><%=i %></button></a>
 	        <%} %>
-	        <%if(nowpage!=maxpage){ %>
+	        <%if(nowpage<maxpage){ %>
 	        <a href="./bidding.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
         	<%}else{ %>
         	<a><button>&#187;</button></a>

@@ -548,7 +548,7 @@
             
             </div>
         </div>
-        <div align="center">
+        <div align="center" style="margin-bottom:100px; margin-top:50px;">
 			<%for(int j=comment_startpage;j<=comment_endpage;j++){%>
 				<a type="button" onclick="commentList(<%=j%>)">[<%=j %>]</a>
 			<%}%>
