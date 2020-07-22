@@ -38,13 +38,29 @@ public class ProductListController {
 		hashmap.put("endrow", endrow);
 		hashmap.put("sort", sort);
 		List<ProductVO> mainlist = productlistService.getMainlist(hashmap);
-		
+		/*
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 5 + 1;
 		int endpage = maxpage;
 		if (endpage > startpage + 5 - 1)
 			endpage = startpage + 5 - 1;
+		*/
+		int maxpage = listcount / limit;
+		int countPage = 5;
+		if (listcount % limit > 0) {
+			maxpage++;
+		}
+		if (maxpage < page) {
+		    page = maxpage;
+		}
+
+		int startpage = ((page - 1) / 5) * 5 + 1;  
+		int endpage = startpage + countPage - 1;  
 		
+		// 마지막 페이지를 보정
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
 		model.addAttribute("page", page);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("mainlist", mainlist);
@@ -84,13 +100,29 @@ public class ProductListController {
 		hashmap.put("sort", sort); // 이 값으로 Order by에 필요한 데이터 넘겨짐.
 		
 		categorylist = productlistService.getCategorylist(hashmap);
-		
+		/*
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 5 + 1;
 		int endpage = maxpage;
 		if (endpage > startpage + 5 - 1)
 			endpage = startpage + 5 - 1;
+		*/
+		int maxpage = listcount / limit;
+		int countPage = 5;
+		if (listcount % limit > 0) {
+			maxpage++;
+		}
+		if (maxpage < page) {
+		    page = maxpage;
+		}
+
+		int startpage = ((page - 1) / 5) * 5 + 1;  
+		int endpage = startpage + countPage - 1;  
 		
+		// 마지막 페이지를 보정
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
 		pricelist = productlistService.getfamousPricelist(product_category_2);
 		participantslist = productlistService.getfamousPricelist(product_category_2);
 		viewslist = productlistService.getfamousPricelist(product_category_2);
