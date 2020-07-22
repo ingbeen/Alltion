@@ -34,7 +34,6 @@ public class ProductlistServiceImpl implements ProductlistService {
 		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
 		return productlist;
 	}
-
 	@Override
 	public List<ProductVO> getfamousPricelist(String product_category_2) {
 		// TODO Auto-generated method stub

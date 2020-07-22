@@ -10,16 +10,17 @@
 	
 	<link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/productRegistration.css">
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
     <link rel="stylesheet" href="resources/css/summernote/summernote-lite.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    
     <title>All-tion</title>
 </head>
 
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-    <!-- top 키 -->
+	<!-- top 키 -->
     <div id="topKey" class="topKey_btn" >
         <span class="material-icons">
             keyboard_arrow_up
@@ -98,7 +99,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="wishList.yb">
+                        <a href="wishList.yb?page=1&endDateFormat=0">
                             <span class="material-icons">turned_in_not</span>
                             <span>찜 목록</span>
                         </a>
@@ -116,6 +117,8 @@
     <!-- 배너 영역 -->
     <div class="banner">
     </div>
+    
+    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
 
@@ -406,7 +409,6 @@
             <div class="form--button">
                 <a class="form-button__submit" onclick="productSubmit()">등록</a>
                 <a class="form-button__cancel" onclick="product_form.reset()">다시 작성</a>
-                <a href="productSelectTest.yb?product_number=1">리스트test</a>
             </div>
 
         </form>
@@ -476,6 +478,8 @@
     <script src="resources/js/productRegistration.js"></script>
     <script src="resources/js/summernote/summernote-lite.js"></script>
     <script src="resources/js/summernote/summernote-ko-KR.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script src="resources/js/kakaoTalk.js"></script>
 </body>
 
 </html>
