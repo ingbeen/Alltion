@@ -19,7 +19,6 @@ public class BiddingController {
 	private BiddingServiceImpl biddingService;
 	
 	@RequestMapping("/bidding.hs")
-<<<<<<< HEAD
 	   public String bidding_page(HttpSession session,Model model,HttpServletRequest request)throws Exception{
 	      String userId = (String)session.getAttribute("userId");
 	      biddingService.getBidding_Product_Info(userId, model,request);
@@ -27,13 +26,4 @@ public class BiddingController {
 	      
 	      return "mypage/bidding";
 	   }
-=======
-	public String bidding_page(HttpSession session,Model model,HttpServletRequest request)throws Exception{
-		String userId = (String)session.getAttribute("userId");
-		biddingService.getBidding_Product_Info(userId, model,request);
-		model.addAttribute("page",Integer.parseInt(request.getParameter("page")));
-		
-		return "mypage/bidding";
-	}
->>>>>>> hong
 }
