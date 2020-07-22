@@ -90,13 +90,13 @@
 						class="search__input">
 				</div>
 				<ul class="member_info">
-					<li><a href="./mypage.kj"> <span class="material-icons">perm_identity</span>
+					<li><a href="./mypage.kj"> <span class="material-icons">perm_identity</span><br>
 							<span>마이 페이지</span>
 					</a></li>
-					<li><a href="#"> <span class="material-icons">turned_in_not</span>
+					<li><a href="#"> <span class="material-icons">turned_in_not</span><br>
 							<span>찜 목록</span>
 					</a></li>
-					<li><a href="#"> <span class="material-icons">access_time</span>
+					<li><a href="#"> <span class="material-icons">access_time</span><br>
 							<span>참여 경매</span>
 					</a></li>
 				</ul>

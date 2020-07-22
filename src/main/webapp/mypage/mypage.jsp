@@ -495,19 +495,19 @@
                 <ul class="member_info">
                     <li>
                         <a href="./mypage.kj">
-                            <span class="material-icons">perm_identity</span>
+                            <span class="material-icons">perm_identity</span><br>
                             <span>마이 페이지</span>
                         </a>
                     </li>
                     <li>
                         <a href="wishList.yb?page=1&endDateFormat=0">
-                            <span class="material-icons">turned_in_not</span>
+                            <span class="material-icons">turned_in_not</span><br>
                             <span>찜 목록</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span class="material-icons">access_time</span>
+                            <span class="material-icons">access_time</span><br>
                             <span>참여 경매</span>
                         </a>
                     </li>
