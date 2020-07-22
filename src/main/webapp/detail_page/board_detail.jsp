@@ -392,11 +392,11 @@
                 <%if(productvo.getProduct_progress()==1) {%>
                 	<font style="color: red;">마감 종료된 경매입니다.</font><br>
                 <%}else if(id!=null&&!id.equals(productvo.getProduct_id())){ %>
-                    <button type="button" id="bid_btn" onclick="bidInsert()">응찰하기</button>
+                    <button type="button" id="bid_btn">응찰하기</button>
                     <%if(productvo.getProduct_purchase_price()!=0) {%>
-                    	<button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
+                    	<button type="button" id="bid_btn2">즉시구매</button>
                     <%} %>
-                    <a href=""><button type="button" id="bid_btn4">찜하기</button></a>
+                    <button type="button" id="bid_btn4">찜하기</button>
                     <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
 					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
@@ -462,25 +462,11 @@
 
         <!-- ↓↓경매의 사진들 펼쳐놓음.↓↓ -->
         <div class="product_information">
-			<!-- 
+			
             <div class="product_information_text">
 				<%=productvo.getProduct_content()%>
             </div>
-             -->
-            <div class="img_1">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_1() %>"></div>
-            </div>
-            <div class="img_2">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_2() %>">
-                </div>
-            </div>
-            <div class="img_3">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_3() %>">
-                </div>
-            </div>
+            
 
             <ul class="detail_page_nav">
                 <li>
@@ -556,13 +542,13 @@
   *비밀글 입력시 판매자와 관리자만 볼 수 있습니다.<%}else{%>댓글은 로그인 후 이용 가능합니다<%}%>" <%if(id==null){ %>onclick="togologin()" style="cursor:pointer;"<%} %>></textarea>
             <br>
             <%if(id!=null){ %>
-            <button type="button" id="comment_btn" onclick="commentInsert()">작 성</button>
+            <button type="button" id="comment_btn">작 성</button>
             <%} %>
             <div class="comment_list">
             
             </div>
         </div>
-        <div align="center">
+        <div align="center" style="margin-bottom:100px; margin-top:50px;">
 			<%for(int j=comment_startpage;j<=comment_endpage;j++){%>
 				<a type="button" onclick="commentList(<%=j%>)">[<%=j %>]</a>
 			<%}%>
@@ -816,6 +802,8 @@
         let limit_price = <%=productvo.getProduct_purchase_price()%>;
         //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
+        //중복 클릭 방지
+        var click = true;
         
         // ↓↓응찰하기 버튼 클릭시
       	function bidList(bid_nowpage){
@@ -827,7 +815,6 @@
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 				success : function(data){
 					var a = '';
-					var i = 0;
 					$.each(data,function(key,value){
 						a += '<div class="bidder1">';
 						a += '<div class="bid_list_no">'+value.bid_no+'</div>';
@@ -835,10 +822,6 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
-						if(key>=5 * (bid_nowpage - 1) && key<=4){
-							console.log(value);
-							
-						}
 					});
 					
 					$(".bidder").html(a);
@@ -849,42 +832,63 @@
 			});
 		}
       	
-		function bidInsert(){
-			$.ajax({
-				url: '/alltion/bid_insert.hs',
-				type : 'POST',
-				data : {'bid_product_number':bno,'bid_id':sessionid},
-				success : function(data){
-					if(data==1){
-						bidList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+      	$("#bid_btn").off("click").on('click',function(){
+			if(click){
+				click = !click;
+				$.ajax({
+					url: '/alltion/bid_insert.hs',
+					type : 'POST',
+					data : {'bid_product_number':bno,'bid_id':sessionid},
+					success : function(data){
+						if(data==1){
+							alert('성공적으로 응찰되었습니다.');
+							bidList(1); //페이지 로딩시 응찰 목록 갱신
+						}else if(data==2){
+							bidList(1);
+							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(insert)");
 					}
-					
-				},
-				error:function(){
-					alert("ajax통신 실패(insert)");
-				}
-			});
-		}
+				});
+	      		//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
-		function nowpurchase(){
-			$.ajax({
-				url: '/alltion/now_purchase.hs',
-				type : 'POST',
-				data : {'bid_product_number':bno,'bid_id':sessionid},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success:function(data){
-					if(data==1){
-						bidList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+      	$("#bid_btn2").off("click").on('click',function(){
+			if(click){	
+				click = !click;
+      			$.ajax({
+					url: '/alltion/now_purchase.hs',
+					type : 'POST',
+					data : {'bid_product_number':bno,'bid_id':sessionid},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success:function(data){
+						if(data==1){
+							alert('성공적으로 응찰되었습니다.');
+							bidList(1); //페이지 로딩시 응찰 목록 갱신
+							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(nowpurchase)");
 					}
-				},
-				error:function(){
-					alert("ajax통신 실패(nowpurchase)");
-				}
-			});
-		}
+				});
+      			//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
 		//경매등록자 아이디
 		let writerId = '<%=writerId%>'; 
@@ -975,33 +979,43 @@
 		let comment_secret = document.getElementById('secret');
 		let comment_secret_value="";
 		
-		function commentInsert(){
-			if(comment_secret.checked==true){
-				comment_secret_value = "1";
-			}else{
-				comment_secret_value = "0";
-			}
-			if(comment_content_input.value==""){
-				alert('내용을 입력해 주세요.');
-				return false;
-			}
-			$.ajax({
-				url: '/alltion/commentinsert.hs',
-				type : 'POST',
-				data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success:function(data){
-					if(data==1){
-						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
-					}
-				},
-				error:function(){
-					alert("ajax통신 실패(commentinsert)");
+		$("#comment_btn").off("click").on('click',function(){
+			if(click){	
+				click = !click;
+				if(comment_secret.checked==true){
+					comment_secret_value = "1";
+				}else{
+					comment_secret_value = "0";
 				}
-			});
-		}
+				if(comment_content_input.value==""){
+					alert('내용을 입력해 주세요.');
+					return false;
+				}
+				$.ajax({
+					url: '/alltion/commentinsert.hs',
+					type : 'POST',
+					data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success:function(data){
+						if(data==1){
+							comment_content_input.value='';
+							commentList(1); //페이지 로딩시 응찰 목록 갱신
+							
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(commentinsert)");
+					}
+				});
+				//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
 		// ↓↓댓글 수정
 		let number_for_update = 0;
@@ -1026,6 +1040,11 @@
 		
 		function commentUpdate(n){
 			let comment_content_update = document.getElementsByClassName('comment_content_update')[number_for_update];
+			if(comment_content_update.value==""){
+				alert('내용을 입력해 주세요.');
+				return false;
+			}
+			
 			$.ajax({
 				url: '/alltion/commentupdate.hs',
 				type : 'POST',
@@ -1035,7 +1054,7 @@
 				success:function(data){
 					if(data==1){
 						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+						
 					}
 				},
 				error:function(){
@@ -1056,7 +1075,7 @@
 				success:function(data){
 					if(data==1){
 						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+						
 					}
 				},
 				error:function(){
@@ -1084,7 +1103,10 @@
 		
 		function commentReply(n){
 			let comment_content_reply = document.getElementsByClassName('comment_content_reply')[number_for_reply];
-			
+			if(comment_content_reply.value==""){
+				alert('내용을 입력해 주세요.');
+				return false;
+			}
 			$.ajax({
 				
 				url: '/alltion/commentreply.hs',
@@ -1094,8 +1116,9 @@
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 				success:function(data){
 					if(data==1){
+						
 						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+						
 					}
 				},
 				error:function(){
@@ -1253,6 +1276,37 @@
 			});
 		}
 		
+		// 찜버튼 클릭시 wish리스트에 해당항목 추가
+		$("#bid_btn4").off("click").on('click',function(){
+			if(click){
+				click = !click;
+				$.ajax({
+					url : '/alltion/wish_list.hs',
+					type : 'post',
+					data : {'wish_product_number':bno,'wish_id':sessionid},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success : function(data){
+						if(data==0){
+							alert('찜목록에 추가 되었습니다.');
+						}else{
+							alert('이미 찜목록에 등록되어있는 경매 입니다.');
+						}
+						
+						
+					},
+					error:function(){
+						alert("ajax통신 실패(insertWishList)!!!");		
+					}
+				});
+				//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
     </script>
 </body>
