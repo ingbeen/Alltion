@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%@ page import = "com.spring.alltion.test.Product_kjVO" %>
 <%@ page import = "java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%	
-	ArrayList<Product_kjVO> product_list =
-			(ArrayList<Product_kjVO>)request.getAttribute("product_list");
+	ArrayList<Product_kjVO> getSale_list = (ArrayList<Product_kjVO>)request.getAttribute("getSale_list");
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
-    <link rel="stylesheet" href="./resources/css/buyer.css">
+    <link rel="stylesheet" href="./resources/css/seller.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
@@ -91,140 +89,173 @@
             </div>
         </div>
     </div>
-    <!--구매 중-->
-    	<%if(product_list.size()==0) {%>
-    	<div class="buyer--form">
-    	<h3>구매 중 경매가 없습니다.</h3>
+    <!--판매 중-->
+    	<%if(getSale_list.size()==0) {%>
+    	<div class="seller--form">
+    	<h3>판매 중 경매가 없습니다.</h3>
     	</div>
     	<%}else{ %>
     	<%
-        	for(int i = 0; i < product_list.size(); i++)
+        	for(int j = 0; j < getSale_list.size(); j++)
         	{
-        		Product_kjVO vo = (Product_kjVO)product_list.get(i);
+        		Product_kjVO Product_kjvo = (Product_kjVO)getSale_list.get(j);
         	
         %> 
        
-        <div class="buyer--form">
-        <h3>구매 중 경매</h3>
-            <div class="buyer--content">
-                <ul class="buyer_form list">
+        <div class="seller--form">
+        <h3>판매 중 경매</h3>
+            <div class="seller--content">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>상품 번호</span>
                         </div>
-                        <div class="buyer_form__list content">
-                        <span><%=vo.getProduct_number() %></span>
+                        <div class="seller_form__list content">
+                        <span><%=Product_kjvo.getTrading_product_number() %></span>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>상품명</span>
                         </div>
-                        <div class="buyer_form__list content">
-                        <span><%=vo.getProduct_subject() %></span>
+                        <div class="seller_form__list content">
+                        <span><%=Product_kjvo.getProduct_subject() %></span>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
-                            <span>구매 가격</span>
+                        <div class="seller_form__list title">
+                            <span>판매 가격</span>
                         </div>
-                        <div class="buyer_form__list content">
-                        <span><%=vo.getTrading_price() %></span>
+                        <div class="seller_form__list content">
+                        <span><%=Product_kjvo.getTrading_price() %></span>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
-                            <span>입금 기한</span>
+                        <div class="seller_form__list title">
+                            <span>운송장번호 입력기한</span>
                         </div>
-                        <div class="buyer_form__list content">
-                        <span><%=vo.getTrading_deposit_deadline() %></span>
+                        <div class="seller_form__list content">
+                        <span><%=Product_kjvo.getTrading_waybill_deadline() %></span>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>거래 방식</span>
                         </div>
-                        <div class="buyer_form__list content">
-                        <span><%=vo.getTrading_transaction_method() %></span>
+                        <div class="seller_form__list content">
+                        <span><%=Product_kjvo.getTrading_transaction_method() %></span>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
-                            <span>판매자</span>
+                        <div class="seller_form__list title">
+                            <span>구매자 아이디</span>
                         </div>
-                        <div class="buyer_form__list content">
-                        	<span><%=vo.getProduct_id() %></span>
+                        <div class="seller_form__list content">
+                        	<span><%=Product_kjvo.getTrading_buyer_id() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>구매자 이름</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        	<span><%=Product_kjvo.getMember_name() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>구매자 번호</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        	<span><%=Product_kjvo.getMember_phone() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>주소</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        	<span><%=Product_kjvo.getSample4_postcode() %>
+                        		<%=Product_kjvo.getSample4_roadAddress() %>
+                        	    <%=Product_kjvo.getSample4_jibunAddress() %>
+                        		<%=Product_kjvo.getSample4_detailAddress() %></span>
                         </div>    
                     </li>
                 </ul>
                
         </div>
-         <a href = "./buyer_emoney.kj"  class = "base_btn" >입금 하기</a>	
+         <a href = "./waybill.kj"  class = "base_btn" >운송장 번호 입력하기</a>	
     </div>
     <%
         	}}
     %>
     
     <!--구매 완료 -->
-        <div class="buyer--form">
-            <h3>구매 완료</h3>
-            <div class="buyer--content">
-                <ul class="buyer_form list">
+        <div class="seller--form">
+            <h3>판매 완료</h3>
+            <div class="seller--content">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>상품 번호</span>
                         </div>
-                        <div class="buyer_form__list content">
+                        <div class="seller_form__list content">
                             
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>상품명</span>
                         </div>
-                        <div class="buyer_form__list content">
+                        <div class="seller_form__list content">
                             <h4></h4>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>구매 가격</span>
                         </div>
-                        <div class="buyer_form__list content">
+                        <div class="seller_form__list content">
                             <h4></h4>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>구매 날짜</span>
                         </div>
-                        <div class="buyer_form__list content">
+                        <div class="seller_form__list content">
                             <h4></h4>
                         </div>    
                     </li>
                 </ul>
-                <ul class="buyer_form list">
+                <ul class="seller_form list">
                     <li>
-                        <div class="buyer_form__list title">
+                        <div class="seller_form__list title">
                             <span>판매자</span>
                         </div>
-                        <div class="buyer_form__list content">
+                        <div class="seller_form__list content">
                             <h4></h4>
                         </div>    
                     </li>

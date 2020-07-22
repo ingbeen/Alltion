@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%
-	String id = (String)session.getAttribute("userId");
-	
+	String id = (String)session.getAttribute("userId");	
 %>
 <!DOCTYPE html>
 <html>
@@ -129,7 +128,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="./seller.kj">
                     <span class="material-icons">list</span><br>
                     <span class="myPage__menu">판매 내역</span>
                 </a>
