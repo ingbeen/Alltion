@@ -14,6 +14,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+<link rel="stylesheet" href="./resources/css/style.css?after">
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 <link rel="stylesheet" href="<c:url value="/resources/css/pay.css" />">
 <link
