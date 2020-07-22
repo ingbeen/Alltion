@@ -121,7 +121,7 @@
     <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
-
+	
     <!-- 경매등록 시작 -->
 
     <section id="product" class="product">

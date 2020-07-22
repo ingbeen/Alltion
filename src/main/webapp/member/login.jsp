@@ -10,6 +10,9 @@ pageEncoding="UTF-8"%>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
+	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
 
 </head>
@@ -88,7 +91,7 @@ pageEncoding="UTF-8"%>
             </div>
         </div>
     </div>
-
+	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
 	<form name = "login" action = "./login.kj" method = "post">   
 
     <!-- 로그인 영역 by 계정 -->
@@ -181,6 +184,8 @@ pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript"></script>
     <script src="./resources/js/login.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
 
 </body>
 </html>

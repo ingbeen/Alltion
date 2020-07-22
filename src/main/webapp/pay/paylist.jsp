@@ -32,6 +32,9 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/css/paylist.css">
+<link rel="stylesheet" href="resources/css/kakaoTalk.css">
+<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+<link rel="stylesheet" href="./resources/css/style.css?after">
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
 	rel="stylesheet">
@@ -100,6 +103,7 @@
 			</div>
 		</div>
 	</div>
+	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
 	<!-- 충전내역 조회 -->
 	<div class="pay">
 		<div class="chargehistory">
@@ -533,5 +537,7 @@
          }
     }
 	</script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

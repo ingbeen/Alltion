@@ -11,7 +11,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <title>All-tion</title>
-
+	<link rel="stylesheet" href="resources/css/kakaoTalk.css">
+	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+	<link rel="stylesheet" href="./resources/css/style.css?after">
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
@@ -86,7 +88,7 @@
             </div>
         </div>
     </div>
-    
+    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!-- 회원 가입 폼 -->
     <div class = "joinWrap">
         <h3>All-tion 통합회원가입</h3>
@@ -181,5 +183,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript"></script>
     <script src="./resources/js/join.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

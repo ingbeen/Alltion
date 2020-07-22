@@ -47,6 +47,10 @@
     <link rel="stylesheet" href="./resources/css/product_detail.css?after"> <!-- 상세페이지 스타일시트 참조 (by.HONG)-->
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
+	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+	<link rel="stylesheet" href="./resources/css/style.css?after">
+    
     <title>All-tion</title>
     <style>
     </style>
@@ -151,6 +155,7 @@
 
 
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
+    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!--  !! 여기에 내용 넣기 !!  by.Hong  -->
     <div align="center">
     <div class="main_body" align="left">
@@ -1310,5 +1315,7 @@
 		});
 		
     </script>
+   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+   <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

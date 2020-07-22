@@ -36,7 +36,7 @@ CREATE TABLE product_kj_trading (
  */
 public class Product_kjVO {
 	 
-	int product_number; 
+	 int product_number; 
 	 String product_id;	 
 	 String product_subject;
 	 String product_delivery;

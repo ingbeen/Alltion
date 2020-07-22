@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="./resources/css/buyer.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
+	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+	<link rel="stylesheet" href="./resources/css/style.css?after">
+    
     <title>All-tion</title>
 </head>
 <body>
@@ -512,6 +516,7 @@
             </div>
         </div>
     </div>
+    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!--구매 중-->
     	<%if(product_list.size()==0) {%>
     	<div class="buyer--form">
@@ -743,5 +748,7 @@
             })
         });
     </script>
+   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+   <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

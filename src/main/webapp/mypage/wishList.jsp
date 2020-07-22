@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="resources/css/wishList.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
+	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+	<link rel="stylesheet" href="./resources/css/style.css?after">
     
     
     <title>All-tion</title>
@@ -539,7 +541,7 @@
     </div>
     
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
-
+	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!-- 찜목록 시작 -->
 
     <section class="wishList">
@@ -661,6 +663,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="resources/js/common.js"></script>
     <script src="resources/js/wishList.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 
 </html>
