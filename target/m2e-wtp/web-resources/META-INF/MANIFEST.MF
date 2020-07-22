@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: cakcl3153
 Build-Jdk: 1.8.0_251
+=======
+Built-By: minse
+Build-Jdk: 1.8.0_202
+>>>>>>> origin/min
 Created-By: Maven Integration for Eclipse
 
