@@ -22,20 +22,16 @@ public class BiddingServiceImpl {
 	@Autowired
 	private DetailServiceImpl detailserviceImpl;
 	
-	public List<ProductVO> getBidding_Product_Info(String userId,Model model,HttpServletRequest request){
+	public void getBidding_Product_Info(String userId,Model model,HttpServletRequest request){
 		BiddingMapper biddingmapper = sqlSession.getMapper(BiddingMapper.class);
 		
 		// 참여중인 경매 리스트 구하기.
 		List<Integer> product_numberList = biddingmapper.getProduct_numberList(userId);
-		List<ProductVO> Bidding_productvo = biddingmapper.getBidding_productvo(product_numberList);
-		
-		// 나의 입찰가 구하기
-		List<Integer> bid_product_numberList = biddingmapper.getBid_product_numberList(userId);
-		
-		if(bid_product_numberList.size()!=0){
-			List<Integer> bidding_bidvo = biddingmapper.getBidding_bidvo(bid_product_numberList,userId);
-			model.addAttribute("bidding_bidvo",bidding_bidvo);
+		if(product_numberList.size()==0) {
+			product_numberList.add(0,0);
 		}
+		
+		List<ProductVO> Bidding_productvo = biddingmapper.getBidding_productvo(product_numberList);
 		
 		for(int i=0;i<Bidding_productvo.size();i++) {
 			ProductVO productvo = Bidding_productvo.get(i);
@@ -61,8 +57,16 @@ public class BiddingServiceImpl {
 				productvo.setProduct_transaction_area("불가능");
 			}
 		}
-		return Bidding_productvo;
+		model.addAttribute("productvolist",Bidding_productvo);
+		
+		
+		// 나의 입찰가 구하기
+		List<Integer> bid_product_numberList = biddingmapper.getBid_product_numberList(userId);
+		
+		if(bid_product_numberList.size()!=0){
+			List<Integer> bidding_bidvo = biddingmapper.getBidding_bidvo(bid_product_numberList,userId);
+			model.addAttribute("bidding_bidvo",bidding_bidvo);
+		}
+		
 	}
-
-	
 }
