@@ -14,51 +14,51 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
     <div class="upper_header">
-            <div class="upper_header--nav">
-                <p>
-                    <a href="" id="clock"></a>
-                </p>
-                <ul>
-                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
-                	<c:choose>
+        <div class="upper_header--nav">
+            <p>
+                <a href="" id="clock"></a>
+            </p>
+            <ul>
+            	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+            	<c:choose>
 
-					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
-                    <li>
-                        <a href="./mypage.kj">${userId}</a>
-                    </li>
-                    <li>
-                        <a href="./logout.kj">로그아웃</a>
-                    </li>
-                    </c:when>
-                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
-                    <li>
-                        <a href="./loginForm.kj">로그인</a>
-                    </li>
-                    <li>
-                        <a href="./naverjoin.kj">회원 가입</a>
-                    </li>
-                    </c:otherwise>
-                    </c:choose>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                    <li>
-                        <a href="#">고객 센터</a>
-                    </li>
-                    
-                </ul>
-            </div>
+				<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
+                <li>
+                    <a href="./mypage.kj">${userId}</a>
+                </li>
+                <li>
+                    <a href="./logout.kj">로그아웃</a>
+                </li>
+                </c:when>
+                <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                <li>
+                    <a href="./loginForm.kj">로그인</a>
+                </li>
+                <li>
+                    <a href="./naverjoin.kj">회원 가입</a>
+                </li>
+                </c:otherwise>
+                </c:choose>
+                <li>
+                	<a href="./registration.yb">판매하기</a>
+                </li>
+                <li>
+                    <a href="#">고객 센터</a>
+                </li>
+            </ul>
         </div>
-        <div class="lower_header">
+        </div>
+    <div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
                     <a href="/alltion/">ALL-TION</a>
                 </h1>
-                <div class="category">
+            	<div>
+                	                <div class="category">
                     <a class="category--drop">
                         <img src="./resources/img/header/category_tab.png">
                     </a>
-                                        <div class="category--dropdown">
+                    <div class="category--dropdown">
                         <ul class="whole_menu">
                             <li>
                                 <a>
@@ -480,7 +480,7 @@ pageEncoding="UTF-8"%>
                     </div>
                 </div>
                 <div class="search">
-                    <select class="search--select">
+	                <select class="search--select">
                         <option value="">전체</option>
                         <option value="cate01">패션</option>
                         <option value="cate02">뷰티</option>
@@ -496,6 +496,7 @@ pageEncoding="UTF-8"%>
                         <option value="cate12">기타잡화</option>
                     </select>
                     <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
+                </div>
                 </div>
                 <ul class="member_info">
                     <li>

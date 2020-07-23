@@ -34,6 +34,8 @@
 
 /* -- 배너 영역 */
 .banner {
+	width: 1200px;
+	height: 540px;
     margin: 0 auto; 
 	position: relative; 
     background: rgba(0,0,0,0.2);
@@ -41,6 +43,7 @@
 
 .banner > div { 
 	position: absolute;
+	width: 100%;
 }
 
 .banner:hover span, #slideshow:hover .banner-dots{
@@ -71,17 +74,15 @@
 }
 
 .prev {
-    position: absolute; 
-    top: 10px; 
+    position: absolute;
+    top: 43%; 
     left: 20px;
-    bottom: 10px;
 }
 
 .next {
     position: absolute; 
-    top: 10px; 
+    top: 43%; 
     right: 10px;
-    bottom: 10px;
 }
 
 .banner_dots {

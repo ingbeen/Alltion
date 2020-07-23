@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
 -->
     </div>
     <div class="header">
-        <jsp:include page="./header/header.jsp"></jsp:include>
+        <jsp:include page="./header/header2.jsp"></jsp:include>
     </div>
     <!-- 배너 영역 -->
     <div class="banner">
