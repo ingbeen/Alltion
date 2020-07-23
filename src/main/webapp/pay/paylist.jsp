@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.spring.alltion.pay.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	List<PayVO> chargevo = (List<PayVO>) request.getAttribute("chargevo");
 	List<PayVO> cancelvo = (List<PayVO>) request.getAttribute("cancelvo");
@@ -55,9 +56,33 @@
 				<span> <a href="" id="clock"></a>
 				</span>
 				<ul>
-					<li><a href="./mypage.kj">${userId}</a></li>
-					<li><a href="./logout.kj">로그아웃</a></li>
-					<li><a href="./registration.yb">판매하기</a></li>
+					<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
+                	<c:choose>
+
+					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
+                    <li>
+                        <a href="./mypage.kj">${userId}</a>
+                    </li>
+                    <li><a href="./pay.ms">￦ ${currentMoney }</a>
+                    <li>
+                        <a href="./logout.kj">로그아웃</a>
+                    </li>
+                    </c:when>
+                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
+                    <li>
+                        <a href="./loginForm.kj">로그인</a>
+                    </li>
+                    <li>
+                        <a href="./naverjoin.kj">회원 가입</a>
+                    </li>
+                    </c:otherwise>
+                    </c:choose>
+                    <li>
+                    	<a href="./registration.yb">판매하기</a>
+                    </li>
+                    <li>
+                        <a href="#">고객 센터</a>
+                    </li>
 				</ul>
 			</div>
 		</div>
@@ -505,12 +530,15 @@
             $.ajax({
             	url: "/alltion/plus.ms",
             	data: formData
+            }).done(function(data){
+            	click = true;
+            }).fail(function(data){
+            	click = false;
             })
             // 타이밍 추가
-            setTimeout(function () {
-                click = true;
-            }, 1000)
-            
+            //setTimeout(function () {
+            //    click = true;
+            //}, 1000)
          } else {
             console.log("중복됨");
          }

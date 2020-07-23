@@ -68,6 +68,7 @@ date = getFormatDate(date);
                     <li>
                         <a href="./mypage.kj">${userId}</a>
                     </li>
+                    <li><a href="./pay.ms">￦ ${currentMoney }</a>
                     <li>
                         <a href="./logout.kj">로그아웃</a>
                     </li>
