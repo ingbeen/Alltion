@@ -13,15 +13,10 @@ pageEncoding="UTF-8"%>
     family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-    <!-- top 키 -->
-    <div id="topKey" class="topKey_btn" >
-        <span class="material-icons">
-            keyboard_arrow_up
-        </span>
-    </div>
     <!-- 광고 배너 및 헤더 -->
     <div class="ad__banner"> 	
         <a href="https://coupa.ng/bEUWFN" target="_blank">
@@ -67,8 +62,8 @@ pageEncoding="UTF-8"%>
 			</span>
         </button>
     </div>
-    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     
+    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     <!--  메뉴 카테고리  -->
     
     <div class="menu">
@@ -1794,9 +1789,11 @@ pageEncoding="UTF-8"%>
     </div>
     
     <!--  스크립트 영역  -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript"></script>
-    <script src="./resources/js/index_main.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script ></script>
+    <script type="text/javascript" src="./resources/js/index_main.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
     <script src="./resources/js/banner.js"></script>
 
 </body>

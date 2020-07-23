@@ -18,6 +18,9 @@
 <link rel="stylesheet" href="./resources/css/style.css?after">
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 <link rel="stylesheet" href="<c:url value="/resources/css/pay.css" />">
+<link rel="stylesheet" href="resources/css/kakaoTalk.css">
+<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+<link rel="stylesheet" href="./resources/css/style.css?after">
 <link
 	href="<c:url value="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"/>"
 	rel="stylesheet">
@@ -49,96 +52,13 @@ date = getFormatDate(date);
 </head>
 
 <body>
-	<!-- 모든 페이지 공통 영역 by 하나  -->
-	<!-- 광고 배너 및 헤더 -->
-	<div class="header">
-		<div class="upper_header">
-			<div class="upper_header--nav">
-                <p>
-                    <a href="" id="clock"></a>
-                </p>
-                <ul>
-                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
-                	<c:choose>
+    <!-- 모든 페이지 공통 영역 by 하나  -->
+    
+    <div class="header">
+        <jsp:include page="../header/header.jsp"></jsp:include>
+    </div>
 
-					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
-                    <li>
-                        <a href="./mypage.kj">${userId}</a>
-                    </li>
-                    <li>
-                        <a href="./logout.kj">로그아웃</a>
-                    </li>
-                    </c:when>
-                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
-                    <li>
-                        <a href="./loginForm.kj">로그인</a>
-                    </li>
-                    <li>
-                        <a href="./naverjoin.kj">회원 가입</a>
-                    </li>
-                    </c:otherwise>
-                    </c:choose>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                    <li>
-                        <a href="#">고객 센터</a>
-                    </li>
-                </ul>
-            </div>
-		</div>
-		<div class="lower_header">
-			<div class="lower_header--nav">
-				<h1 class="logo">
-					<a href="/alltion/">ALL-TION</a>
-				</h1>
-				<div class="category">
-					<a class="category--drop"> <img
-						src="./resources/img/header/category_tab.png">
-					</a>
-				</div>
-				<div class="search">
-					<select class="search--select">
-						<option value="">전체</option>
-						<option value="cate01">패션</option>
-						<option value="cate02">뷰티</option>
-						<option value="cate03">출산/유아동</option>
-						<option value="cate04">전자기기</option>
-						<option value="cate05">가전제품</option>
-						<option value="cate06">가구/인테리어</option>
-						<option value="cate07">반려동물/취미</option>
-						<option value="cate08">도서/음반/문구</option>
-						<option value="cate09">티켓/쿠폰</option>
-						<option value="cate10">스포츠</option>
-						<option value="cate11">공구/산업용품</option>
-						<option value="cate12">기타잡화</option>
-					</select> <input type="text" placeholder="찾으시는 상품을 입력해 주세요"
-						class="search__input">
-				</div>
-				<ul class="member_info">
-                    <li>
-                        <a href="mypage.kj">
-                            <span class="material-icons">perm_identity</span>
-                            <span>마이 페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishList.yb">
-                            <span class="material-icons">turned_in_not</span>
-                            <span>찜 목록</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-icons">access_time</span>
-                            <span>참여 경매</span>
-                        </a>
-                    </li>
-                </ul>
-			</div>
-		</div>
-	</div>
-
+    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
 	<!------------------------------------------------------------------------------------------------>
 	<div class="Main">
 		<div class="h3_subBox">
@@ -177,9 +97,9 @@ date = getFormatDate(date);
 								<tr>
 									<th>아이디</th>
 									<td><input class="text1" type="text" name="buyer_name"
-										title="입금인" size="20"></td>
+										title="입금인" size="20" value="${userId}"></td>
 									<th>현재 사이버 머니</th>
-									<td>￦ 0000</td>
+									<td>￦ ${currentMoney}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="paylist" href="goPaylist.ms">충전내역 조회</a></td>
 								</tr>
 								<tr>
 									<th>충전할 금액(원)</th>
@@ -238,7 +158,7 @@ date = getFormatDate(date);
 										title="결제 주문번호"></td>
 
 									<th>현재 사이버머니</th>
-									<td>￦ 0000</td>
+									<td>￦ ${currentMoney}</td>
 								</tr>
 								<tr>
 									
@@ -295,6 +215,8 @@ date = getFormatDate(date);
 	<script src="<c:url value="https://code.jquery.com/jquery-3.5.1.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/pay.js" />"></script>
 	<script src="<c:url value="/resources/js/common.js" />"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			// 광고 없애기

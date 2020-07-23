@@ -97,10 +97,8 @@ CREATE TABLE sale_credit_score_list (
 
 */
 
-
-
 create table member(
-member_name varchar2(15),
+member_name varchar2(20),
 member_id varchar2(20) primary key,
 member_password varchar2(20) not null,
 email varchar2(50) not null,
@@ -171,5 +169,12 @@ CREATE TABLE trading (
     
     trading_progress varchar2(1000) not null, -- 진행상태
     trading_date date not null -- 등록일
+);
+
+-- 찜목록
+create table wish_list (
+    wish_product_number number, -- 상품번호
+    wish_id varchar2(1000), -- 아이디
+    wish_date Date -- 등록일
 );
 */

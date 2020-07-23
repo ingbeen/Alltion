@@ -3,11 +3,13 @@
 .wishList {
     max-width: 1200px;
     margin: auto;
+    min-height: 600px;
 /*    padding: 0 10px;*/
 }
 
 .wishList * {
     letter-spacing: 0.1px;
+    
 }
 
 /* 타이틀 */
@@ -87,7 +89,7 @@
     color: #114da5;
 }
 
-.wishList--ChangeEndDateFormBtn {
+.wishList--changeEndDateFormBtn {
     box-sizing: border-box;
     color: #eeeeee;
     padding: 9px 12px;
@@ -97,6 +99,7 @@
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
+    outline: 0;
 }
 
 /* 표 공통사항 */
@@ -104,11 +107,11 @@
     overflow: auto;
 }
 
-.wishList--deletCheck {
+.wishList--deleteCheck {
     flex: 0 0 4%;
 }
 
-.wishList--deletCheck > input {
+.wishList--deleteCheck > input {
     margin: 0 10px;
 }
 
@@ -166,7 +169,7 @@
     border-bottom: 1px solid #9ca0aa;
 }
 
-.wishList--contentsWarp .wishList--deletCheck {
+.wishList--contentsWarp .wishList--deleteCheck {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -275,6 +278,7 @@
     font-size: 14px;
     line-height: 1;
     margin-top: 8px;
+    outline: 0;
 }
 
 .wishList--delete {
@@ -289,6 +293,11 @@
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
+    outline: 0;
+}
+
+.wishList--delete:hover {
+    background-color: #eee;
 }
 
 /* 페이지 */
@@ -302,23 +311,21 @@
     margin: 15px 0;
 }
 
-.wishList--page > li{
-    display: inline;
-}
-
-.wishList--page > li > a {
+.wishList--page > li {
     padding: 4px 17px;
     border: 1px solid #ddd;
     margin: 0 3px;
     border-radius: 4px;
     position: relative;
+    display: inline;
 }
 
-.wishList--page > li:not(.active) > a:hover {
+.wishList--page > .nonActive:hover {
+	cursor: pointer;
     background-color: #eee;
 }
 
-.wishList--page > li .material-icons {
+.wishList--page > li > .material-icons {
     font-size: 30px;
     color: #333;
     top: 0;
@@ -326,7 +333,7 @@
     position: absolute;
 }
 
-.wishList--page > li span:not(.material-icons) {
+.wishList--page > li > span:not(.material-icons) {
     font-size: 15px;
     color: #333;
     top: 5px;
@@ -334,17 +341,22 @@
     position: absolute;
 }
 
-.wishList--page > .active > a {
+.wishList--page > #active {
     cursor: default;
     background-color: #222;
     border-color: #222;
 }
 
-.wishList--page > .active > a > span {
+.wishList--page > #active > span {
     color: #fff;
 }
 
 /* container 끝 */
 
+/* 로딩화면 */
+.hidden {
+	overflow: hidden;
+	height: 100%;
+}
 
 /* 찜목록 끝 by.유빈 */

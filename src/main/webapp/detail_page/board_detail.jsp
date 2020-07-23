@@ -47,6 +47,10 @@
     <link rel="stylesheet" href="./resources/css/product_detail.css?after"> <!-- 상세페이지 스타일시트 참조 (by.HONG)-->
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
+	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+	<link rel="stylesheet" href="./resources/css/style.css?after">
+    
     <title>All-tion</title>
     <style>
     </style>
@@ -54,101 +58,10 @@
 
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-    <!-- top 키 -->
-    <div id="topKey" class="topKey_btn" >
-        <span class="material-icons">
-            keyboard_arrow_up
-        </span>
-    </div>
+    
     <div class="header">
-        <div class="upper_header">
-            <div class="upper_header--nav">
-                <p>
-                    <a id="clock"></a>
-                </p>
-                <ul>
-                	<!-- jstl 바뀐 구문 로그인, 비 로그인 -by계정-->
-                	<c:choose>
-
-					<c:when test="${userId != null}"><!-- 메인페이지 로그인시 -->         
-                    <li>
-                        <a href="./mypage.kj">${userId}</a>
-                    </li>
-                    <li>
-                        <a href="./logout.kj">로그아웃</a>
-                    </li>
-                    </c:when>
-                    <c:otherwise><!-- 로그인 하지 않았을때 메인페이지 -->
-                    <li>
-                        <a href="./loginForm.kj">로그인</a>
-                    </li>
-                    <li>
-                        <a href="./naverjoin.kj">회원 가입</a>
-                    </li>
-                    </c:otherwise>
-                    </c:choose>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                    <li>
-                        <a href="#">고객 센터</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="lower_header">
-            <div class="lower_header--nav">
-                <h1 class="logo">
-                    <a href="/alltion/">ALL-TION</a>
-                </h1>
-                <div class="category">
-                    <a class="category--drop">
-                        <img src="./resources/img/header/category_tab.png">
-                    </a>
-                </div>
-                <div class="search">
-                    <select class="search--select">
-                        <option value="">전체</option>
-                        <option value="cate01">패션</option>
-                        <option value="cate02">뷰티</option>
-                        <option value="cate03">출산/유아동</option>
-                        <option value="cate04">전자기기</option>
-                        <option value="cate05">가전제품</option>
-                        <option value="cate06">가구/인테리어</option>
-                        <option value="cate07">반려동물/취미</option>
-                        <option value="cate08">도서/음반/문구</option>
-                        <option value="cate09">티켓/쿠폰</option>
-                        <option value="cate10">스포츠</option>
-                        <option value="cate11">공구/산업용품</option>
-                        <option value="cate12">기타잡화</option>
-                    </select>
-                    <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
-                </div>
-                <ul class="member_info">
-                    <li>
-                        <a href="mypage.kj">
-                            <span class="material-icons">perm_identity</span>
-                            <span>마이 페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishList.yb">
-                            <span class="material-icons">turned_in_not</span>
-                            <span>찜 목록</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-icons">access_time</span>
-                            <span>참여 경매</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="../header/header.jsp"></jsp:include>
     </div>
-
 
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     <!--  !! 여기에 내용 넣기 !!  by.Hong  -->
@@ -393,11 +306,11 @@
                 <%if(productvo.getProduct_progress()==1) {%>
                 	<font style="color: red;">마감 종료된 경매입니다.</font><br>
                 <%}else if(id!=null&&!id.equals(productvo.getProduct_id())){ %>
-                    <button type="button" id="bid_btn" onclick="bidInsert()">응찰하기</button>
+                    <button type="button" id="bid_btn">응찰하기</button>
                     <%if(productvo.getProduct_purchase_price()!=0) {%>
-                    	<button type="button" id="bid_btn2" onclick="nowpurchase()">즉시구매</button>
+                    	<button type="button" id="bid_btn2">즉시구매</button>
                     <%} %>
-                    <a href=""><button type="button" id="bid_btn4">찜하기</button></a>
+                    <button type="button" id="bid_btn4">찜하기</button>
                     <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
 					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
@@ -463,25 +376,11 @@
 
         <!-- ↓↓경매의 사진들 펼쳐놓음.↓↓ -->
         <div class="product_information">
-			<!-- 
+			
             <div class="product_information_text">
 				<%=productvo.getProduct_content()%>
             </div>
-             -->
-            <div class="img_1">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_1() %>"></div>
-            </div>
-            <div class="img_2">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_2() %>">
-                </div>
-            </div>
-            <div class="img_3">
-                <div align="center">
-                    <img src="<%=productvo.getProduct_img_3() %>">
-                </div>
-            </div>
+            
 
             <ul class="detail_page_nav">
                 <li>
@@ -557,13 +456,13 @@
   *비밀글 입력시 판매자와 관리자만 볼 수 있습니다.<%}else{%>댓글은 로그인 후 이용 가능합니다<%}%>" <%if(id==null){ %>onclick="togologin()" style="cursor:pointer;"<%} %>></textarea>
             <br>
             <%if(id!=null){ %>
-            <button type="button" id="comment_btn" onclick="commentInsert()">작 성</button>
+            <button type="button" id="comment_btn">작 성</button>
             <%} %>
             <div class="comment_list">
             
             </div>
         </div>
-        <div align="center">
+        <div align="center" style="margin-bottom:100px; margin-top:50px;">
 			<%for(int j=comment_startpage;j<=comment_endpage;j++){%>
 				<a type="button" onclick="commentList(<%=j%>)">[<%=j %>]</a>
 			<%}%>
@@ -817,6 +716,8 @@
         let limit_price = <%=productvo.getProduct_purchase_price()%>;
         //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
+        //중복 클릭 방지
+        var click = true;
         
         // ↓↓응찰하기 버튼 클릭시
       	function bidList(bid_nowpage){
@@ -828,7 +729,6 @@
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 				success : function(data){
 					var a = '';
-					var i = 0;
 					$.each(data,function(key,value){
 						a += '<div class="bidder1">';
 						a += '<div class="bid_list_no">'+value.bid_no+'</div>';
@@ -836,10 +736,6 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
-						if(key>=5 * (bid_nowpage - 1) && key<=4){
-							console.log(value);
-							
-						}
 					});
 					
 					$(".bidder").html(a);
@@ -850,42 +746,63 @@
 			});
 		}
       	
-		function bidInsert(){
-			$.ajax({
-				url: '/alltion/bid_insert.hs',
-				type : 'POST',
-				data : {'bid_product_number':bno,'bid_id':sessionid},
-				success : function(data){
-					if(data==1){
-						bidList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+      	$("#bid_btn").off("click").on('click',function(){
+			if(click){
+				click = !click;
+				$.ajax({
+					url: '/alltion/bid_insert.hs',
+					type : 'POST',
+					data : {'bid_product_number':bno,'bid_id':sessionid},
+					success : function(data){
+						if(data==1){
+							alert('성공적으로 응찰되었습니다.');
+							bidList(1); //페이지 로딩시 응찰 목록 갱신
+						}else if(data==2){
+							bidList(1);
+							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(insert)");
 					}
-					
-				},
-				error:function(){
-					alert("ajax통신 실패(insert)");
-				}
-			});
-		}
+				});
+	      		//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
-		function nowpurchase(){
-			$.ajax({
-				url: '/alltion/now_purchase.hs',
-				type : 'POST',
-				data : {'bid_product_number':bno,'bid_id':sessionid},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success:function(data){
-					if(data==1){
-						bidList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+      	$("#bid_btn2").off("click").on('click',function(){
+			if(click){	
+				click = !click;
+      			$.ajax({
+					url: '/alltion/now_purchase.hs',
+					type : 'POST',
+					data : {'bid_product_number':bno,'bid_id':sessionid},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success:function(data){
+						if(data==1){
+							alert('성공적으로 응찰되었습니다.');
+							bidList(1); //페이지 로딩시 응찰 목록 갱신
+							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(nowpurchase)");
 					}
-				},
-				error:function(){
-					alert("ajax통신 실패(nowpurchase)");
-				}
-			});
-		}
+				});
+      			//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
 		//경매등록자 아이디
 		let writerId = '<%=writerId%>'; 
@@ -976,33 +893,43 @@
 		let comment_secret = document.getElementById('secret');
 		let comment_secret_value="";
 		
-		function commentInsert(){
-			if(comment_secret.checked==true){
-				comment_secret_value = "1";
-			}else{
-				comment_secret_value = "0";
-			}
-			if(comment_content_input.value==""){
-				alert('내용을 입력해 주세요.');
-				return false;
-			}
-			$.ajax({
-				url: '/alltion/commentinsert.hs',
-				type : 'POST',
-				data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
-				dataType : 'json',
-				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-				success:function(data){
-					if(data==1){
-						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
-					}
-				},
-				error:function(){
-					alert("ajax통신 실패(commentinsert)");
+		$("#comment_btn").off("click").on('click',function(){
+			if(click){	
+				click = !click;
+				if(comment_secret.checked==true){
+					comment_secret_value = "1";
+				}else{
+					comment_secret_value = "0";
 				}
-			});
-		}
+				if(comment_content_input.value==""){
+					alert('내용을 입력해 주세요.');
+					return false;
+				}
+				$.ajax({
+					url: '/alltion/commentinsert.hs',
+					type : 'POST',
+					data : {'comment_product_number':bno,'comment_id':sessionid,'comment_content':comment_content_input.value,'comment_secret':comment_secret_value},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success:function(data){
+						if(data==1){
+							comment_content_input.value='';
+							commentList(1); //페이지 로딩시 응찰 목록 갱신
+							
+						}
+					},
+					error:function(){
+						alert("ajax통신 실패(commentinsert)");
+					}
+				});
+				//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
 		// ↓↓댓글 수정
 		let number_for_update = 0;
@@ -1027,6 +954,11 @@
 		
 		function commentUpdate(n){
 			let comment_content_update = document.getElementsByClassName('comment_content_update')[number_for_update];
+			if(comment_content_update.value==""){
+				alert('내용을 입력해 주세요.');
+				return false;
+			}
+			
 			$.ajax({
 				url: '/alltion/commentupdate.hs',
 				type : 'POST',
@@ -1036,7 +968,7 @@
 				success:function(data){
 					if(data==1){
 						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+						
 					}
 				},
 				error:function(){
@@ -1057,7 +989,7 @@
 				success:function(data){
 					if(data==1){
 						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+						
 					}
 				},
 				error:function(){
@@ -1085,7 +1017,10 @@
 		
 		function commentReply(n){
 			let comment_content_reply = document.getElementsByClassName('comment_content_reply')[number_for_reply];
-			
+			if(comment_content_reply.value==""){
+				alert('내용을 입력해 주세요.');
+				return false;
+			}
 			$.ajax({
 				
 				url: '/alltion/commentreply.hs',
@@ -1095,8 +1030,9 @@
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 				success:function(data){
 					if(data==1){
+						
 						commentList(1); //페이지 로딩시 응찰 목록 갱신
-						window.location.reload(true);
+						
 					}
 				},
 				error:function(){
@@ -1254,7 +1190,40 @@
 			});
 		}
 		
+		// 찜버튼 클릭시 wish리스트에 해당항목 추가
+		$("#bid_btn4").off("click").on('click',function(){
+			if(click){
+				click = !click;
+				$.ajax({
+					url : '/alltion/wish_list.hs',
+					type : 'post',
+					data : {'wish_product_number':bno,'wish_id':sessionid},
+					dataType : 'json',
+					contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+					success : function(data){
+						if(data==0){
+							alert('찜목록에 추가 되었습니다.');
+						}else{
+							alert('이미 찜목록에 등록되어있는 경매 입니다.');
+						}
+						
+						
+					},
+					error:function(){
+						alert("ajax통신 실패(insertWishList)!!!");		
+					}
+				});
+				//타이밍 추가
+	      		setTimeout(function(){
+	      			click=true;
+	      		},2000);
+			}else{
+				console.log("중복됨");
+			}
+		});
 		
     </script>
+   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+   <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>
