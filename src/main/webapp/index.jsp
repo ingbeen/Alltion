@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
     <link rel="stylesheet" href="./resources/css/index_main.css?after">
-    <link rel="stylesheet" href="./resources/css/style.css?after">
+    <link rel="stylesheet" href="./resources/css/style2.css?after">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?
     family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">

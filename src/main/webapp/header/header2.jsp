@@ -40,21 +40,18 @@ pageEncoding="UTF-8"%>
                 </c:otherwise>
                 </c:choose>
                 <li>
-                	<a href="./registration.yb">판매하기</a>
-                </li>
-                <li>
                     <a href="#">고객 센터</a>
                 </li>
             </ul>
         </div>
         </div>
-    <div class="lower_header">
+    	<div class="lower_header">
             <div class="lower_header--nav">
                 <h1 class="logo">
                     <a href="/alltion/">ALL-TION</a>
                 </h1>
-            	<div>
-                	                <div class="category">
+            	<div class="cate_search">
+                <div class="category">
                     <a class="category--drop">
                         <img src="./resources/img/header/category_tab.png">
                     </a>
@@ -512,9 +509,9 @@ pageEncoding="UTF-8"%>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="material-icons">access_time</span><br>
-                            <span>참여 경매</span>
+                        <a href="./registration.yb">
+                            <span class="material-icons">gavel</span><br>
+                            <span>판매하기</span>
                         </a>
                     </li>
                 </ul>
