@@ -28,13 +28,6 @@ public class ProductlistServiceImpl implements ProductlistService {
 	}
 
 	@Override
-	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap) {
-		// TODO Auto-generated method stub
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
-		return productlist;
-	}
-	@Override
 	public List<ProductVO> getfamousPricelist(String product_category_2) {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
