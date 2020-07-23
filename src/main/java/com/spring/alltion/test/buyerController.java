@@ -37,6 +37,10 @@ public class buyerController {
 		{
 		ArrayList<Product_kjVO> product_list = testservice.getProductlist(userId);
 		model.addAttribute("product_list", product_list);
+		ArrayList<Product_kjVO> delivery_list = testservice.getdeliveryList(userId);
+		model.addAttribute("delivery_list", delivery_list);
+		ArrayList<Product_kjVO> dealcomplete_list = testservice.getdealcomplete(userId);
+		model.addAttribute("dealcomplete_list", dealcomplete_list);
 		return  "mypage/buyer";
 		}
 	}
@@ -111,6 +115,8 @@ public class buyerController {
 	throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
+		Object trading_price = null;
+		session.setAttribute("trading_price", trading_price);
 		if(userId == null)
 		{
 			return "member/login";
@@ -128,7 +134,7 @@ public class buyerController {
 	}	
 	
 	@RequestMapping(value = "/buyer_deal.kj")
-	public String deal(Test_emoneyVO emoneyvo, Product_kjVO  Product_kjvo, Model model,HttpSession session,HttpServletResponse response)throws Exception
+	public String deal(Test_emoneyVO emoneyvo, Product_kjVO  Product_kjvo, Model model, HttpSession session, HttpServletResponse response)throws Exception
 	{
 		
 		response.setCharacterEncoding("utf-8");
@@ -136,7 +142,11 @@ public class buyerController {
 		PrintWriter writer = response.getWriter();
 		
 		String userId = (String)session.getAttribute("userId");
+		System.out.println("userId" + userId);
+		Integer trading_price = (Integer)session.getAttribute("trading_price");		
+		System.out.println("trading_price" + trading_price);
 		int res = testservice.after_deposit(Product_kjvo);
+		//int res_emoney = testservice.update_emoney(userId, trading_price);
 		if(userId == null)
 		{
 			return "member/login";
@@ -144,19 +154,23 @@ public class buyerController {
 		else 
 		{
 			
-			if(emoneyvo.getTest_emoney() >= Product_kjvo.getTrading_price())
+			if(emoneyvo.getEmoney() >= Product_kjvo.getTrading_price())
 			{
-				
-				if(res != 0)
-				{
-				writer.write("<script>alert('결제가 완료되었습니다');"
+				//if(res_emoney != 0)
+				//{
+					
+					if(res != 0)
+					{
+						writer.write("<script>alert('결제가 완료되었습니다');"
 						+ "location.href='/alltion/buyer.kj';</script>");
-				}
-			}
+					}
+				//}
 			else
 			{
 				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer_emoney.kj';</script>");
 				
+			}
+			
 			}
 			return null;
 		}

@@ -14,8 +14,10 @@ public interface TestMapper {
 	public Product_kjVO selectProduct(@Param(value="userId")String userId);
 	public int update_deal_address(MemberVO membervo);
 	public ArrayList<Product_kjVO> getSalelist(@Param(value="userId")String userId);
-	public int update_emoney(@Param(value="userId")String userId, @Param(value="trading_price")int trading_price);
+	//public int update_emoney(@Param(value="userId")String userId, @Param(value="trading_price")Integer trading_price);
 	public int updateWaybill(Product_kjVO Product_kjvo);
 	public int after_deposit(Product_kjVO Product_kjvo);
+	public ArrayList<Product_kjVO> getdeliveryList(@Param(value="userId")String userId);
+	public ArrayList<Product_kjVO> getdealcomplete(@Param(value="userId")String userId);
 	
 }

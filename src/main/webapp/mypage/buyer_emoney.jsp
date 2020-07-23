@@ -101,6 +101,7 @@
     </div>
     <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!-- 이머니 확인 페이지by.계정 -->
+    <div class = "emoney">
     <div class="eomney_update--form">
             <h3>이머니 입금</h3>
             <div class="eomney_update--content">
@@ -110,7 +111,7 @@
                             <span>이머니</span>
                         </div>
                         <div class="update_form__list content">
-                            <span>현재 이머니 : <%=emoneyvo.getTest_emoney() %></span>
+                            <span>현재 이머니 : <%=emoneyvo.getEmoney() %></span>
                             <br>
                             <br>           
                             <span>구매 가격 : <%=Product_kjvo.getTrading_price() %></span>
@@ -128,6 +129,8 @@
      			 </div>
       	<form name = "buyer_deal" action = "./buyer_deal.kj" method = "post">			
    	 	<input type = "hidden" name = "trading_buyer_id" id = "trading_buyer_id" value = "<%=Product_kjvo.getTrading_buyer_id() %>">
+   	 	<input type= "hidden" name = "emoney" id = "emoney" value = "<%=emoneyvo.getEmoney() %>">
+   	 	<input type = "hidden" name = "trading_price" id = "trading_price" value = "<%=Product_kjvo.getTrading_price() %>">
    	 	<div class="eomney_update--form">
             <h3>택배 거래</h3>
             <div class="eomney_update--content">
@@ -188,6 +191,7 @@
                     </div>                                     
                     </div>
                     </form>
+                    </div>
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
