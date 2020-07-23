@@ -62,7 +62,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_issue_date desc)) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
 		]]>
 	</select>
 	
@@ -91,7 +91,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_views desc)) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
 		]]>
 	</select>
 	
@@ -120,7 +120,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_current_price asc)) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
 		]]>
 	</select>
 	
@@ -149,7 +149,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_current_price desc)) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
 		]]>
 	</select>
 	
@@ -187,7 +187,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_issue_date desc) where product_category_2 = #{product_category_2}) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
     ]]>
 	</select>
 	
@@ -216,7 +216,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_views desc) where product_category_2 = #{product_category_2}) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
     ]]>
 	</select>
 	
@@ -245,7 +245,7 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_current_price asc) where product_category_2 = #{product_category_2}) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
     ]]>
 	</select>
 	
@@ -274,15 +274,18 @@
 			product_purchase_price,
 			product_progress 
         from (select * from product order by product_current_price desc) where product_category_2 = #{product_category_2}) 
-        where rnum>=#{startrow} and rnum<=#{endrow} and product_end_date >= sysdate+7
+        where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
     ]]>
 	</select>
 	
 	<select id="getCategorylistCount" parameterType="String" resultType="int">
-		SELECT count(*) FROM product where product_category_2 = #{product_category_2, jdbcType=VARCHAR}
+	<![CDATA[
+		SELECT count(*) FROM product where product_category_2 = #{product_category_2, jdbcType=VARCHAR} and sysdate <= product_end_date+1
+	]]>
 	</select>
 	
 	<select id="getfamousPricelist" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
 		select 
 			product_number, 
 			product_subject, 
@@ -295,11 +298,13 @@
 			product_purchase_price,
 			product_progress 
 		from product 
-		where product_category_2 = #{product_category_2}
+		where product_category_2 = #{product_category_2} and sysdate <= product_end_date+1 
 		order by product_current_price desc
+	]]>
 	</select>
 	
 	<select id="getfamousParticipantslist" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
 		select 
 			product_number, 
 			product_subject, 
@@ -312,11 +317,13 @@
 			product_purchase_price,
 			product_progress 
 		from product 
-		where product_category_2 = #{product_category_2}
+		where product_category_2 = #{product_category_2} and sysdate <= product_end_date+1 
 		order by product_participants desc
+	]]>
 	</select>
 	
 	<select id="getfamousViewslist" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
 		select 
 			product_number, 
 			product_subject, 
@@ -329,11 +336,13 @@
 			product_purchase_price,
 			product_progress 
 		from product 
-		where product_category_2 = #{product_category_2}
+		where product_category_2 = #{product_category_2} and sysdate <= product_end_date+1
 		order by product_views desc
+	]]>
 	</select>
 	
 	<select id="getfamousPricelist2" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
 		select 
 			product_number, 
 			product_subject, 
@@ -345,11 +354,13 @@
 			product_current_price, 
 			product_purchase_price,
 			product_progress 
-		from product 
+		from product where sysdate <= product_end_date+1 
 		order by product_current_price desc
+	]]>
 	</select>
 	
 	<select id="getfamousParticipantslist2" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
 		select 
 			product_number, 
 			product_subject, 
@@ -361,11 +372,13 @@
 			product_current_price, 
 			product_purchase_price,
 			product_progress 
-		from product 
+		from product where sysdate <= product_end_date+1 
 		order by product_participants desc
+	]]>
 	</select>
 	
 	<select id="getfamousViewslist2" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
 		select 
 			product_number, 
 			product_subject, 
@@ -377,12 +390,15 @@
 			product_current_price, 
 			product_purchase_price,
 			product_progress 
-		from product 
+		from product where sysdate <= product_end_date+1 
 		order by product_views desc
+	]]>
 	</select>
 	
 	<select id="getListCount" resultType="int">
-		SELECT count(*) FROM product
+	<![CDATA[
+		SELECT count(*) FROM product and sysdate <= product_end_date+1
+	]]>
 	</select>
 	
 </mapper>
