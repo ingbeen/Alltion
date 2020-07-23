@@ -526,12 +526,11 @@
             $.ajax({
             	url: "/alltion/minus.ms",
             	data: formData
+            }).done(function(data){
+            	click = true;
+            }).fail(function(data){
+            	click = false;
             })
-            // 타이밍 추가
-            setTimeout(function () {
-                click = true;
-            }, 1000)
-            
          } else {
             console.log("중복됨");
          }
