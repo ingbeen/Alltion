@@ -267,13 +267,13 @@ li {list-style: none;}
 /* 우측 아이콘 */
 .member_info {
     float: right;
-    margin-top: 10px;
+    margin-top: 14px;
     display: inline-block; /* 2020-06-19 pm12:58 수정됨 */
 }
 
 .member_info li {
     text-align: center;
-    margin-left: 8px;
+    margin-left: 4px;
     width: 58px;
     display: inline-block; /* 2020-06-19 pm12:57 수정됨 */
 }
@@ -292,7 +292,8 @@ li {list-style: none;}
 
 .member_info .material-icons {
     color: #575757;
-    font-size: 40px;
+    font-size: 32px;
+    margin-bottom: 4px;
 }
 
 
