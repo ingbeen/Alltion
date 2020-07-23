@@ -1,4 +1,4 @@
-$(function(){
+window.onload = function(){
             // TOP 키
             let sc = $(window).scrollTop(); // scroll이 제일 위에 있을 때 위치값
             if(sc == 0){
@@ -50,7 +50,7 @@ $(function(){
 				$(this).addClass('active');
 				$('div.deadline-items--product.' + activeTab).addClass('active');
             })
-        });
+        }
         
         // 2020-06-23 pm 03:55 추가
         // 실시간 시간 구하기
