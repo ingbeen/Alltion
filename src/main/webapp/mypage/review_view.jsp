@@ -1,31 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.spring.alltion.productRegistration.*" %>
-<%@ page import = "java.util.*" %>  
+<%@ page import = "com.spring.alltion.detailpage.*" %>
+<%@ page import = "java.util.*" %>
 <%
-	List<ProductVO> productvolist = (List<ProductVO>)request.getAttribute("productvolist");
-	List<String> top_bidder_idlist = (List<String>)request.getAttribute("top_bidder_idlist");
+	List<ReviewVO> reviewlist = (List<ReviewVO>)request.getAttribute("reviewlist");
 	int nowpage = (int)request.getAttribute("page");
-	int maxpage = (int)((double)productvolist.size()/5.0 + 0.99);
-%>  
+	int maxpage = (int)((double)reviewlist.size()/5.0 + 0.99);
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/style.css">
-    <link rel="stylesheet" href="./resources/css/bidding.css">
+    <link rel="stylesheet" href="./resources/css/review_view.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/kakaoTalk.css">
 	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
 	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
-
+    
 </head>
-
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-
     <div class="header">
         <div class="upper_header">
             <div class="upper_header--nav">
@@ -40,7 +37,7 @@
                         <a href="./logout.kj">로그아웃</a>
                     </li>
                     <li>
-                        <a href="./registration.yb">판매하기</a>
+                    	<a href="./registration.yb">판매하기</a>
                     </li>
                 </ul>
             </div>
@@ -100,92 +97,69 @@
     <!-- 메인 내용 -->
     <div class="main_body">
         <div class="bidding_title">
-            <h1>판매 중 경매</h1>
+            <h1>리뷰 보기</h1>
         </div>
         <div class="bidding_notify">
             <ul>
                 <li>
-                    회원님께서 현재 판매 중인 물품의 리스트입니다.
-                <li>
-                <li>
-                    이미 판매 등록된 경매에 대해서는 판매 취소를 하실 수 없습니다. 문의 사항은 고객센터에 문의해주시기 바랍니다.
+                    회원님께 작성된 리뷰를 확인하실 수 있습니다.
                 </li>
                 <li>
-                    해당 물품이 낙찰이 되거나 경매시간이 종료될 경우 해당 물품의 정보는 확인하실 수 없습니다.
+                    욕설 및 비속어 사용글은 카카오톡 플러스 친구를 통해 신고 접수해주시기 바랍니다.
+                </li>
+                <li>
+                    기타 궁금하신 사항은 카카오톡 플러스 친구를 통해 문의 주시기 바랍니다.
                 </li>
             </ul>
         </div>
         <div class="table_title">
-            <p>현재 <font style="color:cornflowerblue;border-bottom: 1px solid #FFA30E;">판매중인 경매</font>에 대해서 모두 <%=productvolist.size()%>개가 검색되었습니다.</p>
+            <p>현재 회원님께 작성된 <font style="color:cornflowerblue;border-bottom: 1px solid #FFA30E;">리뷰</font>에 대해서 모두 <%=reviewlist.size() %>개가 검색되었습니다.</p>
         </div>
-        <div class="bidding_list">
-            <div class="bidding_list_header">
-                <div class="product_info">상품 정보</div>
-                <div class="current_price">응찰현황</div>
-                <div class="product_delivery">배송</div>
-                <div class="bid_deadline">마감 시간</div>
-            </div>
-            <%
-            for(int i=0;i<productvolist.size();i++){  
-  				ProductVO productvo = productvolist.get(i);
-  				String top_bidder_id = top_bidder_idlist.get(i).toString();
-  				if(i >= 5 * (nowpage - 1) && i<=4 + 5 * (nowpage - 1) ){
-  	  		%>
-            <div class="bidding_list_content">
-                <div class="product_info">
-                    <img src="<%=productvo.getProduct_img_1()%>">
-                    <div class="product_info_content">
-                        <p><%=productvo.getProduct_category_1()%>> <%=productvo.getProduct_category_2()%></p>
-                        <p><%=productvo.getProduct_subject()%></p>
-                        <p>시작가: <%=productvo.getProduct_starting_price() %> 원 / 즉시 구매가: <%if(productvo.getProduct_purchase_price()==0){%>설정되어있지 않음.<%}else{%><%=productvo.getProduct_purchase_price() %> 원<%} %></p>
-                    	<p>등록일: <%=productvo.getProduct_issue_date() %>
-                    </div>
-                </div>
-                <div class="current_price">
-                    <div class="current_price_content">
-                        <p>최고 응찰자 : <%=top_bidder_id%> 님</p>
-                        <p>경매 현재가 : <%=productvo.getProduct_current_price() %> 원</p>
-                        <p>참가자 수 : <%=productvo.getProduct_participants() %> 명</p>
-                        <p>입찰 수: <%=productvo.getProduct_bids() %> 건</p>
-                    </div>
-                </div>
-                <div class="product_delivery">
-                    <div class="product_delivery_content1">
-                        <p><%=productvo.getProduct_delivery() %></p>
-                    </div>
-                    <div class="product_delivery_content2">
-                        <p>직거래 가능지역:<br> <%=productvo.getProduct_transaction_area() %></p>
-                    </div>
-                </div>
-                <div class="bid_deadline">
-                    <div class="bid_deadline_content">
-                        <p><%=productvo.getProduct_end_date()%></p>
-                        <p><a href="./boarddetail.hs?product_number=<%=productvo.getProduct_number()%>"><button>페이지로 이동하기</button></a></p>
-                    </div>
-                </div>
-            </div>
-            <%}} %>
+        <div class="review_title">
+        	<div class="review_no">번호</div>
+            <div class="product_image">이미지</div>
+            <div class="product_subject">물품명</div>
+            <div class="review_content">구매 후기</div>
+            <div class="review_writer">작성자</div>
+            <div class="review_date">작성일</div>
         </div>
+        <%for(int i=0;i<reviewlist.size();i++){
+        	ReviewVO reviewvo = reviewlist.get(i);
+        	if(i >= 5*(nowpage-1) && i <= 4 + 5*(nowpage-1)){
+        %>
+        
+        <div class="review_list">
+        	<div class="review_no"><p><%=reviewvo.getReview_no() %></p></div>
+            <div class="product_image"><img src="<%=reviewvo.getReview_image()%>"></div>
+            <div class="product_subject"><p><%=reviewvo.getReview_subject() %></p></div>
+            <div class="review_content"><p style="color: cornflowerblue;"><%=reviewvo.getReview_evaluate() %></p><p><%=reviewvo.getReview_content() %></p></div>
+            <div class="review_writer"><p><%=reviewvo.getReview_evaluator().substring(0,3) %>***</p></div>
+            <div class="review_date"><p><%=reviewvo.getReview_date() %></p></div>
+        </div>
+        
+        <%}} %>
         <div class="page_btns" align="center">
-        	<%if(nowpage>1){ %>
-	        <a href="./selling.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
+            <%if(nowpage>1){ %>
+	        <a href="./review_view.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
 	        <%}else{%>
 	        <a><button>&#171;</button></a>
 	        <% }
 	        for(int i=1;i<=maxpage;i++){ %>
-	        	<%if(i==nowpage){ %>
-        		<a href="./selling.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
-	        <%}else{%>
-	        	<a href="./selling.hs?page=<%=i %>"><button><%=i %></button></a>
+	        <%if(i==nowpage){ %>
+	        	<a href="./review_view.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
+	        <%}else{ %>	
+	        	<a href="./review_view.hs?page=<%=i %>"><button><%=i %></button></a>
 	        <%}} %>
+	        
 	        <%if(nowpage<maxpage){ %>
-	        <a href="./selling.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
+	        <a href="./review_view.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
         	<%}else{ %>
         	<a><button>&#187;</button></a>
         	<%} %>
         </div>
+        
     </div>
-
+   
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -227,7 +201,7 @@
                 </li>
             </ul>
         </div>
-        <div class="lower_footer">
+		<div class="lower_footer">
             <ul class="lower_footer__content">
                 <li>
                     <p>상호명 : (주)올션 / 짜면된다 / 주소: 서울특별시 종로구 삼일대로 서울특별시 서초구 서초4동 강남대로</p>
@@ -235,16 +209,17 @@
                     <p>사업자등록번호 : ###-##-##### 통신판매업 신고번호 : 제##–###호</p>
                 </li>
                 <li>
-                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p>
+                    <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
                     <p>Copyright © eBay Korea LLC All rights reserved.</p>
                 </li>
             </ul>
-        </div>
+        </div>   
     </div>
-
+    
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./resources/js/common.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="resources/js/kakaoTalk.js"></script>
-</body></html>
+</body>
+</html>

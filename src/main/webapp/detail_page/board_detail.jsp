@@ -289,7 +289,7 @@
                         </li>
                         <li>
                             <label for="top_bidder_id">최고 응찰자</label>
-                            <p><%=top_bidder_id %><br></p>
+                            <p id="top_bidder_id"><%=top_bidder_id %><br></p>
                         </li>
                         <li>
                             <label for="sale_credit">판매자 등급</label>
@@ -310,7 +310,7 @@
                         </li>
                         <li>
                             <label for="boarddate">응찰단위</label>
-                            <font><%=productvo.getProduct_bidding_unit() %>원</font>&nbsp;&nbsp; 
+                            <font><%=productvo.getProduct_bidding_unit() %>&nbsp;원</font>&nbsp;&nbsp; 
                             <button class="btns1" type="button" id="bid_notify_btn" onclick="modal_display(2)">응찰 유의사항</button>
                             <!-- ↓↓응찰 유의사항을 눌렀을때↓↓-->
                             <div id="bid_notify_modal" class="modal">
@@ -383,9 +383,9 @@
                        					
                        				</tbody>	
                        				</table>
-                       				<div align="center">
+                       				<div class="paging_btns" align="center">
 	                       				<%for(int i=review_startpage;i<=review_endpage;i++){%>
-											<a type="button" onclick="reviewList(<%=i%>)">[<%=i %>]</a>
+											<a type="button" onclick="reviewList(<%=i%>)"><button><%=i %></button></a>
 										<%}%>
                        				</div>
                         		</div>
@@ -416,7 +416,7 @@
         <!-- ↓↓상세정보페이지 네비게이션바↓↓ -->
         <ul class="detail_page_nav">
             <li style="border-radius: 4px 4px 0 0;background-color:#BBBBBB;font-weight: bold;">
-                <a style="color:white;">응찰 현황 (<%=bid_listcount %>)</a>
+                <a class="bid_list_count" style="color:white;">응찰 현황 (<%=bid_listcount %>)</a>
             </li>
             <li>
                 <a type="button" onclick="move(2)">상품 정보</a>
@@ -425,7 +425,7 @@
                 <a type="button" onclick="move(3)">교환 / 반품</a>
             </li>
             <li>
-                <a type="button" onclick="move(4)">댓 글 (<%=comment_listcount %>)</a>
+                <a class="comment_list_count" type="button" onclick="move(4)">댓 글 (<%=comment_listcount %>)</a>
             </li>
         </ul>
 
@@ -445,15 +445,15 @@
 			
         </div>
 		<!-- 응찰리스트 페이징 -->
-		<div align="center">
+		<div class="paging_btns" align="center">
 			<%for(int i=bid_startpage;i<=bid_endpage;i++){%>
-				<a type="button" onclick="bidList(<%=i%>)">[<%=i %>]</a>
+				<a type="button" onclick="bidList(<%=i%>)"><button><%=i %></button></a>
 			<%}%>
 		</div>
 		
         <ul class="detail_page_nav">
             <li>
-                <a type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
+                <a class="bid_list_count" type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
             </li>
             <li style="border-radius: 4px 4px 0 0;background-color:#BBBBBB;font-weight: bold;">
                 <a style="color:white;">상품 정보</a>
@@ -462,7 +462,7 @@
                 <a type="button" onclick="move(3)">교환 / 반품</a>
             </li>
             <li>
-                <a type="button" onclick="move(4)">댓 글 (<%=comment_listcount %>)</a>
+                <a class="comment_list_count" type="button" onclick="move(4)">댓 글 (<%=comment_listcount %>)</a>
             </li>
         </ul>
 
@@ -476,7 +476,7 @@
 
             <ul class="detail_page_nav">
                 <li>
-                    <a type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
+                    <a class="bid_list_count" type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
                 </li>
                 <li>
                     <a type="button" onclick="move(2)">상품 정보</a>
@@ -485,7 +485,7 @@
                     <a style="color:white;">교환 / 반품</a>
                 </li>
                 <li>
-                    <a type="button" onclick="move(4)">댓 글 (<%=comment_listcount %>)</a>
+                    <a class="comment_list_count" type="button" onclick="move(4)">댓 글 (<%=comment_listcount %>)</a>
                 </li>
             </ul>
         </div>
@@ -528,7 +528,7 @@
 
         <ul class="detail_page_nav">
             <li>
-                <a type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
+                <a class="bid_list_count" type="button" onclick="move(1)">응찰 현황 (<%=bid_listcount %>)</a>
             </li>
             <li>
                 <a type="button" onclick="move(2)">상품 정보</a>
@@ -537,7 +537,7 @@
                 <a type="button" onclick="move(3)">교환 / 반품</a>
             </li>
             <li style="border-radius: 4px 4px 0 0;background-color:#BBBBBB;font-weight: bold;">
-                <a style="color:white;">댓 글 (<%=comment_listcount %>)</a>
+                <a class="comment_list_count" style="color:white;">댓 글 (<%=comment_listcount %>)</a>
             </li>
         </ul>
 
@@ -554,9 +554,9 @@
             
             </div>
         </div>
-        <div align="center" style="margin-bottom:100px; margin-top:50px;">
+        <div class="paging_btns" align="center" style="margin-bottom:100px; margin-top:50px;">
 			<%for(int j=comment_startpage;j<=comment_endpage;j++){%>
-				<a type="button" onclick="commentList(<%=j%>)">[<%=j %>]</a>
+				<a type="button" onclick="commentList(<%=j%>)"><button><%=j %></button></a>
 			<%}%>
 		</div>
 
@@ -808,6 +808,7 @@
         let limit_price = <%=productvo.getProduct_purchase_price()%>;
         //로그인한 아이디(세션아이디)
         let sessionid = '<%=id%>';
+       
         //중복 클릭 방지
         var click = true;
         
@@ -828,8 +829,12 @@
 						a += '<div class="bidder_id">'+value.bid_id.substring(0,3)+'****</div>';
 						a += '<div class="bid_time">'+value.bid_date+'</div>';
 						a += '</div>';
+						if(key==0){
+							$("#now_price").html(value.bid_price+ ' 원');
+							$("#top_bidder_id").html(value.bid_id.substring(0,3)+'****');
+							$(".bid_list_count").html('응찰 현황 ('+value.bid_no+')');
+						}
 					});
-					
 					$(".bidder").html(a);
 				},
 				error:function(){
@@ -850,8 +855,11 @@
 							alert('성공적으로 응찰되었습니다.');
 							bidList(1); //페이지 로딩시 응찰 목록 갱신
 						}else if(data==2){
+							alert('성공적으로 응찰되었습니다.');
 							bidList(1);
 							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+							$('.auction_countdown').html("종료되었습니다");
+							clearInterval(timer);
 						}
 					},
 					error:function(){
@@ -881,6 +889,8 @@
 							alert('성공적으로 응찰되었습니다.');
 							bidList(1); //페이지 로딩시 응찰 목록 갱신
 							$(".btns").html('<font style="color: red;">마감 종료된 경매입니다.</font><br>');
+							$('.auction_countdown').html("종료되었습니다");
+							clearInterval(timer);
 						}
 					},
 					error:function(){
@@ -973,6 +983,7 @@
 					});
 					$(".comment_list").html(a);
 					List_size = i;
+					$(".comment_list_count").html('댓 글 ('+List_size+')');
 				},
 				error:function(){
 					alert("ajax통신 실패(comment_list)!!!");		

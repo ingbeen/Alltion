@@ -540,9 +540,9 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="./review_view.hs?page=1">
                     <span class="material-icons">forum</span><br>
-                    <span class="myPage__menu">활동 내역</span>
+                    <span class="myPage__menu">리뷰 보기</span>
                 </a>
             </li>
             <li>

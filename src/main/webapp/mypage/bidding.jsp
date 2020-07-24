@@ -114,7 +114,7 @@
             </ul>
         </div>
         <div class="table_title">
-            <p>현재 참여중인 경매에 대해서 모두 <%=productvolist.size()%>개가 검색되었습니다.</p>
+            <p>현재 <font style="color:cornflowerblue;border-bottom: 1px solid #FFA30E;">참여중인 경매</font>에 대해서 모두 <%=productvolist.size()%>개가 검색되었습니다.</p>
         </div>
         <div class="bidding_list">
             <div class="bidding_list_header">
