@@ -149,6 +149,8 @@
     <form name="delivery" action="./delivery.kj" method="post">
     <div class="buyer--form">
             <h3>배송중 경매상품</h3>
+            <input type ="hidden" name = "product_id" id = "product_id" value = "<%=deliveryvo.getProduct_id() %>">
+            <input type ="hidden" name = "trading_price" id = "trading_price" value = "<%=deliveryvo.getTrading_price() %>">
             <div class="buyer--content">
                 <ul class="buyer_form list">
                     <li>

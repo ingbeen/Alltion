@@ -3,11 +3,13 @@
 <%@ page import = "com.spring.alltion.test.Product_kjVO" %>
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%@ page import = "com.spring.alltion.test.Test_emoneyVO" %>
+<%@ page import = "com.spring.alltion.pay.*" %>
 <%@ page import = "java.util.*" %>
 <%
 	Test_emoneyVO emoneyvo = (Test_emoneyVO)request.getAttribute("emoneyvo");
 	MemberVO membervo = (MemberVO)request.getAttribute("membervo");
 	Product_kjVO Product_kjvo = (Product_kjVO)request.getAttribute("Product_kjvo");
+	String pmvo = (String)request.getAttribute("pmvo");
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +43,7 @@
                             <span>이머니</span>
                         </div>
                         <div class="update_form__list content">
-                            <span>현재 이머니 : <%=emoneyvo.getEmoney() %></span>
+                            <span>현재 이머니 : <%=pmvo %></span>
                             <br>
                             <br>           
                             <span>구매 가격 : <%=Product_kjvo.getTrading_price() %></span>
@@ -59,7 +61,6 @@
      			 </div>
       	<form name = "buyer_deal" action = "./buyer_deal.kj" method = "post">			
    	 	<input type = "hidden" name = "trading_buyer_id" id = "trading_buyer_id" value = "<%=Product_kjvo.getTrading_buyer_id() %>">
-   	 	<input type= "hidden" name = "emoney" id = "emoney" value = "<%=emoneyvo.getEmoney() %>">
    	 	<input type = "hidden" name = "trading_price" id = "trading_price" value = "<%=Product_kjvo.getTrading_price() %>">
    	 	<div class="eomney_update--form">
             <h3>택배 거래</h3>
