@@ -47,6 +47,7 @@
 	</select>
 	
 	<select id ="getdeliveryList" resultMap="Product_KjResultMap">
+		
 		select
 		product_number,
 		product_subject,
@@ -58,7 +59,8 @@
 		
 	</select>
 	
-	<select id = "getdealcomplete" resultMap="Product_KjResultMap">
+	<select id = "getdealcomplete_buyer" resultMap="Product_KjResultMap">
+	
 		select
 		product_number,
 		product_subject,
@@ -69,8 +71,23 @@
 		where product_kj.product_number = product_kj_trading.trading_product_number 
 		and product_kj_trading.trading_progress = '거래완료'
 		and trading_buyer_id = #{userId}
+	
 	</select>
 	
+	<select id = "getdealcomplete_seller" resultMap="Product_KjResultMap">
+		
+		select
+		product_number,
+		product_subject,
+		trading_price,
+		to_char(trading_purchase_date, 'yyyy-mm-dd hh24:mi') as trading_purchase_date,
+		trading_buyer_id
+		from product_kj natural join product_kj_trading
+		where product_kj.product_number = product_kj_trading.trading_product_number 
+		and product_kj_trading.trading_progress = '거래완료'
+		and product_id = #{userId}
+	
+	</select>
 	
 	<select id = "getSalelist" resultMap="Product_KjResultMap">		
 		
@@ -97,15 +114,15 @@
         order by trading_waybill_deadline
 					
 	</select>
-	<!--  
+	  
 	<update id = "update_emoney" parameterType = "Product_kjVO">
 		update 
         test_emoney 
         set
-        emoney = emoney - #{trading_price}
+        emoney = emoney - trading_price
         where emoney_id = #{userId}
 	</update>
-	-->
+
 	
 	<select id = "selectEmoney" resultType = "com.spring.alltion.test.Test_emoneyVO">
 	
@@ -160,5 +177,13 @@
 	 set
 	 trading_progress = '입금후' 
 	 where trading_buyer_id = #{trading_buyer_id}
+	 </update>
+	 
+	 <update id ="deliverycomplete" parameterType ="Product_kjVO">
+	 update product_kj_trading
+	 set 
+	 trading_progress = '거래완료',
+	 trading_purchase_date = systimestamp
+	 where trading_buyer_id = #{userId}
 	 </update>
 </mapper>

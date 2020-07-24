@@ -524,6 +524,22 @@
             </div>
         </div>
     </div>
+    <div class="main_body">
+        <div class="bidding_title">
+            <h1>구매 경매</h1>
+        </div>
+        <div class="bidding_notify">
+            <ul>
+                <li>
+                    회원님께서 현재 구매 중인 경매 리스트입니다.
+                <li>
+                <li>
+                    문의 사항은 고객센터에 문의해주시기 바랍니다.
+                </li>
+
+            </ul>
+        </div>
+       </div>
     <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!--구매 중-->
     	<%if(product_list.size()==0) {%>
@@ -655,24 +671,24 @@
                     </li>
                 </ul>      
         </div>
-        <input type ="button" onclick = "modal_display_delivery()"  value = "거래 완료" class = "base_btn">  
+        <a onclick = "modal_display_delivery()"class="base_btn">거래 완료</a>
     	<div id="delivery" class="modal">
                             	<div class="modal-content">
                                 <span class="close">&times;</span>
                                 <fieldset id="delivery">
                                 <legend>배송 완료</legend>
                                 <br>
-                                
                                 <li>
-                                <a href="javascript:buyer_deal_update.submit()" class="base_btn" >배송 완료</a>&nbsp;&nbsp;
-                                
+                                <label>배송 완료 버튼을 누르시면 입금이 되며</label>
+                                <br>
+                                <label>판매자 한태 입금이 되오니 신중히 눌러주세요</label>
+                                <a href="./delivery.kj" class="base_btn" >배송 완료</a>&nbsp;&nbsp;                          
                                 </li>
-
-                                   </fieldset>
+                                </fieldset>
                                 </div>
-                       </div>       
-    </div>
-    </form>
+                       		</div>       
+	    				</div>
+	    			</form>
     <%
     	}}
     %>

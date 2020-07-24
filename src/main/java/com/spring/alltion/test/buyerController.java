@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.alltion.creditScore.CreditScoreService;
+import com.spring.alltion.creditScore.PurchaseCreditScoreVO;
+import com.spring.alltion.creditScore.SaleCreditScoreVO;
 import com.spring.alltion.login.MemberService;
 import com.spring.alltion.login.MemberVO;
 @Controller
@@ -23,6 +26,8 @@ public class buyerController {
 	private MemberService memberService;
 	@Autowired
 	private testService testservice;
+	@Autowired
+	private CreditScoreService creditScoreService;
 	
 	@RequestMapping(value = "/buyer.kj")
 	public String getProductlist(Model model, HttpSession session)
@@ -39,7 +44,7 @@ public class buyerController {
 		model.addAttribute("product_list", product_list);
 		ArrayList<Product_kjVO> delivery_list = testservice.getdeliveryList(userId);
 		model.addAttribute("delivery_list", delivery_list);
-		ArrayList<Product_kjVO> dealcomplete_list = testservice.getdealcomplete(userId);
+		ArrayList<Product_kjVO> dealcomplete_list = testservice.getdealcomplete_buyer(userId);
 		model.addAttribute("dealcomplete_list", dealcomplete_list);
 		return  "mypage/buyer";
 		}
@@ -58,6 +63,8 @@ public class buyerController {
 		{
 		ArrayList<Product_kjVO> getSale_list = testservice.getSalelist(userId);
 		model.addAttribute("getSale_list", getSale_list);
+		ArrayList<Product_kjVO> dealcompleteseller_list = testservice.getdealcomplete_seller(userId);
+		model.addAttribute("dealcompleteseller_list", dealcompleteseller_list);
 		return  "mypage/seller";
 		}
 	}
@@ -110,13 +117,48 @@ public class buyerController {
 		}
 	}
 	
+	@RequestMapping(value = "/delivery.kj")
+	public String deliverycomplete(PurchaseCreditScoreVO purchasevo, SaleCreditScoreVO salevo,Product_kjVO Product_kjvo , HttpServletResponse response,  HttpSession session)
+	throws Exception
+	{
+		String userId = (String)session.getAttribute("userId");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		int res = testservice.deliverycomplete(Product_kjvo,userId);
+		int result_sale = creditScoreService.saleNormalCount(salevo);
+		int result_purchase = creditScoreService.purchaseNormalCount(purchasevo);
+		if(userId == null)
+		{
+			return "member/login";
+		}
+		else
+		{
+		if(res != 0)
+		{
+			if(result_sale != 0)
+			{
+				if(result_purchase != 0)
+				{
+					
+				}
+			}
+			writer.write("<script>alert('구매가 완료되었습니다');"
+			+ "location.href='/alltion/buyer.kj';</script>");
+		}
+		 else 
+		{
+			writer.write("<script>alert('구매가  실패하였습니다!!');location.href='./waybill.kj';</script>");
+		}
+		return null;
+		}
+	}
+	
 	@RequestMapping(value = "/buyer_emoney.kj")
 	public String emoney(Model model,HttpSession session)
 	throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
-		Object trading_price = null;
-		session.setAttribute("trading_price", trading_price);
 		if(userId == null)
 		{
 			return "member/login";
@@ -142,11 +184,9 @@ public class buyerController {
 		PrintWriter writer = response.getWriter();
 		
 		String userId = (String)session.getAttribute("userId");
-		System.out.println("userId" + userId);
-		Integer trading_price = (Integer)session.getAttribute("trading_price");		
-		System.out.println("trading_price" + trading_price);
+		
 		int res = testservice.after_deposit(Product_kjvo);
-		//int res_emoney = testservice.update_emoney(userId, trading_price);
+		//int res_emoney = testservice.update_emoney(userId);
 		if(userId == null)
 		{
 			return "member/login";
