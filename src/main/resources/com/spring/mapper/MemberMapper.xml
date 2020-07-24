@@ -25,13 +25,13 @@
 	 	where member_id = #{member_id} 
 	 	and member_password = #{member_password} 
 	 	and member_delete = '0'
-
+	 	and member_manager = '0'
 	 </select>
 	 
 	 <insert id="insertMember" parameterType="MemberVO">
 	 
 	 insert into member values
-	 (#{member_name},#{member_id},#{member_password},#{email},#{member_phone},#{sample4_postcode},#{sample4_roadAddress},#{sample4_jibunAddress},#{sample4_detailAddress},#{member_delete})
+	 (#{member_name},#{member_id},#{member_password},#{email},#{member_phone},#{sample4_postcode},#{sample4_roadAddress},#{sample4_jibunAddress},#{sample4_detailAddress},#{member_delete},#{member_manager})
 	 
 	 </insert>
 	 
