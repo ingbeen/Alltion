@@ -15,7 +15,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/main_style.css?after">
-<!-- <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />"> -->
 <link rel="stylesheet" href="<c:url value="/resources/css/pay.css" />">
     <link href="https://fonts.googleapis.com/css2?
     family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
