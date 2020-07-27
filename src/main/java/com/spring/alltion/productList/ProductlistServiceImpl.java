@@ -154,4 +154,12 @@ public class ProductlistServiceImpl implements ProductlistService {
         }
 		return productlist;
 	}
+
+	@Override
+	public List<ProductVO> getMain(HashMap<String, String> hashmap) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getMainlist2(hashmap);
+		return productlist;
+	}
 }
