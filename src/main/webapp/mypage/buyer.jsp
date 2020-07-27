@@ -5,8 +5,8 @@
 <%@ page import = "java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%	
-	ArrayList<Product_kjVO> product_list =
-			(ArrayList<Product_kjVO>)request.getAttribute("product_list");
+	List<Product_kjVO> product_list =
+			(List<Product_kjVO>)request.getAttribute("product_list");
 %>
 <%
 	ArrayList<Product_kjVO> delivery_list =
@@ -16,6 +16,11 @@
 	ArrayList<Product_kjVO> dealcomplete_list =
 			(ArrayList<Product_kjVO>)request.getAttribute("dealcomplete_list");
 %>
+<%
+	ArrayList<Product_kjVO> delivery_before_list =
+			(ArrayList<Product_kjVO>)request.getAttribute("delivery_before_list");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +38,7 @@
     <div class="header">
         <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
+    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <div class="main_body">
         <div class="bidding_title">
             <h1>구매 경매</h1>
@@ -45,27 +51,19 @@
                 <li>
                     문의 사항은 고객센터에 문의해주시기 바랍니다.
                 </li>
-
             </ul>
         </div>
-       </div>
-    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
-
-    <!--구매 중-->
-    	<%if(product_list.size()==0) {%>
-    	<div class="buyer--form">
-    	<h3>구매 중 경매가 없습니다.</h3>
-    	</div>
-    	<%}else{ %>
-    	<%
+        </div>
+       
+        <div class="buyer--form">
+        <h3>구매 중 경매가<%=product_list.size() %>개가 검색되었습니다</h3>
+        <% 
         	for(int i = 0; i < product_list.size(); i++)
         	{
         		Product_kjVO vo = (Product_kjVO)product_list.get(i);
+        		
         	
         %> 
-       
-        <div class="buyer--form">
-        <h3>구매 중 경매</h3>
             <div class="buyer--content">
                 <ul class="buyer_form list">
                     <li>
@@ -130,10 +128,57 @@
                
         </div>
          <a href = "./buyer_emoney.kj"  class = "base_btn" >입금 하기</a>	
-    </div>
+    	
     <%
-        	}}
+        	}
     %>
+	</div>
+    <!-- 배송 대기중 상품 -->
+    <%if(delivery_before_list.size()!=0) {%>
+    <%
+    for(int x = 0; x < delivery_before_list.size(); x++)
+    {
+    	Product_kjVO delivery_beforevo = (Product_kjVO)delivery_before_list.get(x);
+    
+    %>
+    <div class="buyer--form">
+        <h3>배송 대기중 상품입니다</h3>
+            <div class="buyer--content">
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                             <span><%=delivery_beforevo.getProduct_number() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                            <span><%=delivery_beforevo.getProduct_subject() %></span>
+                        </div>    
+                    </li>
+                </ul>  
+                <ul class="buyer_form list">
+                    <li>
+                        <div class="buyer_form__list title">
+                            <span>구매 가격</span>
+                        </div>
+                        <div class="buyer_form__list content">
+                             <span><%=delivery_beforevo.getTrading_price() %></span>
+                        </div>    
+                    </li>
+                </ul>        
+        </div>
+        </div>
+        <%
+    }}
+        %>
     <!-- 배송중 상품 -->
     <%if(delivery_list.size()==0) {%>
     <div class="buyer--form">
@@ -147,10 +192,12 @@
     
     %>
     <form name="delivery" action="./delivery.kj" method="post">
-    <div class="buyer--form">
+	<input type = "hidden" name = "trading_product_number" id = "trading_product_number" value = "<%=deliveryvo.getTrading_product_number()%>">		
+	<input type = "hidden" name = "trading_progress" id = "trading_progress" value = "<%=deliveryvo.getTrading_progress()%>">		
+	<input type = "hidden" name = "trading_purchase_date" id = "trading_purchase_date" value = "<%=deliveryvo.getTrading_purchase_date()%>">											
+    <input type = "hidden" name = "product_number" id = "product_number" value = "<%=deliveryvo.getProduct_number() %>">
+    <div class="buyer--form">			
             <h3>배송중 경매상품</h3>
-            <input type ="hidden" name = "product_id" id = "product_id" value = "<%=deliveryvo.getProduct_id() %>">
-            <input type ="hidden" name = "trading_price" id = "trading_price" value = "<%=deliveryvo.getTrading_price() %>">
             <div class="buyer--content">
                 <ul class="buyer_form list">
                     <li>
@@ -183,23 +230,8 @@
                     </li>
                 </ul>      
         </div>
-        <a onclick = "modal_display_delivery()"class="base_btn">거래 완료</a>
-    	<div id="delivery" class="modal">
-                            	<div class="modal-content">
-                                <span class="close">&times;</span>
-                                <fieldset id="delivery">
-                                <legend>배송 완료</legend>
-                                <br>
-                                <li>
-                                <label>배송 완료 버튼을 누르시면 입금이 되며</label>
-                                <br>
-                                <label>판매자 한태 입금이 되오니 신중히 눌러주세요</label>
-                                <a href="./delivery.kj" class="base_btn" >배송 완료</a>&nbsp;&nbsp;                          
-                                </li>
-                                </fieldset>
-                                </div>
-                       		</div>       
-	    				</div>
+        <a href="javascript:delivery.submit()" class="base_btn" >배송 완료</a>&nbsp;&nbsp; 
+	</div>
 	    			</form>
     <%
     	}}
@@ -270,6 +302,9 @@
                     </li>
                 </ul> 
         </div>
+        	<form name = "review" action = "./review" method = "post">
+        		<textarea rows="50" cols="50"></textarea>
+        	</form>
     </div>
     <%
     	}}

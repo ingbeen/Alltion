@@ -11,7 +11,8 @@ sample4_roadAddress varchar2(50),
 sample4_jibunAddress varchar2(50),
 sample4_detailAddress varchar2(50),
 member_delete number default 0,   -- 회원탈퇴시 값이 1으로 바뀌면서 로그인 불가
-member_manager number default 0  --0은 일반회원 1은 관리자
+member_manager number default 0,  --0은 일반회원 1은 관리자
+member_date date not null
 );
  */
 public class MemberVO {
@@ -28,6 +29,7 @@ public class MemberVO {
 	String email2;
 	int member_delete;
 	int member_manager;
+	String member_date;
 	public String getMember_name() {
 		return member_name;
 	}
@@ -105,6 +107,12 @@ public class MemberVO {
 	}
 	public void setMember_manager(int member_manager) {
 		this.member_manager = member_manager;
+	}
+	public String getMember_date() {
+		return member_date;
+	}
+	public void setMember_date(String member_date) {
+		this.member_date = member_date;
 	}
 	
 }

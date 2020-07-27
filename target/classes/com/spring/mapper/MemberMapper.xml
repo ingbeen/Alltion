@@ -17,6 +17,7 @@
 	 	<result property="sample4_detailAddress" column="sample4_detailAddress"/>
 	 	<result property="member_delete" column="member_delete"/>
 		<result property="member_manager" column="member_manager"/>
+		<result property="member_date" column="member_date"/>
 	 </resultMap>
 	 
 	 <select id="userCheck" parameterType="MemberVO" resultType="int">
@@ -31,7 +32,18 @@
 	 <insert id="insertMember" parameterType="MemberVO">
 	 
 	 insert into member values
-	 (#{member_name},#{member_id},#{member_password},#{email},#{member_phone},#{sample4_postcode},#{sample4_roadAddress},#{sample4_jibunAddress},#{sample4_detailAddress},#{member_delete},#{member_manager}, sysdate)
+	 (#{member_name},
+	 #{member_id},
+	 #{member_password},
+	 #{email},#{member_phone},
+	 #{sample4_postcode},
+	 #{sample4_roadAddress},
+	 #{sample4_jibunAddress},
+	 #{sample4_detailAddress},
+	 #{member_delete},
+	 #{member_manager},
+	 sysdate 
+	 )
 	 
 	 </insert>
 	 

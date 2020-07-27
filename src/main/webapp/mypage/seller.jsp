@@ -9,6 +9,9 @@
 <%
 	ArrayList<Product_kjVO> dealcompleteseller_list = (ArrayList<Product_kjVO>)request.getAttribute("dealcompleteseller_list");
 %>
+<%
+	ArrayList<Product_kjVO> getdeposit_before_list = (ArrayList<Product_kjVO>)request.getAttribute("getdeposit_before_list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +31,7 @@
     </div>
 
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
-
+	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
  	<div class="main_body">
     <div class="bidding_title">
             <h1>판매 경매</h1>
@@ -45,14 +48,62 @@
             </ul>
         </div>
        </div>
-    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
+	
+		
+    <!--판매 대기중-->
+    	<%if(getdeposit_before_list.size()!=0){ %>
+    		<% 
+    		for(int x = 0; x < getdeposit_before_list.size(); x++)
+    		{
+    			Product_kjVO deposit_beforevo = (Product_kjVO)getdeposit_before_list.get(x);
+    			%>	
+  		<div class="seller--form">
+        <h3>판매 대기중 경매</h3>
+            <div class="seller--content">
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        <span><%=deposit_beforevo.getProduct_number() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        <span><%=deposit_beforevo.getProduct_subject() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>판매 가격</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        <span><%=deposit_beforevo.getTrading_price() %></span>
+                        </div>    
+                    </li>
+                </ul>
 
-    <!--판매 중-->
+        </div>
+        </div>
+    	<%
+    		}}
+    	%>    
+
     	<%if(getSale_list.size()==0) {%>
     	<div class="seller--form">
     	<h3>판매 중 경매가 없습니다.</h3>
     	</div>
-    	<%}else{ %>
+    	
+    	<%}else {%>
+    	
     	<%
         	for(int j = 0; j < getSale_list.size(); j++)
         	{
@@ -234,7 +285,6 @@
     <%
         	}}
     %>
-    
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
