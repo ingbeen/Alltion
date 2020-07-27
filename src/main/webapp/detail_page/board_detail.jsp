@@ -955,12 +955,12 @@
 							}else if(sessionid===writerId){
 								a += '<div class="commentbtn">';
 								a += '<a onclick = "commentReplyForm('+i+')">답글</a>';
-								a += '<a href="#" style="color: red;">신고하기</a>';
+								a += '<a onclick = "commentReport('+value.comment_number+')" style="color: red;">신고하기</a>';
 								a += '</div>';
 							}else if(value.comment_secret==="0"){
 								a += '<div class="commentbtn">';
 								a += '<a onclick = "commentReplyForm('+i+')">답글</a>';
-								a += '<a href="#" style="color: red;">신고하기</a>';
+								a += '<a onclick = "commentReport('+value.comment_number+')" style="color: red;">신고하기</a>';
 								a += '</div>';
 							}
 						}
@@ -1325,6 +1325,35 @@
 			}
 		});
 		
+		function commentReport(n){
+			var checkreport = confirm("해당 댓글을 신고하시겠습니까?");
+			if(checkreport==true){
+				if(click){
+					click = !click;
+					$.ajax({
+						url : '/alltion/commentreport.hs',
+						type: 'post',
+						data : {'comment_number':n,'comment_report_id':sessionid},
+						dataType : 'json',
+						contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+						success : function(data){
+							if(data==1){
+								alert("신고 접수 되었습니다.");
+							}
+						},
+						error:function(){
+							alert("ajax통신 실패(commentReport)!!!");		
+						}
+					});
+					click=true;
+				}else{
+					console.log("중복됨");
+				}
+			
+			}else{
+				return false;
+			}
+		}
     </script>
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
    <script src="resources/js/kakaoTalk.js"></script>
