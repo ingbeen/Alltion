@@ -335,7 +335,7 @@
                 </li>
                 <li>
                     <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
-                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                    <p>Copyright © Alltion All rights reserved.</p>
                 </li>
             </ul>
         </div>      
@@ -343,36 +343,5 @@
     
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    
-    <script>
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category a").click(function(){
-//                
-//                var activeTab = $(this).attr('id');
-//                
-//				$('ul.deadline-items__category a').removeClass('active');
-//				$('.menu-box').removeClass('active');
-//				$(this).prop('checked', true);
-//				$('div#' + activeTab).addClass('active');
-            })
-        });
-    </script>
-    
 </body>
 </html>

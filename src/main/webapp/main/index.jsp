@@ -72,16 +72,16 @@ pageEncoding="UTF-8"%>
     <div class="menu">
         <div class="menu__tab">
             <input type="radio" name="menu--name" id="popular-items" checked>
-            <label for="popular-items">인기 경매</label>
+            <label for="popular-items">많이 본 경매</label>
             <input type="radio" name="menu--name" id="deadline-items">
             <label for="deadline-items">마감 임박</label>
             <input type="radio" name="menu--name" id="resell-items">
-            <label for="resell-items">재경매</label>
+            <label for="resell-items">인기 경매</label>
             <!-- 
             <input type="radio" name="menu--name" id="premium-items">
             <label for="premium-items">프리미엄관</label>
              -->
-            <!--  인기 경매  -->
+            <!--  많이 본 경매  -->
             <div class="menu-box content1">
 			
             <% if(!mainlist.isEmpty()){
@@ -1587,7 +1587,7 @@ pageEncoding="UTF-8"%>
                     </ul>
                 </div>
             </div>
-            <!--  재경매  -->
+            <!--  인기 경매  -->
             <div class="menu-box content3">
             <% if(!viewList.isEmpty()){
             loop : for(int i = 0; i < viewList.size(); i++){%>	       	
