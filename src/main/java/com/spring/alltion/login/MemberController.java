@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.spring.alltion.main.MainController;
 import com.spring.alltion.productList.ProductlistService;
 import com.spring.alltion.productRegistration.ProductVO;
 
@@ -42,45 +43,14 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
-	private ProductlistService productlistService;
+	private MainController mainController;
 	
+	// 탭 메뉴에 목록 페이지 끌고 오기	
 	@RequestMapping(value = "/")
 	public String main(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page)
 	{
-		System.out.println("1");
-		int limit = 8;
-		int listcount = productlistService.getListCount();
-		String startrow = Integer.toString((page - 1) * 8 + 1); // 1 9 17 25
-		String endrow = Integer.toString(Integer.parseInt(startrow) + limit - 1); // 8 16 24 30
-		
-		HashMap<String, String> hashmap = new HashMap<String, String>();
-		hashmap.put("startrow", startrow);
-		hashmap.put("endrow", endrow);
-
-		List<ProductVO> mainlist = productlistService.getMain(hashmap);
-		System.out.println(mainlist.get(0).getProduct_number());
-		int maxpage = listcount / limit;
-		int countPage = 3;
-		if (listcount % limit > 0) {
-			maxpage++;
-		}
-		if (maxpage < page) {
-		    page = maxpage;
-		}
-
-		int startpage = ((page - 1) / 3) * 3 + 1;  
-		int endpage = startpage + countPage - 1;  
-		
-		// 마지막 페이지를 보정
-		if (endpage > maxpage) {
-			endpage = maxpage;
-		}
-		model.addAttribute("page", page);
-		model.addAttribute("listcount", listcount);
-		model.addAttribute("mainlist", mainlist);
-		model.addAttribute("maxpage", maxpage);
-		model.addAttribute("startpage", startpage);
-		model.addAttribute("endpage", endpage);
+		mainController.getPopularList(model, page);
+		mainController.getVeiwList(model, page);
 		
 		return "main/index";
 	}

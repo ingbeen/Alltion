@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-    <link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
+    <link rel="shortcut icon" type="image⁄x-icon" href=".././resources/img/header/logo.jpg">
     <title>All-tion</title>
 </head>
 <body>

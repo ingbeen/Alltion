@@ -71,8 +71,9 @@
     		product_purchase_price,
     		product_progress 
     		from (select row_number()over(order by product_views desc)rnum, p.* 
-             		from product p)
-		where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
+             		from product p
+             		where sysdate <= product_end_date+1)
+		where rnum>=#{startrow} and rnum<=#{endrow}
 		]]>
 	</select>
 	
@@ -256,6 +257,7 @@
 		where product_category_2 = #{product_category_2} and sysdate <= product_end_date+1
 		order by product_views desc
 	]]>
+	
 	</select>
 	
 	<select id="getfamousPricelist2" resultType="com.spring.alltion.productRegistration.ProductVO">
@@ -291,6 +293,28 @@
 			product_progress 
 		from product where sysdate <= product_end_date+1 
 		order by product_participants desc
+	]]>
+	</select>
+	
+	<select id="getParticipantsForMain" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
+			select 
+			product_number, 
+			product_subject, 
+			product_img_1,
+			product_category_1, 
+			product_category_2,
+			to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+			to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
+			product_current_price, 
+			product_purchase_price,
+			product_progress 
+			from (select row_number()over(order by product_issue_date desc)rnum, p.* 
+             		from product p 
+             		where sysdate <= product_end_date+1 
+             		order by p.product_issue_date desc)
+            where rnum>=#{startrow} and rnum<=#{endrow}
+			order by product_participants desc
 	]]>
 	</select>
 	

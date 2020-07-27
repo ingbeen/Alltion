@@ -160,6 +160,20 @@ public class ProductlistServiceImpl implements ProductlistService {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		List<ProductVO> productlist = productListMapper.getMainlist2(hashmap);
+		int i = 1;
+		for(ProductVO vo : productlist) {
+			System.out.println(i++);
+		}
+		return productlist;
+	}
+	
+	public List<ProductVO> getParticipantsForMain(HashMap<String, String> hashmap) {
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getParticipantsForMain(hashmap);
+		int i = 1;
+		for(ProductVO vo : productlist) {
+			System.out.println(i++);
+		}
 		return productlist;
 	}
 }
