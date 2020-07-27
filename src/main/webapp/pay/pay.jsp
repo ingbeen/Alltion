@@ -281,6 +281,10 @@
         $('html, body').animate({scrollTop : offset.top}, 400);
     }
     </script>
+
+	<!--  스크립트 영역  -->
+	<script src="<c:url value="https://code.jquery.com/jquery-3.5.1.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/pay.js" />"></script>
 </body>
 
 </html>

@@ -32,6 +32,10 @@
     z-index: 999;
 }
 
+.category .category--dropdown {
+    margin-top: 0;
+}
+
 /* -- 배너 영역 */
 .banner {
 	width: 1200px;
@@ -187,7 +191,7 @@ input[id="premium-items"]:checked ~ .content4 {display: block;}
 
 .product-box img {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .items__product--info {position: relative;}

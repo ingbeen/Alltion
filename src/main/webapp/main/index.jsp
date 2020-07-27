@@ -3,9 +3,11 @@ pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.spring.alltion.productList.*" %>
+<%@ page import="com.spring.alltion.login.*" %>
 <%@ page import="com.spring.alltion.productRegistration.ProductVO" %>
 <%
- 	List<ProductVO> mainlist=(List<ProductVO>)request.getAttribute("mainlist");
+ 	List<ProductVO> mainlist = (List<ProductVO>)request.getAttribute("mainlist");
+	List<ProductVO> viewList = (List<ProductVO>)request.getAttribute("viewList");
 /*
 	List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
 	List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
@@ -70,16 +72,16 @@ pageEncoding="UTF-8"%>
     <div class="menu">
         <div class="menu__tab">
             <input type="radio" name="menu--name" id="popular-items" checked>
-            <label for="popular-items">인기 경매</label>
+            <label for="popular-items">많이 본 경매</label>
             <input type="radio" name="menu--name" id="deadline-items">
             <label for="deadline-items">마감 임박</label>
             <input type="radio" name="menu--name" id="resell-items">
-            <label for="resell-items">재경매</label>
+            <label for="resell-items">인기 경매</label>
             <!-- 
             <input type="radio" name="menu--name" id="premium-items">
             <label for="premium-items">프리미엄관</label>
              -->
-            <!--  인기 경매  -->
+            <!--  많이 본 경매  -->
             <div class="menu-box content1">
 			
             <% if(!mainlist.isEmpty()){
@@ -90,29 +92,29 @@ pageEncoding="UTF-8"%>
 						break loop;
 					}
 					
-					ProductVO vo = (ProductVO)mainlist.get(j);
+					ProductVO mainVo = (ProductVO)mainlist.get(j);
 	            %> 
             	
             	<!-- 
             	<ul class="items__list popular">
             	 -->
                  	 <li>
-                    	<a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
+                    	<a href="/alltion/boarddetail.hs?product_number=<%=mainVo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=vo.getProduct_img_1() %>><br>
+                               <img src=<%=mainVo.getProduct_img_1() %>><br>
                             </div>
                             <div class="items__product--info product">
-                                <p class="product_name"><%=vo.getProduct_subject() %></p>
+                                <p class="product_name"><%=mainVo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                <span class="countdown"><%=mainVo.getProduct_issue_date() %></span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
                                 </div>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
+                                    <p class="current_price"><%=mainVo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <p class="direct_price"><%=mainVo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
@@ -1585,9 +1587,40 @@ pageEncoding="UTF-8"%>
                     </ul>
                 </div>
             </div>
-            <!--  재경매  -->
+            <!--  인기 경매  -->
             <div class="menu-box content3">
+            <% if(!viewList.isEmpty()){
+            loop : for(int i = 0; i < viewList.size(); i++){%>	       	
                 <ul class="items__list resell">
+	            <%for(int j = i; j < i + 4; j++) {
+					if(j == viewList.size()) {
+						break loop;
+					}
+					
+					ProductVO viewVo = (ProductVO)viewList.get(j);
+	            %> 
+	            	<li>
+                    	<a href="/alltion/boarddetail.hs?product_number=<%=viewVo.getProduct_number() %>">
+                            <div class="product-box">
+                               <img src=<%=viewVo.getProduct_img_1() %>><br>
+                            </div>
+                            <div class="items__product--info product">
+                                <p class="product_name"><%=viewVo.getProduct_subject() %></p>
+                                <span class="material-icons timer">timer</span>
+                                <span class="countdown"><%=viewVo.getProduct_issue_date() %></span>
+                                <div class="bookmark">
+                                    <span class="material-icons bookmark_border">bookmark_border</span>
+                                </div>
+                                <div class="price-txt">
+                                    <p class="price_text">현재가</p>
+                                    <p class="current_price"><%=viewVo.getProduct_current_price() %> 원</p>
+                                    <p class="price_text">즉시 구매가</p>
+                                    <p class="direct_price"><%=viewVo.getProduct_purchase_price() %> 원</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!--
                     <li>
                         <a href="#">
                             <div class="product-box">
@@ -1764,7 +1797,14 @@ pageEncoding="UTF-8"%>
                             </div>
                         </a>
                     </li>
+                    -->
+                <% if(j == i + 3){
+                    i = j;
+                    break;
+                	}
+                }%>
                 </ul>
+              <%} }%>
             </div>
             <!--  프리미엄관  -->
             <div class="menu-box content4">프리미엄관 내용</div>

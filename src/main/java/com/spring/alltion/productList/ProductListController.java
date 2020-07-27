@@ -143,7 +143,7 @@ public class ProductListController {
 		return "productList/productList";
 	}
 	
-public String TranslateCate_1(String product_category_1) {
+	public String TranslateCate_1(String product_category_1) {
 		
 		switch(product_category_1) {
 			case "cate01":
