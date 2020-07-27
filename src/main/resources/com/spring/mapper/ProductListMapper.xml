@@ -59,7 +59,7 @@
 	
 	<select id="getMainlist2" parameterType="Hashmap" resultType="com.spring.alltion.productRegistration.ProductVO">
 		<![CDATA[
-        select  
+        select 
     		product_number, 
     		product_subject, 
     		product_img_1,
@@ -70,16 +70,15 @@
     		product_current_price, 
     		product_purchase_price,
     		product_progress 
-    		from (select row_number()over(order by product_issue_date desc)rnum, p.* 
-             		from product p where sysdate <= product_end_date+1
-             		order by p.product_views desc)
-            where rnum>=#{startrow} and rnum<=#{endrow}
+    		from (select row_number()over(order by product_views desc)rnum, p.* 
+             		from product p)
+		where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
 		]]>
 	</select>
 	
 	<select id="getMainlist3" parameterType="Hashmap" resultType="com.spring.alltion.productRegistration.ProductVO">
 		<![CDATA[
-        select  
+        select 
     		product_number, 
     		product_subject, 
     		product_img_1,
@@ -90,10 +89,9 @@
     		product_current_price, 
     		product_purchase_price,
     		product_progress 
-    		from (select row_number()over(order by product_issue_date desc)rnum, p.* 
-             		from product p where sysdate <= product_end_date+1
-             		order by p.product_current_price asc)
-            where rnum>=#{startrow} and rnum<=#{endrow}
+    		from (select row_number()over(order by product_current_price asc)rnum, p.* 
+             		from product p)
+		where rnum>=#{startrow} and rnum<=#{endrow} and sysdate <= product_end_date+1
 		]]>
 	</select>
 	
