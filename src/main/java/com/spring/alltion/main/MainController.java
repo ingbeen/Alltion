@@ -20,7 +20,7 @@ public class MainController {
 	private ProductlistService productlistService;
 	
 	@RequestMapping(value = "/popularMain.hn", method = RequestMethod.GET)
-	public String getMainlist(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "sort", required = false, defaultValue = "1") String sort) {
+	public String getMainlist(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 		int limit = 8;
 		int listcount = productlistService.getListCount();
 		String startrow = Integer.toString((page - 1) * 8 + 1); // 1 9 17 25
@@ -29,9 +29,9 @@ public class MainController {
 		HashMap<String, String> hashmap = new HashMap<String, String>();
 		hashmap.put("startrow", startrow);
 		hashmap.put("endrow", endrow);
-		hashmap.put("sort", sort);
-		List<ProductVO> mainlist = productlistService.getMainlist2(hashmap);
-
+		//hashmap.put("sort", sort);
+		List<ProductVO> mainlist = productlistService.getMain(hashmap);
+		System.out.println(mainlist.get(0).getProduct_number());
 		int maxpage = listcount / limit;
 		int countPage = 3;
 		if (listcount % limit > 0) {
@@ -54,11 +54,11 @@ public class MainController {
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
-		model.addAttribute("pricelist", productlistService.getfamousPricelist2());
-		model.addAttribute("participantslist", productlistService.getfamousParticipantslist2());
-		model.addAttribute("viewslist", productlistService.getfamousViewslist2());
-		model.addAttribute("sort", sort);
+//		model.addAttribute("pricelist", productlistService.getfamousPricelist2());
+//		model.addAttribute("participantslist", productlistService.getfamousParticipantslist2());
+//		model.addAttribute("viewslist", productlistService.getfamousViewslist2());
+		//model.addAttribute("sort", sort);
 		
-		return "productList/mainlist";
+		return "index";
 	}
 }
