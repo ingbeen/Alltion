@@ -47,6 +47,7 @@ public class MemberController {
 	@RequestMapping(value = "/")
 	public String main(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page)
 	{
+		System.out.println("1");
 		int limit = 8;
 		int listcount = productlistService.getListCount();
 		String startrow = Integer.toString((page - 1) * 8 + 1); // 1 9 17 25
@@ -80,14 +81,14 @@ public class MemberController {
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
-
-		return "index";
+		
+		return "main/index";
 	}
 	
 	@RequestMapping("/main.kj")
 	public String mainPage()
 	{
-		return "index";
+		return "main/index";
 	}
 
 		@RequestMapping(value = "/loginForm.kj")
@@ -204,5 +205,4 @@ public class MemberController {
 			int res = memberService.idCheckService(member_id);
 			return res;
 		}
-		
 }

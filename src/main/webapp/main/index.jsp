@@ -3,6 +3,7 @@ pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.spring.alltion.productList.*" %>
+<%@ page import="com.spring.alltion.login.*" %>
 <%@ page import="com.spring.alltion.productRegistration.ProductVO" %>
 <%
  	List<ProductVO> mainlist=(List<ProductVO>)request.getAttribute("mainlist");
@@ -39,7 +40,7 @@ pageEncoding="UTF-8"%>
 -->
     </div>
     <div class="header">
-        <jsp:include page="./header/main_header.jsp"></jsp:include>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
     <!-- 배너 영역 -->
     <div class="banner">
@@ -104,7 +105,7 @@ pageEncoding="UTF-8"%>
                             <div class="items__product--info product">
                                 <p class="product_name"><%=vo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                <span class="countdown"><%=vo.getProduct_issue_date() %></span>
                                 <div class="bookmark">
                                     <span class="material-icons bookmark_border">bookmark_border</span>
                                 </div>
@@ -295,7 +296,7 @@ pageEncoding="UTF-8"%>
                         </a>
                     </li>
                     --> 
-                <% if(j == i + 2){
+                <% if(j == i + 3){
                     i = j;
                     break;
                 	}
