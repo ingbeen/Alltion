@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
 -->
     </div>
     <div class="header">
-        <jsp:include page="./header/main_header.jsp"></jsp:include>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
     <!-- 배너 영역 -->
     <div class="banner">
@@ -295,7 +295,7 @@ pageEncoding="UTF-8"%>
                         </a>
                     </li>
                     --> 
-                <% if(j == i + 2){
+                <% if(j == i + 3){
                     i = j;
                     break;
                 	}

@@ -81,7 +81,7 @@ public class MemberController {
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
 
-		return "index";
+		return "main/index";
 	}
 	
 	@RequestMapping("/main.kj")
