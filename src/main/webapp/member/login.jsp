@@ -5,16 +5,13 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-    <link rel="stylesheet" href="./resources/css/style.css?after">
-	<link rel="stylesheet" href="./resources/css/member_login.css">
+    <link rel="stylesheet" href="./resources/css/main_style.css?after">
+	<link rel="stylesheet" href="./resources/css/member_login.css?after">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
-
 </head>
 <!-- 로그인 화면시 아이디에 포커스 -->
 <body onload="document.getElementById('member_id').focus();">
@@ -22,7 +19,7 @@ pageEncoding="UTF-8"%>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     
     <div class="header">
-        <jsp:include page="../header/header.jsp"></jsp:include>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
 
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->

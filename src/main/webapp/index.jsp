@@ -1,19 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.spring.alltion.productList.*" %>
+<%@ page import="com.spring.alltion.productRegistration.ProductVO" %>
+<%
+ 	List<ProductVO> mainlist=(List<ProductVO>)request.getAttribute("mainlist");
+/*
+	List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
+	List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
+	List<ProductVO> viewslist=(List<ProductVO>)request.getAttribute("viewslist");
+	*/
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
     <link rel="stylesheet" href="./resources/css/index_main.css?after">
-    <link rel="stylesheet" href="./resources/css/style2.css?after">
+    <link rel="stylesheet" href="./resources/css/main_style.css?after">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?
     family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
-    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
@@ -31,7 +41,7 @@ pageEncoding="UTF-8"%>
 -->
     </div>
     <div class="header">
-        <jsp:include page="./header/header2.jsp"></jsp:include>
+        <jsp:include page="./header/main_header.jsp"></jsp:include>
     </div>
     <!-- 배너 영역 -->
     <div class="banner">
@@ -42,15 +52,8 @@ pageEncoding="UTF-8"%>
             <img src="./resources/img/banner/02.jpg">
         </div>
         <div class="banner_slide">
-            <img src="./resources/img/banner/sample.jpg">
+            <img src="./resources/img/banner/03.jpg">
         </div>
-        <!-- 수정해야 함
-        <ul class="banner_dots">
-        	<li class="dot active">•</li>
-        	<li class="dot">•</li>
-        	<li class="dot">•</li>
-        </ul>
-        -->
         <button class="bannerBtn prev">
         	<span class="material-icons">
 			arrow_back_ios
@@ -74,11 +77,49 @@ pageEncoding="UTF-8"%>
             <label for="deadline-items">마감 임박</label>
             <input type="radio" name="menu--name" id="resell-items">
             <label for="resell-items">재경매</label>
+            <!-- 
             <input type="radio" name="menu--name" id="premium-items">
             <label for="premium-items">프리미엄관</label>
+             -->
             <!--  인기 경매  -->
             <div class="menu-box content1">
-                <ul class="items__list popular">
+			
+            <% if(!mainlist.isEmpty()){
+            loop : for(int i = 0; i < mainlist.size(); i++){%>	       	
+                <ul class="items__list product">
+	            <%for(int j = i; j < i + 4; j++) {
+					if(j == mainlist.size()) {
+						break loop;
+					}
+					
+					ProductVO vo = (ProductVO)mainlist.get(j);
+	            %> 
+            	
+            	<!-- 
+            	<ul class="items__list popular">
+            	 -->
+                 	 <li>
+                    	<a href="/alltion/boarddetail.hs?product_number=<%=vo.getProduct_number() %>">
+                            <div class="product-box">
+                               <img src=<%=vo.getProduct_img_1() %>><br>
+                            </div>
+                            <div class="items__product--info product">
+                                <p class="product_name"><%=vo.getProduct_subject() %></p>
+                                <span class="material-icons timer">timer</span>
+                                <span class="countdown"><%=vo.getProduct_issue_date() %> 00:00</span>
+                                <div class="bookmark">
+                                    <span class="material-icons bookmark_border">bookmark_border</span>
+                                </div>
+                                <div class="price-txt">
+                                    <p class="price_text">현재가</p>
+                                    <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
+                                    <p class="price_text">즉시 구매가</p>
+                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!--                 
                     <li>
                         <a href="#">
                             <div class="product-box">
@@ -255,7 +296,18 @@ pageEncoding="UTF-8"%>
                             </div>
                         </a>
                     </li>
+                    --> 
+                <% if(j == i + 2){
+                    i = j;
+                    break;
+                	}
+                }%>
                 </ul>
+              <%} }%>
+              
+                <!-- 
+                </ul>
+                 -->
             </div>
             <!--  마감 임박  -->
             <div class="menu-box content2">
@@ -1722,6 +1774,7 @@ pageEncoding="UTF-8"%>
     </div>
     
     <!-- 경매 규칙 및 회원 등급 제도 설명 -->
+    <!-- 
     <div class="rules">
         <div class="rules__content">
             <ul class="rules__content">
@@ -1730,6 +1783,7 @@ pageEncoding="UTF-8"%>
             </ul>
         </div>
     </div>
+     -->
     <!-- !! 메인 페이지 내용(지워서 사용함) !! end -->
     
     <!-- 푸터 영역 -->
@@ -1782,7 +1836,7 @@ pageEncoding="UTF-8"%>
                 </li>
                 <li>
                     <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
-                    <p>Copyright © Alltion LLC All rights reserved.</p>
+                    <p>Copyright © Alltion All rights reserved.</p>
                 </li>
             </ul>
         </div>    
@@ -1790,10 +1844,7 @@ pageEncoding="UTF-8"%>
     
     <!--  스크립트 영역  -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script ></script>
-    <script type="text/javascript" src="./resources/js/index_main.js"></script>
-	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
+    <script src="./resources/js/index_main.js"></script>
     <script src="./resources/js/banner.js"></script>
 
 </body>

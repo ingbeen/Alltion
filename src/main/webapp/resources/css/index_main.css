@@ -85,32 +85,6 @@
     right: 10px;
 }
 
-.banner_dots {
-	display: inline-block;
-	position: absolute;
-	left: 50%;
-	bottom: 2%;
-	transform: translate(-50%, 0);
-	z-index: 99;
-	-webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    color: #BDBDBD;
-    opacity: 0.2;
-}
-
-.banner_dots .dot {
-	display: inline;
-	font-size: 48px;
-	margin-right: 2px;
-	cursor: pointer;
-}
-
-.banner_dots .dot.active {
-	color: #000000;
-	opacity: 1;
-}
-
 /* desktop-size(min:1280) */
 /* -- 메뉴 영역 */
 .menu {
@@ -139,7 +113,7 @@ input[type="radio"] {display: none;}
 input[type="radio"] + label {
     margin-left: -4px;
     display: inline-block;
-    width: 300px;
+    width: 33.3333%;
     height: 54px;
     text-align: center;
     line-height: 54px;

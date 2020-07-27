@@ -524,6 +524,6 @@ pageEncoding="UTF-8"%>
     
     <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!--  스크립트 영역  -->
-    <script src="./resources/js/index_main.js"></script>
+    <script src="./resources/js/common.js"></script>
 </body>
 </html>

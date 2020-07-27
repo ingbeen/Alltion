@@ -13,6 +13,12 @@ pageEncoding="UTF-8"%>
     <link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
 </head>
 <body>
+	<!-- top 키 -->
+    <div id="topKey" class="topKey_btn" >
+        <span class="material-icons">
+            keyboard_arrow_up
+        </span>
+    </div>
     <div class="upper_header">
         <div class="upper_header--nav">
             <p>
@@ -493,6 +499,9 @@ pageEncoding="UTF-8"%>
                         <option value="cate12">기타잡화</option>
                     </select>
                     <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
+                    <a href="#" class="searchBtn">
+                    	<span class="material-icons">search</span>
+                    </a>
                 </div>
                 </div>
                 <ul class="member_info">
@@ -517,10 +526,11 @@ pageEncoding="UTF-8"%>
                 </ul>
             </div>
         </div>
+        
+    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!--  스크립트 영역  -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript"></script>
-    <script src="./resources/js/index_main.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="./resources/js/common.js"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="resources/js/kakaoTalk.js"></script>
 </body>

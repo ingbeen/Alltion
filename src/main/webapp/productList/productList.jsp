@@ -30,12 +30,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<c:url value="/resources/css/product_list.css?after" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css?after" />">
     <link href="<c:url value="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"/>" rel="stylesheet">
     <link href="<c:url value="https://fonts.googleapis.com/icon?family=Material+Icons"/>" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/kakaoTalk.css">
 	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
 </head>
 <body>
