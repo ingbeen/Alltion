@@ -5,6 +5,8 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
+    <link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
     <title>All-tion</title>
 </head>
 <body>
@@ -524,6 +526,9 @@ pageEncoding="UTF-8"%>
     
     <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
     <!--  스크립트 영역  -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./resources/js/common.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

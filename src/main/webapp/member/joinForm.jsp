@@ -6,15 +6,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-    <link rel="stylesheet" href="./resources/css/style.css?after">
+    <link rel="stylesheet" href="./resources/css/main_style.css?after">
     <link rel="stylesheet" href="./resources/css/member_joinform.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
+    <link href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>All-tion</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     
@@ -27,7 +23,7 @@
     <!-- 모든 페이지 공통 영역 by 하나  -->
     
     <div class="header">
-        <jsp:include page="../header/header.jsp"></jsp:include>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
 
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
@@ -178,10 +174,7 @@
     <!--  스크립트 영역  -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript"></script>
 	<script src="./resources/js/joinform.js"></script>
-	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
 </form>
 </body>
 </html>

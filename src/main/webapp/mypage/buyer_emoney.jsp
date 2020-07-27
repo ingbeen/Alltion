@@ -3,25 +3,23 @@
 <%@ page import = "com.spring.alltion.test.Product_kjVO" %>
 <%@ page import = "com.spring.alltion.login.MemberVO" %>
 <%@ page import = "com.spring.alltion.test.Test_emoneyVO" %>
+<%@ page import = "com.spring.alltion.pay.*" %>
 <%@ page import = "java.util.*" %>
 <%
 	Test_emoneyVO emoneyvo = (Test_emoneyVO)request.getAttribute("emoneyvo");
 	MemberVO membervo = (MemberVO)request.getAttribute("membervo");
 	Product_kjVO Product_kjvo = (Product_kjVO)request.getAttribute("Product_kjvo");
+	String pmvo = (String)request.getAttribute("pmvo");
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/main_style.css">
     <link rel="stylesheet" href="./resources/css/buyer_emoney.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
-    
     <title>All-tion</title>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -30,11 +28,12 @@
     <!-- 모든 페이지 공통 영역 by 하나  -->
     
     <div class="header">
-        <jsp:include page="../header/header.jsp"></jsp:include>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
 
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     <!-- 이머니 확인 페이지by.계정 -->
+    <div class = "emoney">
     <div class="eomney_update--form">
             <h3>이머니 입금</h3>
             <div class="eomney_update--content">
@@ -44,7 +43,7 @@
                             <span>이머니</span>
                         </div>
                         <div class="update_form__list content">
-                            <span>현재 이머니 : <%=emoneyvo.getTest_emoney() %></span>
+                            <span>현재 이머니 : <%=pmvo %></span>
                             <br>
                             <br>           
                             <span>구매 가격 : <%=Product_kjvo.getTrading_price() %></span>
@@ -62,6 +61,7 @@
      			 </div>
       	<form name = "buyer_deal" action = "./buyer_deal.kj" method = "post">			
    	 	<input type = "hidden" name = "trading_buyer_id" id = "trading_buyer_id" value = "<%=Product_kjvo.getTrading_buyer_id() %>">
+   	 	<input type = "hidden" name = "trading_price" id = "trading_price" value = "<%=Product_kjvo.getTrading_price() %>">
    	 	<div class="eomney_update--form">
             <h3>택배 거래</h3>
             <div class="eomney_update--content">
@@ -122,6 +122,7 @@
                     </div>                                     
                     </div>
                     </form>
+                    </div>
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -181,7 +182,5 @@
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./resources/js/buyer_emoney.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.spring.alltion.pay.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	List<PayVO> chargevo = (List<PayVO>) request.getAttribute("chargevo");
 	List<PayVO> cancelvo = (List<PayVO>) request.getAttribute("cancelvo");
@@ -29,16 +30,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="./resources/css/main_style.css?after">
-<link rel="stylesheet" href="./resources/css/paylist.css">
-<link rel="stylesheet" href="resources/css/kakaoTalk.css">
-<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./resources/css/main_style.css">
+	<link rel="stylesheet" href="./resources/css/paylist.css">
+    <link href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <title>Alltion 충전내역 조회</title>
 </head>
 <body>
@@ -439,7 +436,6 @@
 
 	<!--  스크립트 영역  -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="./resources/js/common.js"></script>
 	<script>
 	var formData = $("form[name=test1]").serialize() ;
 	var click = true;
@@ -450,12 +446,15 @@
             $.ajax({
             	url: "/alltion/plus.ms",
             	data: formData
+            }).done(function(data){
+            	click = true;
+            }).fail(function(data){
+            	click = false;
             })
             // 타이밍 추가
-            setTimeout(function () {
-                click = true;
-            }, 1000)
-            
+            //setTimeout(function () {
+            //    click = true;
+            //}, 1000)
          } else {
             console.log("중복됨");
          }
@@ -481,7 +480,5 @@
          }
     }
 	</script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>
