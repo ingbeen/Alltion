@@ -1,14 +1,22 @@
 @charset "UTF-8";
+
+.wrapper{
+	margin : 0 auto;
+	width: 660px;
+	padding-top: 40px;
+}
+
 .pay, .payment{
-	position: relative;
+	
 	display: inline-block;
-    padding: 2% 0 0 30%;
+    /*padding: 2% 0 0 30%;*/
     /*width: 1190px;*/
     min-height: 500px;
     margin:0 auto;
 }
 .chargehistory{
     /*min-width: 362px;*/
+    position: relative;
     width: 100%;
     min-height: 300px;
     align-content: center;
@@ -20,6 +28,7 @@
 
 .cancelhistory{
     /*min-width: 362px;*/
+    position: relative;
     width: 100%;
     min-height: 300px;
     align-content: center;
@@ -35,14 +44,14 @@
     display:inline;
     border-left: 1px solid #999; 
     float:left;
-    min-width: 100px;
+    min-width: 110px;
     text-align: center;
     padding: 5px 5px 5px 5px;
 }
 .firstcharge li{
     display:inline; 
     float:left;
-    min-width: 100px;
+    min-width: 110px;
     text-align: center;
     padding: 5px 5px 5px 5px;
 }
@@ -51,14 +60,14 @@
     display:inline;
     border-left: 1px solid #999; 
     float:left;
-    min-width: 100px;
+    min-width: 110px;
     text-align: center;
     padding: 5px 5px 5px 5px;
 }
 .firstcancel li, .firstline li{
     display:inline; 
     float:left;
-    min-width: 100px;
+    min-width: 110px;
     text-align: center;
     padding: 5px 5px 5px 5px;
 }

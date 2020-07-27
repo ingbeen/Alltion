@@ -52,7 +52,7 @@ date = getFormatDate(date);
     </div>
     <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
 	<!------------------------------------------------------------------------------------------------>
-	<div class="warp" style="min-height: 450px;">
+	<div class="warp" style="min-height: 450px; width: 1520px; margin: 0 auto; display: inline-block;">
 	<div class="Main">
 		<div class="h3_subBox">
 			<h3>사이버머니 충전/환불</h3>
