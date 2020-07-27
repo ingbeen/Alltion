@@ -2,7 +2,9 @@ package com.spring.alltion.test;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -32,7 +34,7 @@ public class buyerController {
 	private PayService payService;
 	
 	@RequestMapping(value = "/buyer.kj")
-	public String getProductlist(Model model, HttpSession session)
+	public String getProductlist(Model model, HttpSession session,HttpServletRequest request)
 	throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
@@ -42,10 +44,15 @@ public class buyerController {
 		}
 		else
 		{
-		ArrayList<Product_kjVO> product_list = testservice.getProductlist(userId);
+		List<Product_kjVO> product_list = testservice.getProductlist(userId);
 		model.addAttribute("product_list", product_list);
+		
+		ArrayList<Product_kjVO> delivery_before_list = testservice.getdelivery_before(userId);
+		model.addAttribute("delivery_before_list", delivery_before_list);
+		
 		ArrayList<Product_kjVO> delivery_list = testservice.getdeliveryList(userId);
 		model.addAttribute("delivery_list", delivery_list);
+		
 		ArrayList<Product_kjVO> dealcomplete_list = testservice.getdealcomplete_buyer(userId);
 		model.addAttribute("dealcomplete_list", dealcomplete_list);
 		return  "mypage/buyer";
@@ -63,8 +70,12 @@ public class buyerController {
 		}
 		else
 		{
+		ArrayList<Product_kjVO> getdeposit_before_list = testservice.getdeposit_before(userId);
+		model.addAttribute("getdeposit_before_list", getdeposit_before_list);
+		
 		ArrayList<Product_kjVO> getSale_list = testservice.getSalelist(userId);
 		model.addAttribute("getSale_list", getSale_list);
+		
 		ArrayList<Product_kjVO> dealcompleteseller_list = testservice.getdealcomplete_seller(userId);
 		model.addAttribute("dealcompleteseller_list", dealcompleteseller_list);
 		return  "mypage/seller";
@@ -127,7 +138,8 @@ public class buyerController {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		int res = testservice.deliverycomplete(Product_kjvo,userId); // 거래중 -> 거래완료
+		int res = testservice.deliverycomplete(Product_kjvo); // 거래중 -> 거래완료
+		System.out.println("res : " + res);
 		if(userId == null)
 		{
 			return "member/login";
@@ -137,12 +149,8 @@ public class buyerController {
 		if(res != 0)
 		{
 			ArrayList<Product_kjVO> delivery_list = testservice.getdealcomplete_buyer(userId);
-//			System.out.println("id : " + delivery_list.get(0).getProduct_id());
-//			System.out.println("amount : " + delivery_list.get(0).getTrading_price());
 			String id = delivery_list.get(0).getProduct_id();
 			int amount = delivery_list.get(0).getTrading_price();
-			//System.out.println("vo id : " + Product_kjvo.getProduct_id());
-			//String result = plusMoney(Product_kjvo.getProduct_id(), Product_kjvo.getTrading_price(),"상품제목제목");
 			String result = plusMoney(id, amount,"상품제목제목");
 			session.setAttribute("currentMoney", result);
 			writer.write("<script>alert('구매가 완료되었습니다');"
@@ -192,7 +200,8 @@ public class buyerController {
 		
 		String userId = (String)session.getAttribute("userId");
 		
-		int res = testservice.after_deposit(Product_kjvo);
+		
+		Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 		int currentMoney = Integer.parseInt(payService.findCurrentMoney(userId));
 		//int res_emoney = testservice.update_emoney(userId);
 		if(userId == null)
@@ -203,27 +212,24 @@ public class buyerController {
 		{
 			if(currentMoney >= Product_kjvo.getTrading_price())
 			{
-				//if(res_emoney != 0)
-				//{
-					
-					if(res != 0)
-					{
-						String result = minusMoney(userId, Product_kjvo.getTrading_price(), "상품제목제목");
-						session.setAttribute("currentMoney", result);
-						writer.write("<script>alert('결제가 완료되었습니다');"
-						+ "location.href='/alltion/buyer.kj';</script>");
-					}
-				//}
+				int res = testservice.after_deposit(Product_kjvo);
+				if(res != 0)
+				{	
+					String result = minusMoney(userId, Product_kjvo.getTrading_price(), "상품제목제목");
+					session.setAttribute("currentMoney", result);
+					writer.write("<script>alert('결제가 완료되었습니다');"
+					+ "location.href='/alltion/buyer.kj';</script>");
+				}
+			}
 			else
 			{
 				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer_emoney.kj';</script>");
 				
 			}
-			
-			}
+				
+		}				
 			return null;
 		}
-	}
 		@RequestMapping(value = "/buyer_deal_update") 
 		public String address_update(MemberVO membervo, HttpSession session ,HttpServletResponse response)throws Exception
 		{
