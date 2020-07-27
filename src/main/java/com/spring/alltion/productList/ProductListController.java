@@ -20,12 +20,7 @@ public class ProductListController {
 	
 	@Autowired
 	private ProductlistService productlistService;
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-	
-		return "productList/productList";
-	}
+
 	@RequestMapping(value = "/Mainlist.ms", method = RequestMethod.GET)
 	public String getMainlist(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "sort", required = false, defaultValue = "1") String sort) {
 		int limit = 6;
