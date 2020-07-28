@@ -62,6 +62,7 @@
       	<form name = "buyer_deal" action = "./buyer_deal.kj" method = "post">			
    	 	<input type = "hidden" name = "trading_buyer_id" id = "trading_buyer_id" value = "<%=Product_kjvo.getTrading_buyer_id() %>">
    	 	<input type = "hidden" name = "trading_price" id = "trading_price" value = "<%=Product_kjvo.getTrading_price() %>">
+   	 	<input type = "hidden" name = "product_subject" id = "product_subject" value = "<%=Product_kjvo.getProduct_subject() %>">
    	 	<div class="eomney_update--form">
             <h3>택배 거래</h3>
             <div class="eomney_update--content">

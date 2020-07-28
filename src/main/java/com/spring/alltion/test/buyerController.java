@@ -151,7 +151,8 @@ public class buyerController {
 			ArrayList<Product_kjVO> delivery_list = testservice.getdealcomplete_buyer(userId);
 			String id = delivery_list.get(0).getProduct_id();
 			int amount = delivery_list.get(0).getTrading_price();
-			String result = plusMoney(id, amount,"상품제목제목");
+			String subject = delivery_list.get(0).getProduct_subject();
+			String result = plusMoney(id, amount, subject);
 			session.setAttribute("currentMoney", result);
 			writer.write("<script>alert('구매가 완료되었습니다');"
 			+ "location.href='/alltion/buyer.kj';</script>");
@@ -215,7 +216,7 @@ public class buyerController {
 				int res = testservice.after_deposit(Product_kjvo);
 				if(res != 0)
 				{	
-					String result = minusMoney(userId, Product_kjvo.getTrading_price(), "상품제목제목");
+					String result = minusMoney(userId, Product_kjvo.getTrading_price(), Product_kjvo.getProduct_subject());
 					session.setAttribute("currentMoney", result);
 					writer.write("<script>alert('결제가 완료되었습니다');"
 					+ "location.href='/alltion/buyer.kj';</script>");

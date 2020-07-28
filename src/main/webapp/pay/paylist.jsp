@@ -285,6 +285,9 @@ int endpage3 = ((Integer) request.getAttribute("endpage3")).intValue();
 						if (!paymentvo.isEmpty()) {
 						for (int i = 0; i < paymentvo.size(); i++) {
 							PaymentVO vo = (PaymentVO) paymentvo.get(i);
+							if(vo.getPayment_product_subject().length()>5){
+								vo.setPayment_product_subject(vo.getPayment_product_subject().substring(0, 5) + "..");
+							}
 					%>
 					<ul class="paymentlist">
 						<li>
