@@ -59,6 +59,7 @@
 		where product_kj.product_number = product_kj_trading.trading_product_number
         and product_kj_trading.trading_progress = '구매중'
         and product_id = #{userId}
+        order by product_number
 
 		</select>
 		
@@ -66,6 +67,7 @@
 		
 		select
 		trading_product_number,
+		product_number,
 		product_subject,
 		trading_price,
 		to_char(trading_waybill_deadline, 'yyyy-mm-dd hh24:mi') as trading_waybill_deadline,
@@ -151,11 +153,24 @@
 	
 	</select>
 	
+	<select id = "Waybill" resultMap="Product_KjResultMap">
+		
+		select
+		trading_product_number,
+		trading_progress
+		from product_kj_trading
+		where trading_product_number = #{product_number}
+
+	</select>
+	
 	<update id ="after_deposit" parameterType ="Product_kjVO">
+	 
 	 update product_kj_trading
 	 set
 	 trading_progress = '입금후' 
 	 where trading_buyer_id = #{trading_buyer_id}
+	 and trading_product_number = #{trading_product_number}
+	 
 	 </update>
 	
 	<update id = "updateWaybill" parameterType ="Product_kjVO">
@@ -184,8 +199,8 @@
 	
 		select 
 		member_id, 
-		pay_current_money 
-		from member natural join paylist
+		pay_current_money		
+		from member natural join paylist 
 		where member.member_id = paylist.pay_id and pay_id = #{userId}
 	
 	</select>
@@ -193,6 +208,7 @@
 	<select id = "selectProduct" resultType = "com.spring.alltion.test.Product_kjVO">
 		
 		select
+		trading_product_number,
 		trading_price,
 		sample4_postcode,
 		sample4_roadaddress,
@@ -200,10 +216,11 @@
 		sample4_detailaddress,	
 		trading_buyer_id,
 		trading_transaction_method
-		from product_kj_trading  
-		natural join member
+		from product_kj_trading 
+		natural join member 		
 		where product_kj_trading.trading_buyer_id = member.member_id
-		and trading_buyer_id = #{userId}
+		and trading_buyer_id = #{userId} 
+		and trading_product_number = #{product_number}
 	
 	</select>
 	

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 
 import com.spring.alltion.login.MemberVO;
@@ -12,17 +13,26 @@ import com.spring.alltion.login.MemberVO;
 public interface testService {
 	
 		public List<Product_kjVO> getProductlist(String userId);
-		public ArrayList<Product_kjVO> getSalelist(String userId);
-		public ArrayList<Product_kjVO> getdeliveryList(String userId);
-		public ArrayList<Product_kjVO> getdealcomplete_buyer(String userId);
-		public ArrayList<Product_kjVO> getdealcomplete_seller(String userId);
-		public ArrayList<Product_kjVO> getdeposit_before(String userId);
-		public ArrayList<Product_kjVO> getdelivery_before(String userId);
-		public Test_emoneyVO selectEmoney(String userId);
-		public Product_kjVO selectProduct(String userId);	
+		public List<Product_kjVO> getdelivery_before(String userId);
+		public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number,String trading_buyer_id);
+		
+		public List<Product_kjVO> getdeposit_before(String userId);
+		
+		public List<Product_kjVO> getSalelist(String userId);
 		public int updateWaybill(Product_kjVO Product_kjvo);
-		public int after_deposit(Product_kjVO Product_kjvo);	
+		
+		public List<Product_kjVO> getdeliveryList(String userId);
+		
+		public List<Product_kjVO> getdealcomplete_buyer(String userId);
+		public List<Product_kjVO> getdealcomplete_seller(String userId);
+		
+		
+		public Test_emoneyVO selectEmoney(String userId);
+		public Product_kjVO selectProduct(String userId, int product_number);	
+		
+		
+		public Product_kjVO Waybill(String userId,int product_number);
 		public int update_deal_address(MemberVO membervo);
-		public int deliverycomplete(Product_kjVO Product_kjvo);	
+		public int deliverycomplete(Product_kjVO Product_kjvo,int product_number);	
 
 }

@@ -28,46 +28,48 @@ public class testServiceImpl implements testService{
 	}
 	
 	@Override
-	public ArrayList<Product_kjVO> getdeliveryList(String userId) {
+	public List<Product_kjVO> getdelivery_before(String userId) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		ArrayList<Product_kjVO> list = testMapper.getdeliveryList(userId);
-		return list;
+		List<Product_kjVO>delivery_before_list	= testMapper.getdelivery_before(userId);
+		return delivery_before_list;
+	}	
+	
+	@Override
+	public List<Product_kjVO> getdeliveryList(String userId) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		List<Product_kjVO> complete_list = testMapper.getdeliveryList(userId);
+		return complete_list;
 	}
 	
 	@Override
-	public ArrayList<Product_kjVO> getdealcomplete_seller(String userId) {
+	public List<Product_kjVO> getdealcomplete_seller(String userId) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		ArrayList<Product_kjVO> list = testMapper.getdealcomplete_seller(userId);
-		return list;
+		List<Product_kjVO> sale_complete_list = testMapper.getdealcomplete_seller(userId);
+		return sale_complete_list;
 	}
 	
 	@Override
-	public ArrayList<Product_kjVO> getSalelist(String userId) {
+	public List<Product_kjVO> getSalelist(String userId) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		ArrayList<Product_kjVO>list = testMapper.getSalelist(userId);
-		return list;
+		List<Product_kjVO>sell_list = testMapper.getSalelist(userId);
+		return sell_list;
 	}
 	
 	@Override
-	public Product_kjVO selectProduct(String userId) {
+	public Product_kjVO selectProduct(String userId, int product_number) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		Product_kjVO Product_kjvo = testMapper.selectProduct(userId);
+		Product_kjVO Product_kjvo = testMapper.selectProduct(userId,product_number);
 		return Product_kjvo;
 	}
 	
 	@Override
-	public ArrayList<Product_kjVO> getdeposit_before(String userId) {
+	public List<Product_kjVO> getdeposit_before(String userId) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		ArrayList<Product_kjVO>list = testMapper.getdeposit_before(userId);
-		return list;
+		List<Product_kjVO>getdeposit_before_list = testMapper.getdeposit_before(userId);
+		return getdeposit_before_list;
 	}
 
-	@Override
-	public ArrayList<Product_kjVO> getdelivery_before(String userId) {
-		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		ArrayList<Product_kjVO>list = testMapper.getdelivery_before(userId);
-		return list;
-	}	
+	
 	
 	@Override
 	public Test_emoneyVO selectEmoney(String userId) {
@@ -89,22 +91,29 @@ public class testServiceImpl implements testService{
 	}
 
 	@Override
-	public int after_deposit(Product_kjVO Product_kjvo) {
+	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_buyer_id) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		return testMapper.after_deposit(Product_kjvo);
+		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
 	}
 
 	
 	@Override
-	public int deliverycomplete(Product_kjVO Product_kjvo) {
+	public int deliverycomplete(Product_kjVO Product_kjvo, int product_number) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		return testMapper.deliverycomplete(Product_kjvo);
+		return testMapper.deliverycomplete(Product_kjvo,product_number);
 	}
 	
 	@Override
-	public ArrayList<Product_kjVO> getdealcomplete_buyer(String userId) {
+	public List<Product_kjVO> getdealcomplete_buyer(String userId) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		return testMapper.getdealcomplete_buyer(userId);
+	}
+
+	@Override
+	public Product_kjVO Waybill(String userId, int product_number) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		Product_kjVO Product_kjvo = testMapper.Waybill(userId, product_number);
+		return Product_kjvo;
 	}
 
 }
