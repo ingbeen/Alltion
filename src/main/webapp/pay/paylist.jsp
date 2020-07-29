@@ -144,15 +144,15 @@ String tab = (String)request.getAttribute("tab");
 					}
 					%>
 					<ul class="page_number paging">
-						<li>
+						
 							<%
 								if (nowpage1 <= 1) {
-							%> &#60; <%
+							%><li></li><%
  	} else {
- %> <a href="./goPaylist.ms?page1=<%=nowpage1 - 1%>">&#60;</a> <%
+ %> <li><a href="./goPaylist.ms?page1=<%=nowpage1 - 1%>&tab=1">&#60;</a></li> <%
  	}
  %>
-						</li>
+						
 						<%
 							for (int a = startpage1; a <= endpage1; a++) {
 							if (a == nowpage1) {
@@ -172,11 +172,11 @@ String tab = (String)request.getAttribute("tab");
 						<%
 							if (nowpage1 >= maxpage1) {
 						%>
-						<li>&#62;</li>
+						<li></li>
 						<%
 							} else {
 						%>
-						<li><a href="./goPaylist.ms?page1=<%=nowpage1 + 1%>">&#62;</a>
+						<li><a href="./goPaylist.ms?page1=<%=nowpage1 + 1%>&tab=1">&#62;</a>
 						</li>
 						<%
 							}
@@ -219,9 +219,9 @@ String tab = (String)request.getAttribute("tab");
 						
 							<%
 								if (nowpage2 <= 1) {
-							%><li>&#60;</li> <%
+							%><li></li> <%
  	} else {
- %><li><a href="./goPaylist.ms?page2=<%=nowpage2 - 1%>">&#60;</a></li> <%
+ %><li><a href="./goPaylist.ms?page2=<%=nowpage2 - 1%>&tab=2">&#60;</a></li> <%
  	}
  %>
 						
@@ -245,11 +245,11 @@ String tab = (String)request.getAttribute("tab");
 						<%
 							if (nowpage2 >= maxpage2) {
 						%>
-						<li>&#62;</li>
+						<li></li>
 						<%
 							} else {
 						%>
-						<li><a href="./goPaylist.ms?page2=<%=nowpage2 + 1%>">&#62;</a>
+						<li><a href="./goPaylist.ms?page2=<%=nowpage2 + 1%>&tab=2">&#62;</a>
 						</li>
 						<%
 							}
@@ -311,9 +311,9 @@ String tab = (String)request.getAttribute("tab");
 					%>
 					<ul class="page_number paging">
 						<%if (nowpage3 <= 1) {%>
-							<li>&#60;</li> 
+							<li></li> 
  						<%} else { %>
-							<li><a href="./goPaylist.ms?page3=<%=nowpage3 - 1%>">&#60;</a></li> 
+							<li><a href="./goPaylist.ms?page3=<%=nowpage3 - 1%>&tab=3">&#60;</a></li> 
 						<%} %>
 						<%
 							for (int a = startpage3; a <= endpage3; a++) {
@@ -335,11 +335,11 @@ String tab = (String)request.getAttribute("tab");
 						<%
 							if (nowpage3 >= maxpage3) {
 						%>
-						<li>&#62;</li>
+						<li></li>
 						<%
 							} else {
 						%>
-						<li><a href="./goPaylist.ms?page3=<%=nowpage3 + 1%>">&#62;</a>
+						<li><a href="./goPaylist.ms?page3=<%=nowpage3 + 1%>&tab=3">&#62;</a>
 						</li>
 						<%
 							}

@@ -23,6 +23,7 @@ body {
 
 .cf {
 	*zoom: 1;
+	width: 1160px;
 }
 
 .cTabs>div {
@@ -39,10 +40,11 @@ body {
 	padding-right: 5%;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom: none;
+	border-bottom: 2px solid #FFA30E;
+	/*border-bottom: none;*/
 	display: block;
-	background-color: #ffd149;
-	color: #ffffff;
+	background-color: white;
+	color: black;
 	font-weight: bold;
 	z-index: 1;
 }
@@ -56,15 +58,16 @@ body {
 	background-color: #FF7519;
 	border-bottom: none;
 	margin-bottom: -3px;
-	border-bottom: 3px solid #888888;
+	border-bottom: 2px solid #FF7519;
 	border-radius: 10px 10px 0 0;
 }
 
 .cTabContent {
 	padding: 10px;
-	background: whitesmoke;
+	/*background: whitesmoke;*/
+	background: rgba(195, 160, -200, 0.16);
 	color: #fff;
-	border: 3px solid #555555;
+	/*border-top: 3px solid #555555;*/
 	min-height: 260px;
 	width: 870px;
 }
@@ -77,8 +80,9 @@ body {
 
 .cTabs>div.active {
 	color: #000;
-	background-color: #FF7519;
-	border-bottom: 3px solid #888888;
+	background-color: rgb(249, 168, 37);
+	/*border-bottom: 3px solid #888888;*/
+	border-bottom: 2px solid #FF7519;
 	margin-bottom: -3px;
 	border-radius: 10px 10px 0 0;
 }
@@ -171,9 +175,10 @@ body {
 .payment_list ul li:first-child{border-left:none;}
 
 .firstcharge li, .firstcancel li, .firstline li{
-    background-color: #BDBDBD;
+    /*background-color: #BDBDBD;*/
+    background-color: rgba(255, 160, -255, 0.29);
+    border-bottom: 1px solid rgba(255, 160, -255, 1.09);
 }
-
 
 .chargepage ul li, .cancelpage ul li, .paymentpage ul li{
 	display:inline-block;
@@ -240,7 +245,7 @@ body {
 @media all and (min-width: 601px) {
 	.cTabs>div {
 		width: 25%;
-		border: 0px solid green;
+		/*border: 0px solid green;*/
 	}
 }
 
