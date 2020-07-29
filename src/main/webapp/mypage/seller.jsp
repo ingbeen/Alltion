@@ -6,99 +6,104 @@
 <%	
 	ArrayList<Product_kjVO> getSale_list = (ArrayList<Product_kjVO>)request.getAttribute("getSale_list");
 %>
+<%
+	ArrayList<Product_kjVO> dealcompleteseller_list = (ArrayList<Product_kjVO>)request.getAttribute("dealcompleteseller_list");
+%>
+<%
+	ArrayList<Product_kjVO> getdeposit_before_list = (ArrayList<Product_kjVO>)request.getAttribute("getdeposit_before_list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/main_style.css">
     <link rel="stylesheet" href="./resources/css/seller.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
-  
+    
     <div class="header">
-        <div class="upper_header">
-            <div class="upper_header--nav">
-                <span>
-                    <a href="" id="clock"></a>
-                </span>
-                <ul>
-                    <li>
-                        <a href="./mypage.kj">${userId}</a>
-                    </li>
-                    <li>
-                        <a href="./logout.kj">로그아웃</a>
-                    </li>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="lower_header">
-            <div class="lower_header--nav">
-                <h1 class="logo">
-                    <a href="/alltion/">ALL-TION</a>
-                </h1>
-                <div class="category">
-                    <a class="category--drop">
-                        <img src="./resources/img/header/category_tab.png">
-                    </a>
-                </div>
-                <div class="search">
-                    <select class="search--select">
-                        <option value="">전체</option>
-                        <option value="cate01">패션</option>
-                        <option value="cate02">뷰티</option>
-                        <option value="cate03">출산/유아동</option>
-                        <option value="cate04">전자기기</option>
-                        <option value="cate05">가전제품</option>
-                        <option value="cate06">가구/인테리어</option>
-                        <option value="cate07">반려동물/취미</option>
-                        <option value="cate08">도서/음반/문구</option>
-                        <option value="cate09">티켓/쿠폰</option>
-                        <option value="cate10">스포츠</option>
-                        <option value="cate11">공구/산업용품</option>
-                        <option value="cate12">기타잡화</option>
-                    </select>
-                    <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
-                </div>
-                <ul class="member_info">
-                    <li>
-                        <a href="./mypage.kj">
-                            <span class="material-icons">perm_identity</span><br>
-                            <span>마이 페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishList.yb?page=1&endDateFormat=0">
-                            <span class="material-icons">turned_in_not</span><br>
-                            <span>찜 목록</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-icons">access_time</span><br>
-                            <span>참여 경매</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
-    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
-    <!--판매 중-->
+
+    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
+	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
+ 	<div class="main_body">
+    <div class="bidding_title">
+            <h1>판매 경매</h1>
+    </div>
+        <div class="bidding_notify">
+            <ul>
+                <li>
+                    회원님께서 현재 판매 중인 경매 리스트입니다.
+                <li>
+                <li>
+                    문의 사항은 고객센터에 문의해주시기 바랍니다.
+                </li>
+
+            </ul>
+        </div>
+       </div>
+	
+		
+    <!--판매 대기중-->
+    	<%if(getdeposit_before_list.size()!=0){ %>
+    		<% 
+    		for(int x = 0; x < getdeposit_before_list.size(); x++)
+    		{
+    			Product_kjVO deposit_beforevo = (Product_kjVO)getdeposit_before_list.get(x);
+    			%>	
+  		<div class="seller--form">
+        <h3>판매 대기중 경매</h3>
+            <div class="seller--content">
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>상품 번호</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        <span><%=deposit_beforevo.getProduct_number() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>상품명</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        <span><%=deposit_beforevo.getProduct_subject() %></span>
+                        </div>    
+                    </li>
+                </ul>
+                <ul class="seller_form list">
+                    <li>
+                        <div class="seller_form__list title">
+                            <span>판매 가격</span>
+                        </div>
+                        <div class="seller_form__list content">
+                        <span><%=deposit_beforevo.getTrading_price() %></span>
+                        </div>    
+                    </li>
+                </ul>
+
+        </div>
+        </div>
+    	<%
+    		}}
+    	%>    
+
     	<%if(getSale_list.size()==0) {%>
     	<div class="seller--form">
     	<h3>판매 중 경매가 없습니다.</h3>
     	</div>
-    	<%}else{ %>
+    	
+    	<%}else {%>
+    	
     	<%
         	for(int j = 0; j < getSale_list.size(); j++)
         	{
@@ -210,7 +215,18 @@
         	}}
     %>
     
-    <!--구매 완료 -->
+    <!--판매 완료 -->
+    <%if(dealcompleteseller_list.size()==0) {%>
+    	<div class="seller--form">
+    	<h3>판매 완료된 경매가 없습니다.</h3>
+    	</div>
+    	<%}else{ %>
+    	<%
+        	for(int i = 0; i < dealcompleteseller_list.size(); i++)
+        	{
+        		Product_kjVO dealcompletvo = (Product_kjVO)dealcompleteseller_list.get(i);
+        	
+        %> 
         <div class="seller--form">
             <h3>판매 완료</h3>
             <div class="seller--content">
@@ -220,7 +236,7 @@
                             <span>상품 번호</span>
                         </div>
                         <div class="seller_form__list content">
-                            
+                            <span><%=dealcompletvo.getProduct_number() %></span>
                         </div>    
                     </li>
                 </ul>
@@ -230,43 +246,45 @@
                             <span>상품명</span>
                         </div>
                         <div class="seller_form__list content">
-                            <h4></h4>
+                            <span><%=dealcompletvo.getProduct_subject() %></span>
                         </div>    
                     </li>
                 </ul>
                 <ul class="seller_form list">
                     <li>
                         <div class="seller_form__list title">
-                            <span>구매 가격</span>
+                            <span>판매 가격</span>
                         </div>
                         <div class="seller_form__list content">
-                            <h4></h4>
+                            <span><%=dealcompletvo.getTrading_price() %></span>
                         </div>    
                     </li>
                 </ul>
                 <ul class="seller_form list">
                     <li>
                         <div class="seller_form__list title">
-                            <span>구매 날짜</span>
+                            <span>판매 날짜</span>
                         </div>
                         <div class="seller_form__list content">
-                            <h4></h4>
+                            <span><%=dealcompletvo.getTrading_purchase_date() %></span>
                         </div>    
                     </li>
                 </ul>
                 <ul class="seller_form list">
                     <li>
                         <div class="seller_form__list title">
-                            <span>판매자</span>
+                            <span>구매자</span>
                         </div>
                         <div class="seller_form__list content">
-                            <h4></h4>
+                            <span><%=dealcompletvo.getTrading_buyer_id() %></span>
                         </div>    
                     </li>
                 </ul> 
         </div>
     </div>
-    
+    <%
+        	}}
+    %>
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -317,48 +335,13 @@
                 </li>
                 <li>
                     <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
-                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                    <p>Copyright © Alltion All rights reserved.</p>
                 </li>
             </ul>
         </div>      
     </div>
     
     <!--  스크립트 영역  -->
-    <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="./resources/js/common.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
-    
-    <script>
-        $(function(){
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function(){
-                $(".ad__banner").hide();
-			})
-            
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 0){
-                        header.addClass('sticky');
-                   }else{
-                        header.removeClass('sticky');
-                   }
-            })
-            
-            // 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category a").click(function(){
-//                
-//                var activeTab = $(this).attr('id');
-//                
-//				$('ul.deadline-items__category a').removeClass('active');
-//				$('.menu-box').removeClass('active');
-//				$(this).prop('checked', true);
-//				$('div#' + activeTab).addClass('active');
-            })
-        });
-    </script>
-    
 </body>
 </html>

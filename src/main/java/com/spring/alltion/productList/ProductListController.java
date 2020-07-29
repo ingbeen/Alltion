@@ -20,12 +20,7 @@ public class ProductListController {
 	
 	@Autowired
 	private ProductlistService productlistService;
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-	
-		return "productList/productList";
-	}
+
 	@RequestMapping(value = "/Mainlist.ms", method = RequestMethod.GET)
 	public String getMainlist(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "sort", required = false, defaultValue = "1") String sort) {
 		int limit = 6;
@@ -124,8 +119,8 @@ public class ProductListController {
 			endpage = maxpage;
 		}
 		pricelist = productlistService.getfamousPricelist(product_category_2);
-		participantslist = productlistService.getfamousPricelist(product_category_2);
-		viewslist = productlistService.getfamousPricelist(product_category_2);
+		participantslist = productlistService.getfamousParticipantslist(product_category_2);
+		viewslist = productlistService.getfamousViewslist(product_category_2);
 		
 		model.addAttribute("categorylist", categorylist);
 		model.addAttribute("pricelist", pricelist);
@@ -148,7 +143,7 @@ public class ProductListController {
 		return "productList/productList";
 	}
 	
-public String TranslateCate_1(String product_category_1) {
+	public String TranslateCate_1(String product_category_1) {
 		
 		switch(product_category_1) {
 			case "cate01":

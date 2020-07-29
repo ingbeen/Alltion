@@ -2,467 +2,354 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.spring.alltion.pay.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	List<PayVO> chargevo = (List<PayVO>) request.getAttribute("chargevo");
-	List<PayVO> cancelvo = (List<PayVO>) request.getAttribute("cancelvo");
-	List<PaymentVO> paymentvo = (List<PaymentVO>) request.getAttribute("paymentvo");
-	
-	int listcount1=((Integer)request.getAttribute("listcount1")).intValue();
-	int nowpage1=((Integer)request.getAttribute("page1")).intValue();
-	int maxpage1=((Integer)request.getAttribute("maxpage1")).intValue();
-	int startpage1=((Integer)request.getAttribute("startpage1")).intValue();
-	int endpage1=((Integer)request.getAttribute("endpage1")).intValue();
-	
-	int listcount2=((Integer)request.getAttribute("listcount2")).intValue();
-	int nowpage2=((Integer)request.getAttribute("page2")).intValue();
-	int maxpage2=((Integer)request.getAttribute("maxpage2")).intValue();
-	int startpage2=((Integer)request.getAttribute("startpage2")).intValue();
-	int endpage2=((Integer)request.getAttribute("endpage2")).intValue();
-	
-	int listcount3=((Integer)request.getAttribute("listcount3")).intValue();
-	int nowpage3=((Integer)request.getAttribute("page3")).intValue();
-	int maxpage3=((Integer)request.getAttribute("maxpage3")).intValue();
-	int startpage3=((Integer)request.getAttribute("startpage3")).intValue();
-	int endpage3=((Integer)request.getAttribute("endpage3")).intValue();
-%>
+List<PayVO> cancelvo = (List<PayVO>) request.getAttribute("cancelvo");
+List<PaymentVO> paymentvo = (List<PaymentVO>) request.getAttribute("paymentvo");
 
+int listcount1 = ((Integer) request.getAttribute("listcount1")).intValue();
+int nowpage1 = ((Integer) request.getAttribute("page1")).intValue();
+int maxpage1 = ((Integer) request.getAttribute("maxpage1")).intValue();
+int startpage1 = ((Integer) request.getAttribute("startpage1")).intValue();
+int endpage1 = ((Integer) request.getAttribute("endpage1")).intValue();
+
+int listcount2 = ((Integer) request.getAttribute("listcount2")).intValue();
+int nowpage2 = ((Integer) request.getAttribute("page2")).intValue();
+int maxpage2 = ((Integer) request.getAttribute("maxpage2")).intValue();
+int startpage2 = ((Integer) request.getAttribute("startpage2")).intValue();
+int endpage2 = ((Integer) request.getAttribute("endpage2")).intValue();
+
+int listcount3 = ((Integer) request.getAttribute("listcount3")).intValue();
+int nowpage3 = ((Integer) request.getAttribute("page3")).intValue();
+int maxpage3 = ((Integer) request.getAttribute("maxpage3")).intValue();
+int startpage3 = ((Integer) request.getAttribute("startpage3")).intValue();
+int endpage3 = ((Integer) request.getAttribute("endpage3")).intValue();
+
+String tab = (String)request.getAttribute("tab");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/main_style.css">
 <link rel="stylesheet" href="./resources/css/paylist.css">
-<link rel="stylesheet" href="resources/css/kakaoTalk.css">
-<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-<link rel="stylesheet" href="./resources/css/style.css?after">
+<link rel="stylesheet" href="./resources/css/bootstrap.css">
+<link rel="stylesheet" href="./resources/css/button.css">
 <link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+	href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<title>Alltion 충전내역 조회</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<title>Alltion E머니 거래내역 조회</title>
 </head>
 <body>
 	<!-- 모든 페이지 공통 영역 by 하나  -->
-	<!-- top 키 -->
-	<div id="topKey" class="topKey_btn">
-		<p class="material-icons">keyboard_arrow_up</p>
-	</div>
-	<!-- 헤더 -->
+
 	<div class="header">
-		<div class="upper_header">
-			<div class="upper_header--nav">
-				<span> <a href="" id="clock"></a>
-				</span>
-				<ul>
-					<li><a href="./mypage.kj">${userId}</a></li>
-					<li><a href="./logout.kj">로그아웃</a></li>
-					<li><a href="./registration.yb">판매하기</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="lower_header">
-			<div class="lower_header--nav">
-				<h1 class="logo">
-					<a href="/alltion/">ALL-TION</a>
-				</h1>
-				<div class="category">
-					<a class="category--drop"> <img
-						src="./resources/img/header/category_tab.png">
-					</a>
-				</div>
-				<div class="search">
-					<select class="search--select">
-						<option value="">전체</option>
-						<option value="cate01">패션</option>
-						<option value="cate02">뷰티</option>
-						<option value="cate03">출산/유아동</option>
-						<option value="cate04">전자기기</option>
-						<option value="cate05">가전제품</option>
-						<option value="cate06">가구/인테리어</option>
-						<option value="cate07">반려동물/취미</option>
-						<option value="cate08">도서/음반/문구</option>
-						<option value="cate09">티켓/쿠폰</option>
-						<option value="cate10">스포츠</option>
-						<option value="cate11">공구/산업용품</option>
-						<option value="cate12">기타잡화</option>
-					</select> <input type="text" placeholder="찾으시는 상품을 입력해 주세요"
-						class="search__input">
-				</div>
-				<ul class="member_info">
-					<li><a href="./mypage.kj"> <span class="material-icons">perm_identity</span><br>
-							<span>마이 페이지</span>
-					</a></li>
-					<li><a href="#"> <span class="material-icons">turned_in_not</span><br>
-							<span>찜 목록</span>
-					</a></li>
-					<li><a href="#"> <span class="material-icons">access_time</span><br>
-							<span>참여 경매</span>
-					</a></li>
-				</ul>
-			</div>
-		</div>
+		<jsp:include page="../header/main_header.jsp"></jsp:include>
 	</div>
-	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
-	<!-- 충전내역 조회 -->
-	<div class="pay">
-		<div class="chargehistory">
-			<h3>충전 내역</h3>
-			<div class="pay_list">
-				<ul class="firstcharge">
-					<li>
-						<div class="charge__list title">
-							<span>No</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>결제주문번호</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>결제 금액</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>이전 금액	</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>변동 후 금액</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>결제 상태</span>
-						</div>
-					</li>
-				</ul>
-				<%	
-					if (!chargevo.isEmpty()) {
-					for (int i = 0; i < chargevo.size(); i++) {
-						PayVO vo = (PayVO) chargevo.get(i);
-				%>
-				<ul class="charge">
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getRnum() %></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPay_merchant_uid()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPay_amount()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPay_lastmoney()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPay_nowmoney()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span>결제</span>
-						</div>
-					</li>
-				</ul>
-				<%
-					}
-				}
-				%>
+	<!-- 메인 페이지 내용 -->
+	<div class="main_body">
+	<div class="list_title">
+				<h3>E머니 관리페이지</h3>
 			</div>
-			<div class="chargepage">
-				<ul class="page_number paging">
-                    <li>
-                    <%if(nowpage1<=1){ %>
-                    &#60;
-                    <%}else{ %>
-                        <a href="./goPaylist.ms?page1=<%=nowpage1-1 %>">&#60;</a>
-                    <%} %>
-                    </li>
-                    <%for(int a=startpage1;a<=endpage1;a++){
-						if(a==nowpage1){%>
-						<li>
-						<a href="" class="active num"><%=a %></a>
-						</li>
-						<%}else{ %>
-						<li>
-						<a href="./goPaylist.ms?page1=<%=a %>"><%=a %></a>
-						</li>
-						<%} %>
-					<%} %>
-                    
-                    <%if(nowpage1>=maxpage1){ %>
-                    <li>
-                    &#62;
-                    </li>
-                    <%}else{ %>
-                    <li>
-                        <a href="./goPaylist.ms?page1=<%=nowpage1+1 %>">&#62;</a>
-                    </li>
-                    <%} %>
-                </ul>
-			</div>
-		</div>
-		
-		<!-- 환불 내역 조회 -->
-		<div class="cancelhistory">
-			<h3>환불 내역</h3>
-			<div class="pay_list">
-				<ul class="firstcancel">
-					<li>
-						<div class="cancel__list title">
-							<span>No</span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list title">
-							<span>결제주문번호</span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list title">
-							<span>결제 금액</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>이전 금액	</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>변동 후 금액</span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list title">
-							<span>결제 상태</span>
-						</div>
-					</li>
-				</ul>
-				<%
-					if (!cancelvo.isEmpty()) {
-					for (int i = 0; i < cancelvo.size(); i++) {
-						PayVO vo = (PayVO) cancelvo.get(i);
-				%>
-				<ul class="cancel">
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getRnum()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getPay_merchant_uid()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getPay_amount()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPay_lastmoney()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPay_nowmoney()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getPay_status()%></span>
-						</div>
-					</li>
-				</ul>
-				<%
-					}
-				}
-				%>
-			</div>
-			<div class="cancelpage">
-				<ul class="page_number paging">
-                    <li>
-                    <%if(nowpage2<=1){ %>
-                    &#60;
-                    <%}else{ %>
-                        <a href="./goPaylist.ms?page2=<%=nowpage2-1 %>">&#60;</a>
-                    <%} %>
-                    </li>
-                    <%for(int a=startpage2;a<=endpage2;a++){
-						if(a==nowpage2){%>
-						<li>
-						<a href="" class="active num"><%=a %></a>
-						</li>
-						<%}else{ %>
-						<li>
-						<a href="./goPaylist.ms?page2=<%=a %>" class="num"><%=a %></a>
-						</li>
-						<%} %>
-					<%} %>
-                    
-                    <%if(nowpage2>=maxpage2){ %>
-                    <li>
-                    &#62;
-                    </li>
-                    <%}else{ %>
-                    <li>
-                        <a href="./goPaylist.ms?page2=<%=nowpage2+1 %>">&#62;</a>
-                    </li>
-                    <%} %>
-                </ul>
+	<div class="wrap">
+	<!-- 위 내용 -->
+			
+	<!-- 이머니 상세내역 -->
+	
+            <div class="row mt30">
+                
+                <div class="list_notify">
+                    <ul>
+                        <li>이머니 충전신청 후 입금을 해주시면 입금 30분~1시간 이내로 이머니 충전됩니다. <span class="fcBlue">(단, 충전신청 금액, 입금액 및 입금자명 동일시)</span></li>
+                        <li>입금[충전]신청 후 7일 동안 입금확인이 되지 않는 경우 입금오류로 변경되오며, 고객님의 이의제기가 없을 시 자동 삭제됩니다.</li>
+                        <li>이머니 충전신청 후 입금하였으나 1시간 이후로도 정상적으로 이머니 충전이 되지 않을 경우 <strong class="fcBlue">일대일상담</strong>으로 문의바랍니다.</li>
+                    </ul>
+                </div>
+                <div class="row mt30 clearfix" style="width: 85%;margin:0 auto;">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="box my-money-box text-left" style="height: 110px">
+                            <div class="row fs18 fcBlack">
+                                <strong>사용 가능 이머니</strong>
+                            </div>
+                            <div class="row fs18 fcBlue text-right">
+                                <strong>${currentMoney}&nbsp;원</strong>
+                                &nbsp;&nbsp;&nbsp;<a href="/alltion/pay.ms" class="btn btn-blue-green w60">충전</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="box my-money-box text-left" style="height: 110px">
+                            <div class="row fs18 fcBlack">
+                                <strong>출금 가능 이머니</strong>
+                            </div>
+                            <div class="row fs18 fcBlue text-right">
+                                <strong>0&nbsp;원</strong>
+                                &nbsp;&nbsp;&nbsp;<a href="/alltion/pay.ms" class="btn btn-blue-green w60">출금</a>
+                            </div>
+                            <div class="row fs14 fcBlue text-center">
+                                카드충전 잔액: <strong>0&nbsp;원</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix visible-md visible-lg">
+                        <div class="col-md-12 col-sm-6 col-xs-12 mt10">
+                        
+                        </div>
+                    </div>
+                </div>
             </div>
-		</div>
-	</div>
 	
-	<div class="payment">
-		<div class="paymenthistory">
-			<h3>거래 내역</h3>
-			<div class="payment_list">
-				<ul class="firstline">
-					<li>
-						<div class="cancel__list title">
-							<span>No</span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list title">
-							<span>상품 제목</span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list title">
-							<span>결제 금액</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>이전 금액	</span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list title">
-							<span>변동 후 금액</span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list title">
-							<span>결제 상태</span>
-						</div>
-					</li>
-				</ul>
-				<%
-					if (!paymentvo.isEmpty()) {
-					for (int i = 0; i < paymentvo.size(); i++) {
-						PaymentVO vo = (PaymentVO) paymentvo.get(i);
-				%>
-				<ul class="paymentlist">
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getRnum()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getPayment_product_subject()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getPayment_amount()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPayment_lastmoney()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="charge__list content">
-							<span><%=vo.getPayment_nowmoney()%></span>
-						</div>
-					</li>
-					<li>
-						<div class="cancel__list content">
-							<span><%=vo.getPayment_status()%></span>
-						</div>
-					</li>
-				</ul>
-				<%
+	<!-- 조회 테이블 -->
+	<div class="wrapper">
+		<div id="cTabs" class="cTabs cf">
+			<div class="<%=tab.equals("1") ? "active" : "" %>">충전 내역</div>
+			<div class="<%=tab.equals("2") ? "active" : "" %>">환불 내역</div>
+			<div class="<%=tab.equals("3") ? "active" : "" %>">거래 내역</div>
+		</div>
+		<div id="cTabContent" class="cTabContent">
+			<div id="ctab1">
+					<ul class="firstcharge">
+						<li><span class="charge__list title">No</span></li>
+						<li><span class="charge__list title">결제주문번호</span></li>
+						<li><span class="charge__list title">결제 금액</span></li>
+						<li><span class="charge__list title">이전 금액 </span></li>
+						<li><span class="charge__list title">변동 후 금액</span></li>
+						<li><span class="charge__list title">결제 상태</span></li>
+					</ul>
+					<%
+						if (!chargevo.isEmpty()) {
+						for (int i = 0; i < chargevo.size(); i++) {
+							PayVO vo = (PayVO) chargevo.get(i);
+					%>
+					<ul class="charge">
+						<li><span class="charge__list content"><%=vo.getRnum()%></span>
+						</li>
+						<li><span class="charge__list content"><%=vo.getPay_merchant_uid()%></span>
+						</li>
+						<li><span class="charge__list content"><%=vo.getPay_amount()%></span>
+						</li>
+						<li><span class="charge__list content"><%=vo.getPay_lastmoney()%></span>
+						<li><span class="charge__list content"><%=vo.getPay_nowmoney()%></span>
+						</li>
+						<li><span class="charge__list content">결제</span></li>
+					</ul>
+					<%
+						}
 					}
-				}
-				%>
+					%>
+					<ul class="page_number paging">
+						
+							<%
+								if (nowpage1 <= 1) {
+							%><li></li><%
+ 	} else {
+ %> <li><a href="./goPaylist.ms?page1=<%=nowpage1 - 1%>&tab=1">&#60;</a></li> <%
+ 	}
+ %>
+						
+						<%
+							for (int a = startpage1; a <= endpage1; a++) {
+							if (a == nowpage1) {
+						%>
+						<li><a href="" class="active num"><%=a%></a></li>
+						<%
+							} else {
+						%>
+						<li><a href="./goPaylist.ms?page1=<%=a%>&tab=1" class="num" onclick="ctab1.focus();"><%=a%></a></li>
+						<%
+							}
+						%>
+						<%
+							}
+						%>
+
+						<%
+							if (nowpage1 >= maxpage1) {
+						%>
+						<li></li>
+						<%
+							} else {
+						%>
+						<li><a href="./goPaylist.ms?page1=<%=nowpage1 + 1%>&tab=1">&#62;</a>
+						</li>
+						<%
+							}
+						%>
+					</ul>
 			</div>
-			<div class="paymentpage">
-				<ul class="page_number paging">
-                    <li>
-                    <%if(nowpage3<=1){ %>
-                    &#60;
-                    <%}else{ %>
-                        <a href="./goPaylist.ms?page3=<%=nowpage3-1 %>">&#60;</a>
-                    <%} %>
-                    </li>
-                    <%for(int a=startpage3;a<=endpage3;a++){
-						if(a==nowpage3){%>
-						<li>
-						<a href="" class="active num"><%=a %></a>
+			<div id="ctab2">
+					<ul class="firstcancel">
+						<li><span class="cancel__list title">No</span></li>
+						<li><span class="cancel__list title">결제주문번호</span></li>
+						<li><span class="cancel__list title">결제 금액</span></li>
+						<li><span class="cancel__list title">이전 금액 </span></li>
+						<li><span class="cancel__list title">변동 후 금액</span></li>
+						<li><span class="cancel__list title">결제 상태</span></li>
+					</ul>
+					<%
+						if (!cancelvo.isEmpty()) {
+						for (int i = 0; i < cancelvo.size(); i++) {
+							PayVO vo = (PayVO) cancelvo.get(i);
+					%>
+					<ul class="cancel">
+						<li><span class="cancel__list content"><%=vo.getRnum()%></span>
 						</li>
-						<%}else{ %>
-						<li>
-						<a href="./goPaylist.ms?page3=<%=a %>" class="num"><%=a %></a>
+						<li><span class="cancel__list content"><%=vo.getPay_merchant_uid()%></span>
 						</li>
+						<li><span class="cancel__list content"><%=vo.getPay_amount()%></span>
+						</li>
+						<li><span class="cancel__list content"><%=vo.getPay_lastmoney()%></span>
+						</li>
+						<li><span class="cancel__list content"><%=vo.getPay_nowmoney()%></span>
+						</li>
+						<li><span class="cancel__list content"><%=vo.getPay_status()%></span>
+						</li>
+					</ul>
+					<%
+						}
+					}
+					%>
+					<ul class="page_number paging">
+						
+							<%
+								if (nowpage2 <= 1) {
+							%><li></li> <%
+ 	} else {
+ %><li><a href="./goPaylist.ms?page2=<%=nowpage2 - 1%>&tab=2">&#60;</a></li> <%
+ 	}
+ %>
+						
+						<%
+							for (int a = startpage2; a <= endpage2; a++) {
+							if (a == nowpage2) {
+						%>
+						<li><a href="" class="active num"><%=a%></a></li>
+						<%
+							} else {
+						%>
+						<li><a href="./goPaylist.ms?page2=<%=a%>&tab=2" class="num" onclick="ctab2.focus();"><%=a%></a>
+						</li>
+						<%
+							}
+						%>
+						<%
+							}
+						%>
+
+						<%
+							if (nowpage2 >= maxpage2) {
+						%>
+						<li></li>
+						<%
+							} else {
+						%>
+						<li><a href="./goPaylist.ms?page2=<%=nowpage2 + 1%>&tab=2">&#62;</a>
+						</li>
+						<%
+							}
+						%>
+					</ul>
+			</div>
+			<div id="ctab3">
+					<ul class="firstline">
+						<li>
+								<span class="cancel__list title">No</span>
+						</li>
+						<li>
+								<span class="cancel__list title">상품 제목</span>
+						</li>
+						<li>
+								<span class="cancel__list title">결제 금액</span>
+						</li>
+						<li>
+								<span class="cancel__list title">이전 금액 </span>
+						</li>
+						<li>
+								<span class="cancel__list title">변동 후 금액</span>
+						</li>
+						<li>
+								<span class="cancel__list title">결제 상태</span>
+						</li>
+					</ul>
+					<%
+						if (!paymentvo.isEmpty()) {
+						for (int i = 0; i < paymentvo.size(); i++) {
+							PaymentVO vo = (PaymentVO) paymentvo.get(i);
+							if (vo.getPayment_product_subject().length() > 5) {
+						vo.setPayment_product_subject(vo.getPayment_product_subject().substring(0, 5) + "..");
+							}
+					%>
+					<ul class="paymentlist">
+						<li>
+								<span class="cancel__list content"><%=vo.getRnum()%></span>
+						</li>
+						<li>
+								<span class="cancel__list content"><%=vo.getPayment_product_subject()%></span>
+						</li>
+						<li>
+								<span class="cancel__list content"><%=vo.getPayment_amount()%></span>
+						</li>
+						<li>
+								<span class="cancel__list content"><%=vo.getPayment_lastmoney()%></span>
+						</li>
+						<li>
+								<span class="cancel__list content"><%=vo.getPayment_nowmoney()%></span>
+						</li>
+						<li>
+								<span class="cancel__list content"><%=vo.getPayment_status()%></span>
+						</li>
+					</ul>
+					<%
+						}
+					}
+					%>
+					<ul class="page_number paging">
+						<%if (nowpage3 <= 1) {%>
+							<li></li> 
+ 						<%} else { %>
+							<li><a href="./goPaylist.ms?page3=<%=nowpage3 - 1%>&tab=3">&#60;</a></li> 
 						<%} %>
-					<%} %>
-                    
-                    <%if(nowpage3>=maxpage3){ %>
-                    <li>
-                    &#62;
-                    </li>
-                    <%}else{ %>
-                    <li>
-                        <a href="./goPaylist.ms?page3=<%=nowpage3+1 %>">&#62;</a>
-                    </li>
-                    <%} %>
-                </ul>
-            </div>
+						<%
+							for (int a = startpage3; a <= endpage3; a++) {
+							if (a == nowpage3) {
+						%>
+						<li><a href="" class="active num"><%=a%></a></li>
+						<%
+							} else {
+						%>
+						<li><a href="./goPaylist.ms?page3=<%=a%>&tab=3" class="num" onclick="ctab3.focus();"><%=a%></a>
+						</li>
+						<%
+							}
+						%>
+						<%
+							}
+						%>
+
+						<%
+							if (nowpage3 >= maxpage3) {
+						%>
+						<li></li>
+						<%
+							} else {
+						%>
+						<li><a href="./goPaylist.ms?page3=<%=nowpage3 + 1%>&tab=3">&#62;</a>
+						</li>
+						<%
+							}
+						%>
+					</ul>
+			</div>
 		</div>
 	</div>
-	<div class="test">
-		<div>
-			<span>현재 보유한 사이버머니 : ${currentMoney }</span>
-		</div>
-		<div>
-		<form name="test1" action="plus.ms">
-			<input type="hidden" name="userId" value="${userId}">
-			<input type="hidden" name="product_subject" value="테스트상품1">
-			<input type="hidden" name="amount" value=10000>
-			<a href="" onclick="plusClick();">플러스</a>
-		</form>
-		<form name="test2" action="minus.ms">
-			<input type="hidden" name="userId" value="${userId}">
-			<input type="hidden" name="product_subject" value="테스트상품1">
-			<input type="hidden" name="amount" value=10000>
-			<a href="" onclick="minusClick();">마이너스</a>
-		</form>
-		</div>
 	</div>
-	
-	
+	</div>
 	<!-- 푸터 영역 -->
 	<div class="footer">
 		<div class="upper_footer">
@@ -486,58 +373,71 @@
 				<li>
 					<p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여
 						책임을 지지 않습니다.</p>
-					<p>Copyright © eBay Korea LLC All rights reserved.</p>
+					<p>Copyright © Alltion All rights reserved.</p>
 				</li>
 			</ul>
 		</div>
 	</div>
-
-	<!--  스크립트 영역  -->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="./resources/js/common.js"></script>
-	<script>
-	var formData = $("form[name=test1]").serialize() ;
-	var click = true;
-    function plusClick() {
-         if (click) {
-            console.log("클릭됨");
-            click = !click;
-            $.ajax({
-            	url: "/alltion/plus.ms",
-            	data: formData
-            })
-            // 타이밍 추가
-            setTimeout(function () {
-                click = true;
-            }, 1000)
-            
-         } else {
-            console.log("중복됨");
-         }
-    }
-	</script>
-	<script>
-	var formData = $("form[name=test2]").serialize() ;
-	var click = true;
-    function minusClick() {
-         if (click) {
-            console.log("클릭됨");
-            click = !click;
-            $.ajax({
-            	url: "/alltion/minus.ms",
-            	data: formData
-            })
-            // 타이밍 추가
-            setTimeout(function () {
-                click = true;
-            }, 1000)
-            
-         } else {
-            console.log("중복됨");
-         }
-    }
-	</script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
 </body>
+<script>
+	var makeCtab = {
+
+		config : {
+			tabNavContainer : '#cTabs',
+			tabNavElement : 'div',
+			tabContentContainer : '#cTabContent',
+			tabContentElement : 'div'
+		},
+
+		init : function(config) {
+			$.extend(makeCtab.config, config);
+			$(makeCtab.config.tabNavContainer).on('click',
+					makeCtab.config.tabNavElement, this.changeContent);
+			myIndex = $(this).index();
+			if(<%=tab%> == 1){
+				makeCtab.showFirstTab();
+			}else if (<%=tab%> == 2){
+				makeCtab.showSecondTab();
+			}else{
+			$(makeCtab.config.tabContentContainer).find(
+					makeCtab.config.tabContentElement).eq(myIndex).show()
+					.siblings().hide();
+			}
+		},
+
+		showFirstTab : function() {
+			$(makeCtab.config.tabContentContainer).find(
+					makeCtab.config.tabContentElement).hide().filter(":first")
+					.show();
+			$(makeCtab.config.tabNavContainer).find(
+					makeCtab.config.tabNavElement).removeClass('active')
+					.filter(":first").addClass('active');
+		},showSecondTab : function() {
+			$(makeCtab.config.tabContentContainer).find(
+					makeCtab.config.tabContentElement).hide().filter(":second")
+					.show();
+			$(makeCtab.config.tabNavContainer).find(
+					makeCtab.config.tabNavElement).removeClass('active')
+					.filter(":second").addClass('active');
+		},
+		showActiveTab : function(a) {
+			$(a).addClass('active').siblings().removeClass('active');
+		},
+		changeContent : function(event) {
+			event.preventDefault();
+			myIndex = $(this).index();
+
+			makeCtab.showActiveTab(this);
+			$(makeCtab.config.tabContentContainer).find(
+					makeCtab.config.tabContentElement).eq(myIndex).show()
+					.siblings().hide();
+		}
+	};
+
+	$(document).ready(function() {
+		makeCtab.init({
+			'tabNavContainer' : '#cTabs'
+		});
+	});
+</script>
 </html>

@@ -12,7 +12,7 @@ public interface PayMapper {
 	void deletePay(String imp_uid);
 	PayVO getPayList(String merchant_uid);
 	void chargePay(@Param("convertChargeMoney")String convertChargeMoney, @Param("pay_id")String pay_id);
-	void cancelPay(@Param("convertChargeMoney")String convertChargeMoney, @Param("pay_id")String pay_id);
+	void cancelPay(@Param("convertCancelMoney")String convertCancelMoney, @Param("pay_id")String pay_id);
 	void insertPaylist(String pay_id);
 	String findCurrentMoney(String pay_id);
 	String findPayid(String pay_id);
@@ -25,4 +25,5 @@ public interface PayMapper {
 	void insertPayment(PaymentVO vo);
 	List<PaymentVO> getPaymentlist(@Param("payment_userId")String payment_userId, @Param("startrow3")int startrow3, @Param("endrow3")int endrow3);
 	int getPaymentcount(String payment_userId);
+	PaymentVO getPayment(String payment_userId);
 }

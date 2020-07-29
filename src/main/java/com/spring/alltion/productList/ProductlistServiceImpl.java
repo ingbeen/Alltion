@@ -28,13 +28,6 @@ public class ProductlistServiceImpl implements ProductlistService {
 	}
 
 	@Override
-	public List<ProductVO> getproductList(HashMap<String, Integer> hashmap) {
-		// TODO Auto-generated method stub
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getProductList(hashmap);
-		return productlist;
-	}
-	@Override
 	public List<ProductVO> getfamousPricelist(String product_category_2) {
 		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
@@ -140,8 +133,8 @@ public class ProductlistServiceImpl implements ProductlistService {
             key = (String)entry.getKey();
             // value값 확인
             value = (String)entry.getValue();
-            //System.out.println("hashMap Key : " + key);
-            //System.out.println("hashMap Value : " + value);
+//            System.out.println("hashMap Key : " + key);
+//            System.out.println("hashMap Value : " + value);
          // 키가 sort인 value값에 따라 mapping
             if(key.equals("sort") && value.equals("1")) {
             	// 최신 순
@@ -159,6 +152,28 @@ public class ProductlistServiceImpl implements ProductlistService {
             	//System.out.println("key값이 sort가 아닌 경우");
             }
         }
+		return productlist;
+	}
+
+	@Override
+	public List<ProductVO> getMain(HashMap<String, String> hashmap) {
+		// TODO Auto-generated method stub
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getMainlist2(hashmap);
+		int i = 1;
+		for(ProductVO vo : productlist) {
+			System.out.println(i++);
+		}
+		return productlist;
+	}
+	
+	public List<ProductVO> getParticipantsForMain(HashMap<String, String> hashmap) {
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getParticipantsForMain(hashmap);
+		int i = 1;
+		for(ProductVO vo : productlist) {
+			System.out.println(i++);
+		}
 		return productlist;
 	}
 }

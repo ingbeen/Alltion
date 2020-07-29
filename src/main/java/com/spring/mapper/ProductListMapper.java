@@ -9,7 +9,6 @@ import com.spring.alltion.productRegistration.ProductVO;
 
 public interface ProductListMapper {
 	public int getCategorylistCount(String product_category_2);
-	public List<ProductVO> getProductList(HashMap<String, Integer> hashmap);
 	public List<ProductVO> getfamousPricelist(String product_category_2);
 	public List<ProductVO> getfamousParticipantslist(String product_category_2);
 	public List<ProductVO> getfamousViewslist(String product_category_2);
@@ -25,4 +24,5 @@ public interface ProductListMapper {
 	public List<ProductVO> getCategorylist2(HashMap<String, String> hashmap);
 	public List<ProductVO> getCategorylist3(HashMap<String, String> hashmap);
 	public List<ProductVO> getCategorylist4(HashMap<String, String> hashmap);
+	public List<ProductVO> getParticipantsForMain(HashMap<String, String> hashmap);
 }
