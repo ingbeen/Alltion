@@ -161,3 +161,6 @@
 .page_btns button:active{
 	background-color: darkgray;
 }
+.auction_countdown{
+	color:red;
+}

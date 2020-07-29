@@ -7,6 +7,7 @@
 	List<Integer> Bidding_bidvo = (List<Integer>)request.getAttribute("bidding_bidvo");
 	int nowpage = (int)request.getAttribute("page");
 	int maxpage = (int)((double)productvolist.size()/5.0 + 0.99);
+	int productvolist_size = productvolist.size();
 %>
 <!DOCTYPE html>
 <html>
@@ -155,6 +156,12 @@
                 </div>
                 <div class="bid_deadline">
                     <div class="bid_deadline_content">
+                    <p>
+                      	<span class="auction_countdown date<%=i %>"
+							data-endTime="<%=productvo.getProduct_end_date() %>"
+							data-complete="<%=productvo.getProduct_progress() %>">&nbsp;
+						</span>
+					</p>
                     <p><%=productvo.getProduct_end_date()%></p>
                     <p><a href="./boarddetail.hs?product_number=<%=productvo.getProduct_number()%>"><button>페이지로 이동하기</button></a></p>
                     </div>
@@ -244,5 +251,6 @@
     <script src="./resources/js/common.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="resources/js/kakaoTalk.js"></script>
+    <script type="text/javascript" src="./resources/js/selling.js?productvolist_size=<%=productvolist_size%>"></script>
 </body>
 </html>

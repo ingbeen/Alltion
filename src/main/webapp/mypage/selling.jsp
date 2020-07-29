@@ -7,6 +7,7 @@
 	List<String> top_bidder_idlist = (List<String>)request.getAttribute("top_bidder_idlist");
 	int nowpage = (int)request.getAttribute("page");
 	int maxpage = (int)((double)productvolist.size()/5.0 + 0.99);
+	int productvolist_size = productvolist.size();
 %>  
 <!DOCTYPE html>
 <html>
@@ -143,7 +144,7 @@
                 </div>
                 <div class="current_price">
                     <div class="current_price_content">
-                        <p>최고 응찰자 : <%=top_bidder_id%> 님</p>
+                        <p>최고 응찰자 : <%=top_bidder_id%><%if(top_bidder_id!=""){ %> 님<%} %></p>
                         <p>경매 현재가 : <%=productvo.getProduct_current_price() %> 원</p>
                         <p>참가자 수 : <%=productvo.getProduct_participants() %> 명</p>
                         <p>입찰 수: <%=productvo.getProduct_bids() %> 건</p>
@@ -159,7 +160,14 @@
                 </div>
                 <div class="bid_deadline">
                     <div class="bid_deadline_content">
-                        <p><%=productvo.getProduct_end_date()%></p>
+                    	<p>
+                           	<span class="auction_countdown date<%=i %>"
+								data-endTime="<%=productvo.getProduct_end_date() %>"
+								data-complete="<%=productvo.getProduct_progress() %>">&nbsp;
+							</span>
+						</p>
+                    	<p><%=productvo.getProduct_end_date() %>
+						</p>
                         <p><a href="./boarddetail.hs?product_number=<%=productvo.getProduct_number()%>"><button>페이지로 이동하기</button></a></p>
                     </div>
                 </div>
@@ -247,4 +255,6 @@
     <script src="./resources/js/common.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="resources/js/kakaoTalk.js"></script>
+    <script type="text/javascript" src="./resources/js/selling.js?productvolist_size=<%=productvolist_size%>"></script>
+    
 </body></html>
