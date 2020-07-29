@@ -337,7 +337,7 @@
         						output += '<span>구매자 아이디</span>';
         						output += '</div>';
         						output += '<div class="seller_form__list content">';
-        						output += '<span>' + item.trading_id + '</span>';
+        						output += '<span>' + item.trading_buyer_id + '</span>';
         						output += '</div>';
         						output += '</li>';
         						output += '</ul>';
@@ -489,7 +489,7 @@
     						output += '<span>구매자</span>';
     						output += '</div>';
     						output += '<div class="seller_form__list content">';
-    						output += '<span>' + item.trading_id + '</span>';
+    						output += '<span>' + item.trading_buyer_id + '</span>';
     						output += '</div>';
     						output += '</li>';
     						output += '</ul>';

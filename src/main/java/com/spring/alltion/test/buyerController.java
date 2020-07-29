@@ -218,7 +218,6 @@ public class buyerController {
 			int amount = delivery_list.get(0).getTrading_price();
 			String subject = delivery_list.get(0).getProduct_subject();
 			String result = plusMoney(id, amount, subject);
-			session.setAttribute("currentMoney", result);
 			writer.write("<script>alert('구매가 완료되었습니다');"
 			+ "location.href='/alltion/buyer.kj';</script>");
 		}
@@ -245,6 +244,8 @@ public class buyerController {
 			Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 			model.addAttribute("emoneyvo", emoneyvo);			
 			Product_kjVO  Product_kjvo = testservice.selectProduct(userId,product_number);
+			String product_subject = testservice.findSubjectFromNum(product_number);
+			Product_kjvo.setProduct_subject(product_subject);
 			model.addAttribute("Product_kjvo", Product_kjvo);
 			MemberVO membervo = memberService.selectMember(userId);
 			model.addAttribute("membervo", membervo);
@@ -267,7 +268,7 @@ public class buyerController {
 		
 		String userId = (String)session.getAttribute("userId");
 		int trading_product_number = Integer.parseInt(request.getParameter("trading_product_number"));
-		String trading_id = (String)request.getParameter("trading_id");
+		String trading_buyer_id = (String)request.getParameter("trading_buyer_id");
 		Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 		int currentMoney = Integer.parseInt(payService.findCurrentMoney(userId));
 		//int res_emoney = testservice.update_emoney(userId);
@@ -279,7 +280,7 @@ public class buyerController {
 		{
 			if(currentMoney >= Product_kjvo.getTrading_price())
 			{
-				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_id);
+				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
 				if(res != 0)
 				{	
 					String result = minusMoney(userId, Product_kjvo.getTrading_price(), Product_kjvo.getProduct_subject());
@@ -290,14 +291,14 @@ public class buyerController {
 			}
 			else
 			{
-				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer_emoney.kj';</script>");
+				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer.kj';</script>");
 				
 			}
 				
 		}				
 			return null;
 		}
-		@RequestMapping(value = "/buyer_deal_update") 
+		@RequestMapping(value = "/buyer_deal_update.kj") 
 		public String address_update(MemberVO membervo, HttpSession session ,HttpServletResponse response)throws Exception
 		{
 			
@@ -316,7 +317,7 @@ public class buyerController {
 			if(res != 0)
 			{
 				writer.write("<script>alert('주소가 변경되었습니다');"
-						+ "location.href='./buyer_emoney.kj';</script>");
+						+ "location.href='./buyer.kj';</script>");
 			}
 			else
 			{

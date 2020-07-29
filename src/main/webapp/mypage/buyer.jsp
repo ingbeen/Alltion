@@ -118,7 +118,7 @@
                                             		 <li>
                                                 	 <label>판매자&nbsp;&nbsp;:&nbsp;</label>
                                                 	 <input type = "hidden"  name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
-                                                	 <input type = "hidden"  name = "review_evaluator" value = "<%=dealcompletevo.getTrading_id() %>">
+                                                	 <input type = "hidden"  name = "review_evaluator" value = "<%=dealcompletevo.getTrading_buyer_id() %>">
                                                 	 <input type = "hidden"  name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                           	 
                                                 	 
                                                 	 <span><%=dealcompletevo.getProduct_id() %></span>         	 
@@ -471,7 +471,7 @@
 						output += '<ul class="buyer_form list">';
 						output += '<li>';
 						output += '<div class="buyer_form__list title">';
-						output += '<span>상품 번호</span>';
+						output += '<span>운송장 번호</span>';
 						output += '</div>';
 						output += '<div class="buyer_form__list content">';
 						output += '<span>' + item.trading_waybill_number + '</span>';

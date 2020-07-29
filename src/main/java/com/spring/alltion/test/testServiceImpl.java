@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,9 +101,9 @@ public class testServiceImpl implements testService{
 	}
 
 	@Override
-	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_id) {
+	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_buyer_id) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_id);
+		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
 	}
 
 	
@@ -130,6 +131,13 @@ public class testServiceImpl implements testService{
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		int res = testMapper.insertReview(Reviewvo);
 		
+		return res;
+	}
+	
+	@Override
+	public String findSubjectFromNum(int product_number) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		String res = testMapper.findSubjectFromNum(product_number);
 		return res;
 	}
 
