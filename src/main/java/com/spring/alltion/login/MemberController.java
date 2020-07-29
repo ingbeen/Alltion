@@ -3,6 +3,7 @@ package com.spring.alltion.login;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -57,7 +58,7 @@ public class MemberController {
 		
 		@RequestMapping("/login.kj")
 		public String userCheck(MemberVO membervo, HttpSession session,
-				HttpServletResponse response) throws Exception
+				HttpServletResponse response,HttpServletRequest request) throws Exception
 		{
 			
 			int res = memberService.userCheck(membervo);
@@ -68,7 +69,8 @@ public class MemberController {
 			if (res == 1)
 			{
 				session.setAttribute("userId",membervo.getMember_id());
-				
+				System.out.println(request.getHeader("referer"));
+				response.sendRedirect(request.getHeader("referer"));
 				return "redirect:/";
 			}
 			else 	
@@ -162,6 +164,42 @@ public class MemberController {
 		{
 			int res = memberService.idCheckService(member_id);
 			return res;
+		}
+		
+		
+		//TEST 상세페이지에서 로그인한뒤 상세페이지로 되돌아오는것.
+		
+		@RequestMapping(value = "/loginForm1.kj")
+		public String login2Page(HttpServletRequest request,Model model)
+		{
+			model.addAttribute("url",request.getHeader("referer"));
+			return "detail_page/login2";
+		}
+		
+		@RequestMapping("/login1.kj")
+		public String user2Check(MemberVO membervo, HttpSession session,
+				HttpServletResponse response,@RequestParam(value="url")String url) throws Exception
+		{
+			
+			int res = memberService.userCheck(membervo);
+			
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if (res == 1)
+			{
+				session.setAttribute("userId",membervo.getMember_id());
+				String redirect = url.substring(30);
+				
+				return "redirect:/"+redirect;
+			}
+			else 	
+			{
+					
+				writer.write("<script>alert('해당 아이디와 비밀번호를 확인해 주세요!!');location.href='./loginForm.kj';</script>");
+				
+			}
+			return null;
 		}
 		
 }

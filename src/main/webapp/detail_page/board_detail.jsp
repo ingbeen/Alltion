@@ -405,7 +405,7 @@
                     <button type="button" id="bid_btn4">찜하기</button>
                     <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
-					<font><a href="./loginForm.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
+					<font><a href="./loginForm1.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
 				<%}else if(id.equals(productvo.getProduct_id())){ %>
 					<a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%} %>
