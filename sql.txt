@@ -94,6 +94,26 @@ CREATE TABLE sale_credit_score_list (
     constraint PK_sale_id primary key(sale_id)
 );
 
+/*
+review테이블 insert시 주의사항.
+review_number는 nvl(max(review_number),0)+1
+review_id 는 해당 리뷰 product_id를 받아서 입력하면 됨.
+review_evaluator 는 세션 아이디 값을 받아서 입력하면 됨.
+review_evaluate는 checkbox이용하여 입력.
+review_image는 product테이블의 product_img_1 로 입력.
+review_no 는 페이징에 사용할 넘버링. DetailMapper.java에서 countReviewList가 있는데 그거 그대로 사용하면됨. (+1)적용 해놨음.
+*/
+create table review(
+    review_number number primary key,  -- 리뷰테이블 고유번호
+    review_id varchar2(20) references member(member_id), -- 판매자 아이디
+    review_evaluator varchar2(20) references member(member_id), -- 구매자 아이디(리뷰달 아이디)
+    review_evaluate varchar2(20) check(review_evaluate in('매우 만족','만족','보통','불만족','매우 불만족')), -- 평가
+    review_image varchar2(1000), -- 썸네일 이미지 (1번이미지 사용)
+    review_subject varchar2(1000), -- 상품 제목
+    review_content varchar2(4000), -- 리뷰 내용
+    review_date date default sysdate, -- 리뷰 작성 날짜
+    review_no number -- 리뷰 넘버링 (페이징용)
+);
 
 */
 

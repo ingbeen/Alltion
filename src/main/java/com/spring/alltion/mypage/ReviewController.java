@@ -9,17 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class BiddingController {
+public class ReviewController {
 	
 	@Autowired
-	private BiddingServiceImpl biddingService;
+	private ReviewServiceImpl reviewService;
 	
-	@RequestMapping("/bidding.hs")
-	public String bidding_page(HttpSession session,Model model,HttpServletRequest request)throws Exception{
+	@RequestMapping("/review_view.hs")
+	public String review_page(HttpSession session,Model model,HttpServletRequest request)throws Exception{
 		String userId = (String)session.getAttribute("userId");
-		biddingService.getBidding_Product_Info(userId, model,request);
+		reviewService.getReview_view(userId,model,request);
 		model.addAttribute("page",Integer.parseInt(request.getParameter("page")));
-  
-		return "mypage/bidding";
+		
+		return "mypage/review_view";
 	}
 }
