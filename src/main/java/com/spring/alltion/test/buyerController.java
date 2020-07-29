@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.alltion.creditScore.CreditScoreService;
 import com.spring.alltion.creditScore.PurchaseCreditScoreVO;
 import com.spring.alltion.creditScore.SaleCreditScoreVO;
+import com.spring.alltion.detailpage.ReviewVO;
 import com.spring.alltion.login.MemberService;
 import com.spring.alltion.login.MemberVO;
 import com.spring.alltion.pay.PayController;
@@ -38,6 +41,8 @@ public class buyerController {
 	throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
+		//model.addAttribute("product_page",Integer.parseInt(request.getParameter("product_page")));
+	      
 		if(userId == null)
 		{
 			return "member/login";
@@ -47,17 +52,73 @@ public class buyerController {
 		List<Product_kjVO> product_list = testservice.getProductlist(userId);
 		model.addAttribute("product_list", product_list);
 		
-		ArrayList<Product_kjVO> delivery_before_list = testservice.getdelivery_before(userId);
+		List<Product_kjVO> delivery_before_list = testservice.getdelivery_before(userId);
 		model.addAttribute("delivery_before_list", delivery_before_list);
 		
-		ArrayList<Product_kjVO> delivery_list = testservice.getdeliveryList(userId);
+		List<Product_kjVO> delivery_list = testservice.getdeliveryList(userId);
 		model.addAttribute("delivery_list", delivery_list);
 		
-		ArrayList<Product_kjVO> dealcomplete_list = testservice.getdealcomplete_buyer(userId);
+		List<Product_kjVO> dealcomplete_list = testservice.getdealcomplete_buyer(userId);
 		model.addAttribute("dealcomplete_list", dealcomplete_list);
 		return  "mypage/buyer";
 		}
 	}
+	
+	@RequestMapping(value = "product_page.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> product_list_page(int page, HttpSession session) {
+		List<Product_kjVO> product_list = testservice.getProductlist((String)session.getAttribute("userId"));
+		return product_list;
+	}
+	
+	@RequestMapping(value = "before_page.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> delivery_before_page(int page, HttpSession session){
+		List<Product_kjVO> delivery_before_list = testservice.getdelivery_before((String)session.getAttribute("userId"));
+		return delivery_before_list;
+	}
+	
+	@RequestMapping(value = "wait_sell.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> wait_sell_page(int page, HttpSession session)
+	{
+		List<Product_kjVO> getdeposit_before_list = testservice.getdeposit_before((String)session.getAttribute("userId"));
+		return getdeposit_before_list;
+	}
+	
+	@RequestMapping(value = "sell.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> sell_page(int page, HttpSession session)
+	{
+		List<Product_kjVO> sell_list = testservice.getSalelist((String)session.getAttribute("userId"));
+		return sell_list;
+	}
+	
+	@RequestMapping(value = "delivery_complete.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> complete_page(int page, HttpSession session)
+	{
+		List<Product_kjVO> complete_list = testservice.getdeliveryList((String)session.getAttribute("userId"));
+		return complete_list;
+	}
+	
+	@RequestMapping(value = "complete_buyer.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> complete_buyer(int page, HttpSession session)
+	{
+		List<Product_kjVO> delivery_complete_list = testservice.getdealcomplete_buyer((String)session.getAttribute("userId"));
+		return delivery_complete_list;
+	}
+	
+	@RequestMapping(value = "sale_complete.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Product_kjVO> sale_complete_page(int page, HttpSession session)
+	{
+		List<Product_kjVO> sale_complete_list = testservice.getdealcomplete_seller((String)session.getAttribute("userId"));
+		return sale_complete_list;
+	}
+	
+	
 	
 	@RequestMapping(value = "/seller.kj")
 	public String getSeller(Model model, HttpSession session)
@@ -70,31 +131,34 @@ public class buyerController {
 		}
 		else
 		{
-		ArrayList<Product_kjVO> getdeposit_before_list = testservice.getdeposit_before(userId);
+		List<Product_kjVO> getdeposit_before_list = testservice.getdeposit_before(userId);
 		model.addAttribute("getdeposit_before_list", getdeposit_before_list);
 		
-		ArrayList<Product_kjVO> getSale_list = testservice.getSalelist(userId);
+		List<Product_kjVO> getSale_list = testservice.getSalelist(userId);
 		model.addAttribute("getSale_list", getSale_list);
 		
-		ArrayList<Product_kjVO> dealcompleteseller_list = testservice.getdealcomplete_seller(userId);
+		List<Product_kjVO> dealcompleteseller_list = testservice.getdealcomplete_seller(userId);
 		model.addAttribute("dealcompleteseller_list", dealcompleteseller_list);
 		return  "mypage/seller";
 		}
 	}
 	
+	
+	
 	@RequestMapping(value = "/waybill.kj")
-	public String waybillpage(Model model, HttpSession session)
+	public String waybillpage(Model model, HttpSession session, HttpServletRequest request)
 			throws Exception
 			{
 				String userId = (String)session.getAttribute("userId");
+				int product_number = Integer.parseInt(request.getParameter("product_number"));
 				if(userId == null)
 				{
 					return "member/login";
 				}
 				else
 				{
-				ArrayList<Product_kjVO> getSale_list = testservice.getSalelist(userId);
-				model.addAttribute("getSale_list", getSale_list);
+					Product_kjVO  Product_kjvo = testservice.Waybill(userId, product_number);
+					model.addAttribute("Product_kjvo", Product_kjvo);
 				return "mypage/waybill";
 				}
 		
@@ -131,14 +195,15 @@ public class buyerController {
 	}
 	
 	@RequestMapping(value = "/delivery.kj")
-	public String deliverycomplete(Product_kjVO Product_kjvo , HttpServletResponse response,  HttpSession session)
+	public String deliverycomplete(Product_kjVO Product_kjvo , HttpServletResponse response,  HttpSession session,HttpServletRequest request)
 	throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		int res = testservice.deliverycomplete(Product_kjvo); // 거래중 -> 거래완료
+		int product_number = Integer.parseInt(request.getParameter("product_number"));
+		int res = testservice.deliverycomplete(Product_kjvo,product_number); // 거래중 -> 거래완료
 		System.out.println("res : " + res);
 		if(userId == null)
 		{
@@ -148,7 +213,7 @@ public class buyerController {
 		{
 		if(res != 0)
 		{
-			ArrayList<Product_kjVO> delivery_list = testservice.getdealcomplete_buyer(userId);
+			List<Product_kjVO> delivery_list = testservice.getdealcomplete_buyer(userId);
 			String id = delivery_list.get(0).getProduct_id();
 			int amount = delivery_list.get(0).getTrading_price();
 			String subject = delivery_list.get(0).getProduct_subject();
@@ -166,10 +231,11 @@ public class buyerController {
 	}
 	
 	@RequestMapping(value = "/buyer_emoney.kj")
-	public String emoney(Model model,HttpSession session)
+	public String emoney(Model model,HttpSession session,HttpServletRequest request)
 	throws Exception
 	{
 		String userId = (String)session.getAttribute("userId");
+		int product_number = Integer.parseInt(request.getParameter("product_number"));
 		if(userId == null)
 		{
 			return "member/login";
@@ -178,7 +244,7 @@ public class buyerController {
 		{
 			Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 			model.addAttribute("emoneyvo", emoneyvo);			
-			Product_kjVO  Product_kjvo = testservice.selectProduct(userId);
+			Product_kjVO  Product_kjvo = testservice.selectProduct(userId,product_number);
 			model.addAttribute("Product_kjvo", Product_kjvo);
 			MemberVO membervo = memberService.selectMember(userId);
 			model.addAttribute("membervo", membervo);
@@ -192,7 +258,7 @@ public class buyerController {
 	}	
 	
 	@RequestMapping(value = "/buyer_deal.kj")
-	public String deal(Product_kjVO  Product_kjvo, Model model, HttpSession session, HttpServletResponse response)throws Exception
+	public String deal(Product_kjVO  Product_kjvo, Model model, HttpSession session, HttpServletResponse response ,HttpServletRequest request)throws Exception
 	{
 		
 		response.setCharacterEncoding("utf-8");
@@ -200,8 +266,8 @@ public class buyerController {
 		PrintWriter writer = response.getWriter();
 		
 		String userId = (String)session.getAttribute("userId");
-		
-		
+		int trading_product_number = Integer.parseInt(request.getParameter("trading_product_number"));
+		String trading_id = (String)request.getParameter("trading_id");
 		Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 		int currentMoney = Integer.parseInt(payService.findCurrentMoney(userId));
 		//int res_emoney = testservice.update_emoney(userId);
@@ -213,13 +279,13 @@ public class buyerController {
 		{
 			if(currentMoney >= Product_kjvo.getTrading_price())
 			{
-				int res = testservice.after_deposit(Product_kjvo);
+				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_id);
 				if(res != 0)
 				{	
 					String result = minusMoney(userId, Product_kjvo.getTrading_price(), Product_kjvo.getProduct_subject());
 					session.setAttribute("currentMoney", result);
 					writer.write("<script>alert('결제가 완료되었습니다');"
-					+ "location.href='/alltion/buyer.kj';</script>");
+					+ "location.href='/alltion/buyer.kj?product_page=1';</script>");
 				}
 			}
 			else
@@ -337,4 +403,27 @@ public class buyerController {
 			}
 			return result;
 		}
+		
+		@RequestMapping("/review.kj")
+		public String insertReview(ReviewVO Reviewvo, HttpServletResponse response,HttpSession session)
+		throws Exception{
+			
+			int res = testservice.insertReview(Reviewvo);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if (res != 0)
+			{
+				writer.write("<script>alert('리뷰 작성!!');"
+						+ "location.href='./buyer.kj';</script>");
+			}
+			else
+			{
+				writer.write("<script>alert('리뷰작성 실패!!');"
+						+ "location.href='./buyer.kj';</script>");
+			}
+			return null;
+		}
+
+
 }
