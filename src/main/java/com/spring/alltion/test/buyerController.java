@@ -290,7 +290,7 @@ public class buyerController {
 			}
 			else
 			{
-				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer_emoney.kj';</script>");
+				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer.kj';</script>");
 				
 			}
 				
