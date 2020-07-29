@@ -15,7 +15,7 @@ public interface testService {
 	
 		public List<Product_kjVO> getProductlist(String userId);
 		public List<Product_kjVO> getdelivery_before(String userId);
-		public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number,String trading_id);
+		public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number,String trading_buyer_id);
 		
 		public List<Product_kjVO> getdeposit_before(String userId);
 		
@@ -37,5 +37,7 @@ public interface testService {
 		public int deliverycomplete(Product_kjVO Product_kjvo,int product_number);	
 		
 		public int insertReview(ReviewVO Reviewvo);
+		
+		public String findSubjectFromNum(int product_number);
 
 }
