@@ -100,9 +100,9 @@ public class testServiceImpl implements testService{
 	}
 
 	@Override
-	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_buyer_id) {
+	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_id) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
+		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_id);
 	}
 
 	

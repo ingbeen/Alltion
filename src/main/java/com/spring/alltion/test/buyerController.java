@@ -266,7 +266,7 @@ public class buyerController {
 		
 		String userId = (String)session.getAttribute("userId");
 		int trading_product_number = Integer.parseInt(request.getParameter("trading_product_number"));
-		String trading_buyer_id = (String)request.getParameter("trading_buyer_id");
+		String trading_id = (String)request.getParameter("trading_id");
 		Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 		int currentMoney = Integer.parseInt(payService.findCurrentMoney(userId));
 		//int res_emoney = testservice.update_emoney(userId);
@@ -278,7 +278,7 @@ public class buyerController {
 		{
 			if(currentMoney >= Product_kjvo.getTrading_price())
 			{
-				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
+				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_id);
 				if(res != 0)
 				{	
 					String result = minusMoney(userId, Product_kjvo.getTrading_price(), "상품제목제목");

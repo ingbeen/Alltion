@@ -108,17 +108,17 @@
         <div class="buyer--form" id = "buyer_complete_list"></div>
         <div class="page_btns" id = "buyer_complete_page_list" align="center"></div>  
         
-        
+        <form name = "review" action = "./review.kj" method = "post">
     	<div id="member_update_modal_email" class="modal">
-    	
                                		 <div class="modal-content">
                                    		 <span class="close">&times;</span>
                                     		<fieldset id="member_update">
                                        		 <legend>리뷰 작성</legend>
+                                       		 		 
                                             		 <li>
                                                 	 <label>판매자&nbsp;&nbsp;:&nbsp;</label>
                                                 	 <input type = "hidden"  name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
-                                                	 <input type = "hidden"  name = "review_evaluator" value = "<%=dealcompletevo.getTrading_buyer_id() %>">
+                                                	 <input type = "hidden"  name = "review_evaluator" value = "<%=dealcompletevo.getTrading_id() %>">
                                                 	 <input type = "hidden"  name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                           	 
                                                 	 
                                                 	 <span><%=dealcompletevo.getProduct_id() %></span>         	 
@@ -141,8 +141,9 @@
 				  <br>
 				  <a href="javascript:review.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;
 
-                                           	 </li>      
-                                  	 </fieldset>
+                                           	   </li>   
+										      
+                                  	  </fieldset>
                                 	</div>
                             	</div>	
                             </form>
@@ -562,13 +563,9 @@
 					$.each(data, function(index, item){
 						var output = '';
 						if(index == complete_page_buyer - 1){
-							output += '<form name = "review" action = "./review.kj" method = "post">';
-							output += '<h3>구매 완료</h3>';
-							output += '<input type = "hidden" id = "trading_buyer_id" name = "trading_buyer_id" value = "' + item.trading_buyer_id +'">';
-							output += '<input type = "hidden" id = "review_id" name = "review_id" value = "' + item.product_id + '">';
-							output += '<input type = "hidden" id = "review_evaluator" name = "review_evaluator" value = "' + item.trading_buyer_id + '">';
-							output += '<input type = "hidden" id = "review_subject" name = "review_subject" value = "' + item.product_subject +'">';
 							
+							output += '<h3>구매 완료</h3>';
+
 							output += '<div class="buyer--content">';
 							
 							output += '<ul class="buyer_form list">';

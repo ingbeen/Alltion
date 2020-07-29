@@ -14,7 +14,7 @@
 	<result property="trading_waybill_number" column = "trading_waybill_number"/>
 	<result property="trading_product_number" column = "trading_product_number"/>
 	<result property="trading_waybill_deadline" column="trading_waybill_deadline"/>
-	<result property="trading_buyer_id" column="trading_buyer_id"/>
+	<result property="trading_id" column="trading_id"/>
 	<result property="trading_progress" column="trading_progress"/>
 	<result property="trading_purchase_date" column="trading_purchase_date"/>
 	
@@ -39,11 +39,11 @@
 		product_delivery,
 		product_transaction_area,
 		product_id,
-		trading_buyer_id
+		trading_id
 		from product_kj natural join product_kj_trading
 		where product_kj.product_number = product_kj_trading.trading_product_number 
 		and product_kj_trading.trading_progress = '구매중'
-		and trading_buyer_id = #{userId}
+		and trading_id = #{userId}
 		order by trading_deposit_deadline
 		
 		</select>
@@ -54,7 +54,7 @@
 		product_number,
 		product_subject,
 		trading_price,
-		trading_buyer_id
+		trading_id
 		from product_kj 
 		natural join product_kj_trading 
 		where product_kj.product_number = product_kj_trading.trading_product_number
@@ -73,7 +73,7 @@
 		trading_price,
 		to_char(trading_waybill_deadline, 'yyyy-mm-dd hh24:mi') as trading_waybill_deadline,
 		trading_transaction_method,
-		trading_buyer_id,
+		trading_id,
 		member_name,
         member_phone,
         sample4_postcode,
@@ -84,7 +84,7 @@
 		natural join product_kj_trading 
 		natural join member 
         where product_kj.product_number = product_kj_trading.trading_product_number
-        and product_kj_trading.trading_buyer_id = member.member_id
+        and product_kj_trading.trading_id = member.member_id
         and product_kj_trading.trading_progress = '입금후'
         and product_id = #{userId}
         order by trading_waybill_deadline
@@ -97,12 +97,12 @@
 		product_number,
 		product_subject,
 		trading_price,
-		trading_buyer_id
+		trading_id
 		from product_kj 
 		natural join product_kj_trading 
 		where product_kj.product_number = product_kj_trading.trading_product_number
         and product_kj_trading.trading_progress = '입금후'
-        and trading_buyer_id = #{userId}
+        and trading_id = #{userId}
 		
 		</select>
 	
@@ -119,14 +119,14 @@
 		from product_kj natural join product_kj_trading
 		where product_kj.product_number = product_kj_trading.trading_product_number 
 		and product_kj_trading.trading_progress = '운송장번호입력'
-		and trading_buyer_id = #{userId}
+		and trading_id = #{userId}
 		
 		</select>
 	
 	<select id = "getdealcomplete_buyer" resultMap="Product_KjResultMap">
 	
 		select
-		trading_buyer_id,
+		trading_id,
 		product_number,
 		product_subject,
 		trading_price,
@@ -135,7 +135,7 @@
 		from product_kj natural join product_kj_trading
 		where product_kj.product_number = product_kj_trading.trading_product_number 
 		and product_kj_trading.trading_progress = '거래완료'
-		and trading_buyer_id = #{userId}
+		and trading_id = #{userId}
 		order by trading_purchase_date
 	
 	</select>
@@ -147,7 +147,7 @@
 		product_subject,
 		trading_price,
 		to_char(trading_purchase_date, 'yyyy-mm-dd hh24:mi') as trading_purchase_date,
-		trading_buyer_id
+		trading_id
 		from product_kj natural join product_kj_trading
 		where product_kj.product_number = product_kj_trading.trading_product_number 
 		and product_kj_trading.trading_progress = '거래완료'
@@ -170,7 +170,7 @@
 	 update product_kj_trading
 	 set
 	 trading_progress = '입금후' 
-	 where trading_buyer_id = #{trading_buyer_id}
+	 where trading_id = #{trading_id}
 	 and trading_product_number = #{trading_product_number}
 	 
 	 </update>
@@ -216,12 +216,12 @@
 		sample4_roadaddress,
 		sample4_jibunaddress,
 		sample4_detailaddress,	
-		trading_buyer_id,
+		trading_id,
 		trading_transaction_method
 		from product_kj_trading 
 		natural join member 		
-		where product_kj_trading.trading_buyer_id = member.member_id
-		and trading_buyer_id = #{userId} 
+		where product_kj_trading.trading_id = member.member_id
+		and trading_id = #{userId} 
 		and trading_product_number = #{product_number}
 	
 	</select>

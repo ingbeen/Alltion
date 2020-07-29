@@ -60,7 +60,7 @@
 					</div>                
      			 </div>
       	<form name = "buyer_deal" action = "./buyer_deal.kj" method = "post">			
-   	 	<input type = "hidden" name = "trading_buyer_id" id = "trading_buyer_id" value = "<%=Product_kjvo.getTrading_buyer_id() %>">
+   	 	<input type = "hidden" name = "trading_id" id = "trading_id" value = "<%=Product_kjvo.getTrading_id() %>">
    	 	<input type = "hidden" name = "trading_price" id = "trading_price" value = "<%=Product_kjvo.getTrading_price() %>">
    	 	<input type = "hidden" name = "trading_product_number" id = "trading_product_number" value = "<%=Product_kjvo.getTrading_product_number() %>">  	 	
    	 	<div class="eomney_update--form">
