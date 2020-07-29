@@ -155,25 +155,38 @@ public class ProductlistServiceImpl implements ProductlistService {
 		return productlist;
 	}
 
+	
+	// MainController
 	@Override
 	public List<ProductVO> getMain(HashMap<String, String> hashmap) {
-		// TODO Auto-generated method stub
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		List<ProductVO> productlist = productListMapper.getMainlist2(hashmap);
-		int i = 1;
-		for(ProductVO vo : productlist) {
-			System.out.println(i++);
-		}
+
 		return productlist;
 	}
 	
+	@Override
 	public List<ProductVO> getParticipantsForMain(HashMap<String, String> hashmap) {
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
 		List<ProductVO> productlist = productListMapper.getParticipantsForMain(hashmap);
-		int i = 1;
-		for(ProductVO vo : productlist) {
-			System.out.println(i++);
-		}
+		
 		return productlist;
 	}
+	
+	@Override
+	public int getCate01ListCount(String product_category_1) {
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		int result = productListMapper.getCate01ListCount(product_category_1);
+		
+		return result;
+	}
+	
+	@Override
+	public List<ProductVO> getCate01List(HashMap<String, String> hashmap) {
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getCate01List(hashmap);
+		
+		return productlist;
+	}
+	
 }

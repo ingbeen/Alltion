@@ -166,10 +166,6 @@ input[id="premium-items"]:checked ~ .content4 {display: block;}
 */
 
 .items__list {
-    display: inline-block;
-}
-
-.items__list {
     margin-top: 52px;
     display: flex;
     flex-flow: row wrap;
@@ -279,15 +275,11 @@ input[id="premium-items"]:checked ~ .content4 {display: block;}
 
 .deadline-items__category li:hover {font-weight: bold;}
 
+.deadline-items__category li.active {font-weight: bold;}
+
 .deadline-items__detail_menu, .deadline-items__detail_menu ul, .deadline-items__detail_menu ul li {
     display: inline-block;
 }
-
-/*
-.items__list.deadline > li:first-child {
-    text-align: center;
-}
-*/
 
 .deadline-items__detail_menu {
     padding-top: 70px;
