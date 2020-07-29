@@ -2,8 +2,6 @@ package com.spring.alltion.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,8 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.spring.alltion.main.MainController;
-import com.spring.alltion.productList.ProductlistService;
-import com.spring.alltion.productRegistration.ProductVO;
+import com.spring.alltion.pay.PayService;
 
 
 
@@ -44,6 +41,9 @@ public class MemberController {
 	
 	@Autowired
 	private MainController mainController;
+	
+	@Autowired
+	private PayService payService;
 	
 	// 탭 메뉴에 목록 페이지 끌고 오기	
 	@RequestMapping(value = "/")
@@ -81,7 +81,13 @@ public class MemberController {
 			if (res == 1)
 			{
 				session.setAttribute("userId",membervo.getMember_id());
-				
+				String userId = membervo.getMember_id();
+				// currentMoney = 로그인한 사람이 보유한 사이버머니
+				String currentMoney = payService.findCurrentMoney(userId);
+				if (currentMoney == null) {
+					currentMoney = "0";
+				}
+				session.setAttribute("currentMoney", currentMoney);
 				return "redirect:/";
 			}
 			else 	
