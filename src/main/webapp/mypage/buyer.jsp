@@ -210,8 +210,6 @@
     <!--  스크립트 영역  -->
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-   <script src="resources/js/kakaoTalk.js"></script>
    <script src="./resources/js/buyer.js"></script>
 	<script>
 		function product_page(prod_page) {
