@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 
 import com.spring.alltion.login.MemberVO;
+import com.spring.alltion.detailpage.*;
 
 public interface testService {
 	
@@ -34,5 +35,7 @@ public interface testService {
 		public Product_kjVO Waybill(String userId,int product_number);
 		public int update_deal_address(MemberVO membervo);
 		public int deliverycomplete(Product_kjVO Product_kjvo,int product_number);	
+		
+		public int insertReview(ReviewVO Reviewvo);
 
 }

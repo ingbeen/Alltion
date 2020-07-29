@@ -51,17 +51,29 @@
 	
 		
     <!--판매 대기중-->
+		<%if(getdeposit_before_list.size()==0) {%>
+    		<div class="seller--form">
+    		<h3>판매 대기중 경매가 없습니다</h3>
+    		</div>
+    	<%}else{ %>
 		<div class="seller--form" id = "wait_sell_list"></div>
   		
   		<div class="page_btns" id = "wait_sell_page_list" align = "center"></div>
-    	
-    	
+		<%} %>
     <!-- 판매중 -->
+    	
+    	<%if(getSale_list.size()==0) {%>
+    		<div class="seller--form">
+    		<h3>판매중 경매가 없습니다</h3>
+    		</div>
+    	<%}else{ %>
+    	
     	<div class="seller--form" id ="sell_list"></div>
     	
         <div class="page_btns" id ="sell_list_page" align = "center"></div>
-    
-    <!--판매 완료 -->
+    	<%} %>
+    <!-- 판매완료 -->
+    	
         <div class="seller--form" id ="sale_list"></div>
     	
         <div class="page_btns" id ="sale_list_page" align = "center"></div>
@@ -362,8 +374,11 @@
         						output += '</div>';
         						output += '<div class="seller_form__list content">';
         						output += '<span>' + item.sample4_postcode + '</span>';
+        						output += '&nbsp;&nbsp;'
         						output += '<span>' + item.sample4_roadAddress + '</span>'; 
+        						output += '&nbsp;&nbsp;'
         						output += '<span>' + item.sample4_jibunAddress + '</span>';
+        						output += '&nbsp;&nbsp;'
         						output += '<span>' + item.sample4_detailAddress + '</span>';
         						output += '</div>';
         						output += '</li>';

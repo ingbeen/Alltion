@@ -55,10 +55,10 @@
     
   
   //이메일 변경 모달
-    function modal_display_email() {
+    function modal_display_email(n) {
     	  
-        var member_update_modal_email = document.getElementById('member_update_modal_email');
-        var close0 = document.getElementsByClassName('close')[0];
+        var member_update_modal_email = document.getElementsByClassName('modal')[n];
+        var close0 = document.getElementsByClassName('close')[n];
         member_update_modal_email.style.display = "block";
         close0.onclick = function(event) {
         	member_update_modal_email.style.display = "none";
@@ -70,9 +70,9 @@
         if (event.target == member_update_modal_email) {
         	member_update_modal_email.style.display = "none";
         }
-        if (event.target == bid_notify_modal) {
+        /*if (event.target == bid_notify_modal) {
             bid_notify_modal.style.display = "none";
-        }
+        }*/
     }
     }
  

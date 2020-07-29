@@ -36,7 +36,8 @@
 		product_subject,
 		trading_price,
 		to_char(trading_deposit_deadline, 'yyyy-mm-dd hh24:mi') as trading_deposit_deadline,
-		trading_transaction_method,
+		product_delivery,
+		product_transaction_area,
 		product_id,
 		trading_buyer_id
 		from product_kj natural join product_kj_trading
@@ -125,6 +126,7 @@
 	<select id = "getdealcomplete_buyer" resultMap="Product_KjResultMap">
 	
 		select
+		trading_buyer_id,
 		product_number,
 		product_subject,
 		trading_price,
@@ -236,5 +238,22 @@
 		 where member_id = #{member_id} 
 	 </update>
 	 
-	 
+	 <insert id = "insertReview" parameterType = "ReviewVO">
+	 	<selectKey keyProperty="review_number" order="BEFORE" resultType = "int">
+	 		select nvl(max(review_number),0)+1 as review_number from review
+	 	</selectKey>
+	 	
+	 	insert into review
+	 	(review_id,review_evaluator,review_evaluate,review_subject,review_content,review_date)
+	 	values
+	 	(
+	 	#{review_id},
+	 	#{review_evaluator},
+	 	#{review_evaluate},
+	 	#{review_subject},
+	 	#{review_content},
+	 	sysdate
+	 	)
+	 	
+	 </insert>
 </mapper>

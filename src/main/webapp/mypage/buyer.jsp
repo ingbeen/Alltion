@@ -55,32 +55,43 @@
             </ul>
         </div>
         </div>
-       
+       <%if(product_list.size()==0) {%>
+    
+    	<div class = "buyer--form">
+    	<h3>구매중인 상품이 없습니다</h3>
+    	</div>
+    	<%}else{%>
+    	
+    	
         <div class="buyer--form" id="product_list"></div>
 		
 		<div class="page_btns" id="product_page_list" align="center"></div>
 	
+    	<%  } %>
+    		
     <!-- 배송 대기중 상품 -->
     <%if(delivery_before_list.size()!=0) {%>
-    <%
-    for(int x = 0; x < delivery_before_list.size(); x++)
-    {
-    	Product_kjVO delivery_beforevo = (Product_kjVO)delivery_before_list.get(x);
     
-    %>
+    	<div class = "buyer--form">
+    	<h3></h3>
+    	</div>
+    	<%}else{ %>
+    
     <div class="buyer--form" id = "delivery_before_list"></div>
     
     <div class="page_btns" id = "delivery_before_page" align="center"></div>
-	
-        <%
-    }}
-        %>
+	<%} %>
     <!-- 배송중 상품 -->
-
+	<%if(delivery_list.size()==0) {%>
+    
+    	<div class = "buyer--form">
+    	<h3>배송중 경매가 없습니다</h3>
+    	</div>
+    	<%}else{ %>
 	<div class="buyer--form" id = "delivery_complete_list"></div>
 	
 	<div class="page_btns" id = "delivery_complete_page_list" align="center"></div>
-	
+	<%} %>
     <!--구매 완료 -->
     <%if(dealcomplete_list.size()==0) {%>
     <div class="buyer--form">
@@ -93,18 +104,24 @@
     		Product_kjVO dealcompletevo = (Product_kjVO)dealcomplete_list.get(i);
     	
     %>
-    
+    	
         <div class="buyer--form" id = "buyer_complete_list"></div>
         <div class="page_btns" id = "buyer_complete_page_list" align="center"></div>  
         
+        
     	<div id="member_update_modal_email" class="modal">
+    	
                                		 <div class="modal-content">
                                    		 <span class="close">&times;</span>
                                     		<fieldset id="member_update">
                                        		 <legend>리뷰 작성</legend>
                                             		 <li>
                                                 	 <label>판매자&nbsp;&nbsp;:&nbsp;</label>
-                                                	 <span><%=dealcompletevo.getProduct_id() %></span>
+                                                	 <input type = "hidden"  name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
+                                                	 <input type = "hidden"  name = "review_evaluator" value = "<%=dealcompletevo.getTrading_buyer_id() %>">
+                                                	 <input type = "hidden"  name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                           	 
+                                                	 
+                                                	 <span><%=dealcompletevo.getProduct_id() %></span>         	 
                                                 	 <br>
                                                 	 <label>상품번호&nbsp;&nbsp;:&nbsp;</label>
                                                 	 <span><%=dealcompletevo.getProduct_number() %></span>
@@ -120,15 +137,15 @@
 				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우불만족" onclick="oneCheckbox(this)">&nbsp;매우불만족&nbsp;&nbsp;&nbsp;
 				                                  	 <br>
 				                                  	 <br>
-				  <textarea style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
+				  <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
 				  <br>
 				  <a href="javascript:review.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;
 
-                                            </li>   
-                                        
-                                   </fieldset>
-                                </div>
-                            </div>	
+                                           	 </li>      
+                                  	 </fieldset>
+                                	</div>
+                            	</div>	
+                            </form>
 
     <%
     	}}
@@ -299,7 +316,12 @@
 							output += '<span>거래 방식</span>';
 							output += '</div>';
 							output += '<div class="buyer_form__list content">';
-							output += '<span>' + item.trading_transaction_method + '</span>';
+							output += '<span>택배 : </span>';
+							output += '<span>' + item.product_delivery + '</span>';
+							output += '&nbsp;&nbsp;'
+							output += '&nbsp;&nbsp;'
+							output += '<span>직거래 : </span>'
+							output += '<span>' + item.product_transaction_area + '</span>';	
 							output += '</div>';
 							output += '</li>';
 							output += '</ul>';
@@ -542,6 +564,10 @@
 						if(index == complete_page_buyer - 1){
 							output += '<form name = "review" action = "./review.kj" method = "post">';
 							output += '<h3>구매 완료</h3>';
+							output += '<input type = "hidden" id = "trading_buyer_id" name = "trading_buyer_id" value = "' + item.trading_buyer_id +'">';
+							output += '<input type = "hidden" id = "review_id" name = "review_id" value = "' + item.product_id + '">';
+							output += '<input type = "hidden" id = "review_evaluator" name = "review_evaluator" value = "' + item.trading_buyer_id + '">';
+							output += '<input type = "hidden" id = "review_subject" name = "review_subject" value = "' + item.product_subject +'">';
 							
 							output += '<div class="buyer--content">';
 							
@@ -601,7 +627,8 @@
 							output += '</ul>';
 							
 							output += '</div>';
-							output += '<input type = "button" onclick = "modal_display_email()" value = "리뷰 작성" class="base_btn">';
+							output += '<input type = "button" id="modal_product_' + (index+1) + '" onclick = "modal_display_email('+(index)+')" value = "리뷰 작성" class="base_btn">';
+							
 						}
 							$("#buyer_complete_list").append(output);
 						});
@@ -628,7 +655,10 @@
 			}
 			$(function() {
 				buyer_complete(1);
+				
+				
 			});
+			
 	</script>
 </body>
 </html>

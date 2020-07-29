@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.alltion.login.MemberVO;
 import com.spring.alltion.test.Product_kjVO;
 import com.spring.alltion.test.Test_emoneyVO;
+import com.spring.alltion.detailpage.ReviewVO;
 
 public interface TestMapper {
 	public List<Product_kjVO> getProductlist(@Param(value="userId")String userId);
@@ -27,6 +28,8 @@ public interface TestMapper {
 	public Product_kjVO Waybill(@Param(value="userId")String userId, @Param(value="product_number")int product_number);
 	public int update_deal_address(MemberVO membervo);	
 	public int updateWaybill(Product_kjVO Product_kjvo);
+	
+	public int insertReview(ReviewVO Reviewvo);
 	
 	
 	

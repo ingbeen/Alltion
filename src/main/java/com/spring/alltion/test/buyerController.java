@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.alltion.creditScore.CreditScoreService;
 import com.spring.alltion.creditScore.PurchaseCreditScoreVO;
 import com.spring.alltion.creditScore.SaleCreditScoreVO;
+import com.spring.alltion.detailpage.ReviewVO;
 import com.spring.alltion.login.MemberService;
 import com.spring.alltion.login.MemberVO;
 import com.spring.alltion.pay.PayController;
@@ -401,4 +402,27 @@ public class buyerController {
 			}
 			return result;
 		}
+		
+		@RequestMapping("/review.kj")
+		public String insertReview(ReviewVO Reviewvo, HttpServletResponse response,HttpSession session)
+		throws Exception{
+			
+			int res = testservice.insertReview(Reviewvo);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if (res != 0)
+			{
+				writer.write("<script>alert('리뷰 작성!!');"
+						+ "location.href='./buyer.kj';</script>");
+			}
+			else
+			{
+				writer.write("<script>alert('리뷰작성 실패!!');"
+						+ "location.href='./buyer.kj';</script>");
+			}
+			return null;
+		}
+
+
 }

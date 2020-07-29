@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.spring.alltion.detailpage.ReviewVO;
 import com.spring.alltion.login.MemberVO;
 import com.spring.mapper.TestMapper;
 
@@ -23,7 +24,15 @@ public class testServiceImpl implements testService{
 	public List<Product_kjVO> getProductlist(String userId) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		List<Product_kjVO>product_list = testMapper.getProductlist(userId);
-	
+		for(int i = 0; i < product_list.size(); i++) {
+		Product_kjVO product_listvo = (Product_kjVO)product_list.get(i);
+		if(product_listvo.getProduct_delivery().equals("none")) {
+			product_listvo.setProduct_delivery("불가능");
+			}
+		if(product_listvo.getProduct_transaction_area().equals("none")){
+			product_listvo.setProduct_transaction_area("불가능");
+			}
+		}
 		return product_list;
 	}
 	
@@ -114,6 +123,14 @@ public class testServiceImpl implements testService{
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		Product_kjVO Product_kjvo = testMapper.Waybill(userId, product_number);
 		return Product_kjvo;
+	}
+
+	@Override
+	public int insertReview(ReviewVO Reviewvo) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		int res = testMapper.insertReview(Reviewvo);
+		
+		return res;
 	}
 
 }
