@@ -50,6 +50,7 @@ public class MemberController {
 	public String main(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page)
 	{
 		mainController.getPopularList(model, page);
+		//mainController.getCategorylist(page, product_category_1, model);
 		mainController.getVeiwList(model, page);
 		
 		return "main/index";
