@@ -54,6 +54,11 @@
             <div class="review_writer">작성자</div>
             <div class="review_date">작성일</div>
         </div>
+        <%if(reviewlist.size()==0){%>
+				<div class="no_list" align="center">
+					<p>출력할 내용이 없습니다.</p>
+				</div>
+  			<%}%>
         <%for(int i=0;i<reviewlist.size();i++){
         	ReviewVO reviewvo = reviewlist.get(i);
         	if(i >= 5*(nowpage-1) && i <= 4 + 5*(nowpage-1)){
@@ -72,9 +77,7 @@
         <div class="page_btns" align="center">
             <%if(nowpage>1){ %>
 	        <a href="./review_view.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
-	        <%}else{%>
-	        <a><button>&#171;</button></a>
-	        <% }
+	        <%}
 	        for(int i=1;i<=maxpage;i++){ %>
 	        <%if(i==nowpage){ %>
 	        	<a href="./review_view.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
@@ -84,9 +87,7 @@
 	        
 	        <%if(nowpage<maxpage){ %>
 	        <a href="./review_view.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
-        	<%}else{ %>
-        	<a><button>&#187;</button></a>
-        	<%} %>
+        	<%}%>
         </div>
         
     </div>
