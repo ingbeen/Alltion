@@ -57,6 +57,11 @@
                 <div class="product_delivery">배송</div>
                 <div class="bid_deadline">마감 시간</div>
             </div>
+            <%if(productvolist.size()==0){%>
+				<div class="no_list" align="center">
+					<p>출력할 내용이 없습니다.</p>
+				</div>
+  			<%}%>
             <%for(int i=0;i<productvolist.size();i++){  
   				ProductVO productvo = productvolist.get(i);
   				int Bidding_bid_price = Bidding_bidvo.get(i);
@@ -105,9 +110,7 @@
         <div class="page_btns" align="center">
         	<%if(nowpage>1){ %>
 	        <a href="./bidding.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
-	        <%}else{%>
-	        <a><button>&#171;</button></a>
-	        <% }
+	        <%}
 	        for(int i=1;i<=maxpage;i++){ %>
 	        <%if(i==nowpage){ %>
 	        	<a href="./bidding.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
@@ -117,9 +120,7 @@
 	        
 	        <%if(nowpage<maxpage){ %>
 	        <a href="./bidding.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
-        	<%}else{ %>
-        	<a><button>&#187;</button></a>
-        	<%} %>
+        	<%}%>
         </div>
     </div>
    
