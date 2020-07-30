@@ -174,9 +174,9 @@ public class ProductlistServiceImpl implements ProductlistService {
 	}
 	
 	@Override
-	public int getCate01ListCount(String product_category_1) {
+	public int getCate01ListCount() {
 		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		int result = productListMapper.getCate01ListCount(product_category_1);
+		int result = productListMapper.getCate01ListCount();
 		
 		return result;
 	}
@@ -189,4 +189,11 @@ public class ProductlistServiceImpl implements ProductlistService {
 		return productlist;
 	}
 	
+	@Override
+	public List<ProductVO> getCate01List2(HashMap<String, String> hashmap) {
+		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
+		List<ProductVO> productlist = productListMapper.getCate01List2(hashmap);
+		
+		return productlist;
+	}
 }

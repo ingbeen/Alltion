@@ -341,29 +341,47 @@
 	]]>
 	</select>
 	
-	<select id="getCate01ListCount" parameterType="String" resultType="int">
+	<select id="getCate01ListCount" resultType="int">
 	<![CDATA[
-		SELECT count(*) FROM product WHERE product_category_1 = #{product_category_1, jdbcType=VARCHAR} and to_char(product_end_date, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
+		SELECT count(*) FROM product WHERE to_char(product_end_date, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
 	]]>
 	</select>
 	
 	<select id="getCate01List" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		SELECT
-    		product_number, 
-    		product_subject, 
-    		product_img_1,
-    		product_category_1, 
-    		product_category_2,
-    		to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
-    		to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
-    		product_current_price, 
-    		product_purchase_price,
-    		product_progress 
-    		from (select row_number()over(order by product_current_price desc)rnum, p.* 
-             		from product p
-             		where product_category_1 = #{product_category_1})
-		where rnum>=#{startrow} and rnum<=#{endrow} and to_char(product_end_date, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
+		    product_number, 
+		    product_subject, 
+		    product_img_1,
+		    product_category_1, 
+		    product_category_2,
+		    to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+		    to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
+		    product_current_price, 
+		    product_purchase_price,
+		    product_progress 
+		    FROM (SELECT row_number()over(order by product_current_price desc)rnum, p.* 
+		            FROM product p WHERE to_char(product_end_date, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+		where rnum>=#{startrow} and rnum<=#{endrow}
+    ]]>
+	</select>
+	
+	<select id="getCate01List2" resultType="com.spring.alltion.productRegistration.ProductVO">
+	<![CDATA[
+		SELECT
+		    product_number, 
+		    product_subject, 
+		    product_img_1,
+		    product_category_1, 
+		    product_category_2,
+		    to_char(product_issue_date, 'yyyy-mm-dd hh24:mi') as product_issue_date, 
+		    to_char(product_end_date, 'yyyy-mm-dd hh24:mi') as product_end_date, 
+		    product_current_price, 
+		    product_purchase_price,
+		    product_progress 
+		    FROM (SELECT row_number()over(order by product_current_price desc)rnum, p.* 
+		            FROM product p WHERE product_end_date >= sysdate ORDER BY product_end_date)
+		where rnum>=#{startrow} and rnum<=#{endrow}
     ]]>
 	</select>
 	

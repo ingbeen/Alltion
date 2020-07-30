@@ -27,6 +27,7 @@ public interface ProductListMapper {
 		
 	// MainController
 	public List<ProductVO> getParticipantsForMain(HashMap<String, String> hashmap);
-	public int getCate01ListCount(String product_category_1);
+	public int getCate01ListCount();
 	public List<ProductVO> getCate01List(HashMap<String, String> hashmap);
+	public List<ProductVO> getCate01List2(HashMap<String, String> hashmap);
 }
