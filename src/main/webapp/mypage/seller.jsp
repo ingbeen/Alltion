@@ -73,11 +73,15 @@
         <div class="page_btns" id ="sell_list_page" align = "center"></div>
     	<%} %>
     <!-- 판매완료 -->
-    	
+    	<%if(sale_complete_list.size()==0){%>
+    	<div class="seller--form">
+    	<h3>판매완료된 경매가 없습니다</h3>
+    	</div>
+    	<%}else{ %>
         <div class="seller--form" id ="sale_list"></div>
     	
         <div class="page_btns" id ="sale_list_page" align = "center"></div>
-
+		<%} %>
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">

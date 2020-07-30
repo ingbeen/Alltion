@@ -7,6 +7,7 @@
 	<result property="product_number" column="product_number"/>
 	<result property="product_subject" column="product_subject"/>
 	<result property="product_id" column="product_id"/>
+	<result property="product_delivery" column="product_delivery"/>
 	
 	<result property="trading_price" column="trading_price"/>
 	<result property="trading_deposit_deadline" column="trading_deposit_deadline"/>
@@ -39,7 +40,8 @@
 		product_delivery,
 		product_transaction_area,
 		product_id,
-		trading_id
+		trading_id,
+		trading_transaction_method
 		from product_kj natural join product_kj_trading
 		where product_kj.product_number = product_kj_trading.trading_product_number 
 		and product_kj_trading.trading_progress = '구매중'
@@ -123,7 +125,7 @@
 		
 		</select>
 	
-	<select id = "getdealcomplete_buyer" resultMap="Product_KjResultMap">
+		<select id = "getdealcomplete_buyer" resultMap="Product_KjResultMap">
 	
 		select
 		trading_id,
@@ -138,9 +140,9 @@
 		and trading_id = #{userId}
 		order by trading_purchase_date
 	
-	</select>
+		</select>
 	
-	<select id = "getdealcomplete_seller" resultMap="Product_KjResultMap">
+		<select id = "getdealcomplete_seller" resultMap="Product_KjResultMap">
 		
 		select
 		product_number,
@@ -153,9 +155,9 @@
 		and product_kj_trading.trading_progress = '거래완료'
 		and product_id = #{userId}
 	
-	</select>
+		</select>
 	
-	<select id = "Waybill" resultMap="Product_KjResultMap">
+		<select id = "Waybill" resultMap="Product_KjResultMap">
 		
 		select
 		trading_product_number,
@@ -163,41 +165,41 @@
 		from product_kj_trading
 		where trading_product_number = #{product_number}
 
-	</select>
+		</select>
 	
-	<update id ="after_deposit" parameterType ="Product_kjVO">
+		<update id ="after_deposit" parameterType ="Product_kjVO">
 	 
-	 update product_kj_trading
-	 set
-	 trading_progress = '입금후' 
-	 where trading_id = #{trading_id}
-	 and trading_product_number = #{trading_product_number}
+		 update product_kj_trading
+		 set
+		 trading_progress = '입금후' 
+		 where trading_id = #{trading_id}
+		 and trading_product_number = #{trading_product_number}
 	 
-	 </update>
+	 	</update>
 	
-	<update id = "updateWaybill" parameterType ="Product_kjVO">
+		<update id = "updateWaybill" parameterType ="Product_kjVO">
+		 
+		 update 
+		 product_kj_trading
+		 set
+		 trading_progress = '운송장번호입력',
+		 trading_waybill_number = #{trading_waybill_number}
+		 where trading_product_number = #{trading_product_number}
+		 
+		 </update>
 	 
-	 update 
-	 product_kj_trading
-	 set
-	 trading_progress = '운송장번호입력',
-	 trading_waybill_number = #{trading_waybill_number}
-	 where trading_product_number = #{trading_product_number}
-	 
-	 </update>
-	 
-	 <update id ="deliverycomplete" parameterType ="Product_kjVO">
-	 
-	 update 
-	 product_kj_trading
-	 set 	 
-	 trading_purchase_date = systimestamp,
-	 trading_progress = '거래완료'
-	 where trading_product_number = #{product_number}
-	 
-	 </update>
+		 <update id ="deliverycomplete" parameterType ="Product_kjVO">
+		 
+		 update 
+		 product_kj_trading
+		 set 	 
+		 trading_purchase_date = systimestamp,
+		 trading_progress = '거래완료'
+		 where trading_product_number = #{product_number}
+		 
+		 </update>
 	
-	<select id = "selectEmoney" resultType = "com.spring.alltion.test.Test_emoneyVO">
+		<select id = "selectEmoney" resultType = "com.spring.alltion.test.Test_emoneyVO">
 	
 		select 
 		member_id, 
@@ -205,9 +207,9 @@
 		from member natural join paylist 
 		where member.member_id = paylist.pay_id and pay_id = #{userId}
 	
-	</select>
+		</select>
 	
-	<select id = "selectProduct" resultType = "com.spring.alltion.test.Product_kjVO">
+		<select id = "selectProduct" resultType = "com.spring.alltion.test.Product_kjVO">
 		
 		select
 		trading_product_number,
@@ -224,10 +226,11 @@
 		and trading_id = #{userId} 
 		and trading_product_number = #{product_number}
 	
-	</select>
+		</select>
 	
 	
-	<update id = "update_deal_address" parameterType = "MemberVO">
+		<update id = "update_deal_address" parameterType = "MemberVO">
+		
 		 update 
 		 member 
 		 set 
@@ -236,24 +239,39 @@
 		 sample4_jibunAddress = #{sample4_jibunAddress}, 
 		 sample4_detailAddress = #{sample4_detailAddress}  
 		 where member_id = #{member_id} 
-	 </update>
+		 
+	 	</update>
 	 
 	 <insert id = "insertReview" parameterType = "ReviewVO">
+	 	
 	 	<selectKey keyProperty="review_number" order="BEFORE" resultType = "int">
 	 		select nvl(max(review_number),0)+1 as review_number from review
 	 	</selectKey>
 	 	
 	 	insert into review
-	 	(review_id,review_evaluator,review_evaluate,review_subject,review_content,review_date)
+	 	(review_number,review_id,review_evaluator,review_evaluate,review_subject,review_content,review_date,review_no)
 	 	values
 	 	(
+	 	#{review_number},
 	 	#{review_id},
 	 	#{review_evaluator},
 	 	#{review_evaluate},
 	 	#{review_subject},
 	 	#{review_content},
-	 	sysdate
+	 	sysdate,
+	 	#{review_no}
 	 	)
 	 	
 	 </insert>
+	 
+	 <update id="updatetrading_transaction_method" parameterType ="Product_kjVO">
+	 
+	 	update 
+	 	product_kj_trading
+	 	set
+	 	trading_transaction_method = #{trading_transaction_method}
+	 	where trading_product_number = #{product_number}
+	 
+	 </update>
+	 
 </mapper>

@@ -24,6 +24,7 @@ import com.spring.alltion.login.MemberVO;
 import com.spring.alltion.pay.PayController;
 import com.spring.alltion.pay.PayService;
 import com.spring.alltion.pay.PaymentVO;
+import com.spring.mapper.TestMapper;
 @Controller
 public class buyerController {
 
@@ -137,8 +138,8 @@ public class buyerController {
 		List<Product_kjVO> getSale_list = testservice.getSalelist(userId);
 		model.addAttribute("getSale_list", getSale_list);
 		
-		List<Product_kjVO> dealcompleteseller_list = testservice.getdealcomplete_seller(userId);
-		model.addAttribute("dealcompleteseller_list", dealcompleteseller_list);
+		List<Product_kjVO> sale_complete_list = testservice.getdealcomplete_seller(userId);
+		model.addAttribute("sale_complete_list", sale_complete_list);
 		return  "mypage/seller";
 		}
 	}
@@ -235,16 +236,17 @@ public class buyerController {
 	{
 		String userId = (String)session.getAttribute("userId");
 		int product_number = Integer.parseInt(request.getParameter("product_number"));
+		Product_kjVO  Product_kjvo = testservice.selectProduct(userId,product_number);
+		model.addAttribute("Product_kjvo", Product_kjvo);
 		if(userId == null)
 		{
 			return "member/login";
 		}
 		else
 		{
+			
 			Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 			model.addAttribute("emoneyvo", emoneyvo);			
-			Product_kjVO  Product_kjvo = testservice.selectProduct(userId,product_number);
-			model.addAttribute("Product_kjvo", Product_kjvo);
 			MemberVO membervo = memberService.selectMember(userId);
 			model.addAttribute("membervo", membervo);
 			String pmvo = payService.findCurrentMoney(userId);
@@ -252,9 +254,11 @@ public class buyerController {
 				 pmvo = "0";
 		      }
 			model.addAttribute("pmvo", pmvo);
-		    return "mypage/buyer_emoney";
+			
+			}
+			return "mypage/buyer_emoney";
 		}
-	}	
+		
 	
 	@RequestMapping(value = "/buyer_deal.kj")
 	public String deal(Product_kjVO  Product_kjvo, Model model, HttpSession session, HttpServletResponse response ,HttpServletRequest request)throws Exception
@@ -289,14 +293,14 @@ public class buyerController {
 			}
 			else
 			{
-				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer_emoney.kj';</script>");
+				writer.write("<script>alert('이머니가 부족합니다 충전해주세요!!');location.href='./buyer.kj';</script>");
 				
 			}
 				
 		}				
 			return null;
 		}
-		@RequestMapping(value = "/buyer_deal_update") 
+		@RequestMapping(value = "/address.kj") 
 		public String address_update(MemberVO membervo, HttpSession session ,HttpServletResponse response)throws Exception
 		{
 			
@@ -315,7 +319,7 @@ public class buyerController {
 			if(res != 0)
 			{
 				writer.write("<script>alert('주소가 변경되었습니다');"
-						+ "location.href='./buyer_emoney.kj';</script>");
+						+ "location.href='./buyer.kj';</script>");
 			}
 			else
 			{
@@ -326,7 +330,38 @@ public class buyerController {
 		}
 		
 	}
-		
+		@RequestMapping(value = "/trading_transaction.kj")
+		public String trading_transaction(Product_kjVO  Product_kjvo, HttpSession session ,HttpServletResponse response,HttpServletRequest request)throws Exception
+		{
+			String userId = (String)session.getAttribute("userId");
+			String trading_transaction_method = request.getParameter("trading_transaction_method");	
+			int product_number = Integer.parseInt(request.getParameter("product_number"));
+			int res = testservice.updatetrading_transaction_method(Product_kjvo,trading_transaction_method, product_number);
+			System.out.println("trading_transaction_method" + trading_transaction_method);
+			System.out.println("res" + res);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if(userId == null)
+			{
+			return "member/login";
+			}
+			else
+				{	
+			if(res != 0)
+			{
+				writer.write("<script>alert('거래방식 선택');"
+						+ "location.href='./buyer.kj';</script>");
+			}
+			else
+			{
+				writer.write("<script>alert('거래방식 선택실패!!');"
+						+ "location.href='./buyer.kj';</script>");
+			}
+			}
+			
+			return null;
+		}
 		// 출금할 경우 쓰는 메소드(userId에 amount만큼 출금)
 		public String minusMoney(String userId, int amount, String product_subject) {
 			// userId가 존재하는지 체크

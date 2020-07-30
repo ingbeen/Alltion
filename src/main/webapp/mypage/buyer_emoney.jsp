@@ -75,8 +75,6 @@
                             <span><%=Product_kjvo.getTrading_transaction_method() %></span>      
                         </div>               
                     </li>
-                    <form name = "buyer_deal_update" action = "./buyer_deal_update.kj" method = "post">
-                    <ul>
                     <li>
                         <div class="update_form__list title">
                             <span>주소</span>
@@ -86,44 +84,47 @@
                         		<%=membervo.getSample4_roadAddress() %>
                         	    <%=membervo.getSample4_jibunAddress() %>
                         		<%=membervo.getSample4_detailAddress() %></span>
+                        		
+                        		
 				            	<input type ="button" onclick = "modal_display_address_deal()" value = "주소 변경"> 
-                            	<div id="update_address_deal" class="modal">
-                            	<div class="modal-content">
-                                <span class="close">&times;</span>
-                                <fieldset id="member_update">
-                                <legend>주소 변경</legend>
-                                <br>
-                                <li>
-                                <label>우편 번호</label>
-                                <input type="text" id="sample4_postcode" class = "input_border" name="sample4_postcode" placeholder="우편번호">                             
-                                <label>도로명 주소</label>
-                                <input type="text" class = "input_border" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
-                                <label>지번 주소</label>
-                                <input type="text" class = "input_border" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
-                                <label>상세 주소</label>
-                                <input type="text" class = "input_border" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
-                                <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span id="guide" style="color:#999;display:none;"></span>
-                                <a href="javascript:buyer_deal_update.submit()" class="update_btn__submit" >주소 변경</a>&nbsp;&nbsp;
-                                </li>
-
-                                   </fieldset>
-                                </div>
-                       		 </div>              
+				            	       
                         </div>                                   
                     </li>
                     </ul>
-                    </form>
-                    </ul>
-                   
+                    </div>
                     <div class="buyer_update--btn">
                     <a href = "javascript:buyer_deal.submit()" class = "base_btn">결제진행</a>
                     </div>
-                    
-                    </div>                                     
-                    </div>
+                    </div>             
                     </form>
-                    </div>
+                    </div>  
+                    <form name = "address1" action = "./address.kj" method = "post">
+                       	<div id="update_address_deal" class="modal">
+                         	 <div class="modal-content">
+                             <span class="close">&times;</span>
+	                             <fieldset id="member_update">
+	                             <legend>주소 변경</legend>
+	                             <br>
+	                             
+	                             <label>우편 번호</label>
+	                             
+	                             <input type="text" id="sample4_postcode" class = "input_border" name="sample4_postcode" placeholder="우편번호">                             
+	                             <label>도로명 주소</label>
+	                             <input type="text" class = "input_border" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
+	                             <label>지번 주소</label>
+	                             <input type="text" class = "input_border" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
+	                             <label>상세 주소</label>
+	                             <input type="text" class = "input_border" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
+	                             <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">&nbsp;&nbsp;&nbsp;&nbsp;
+	                             <span id="guide" style="color:#999;display:none;"></span>
+	                             <a href = "#" onclick="javascript:document.address1.submit()" class="update_btn__submit">주소 변경</a>
+	                             
+	
+	                             </fieldset>
+                             </div>
+                   		 </div>   
+               		 </form>                        
+
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">

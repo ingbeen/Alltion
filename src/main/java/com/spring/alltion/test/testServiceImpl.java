@@ -1,17 +1,17 @@
 package com.spring.alltion.test;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+
 
 import com.spring.alltion.detailpage.ReviewVO;
 import com.spring.alltion.login.MemberVO;
+import com.spring.mapper.DetailMapper;
 import com.spring.mapper.TestMapper;
 
 @Service("testService")
@@ -32,6 +32,9 @@ public class testServiceImpl implements testService{
 		if(product_listvo.getProduct_transaction_area().equals("none")){
 			product_listvo.setProduct_transaction_area("불가능");
 			}
+		if(product_listvo.getTrading_transaction_method()==null) {
+			product_listvo.setTrading_transaction_method("미정");
+		}
 		}
 		return product_list;
 	}
@@ -128,9 +131,21 @@ public class testServiceImpl implements testService{
 	@Override
 	public int insertReview(ReviewVO Reviewvo) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
+		int review_no = detailmapper.getReviewCount(Reviewvo.getReview_id())+1;
+		Reviewvo.setReview_no(review_no);
+		
 		int res = testMapper.insertReview(Reviewvo);
 		
 		return res;
 	}
+
+	@Override
+	public int updatetrading_transaction_method(Product_kjVO Product_kjvo, String trading_transaction_method, int product_number) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		return testMapper.updatetrading_transaction_method(Product_kjvo,trading_transaction_method, product_number);
+	}
+
+
 
 }

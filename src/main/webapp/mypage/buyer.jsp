@@ -71,12 +71,7 @@
     		
     <!-- 배송 대기중 상품 -->
     <%if(delivery_before_list.size()!=0) {%>
-    
-    	<div class = "buyer--form">
-    	<h3></h3>
-    	</div>
-    	<%}else{ %>
-    
+       
     <div class="buyer--form" id = "delivery_before_list"></div>
     
     <div class="page_btns" id = "delivery_before_page" align="center"></div>
@@ -108,19 +103,18 @@
         <div class="buyer--form" id = "buyer_complete_list"></div>
         <div class="page_btns" id = "buyer_complete_page_list" align="center"></div>  
         
-        <form name = "review" action = "./review.kj" method = "post">
+        
     	<div id="member_update_modal_email" class="modal">
+    	<form name = "review<%=i %>" action = "./review.kj" method = "post">
                                		 <div class="modal-content">
                                    		 <span class="close">&times;</span>
-                                    		<fieldset id="member_update">
+                                    		<fieldset id="member_update">                     		 
                                        		 <legend>리뷰 작성</legend>
-                                       		 		 
-                                            		 <li>
+                                            				 
                                                 	 <label>판매자&nbsp;&nbsp;:&nbsp;</label>
-                                                	 <input type = "hidden"  name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
-                                                	 <input type = "hidden"  name = "review_evaluator" value = "<%=dealcompletevo.getTrading_id() %>">
-                                                	 <input type = "hidden"  name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                           	 
-                                                	 
+                                                	 <input type = "hidden"  id = "review_id" name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
+                                                	 <input type = "hidden"  id = "review_evaluator" name = "review_evaluator" value = "<%=dealcompletevo.getTrading_id() %>">
+                                                	 <input type = "hidden"  id = "review_subject" name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                           	     	 
                                                 	 <span><%=dealcompletevo.getProduct_id() %></span>         	 
                                                 	 <br>
                                                 	 <label>상품번호&nbsp;&nbsp;:&nbsp;</label>
@@ -130,23 +124,21 @@
                                                 	 <span><%=dealcompletevo.getProduct_subject() %></span>
 				                                  	 <br>
 				                                  	 <label>평점 주기&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우만족" onclick="oneCheckbox(this)">&nbsp;매우만족&nbsp;&nbsp;&nbsp;
+				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우 만족" onclick="oneCheckbox(this)">&nbsp;매우만족&nbsp;&nbsp;&nbsp;
 				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "만족" onclick="oneCheckbox(this)">&nbsp;만족&nbsp;&nbsp;&nbsp;
 				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "보통" onclick="oneCheckbox(this)">&nbsp;보통&nbsp;&nbsp;&nbsp;
 				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "불만족" onclick="oneCheckbox(this)">&nbsp;불만족&nbsp;&nbsp;&nbsp;
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우불만족" onclick="oneCheckbox(this)">&nbsp;매우불만족&nbsp;&nbsp;&nbsp;
+				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우 불만족" onclick="oneCheckbox(this)">&nbsp;매우불만족&nbsp;&nbsp;&nbsp;
 				                                  	 <br>
 				                                  	 <br>
-				  <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
-				  <br>
-				  <a href="javascript:review.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;
-
-                                           	   </li>   
-										      
-                                  	  </fieldset>
-                                	</div>
+													 <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
+													 <br>
+													 <a href="javascript:review<%=i %>.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;    
+                                  	  			</fieldset>
+                                			</div>
+                                		</form>
                             	</div>	
-                            </form>
+                            
 
     <%
     	}}
@@ -241,9 +233,6 @@
         });
     </script>
 
-
-   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-   <script src="resources/js/kakaoTalk.js"></script>
    <script src="./resources/js/buyer.js"></script>
 	<script>
 		function product_page(prod_page) {
@@ -263,8 +252,9 @@
 					$.each(data, function(index, item) {
 						var output = '';
 						if(index == prod_page - 1) {
+							output += '<form name = "trading_transaction" action = "./trading_transaction.kj" method = "post">';
 							output += '<h3>구매 중인 상품</h3>';
-							
+							output += '<input type = "hidden" name = "product_number" id = "product_number" value = "' + item.product_number +'">';
 							output += '<div class="buyer--content">';
 							
 							output += '<ul class="buyer_form list">';
@@ -311,22 +301,35 @@
 							output += '</li>';
 							output += '</ul>';
 							
+							
+							
 							output += '<ul class="buyer_form list">';
 							output += '<li>';
 							output += '<div class="buyer_form__list title">';
 							output += '<span>거래 방식</span>';
 							output += '</div>';
 							output += '<div class="buyer_form__list content">';
-							output += '<span>택배 : </span>';
+							output += '<span>택배  </span>';
+							output += '&nbsp;&nbsp';
+							output += '<input type = "radio" name = "trading_transaction_method" id = "trading_transaction_method" value = "' + item.product_delivery + '">';
+							output += '&nbsp;&nbsp';
 							output += '<span>' + item.product_delivery + '</span>';
 							output += '&nbsp;&nbsp;'
-							output += '&nbsp;&nbsp;'
-							output += '<span>직거래 : </span>'
-							output += '<span>' + item.product_transaction_area + '</span>';	
+							output += '<br>';
+							output += '<span>직거래  </span>'
+							output += '&nbsp;&nbsp';
+							output += '<input type = "radio" name = "trading_transaction_method" id = "trading_transaction_method" value = "' + item.product_transaction_area + '">';
+							output += '<span>' + item.product_transaction_area + '</span>';
+							output += '&nbsp;&nbsp;&nbsp;&nbsp;';
+							output += '<a href = "javascript:trading_transaction.submit()">거래 방식</a>';
+							output += '<br>';
+							output += '<span>거래방식  </span>';
+							output += '&nbsp;&nbsp';
+							output += '<span>' + item.trading_transaction_method + '</span>';
 							output += '</div>';
 							output += '</li>';
 							output += '</ul>';
-	
+							
 							output += '<ul class="buyer_form list">';
 							output += '<li>';
 							output += '<div class="buyer_form__list title">';
@@ -565,7 +568,6 @@
 						if(index == complete_page_buyer - 1){
 							
 							output += '<h3>구매 완료</h3>';
-
 							output += '<div class="buyer--content">';
 							
 							output += '<ul class="buyer_form list">';
