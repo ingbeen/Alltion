@@ -62,7 +62,8 @@
          <form name = "buyer_deal" action = "./buyer_deal.kj" method = "post">         
           <input type = "hidden" name = "trading_buyer_id" id = "trading_buyer_id" value = "<%=Product_kjvo.getTrading_buyer_id() %>">
           <input type = "hidden" name = "trading_price" id = "trading_price" value = "<%=Product_kjvo.getTrading_price() %>">
-          <input type = "hidden" name = "trading_product_number" id = "trading_product_number" value = "<%=Product_kjvo.getTrading_product_number() %>">         
+          <input type = "hidden" name = "trading_product_number" id = "trading_product_number" value = "<%=Product_kjvo.getTrading_product_number() %>">
+          <input type = "hidden" name = "product_subject" id = "product_subject" value = "<%=Product_kjvo.getProduct_subject() %>">
           <div class="eomney_update--form">
             <h3>택배 거래</h3>
             <div class="eomney_update--content">
@@ -80,16 +81,6 @@
                             <span>주소</span>
                         </div>                      
                         <div class="update_form__list content">   
-<<<<<<< HEAD
-							<span><%=membervo.getSample4_postcode() %>
-                        		<%=membervo.getSample4_roadAddress() %>
-                        	    <%=membervo.getSample4_jibunAddress() %>
-                        		<%=membervo.getSample4_detailAddress() %></span>
-                        		
-                        		
-				            	<input type ="button" onclick = "modal_display_address_deal()" value = "주소 변경"> 
-				            	       
-=======
                      <span><%=membervo.getSample4_postcode() %>
                               <%=membervo.getSample4_roadAddress() %>
                                <%=membervo.getSample4_jibunAddress() %>
@@ -98,7 +89,6 @@
                               
                            <input type ="button" onclick = "modal_display_address_deal()" value = "주소 변경"> 
                                   
->>>>>>> origin/min
                         </div>                                   
                     </li>
                     </ul>
@@ -109,35 +99,7 @@
                     </div>             
                     </form>
                     </div>  
-<<<<<<< HEAD
-                    <form name = "address1" action = "./address.kj" method = "post">
-                       	<div id="update_address_deal" class="modal">
-                         	 <div class="modal-content">
-                             <span class="close">&times;</span>
-	                             <fieldset id="member_update">
-	                             <legend>주소 변경</legend>
-	                             <br>
-	                             
-	                             <label>우편 번호</label>
-	                             
-	                             <input type="text" id="sample4_postcode" class = "input_border" name="sample4_postcode" placeholder="우편번호">                             
-	                             <label>도로명 주소</label>
-	                             <input type="text" class = "input_border" id="sample4_roadAddress" name = "sample4_roadAddress" placeholder="도로명 주소">                                
-	                             <label>지번 주소</label>
-	                             <input type="text" class = "input_border" id="sample4_jibunAddress" name = "sample4_jibunAddress" placeholder="지번 주소">                               
-	                             <label>상세 주소</label>
-	                             <input type="text" class = "input_border" id="sample4_detailAddress" name = "sample4_detailAddress" placeholder="상세 주소를 입력해 주세요">				                                
-	                             <input type="button" class = "base_btn address" onclick="sample4_execDaumPostcode()" value="검색">&nbsp;&nbsp;&nbsp;&nbsp;
-	                             <span id="guide" style="color:#999;display:none;"></span>
-	                             <a href = "#" onclick="javascript:document.address1.submit()" class="update_btn__submit">주소 변경</a>
-	                             
-	
-	                             </fieldset>
-                             </div>
-                   		 </div>   
-               		 </form>                        
-=======
-					<form name = "buyer_deal_update" action = "./buyer_deal_update.kj" method = "post">
+               <form name = "buyer_deal_update" action = "./buyer_deal_update.kj" method = "post">
                           <div id="update_address_deal" class="modal">
                              <div class="modal-content">
                              <span class="close">&times;</span>
@@ -162,7 +124,6 @@
                              </div>
                           </div>   
                       </form>                        
->>>>>>> origin/min
 
     <!-- 푸터 영역 -->
     <div class="footer">

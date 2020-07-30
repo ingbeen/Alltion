@@ -103,43 +103,44 @@
         <div class="buyer--form" id = "buyer_complete_list"></div>
         <div class="page_btns" id = "buyer_complete_page_list" align="center"></div>  
         
-<<<<<<< HEAD
-        
-    	<div id="member_update_modal_email" class="modal">
-    	<form name = "review<%=i %>" action = "./review.kj" method = "post">
-                               		 <div class="modal-content">
-                                   		 <span class="close">&times;</span>
-                                    		<fieldset id="member_update">                     		 
-                                       		 <legend>리뷰 작성</legend>
-                                            				 
-                                                	 <label>판매자&nbsp;&nbsp;:&nbsp;</label>
-                                                	 <input type = "hidden"  id = "review_id" name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
-                                                	 <input type = "hidden"  id = "review_evaluator" name = "review_evaluator" value = "<%=dealcompletevo.getTrading_buyer_id() %>">
-                                                	 <input type = "hidden"  id = "review_subject" name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                           	     	 
-                                                	 <span><%=dealcompletevo.getProduct_id() %></span>         	 
-                                                	 <br>
-                                                	 <label>상품번호&nbsp;&nbsp;:&nbsp;</label>
-                                                	 <span><%=dealcompletevo.getProduct_number() %></span>
-                                                	 <br>
-                                                	 <label>상품명&nbsp;&nbsp;:&nbsp;</label>
-                                                	 <span><%=dealcompletevo.getProduct_subject() %></span>
-				                                  	 <br>
-				                                  	 <label>평점 주기&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우 만족" onclick="oneCheckbox(this)">&nbsp;매우만족&nbsp;&nbsp;&nbsp;
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "만족" onclick="oneCheckbox(this)">&nbsp;만족&nbsp;&nbsp;&nbsp;
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "보통" onclick="oneCheckbox(this)">&nbsp;보통&nbsp;&nbsp;&nbsp;
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "불만족" onclick="oneCheckbox(this)">&nbsp;불만족&nbsp;&nbsp;&nbsp;
-				                                  	 <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우 불만족" onclick="oneCheckbox(this)">&nbsp;매우불만족&nbsp;&nbsp;&nbsp;
-				                                  	 <br>
-				                                  	 <br>
-													 <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
-													 <br>
-													 <a href="javascript:review<%=i %>.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;    
-                                  	  			</fieldset>
-                                			</div>
-                                		</form>
-                            	</div>	
-                            
+        <form name = "review<%=i %>" action = "./review.kj" method = "post">
+       <div id="member_update_modal_email" class="modal">
+                                      <div class="modal-content">
+                                          <span class="close">&times;</span>
+                                          <fieldset id="member_update">
+                                              <legend>리뷰 작성</legend>
+                                                     
+                                                   <li>
+                                                    <label>판매자&nbsp;&nbsp;:&nbsp;</label>
+                                                    <input type = "hidden"  id = "review_id" name = "review_id" value = "<%=dealcompletevo.getProduct_id() %>">
+                                                    <input type = "hidden"  id = "review_evaluator" name = "review_evaluator" value = "<%=dealcompletevo.getTrading_buyer_id() %>">
+                                                    <input type = "hidden"  id = "review_subject" name = "review_subject" value = "<%=dealcompletevo.getProduct_subject() %>">                                       
+                                                    <span><%=dealcompletevo.getProduct_id() %></span>             
+                                                    <br>
+                                                    <label>상품번호&nbsp;&nbsp;:&nbsp;</label>
+                                                    <span><%=dealcompletevo.getProduct_number() %></span>
+                                                    <br>
+                                                    <label>상품명&nbsp;&nbsp;:&nbsp;</label>
+                                                    <span><%=dealcompletevo.getProduct_subject() %></span>
+                                                  <br>
+                                                  <label>평점 주기&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+                                                  <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우만족" onclick="oneCheckbox(this)">&nbsp;매우만족&nbsp;&nbsp;&nbsp;
+                                                  <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "만족" onclick="oneCheckbox(this)">&nbsp;만족&nbsp;&nbsp;&nbsp;
+                                                  <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "보통" onclick="oneCheckbox(this)">&nbsp;보통&nbsp;&nbsp;&nbsp;
+                                                  <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "불만족" onclick="oneCheckbox(this)">&nbsp;불만족&nbsp;&nbsp;&nbsp;
+                                                  <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우불만족" onclick="oneCheckbox(this)">&nbsp;매우불만족&nbsp;&nbsp;&nbsp;
+                                                  <br>
+                                                  <br>
+                                        <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
+                                        <br>
+                                        <a href="javascript:review<%=i %>.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;
+
+                                                 </li>   
+                                    
+                                       </fieldset>
+                                   </div>
+                               </div>   
+                            </form>
 
     <%
        }}
@@ -661,6 +662,5 @@
          });
          
    </script>
->>>>>>> origin/min
 </body>
 </html>
