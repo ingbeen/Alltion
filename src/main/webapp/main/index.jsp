@@ -34,12 +34,6 @@ pageEncoding="UTF-8"%>
             <img src="https://ads-partners.coupang.com/banners/263827?subId=&traceId=V0-301-969b06e95b87326d-I263827&w=728&h=90" >
         </a>
         <button style="background:url(./resources/img/header/close_btn.png);" class="ad__banner--closeBtn"></button>
-<!--
-        <a href="#" class="ad__banner--link">
-            <img src="img/header/adEx.png" class="ad__banner--img">
-            <button class="ad__banner--closeBtn"></button>
-        </a>
--->
     </div>
     <div class="header">
         <jsp:include page="../header/main_header.jsp"></jsp:include>
@@ -66,8 +60,6 @@ pageEncoding="UTF-8"%>
 			</span>
         </button>
     </div>
-    
-    <!-- !! 메인 페이지 내용(지워서 사용함) !! start -->
     <!--  메뉴 카테고리  -->
     
     <div class="menu">
@@ -84,21 +76,16 @@ pageEncoding="UTF-8"%>
              -->
             <!--  많이 본 경매  -->
             <div class="menu-box content1">
-			
-            <% if(!mainlist.isEmpty()){
-            loop : for(int i = 0; i < mainlist.size(); i++){%>	       	
                 <ul class="items__list product">
-	            <%for(int j = i; j < i + 4; j++) {
-					if(j == mainlist.size()) {
-						break loop;
-					}
-					
-					ProductVO mainVo = (ProductVO)mainlist.get(j);
-	            %> 
-            	
-            	<!-- 
-            	<ul class="items__list popular">
-            	 -->
+                <% if(!mainlist.isEmpty()){
+            		loop : for(int i = 0; i < mainlist.size(); i++){%>	       	
+		            <%for(int j = i; j < i + 4; j++) {
+						if(j == mainlist.size()) {
+							break loop;
+						}
+						
+						ProductVO mainVo = (ProductVO)mainlist.get(j);
+		            %> 
                  	 <li>
                     	<a href="/alltion/boarddetail.hs?product_number=<%=mainVo.getProduct_number() %>">
                             <div class="product-box">
@@ -107,7 +94,7 @@ pageEncoding="UTF-8"%>
                             <div class="items__product--info product">
                                 <p class="product_name"><%=mainVo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=mainVo.getProduct_issue_date() %></span>
+                                <span class="countdown"><%=mainVo.getProduct_end_date() %></span>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
                                     <p class="current_price"><%=mainVo.getProduct_current_price() %> 원</p>
@@ -117,34 +104,27 @@ pageEncoding="UTF-8"%>
                             </div>
                         </a>
                     </li>
-                <% if(j == i + 3){
-                    i = j;
-                    break;
-                	}
-                }%>
+	                <% if(j == i + 3){
+	                    i = j;
+	                    break;
+	                	}
+                	}%>
+                 <%} 
+            	}%>
                 </ul>
-              <%} }%>
-              
-                <!-- 
-                </ul>
-                 -->
             </div>
             <!--  마감 임박  -->
             <div class="menu-box content2">
-            <% if(!cateList.isEmpty()){
-            loop : for(int i = 0; i < cateList.size(); i++){%>	       	
                 <ul class="items__list deadline">
-	            <%for(int j = i; j < i + 4; j++) {
-					if(j == cateList.size()) {
-						break loop;
-					}
-					
-					ProductVO cateVo = (ProductVO)cateList.get(j);
-	            %> 
-            	
-            	<!-- 
-            	<ul class="items__list popular">
-            	 -->
+                <% if(!cateList.isEmpty()){
+            		loop : for(int i = 0; i < cateList.size(); i++){%>	   
+			            <%for(int j = i; j < i + 4; j++) {
+							if(j == cateList.size()) {
+								break loop;
+							}
+							
+							ProductVO cateVo = (ProductVO)cateList.get(j);
+			            %>
                  	 <li>
                     	<a href="/alltion/boarddetail.hs?product_number=<%=cateVo.getProduct_number() %>">
                             <div class="product-box">
@@ -163,48 +143,28 @@ pageEncoding="UTF-8"%>
                             </div>
                         </a>
                     </li>
-                <% if(j == i + 3){
-                    i = j;
-                    break;
-                	}
-                }%>
+	                <% if(j == i + 3){
+		                    i = j;
+		                    break;
+	                	}
+                	}%>
+              	<%} 
+            	}%>
                 </ul>
-              <%} }%>
-              <!-- 
-                    <ul class="items__list deadline">
-                    	<li>
-                            <a href="#">
-                                <div class="product-box">
-                                   <img src="./resources/img/product/product_ex.png"><br>
-                                </div>
-                                <div class="items__product--info deadline">
-                                    <p class="product_name">품목 이름</p>
-                                    <span class="material-icons timer">timer</span>
-                                    <span class="countdown hour">2시간</span>
-                                    <div class="price-txt">
-                                        <p class="price_text">현재가</p>
-                                        <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                        <p class="price_text">즉시 구매가</p>
-                                        <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    -->
+
             </div>
             <!--  인기 경매  -->
             <div class="menu-box content3">
-            <% if(!viewList.isEmpty()){
-            loop : for(int i = 0; i < viewList.size(); i++){%>	       	
                 <ul class="items__list resell">
-	            <%for(int j = i; j < i + 4; j++) {
-					if(j == viewList.size()) {
-						break loop;
-					}
-					
-					ProductVO viewVo = (ProductVO)viewList.get(j);
-	            %> 
+                <% if(!viewList.isEmpty()){
+            		loop : for(int i = 0; i < viewList.size(); i++){%>	       	
+		            <%for(int j = i; j < i + 4; j++) {
+						if(j == viewList.size()) {
+							break loop;
+						}
+						
+						ProductVO viewVo = (ProductVO)viewList.get(j);
+		            %> 
 	            	<li>
                     	<a href="/alltion/boarddetail.hs?product_number=<%=viewVo.getProduct_number() %>">
                             <div class="product-box">
@@ -213,7 +173,7 @@ pageEncoding="UTF-8"%>
                             <div class="items__product--info product">
                                 <p class="product_name"><%=viewVo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=viewVo.getProduct_issue_date() %></span>
+                                <span class="countdown"><%=viewVo.getProduct_end_date() %></span>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
                                     <p class="current_price"><%=viewVo.getProduct_current_price() %> 원</p>
@@ -223,191 +183,15 @@ pageEncoding="UTF-8"%>
                             </div>
                         </a>
                     </li>
-                    <!--
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="product-box">
-                               <img src="./resources/img/product/product_ex.png"><br>
-                            </div>
-                            <div class="items__product--info resell">
-                                <p class="product_name">품목 이름</p>
-                                <span class="material-icons timer">timer</span>
-                                <span class="countdown">2020/06/15 00:00</span>
-                                <div class="bookmark">
-                                    <span class="material-icons bookmark_border">bookmark_border</span>
-                                    <p class="bookmark--count">99</p>
-                                </div>
-                                <div class="price-txt">
-                                    <p class="price_text">현재가</p>
-                                    <p class="current_price">9,999,999,999,999,999,999,999 원</p>
-                                    <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price">9,999,999,999,999,999,999,999 원</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    -->
-                <% if(j == i + 3){
-                    i = j;
-                    break;
-                	}
+	                <% if(j == i + 3){
+	                    i = j;
+	                    break;
+	                	}
+                	}%>
+                <%} 
                 }%>
                 </ul>
-              <%} }%>
+              
             </div>
         </div>
     </div>

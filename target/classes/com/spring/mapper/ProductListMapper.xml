@@ -380,7 +380,7 @@
 		    product_purchase_price,
 		    product_progress 
 		    FROM (SELECT row_number()over(order by product_current_price desc)rnum, p.* 
-		            FROM product p WHERE to_char(product_end_date, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd') ORDER BY product_end_date)
+		            FROM product p WHERE product_end_date >= sysdate ORDER BY product_end_date)
 		where rnum>=#{startrow} and rnum<=#{endrow}
     ]]>
 	</select>

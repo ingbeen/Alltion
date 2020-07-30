@@ -23,8 +23,8 @@ public class MainController {
 	public void getPopularList(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 		int limit = 8;
 		int listcount = productlistService.getListCount();
-		String startrow = Integer.toString((page - 1) * 8 + 1); // 1 9 17 25
-		String endrow = Integer.toString(Integer.parseInt(startrow) + limit - 1); // 8 16 24 30
+		String startrow = Integer.toString((page - 1) * 8 + 1);
+		String endrow = Integer.toString(Integer.parseInt(startrow) + limit - 1);
 		
 		HashMap<String, String> hashmap = new HashMap<String, String>();
 		hashmap.put("startrow", startrow);
