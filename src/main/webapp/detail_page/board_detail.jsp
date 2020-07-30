@@ -222,36 +222,41 @@
                                         <legend>응찰시 유의사항!</legend>
                                         <ul>
                                             <li>
-                                                <label>1조1항</label>
-                                                <font>응찰시 취소 불가능.</font>
+                                                <label>1조 1항</label>
+                                                <font>응찰시 취소 불가능</font>
                                             </li>
                                             <li>
-                                                <label>2조1항</label>
-                                                <font>즉시구매가에 도달할 시 즉시 구매진행됨.</font>
+                                                <label>1조 2항</label>
+                                                <font>응찰 후에는 물품을 열람하지 않았다는 이유 등으로 여하한 이의도 제기할 수 없습니다.
+</font>
                                             </li>
                                             <li>
-                                                <label>2조3항</label>
-                                                <font>택배 배송시 손상은 판매자에게 없음.</font>
+                                                <label>2조 1항</label>
+                                                <font>택배 배송시 발생한 손상은 판매자에게 없습니다. (또한, 반품사유가 되지 않음.)</font>
                                             </li>
                                             <li>
-                                                <label>3조1항</label>
-                                                <font>시간이 종료시 최고응찰자가 낙찰됨.</font>
+                                                <label>2조 2항</label>
+                                                <font>경매가격에 택배 배송 관련 요금은 포함되어 있지 않습니다.</font>
                                             </li>
                                             <li>
-                                                <label>3조2항</label>
+                                                <label>3조 1항</label>
                                                 <font>판매자나 관리자가 임의로 응찰을 취소할 수 없음.</font>
                                             </li>
                                             <li>
-                                                <label>3조3항</label>
-                                                <font>아무거나아무거나 아무거나 응찰해라~</font>
+                                                <label>3조 2항</label>
+                                                <font>응찰을 참여한 순간 판매자는 판매를 취소할 수 없습니다.</font>
                                             </li>
                                             <li>
-                                                <label>3조5항</label>
-                                                <font>거지같은 물품올리지 마라~</font>
+                                                <label>3조 3항</label>
+                                                <font>즉시 구매를 할 시 경매 남은시간에 관련없이 경매가 종료됩니다.</font>
                                             </li>
                                             <li>
-                                                <label>4조1항</label>
-                                                <font>모달모달모달 모달모달모달</font>
+                                                <label>4조 1항</label>
+                                                <font>즉시 구매가가 설정되어 있을 시 즉시 구매가를 상한가로 간주합니다.</font>
+                                            </li>
+                                            <li>
+                                            	<label>4조 2항</label>
+                                            	<font>즉시 구매가가 설정되어 있지 않을 시 경매시간이 종료함에 따라 경매가 종료됩니다.</font>
                                             </li>
                                         </ul>
                                     </fieldset>
@@ -307,7 +312,7 @@
                     <button type="button" id="bid_btn4">찜하기</button>
                     <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
-					<font><a href="./loginForm1.kj" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
+					<font><a href="./loginForm1.kj?product_number=<%=productvo.getProduct_number() %>" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
 				<%}else if(id.equals(productvo.getProduct_id())){ %>
 					<a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%} %>
