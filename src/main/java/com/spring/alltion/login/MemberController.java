@@ -208,7 +208,13 @@ public class MemberController {
 			if (res == 1)
 			{
 				session.setAttribute("userId",membervo.getMember_id());
-				
+				String userId = membervo.getMember_id();
+				// currentMoney = 로그인한 사람이 보유한 사이버머니
+				String currentMoney = payService.findCurrentMoney(userId);
+				if (currentMoney == null) {
+					currentMoney = "0";
+				}
+				session.setAttribute("currentMoney", currentMoney);
 				return "redirect:/boarddetail.hs?product_number="+product_number;
 			}
 			else 	
