@@ -187,8 +187,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script src="./resources/js/common.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
     <script type="text/javascript" src="./resources/js/selling.js?productvolist_size=<%=productvolist_size%>"></script>
     
 </body></html>

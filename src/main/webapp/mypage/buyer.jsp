@@ -236,8 +236,6 @@
     </script>
 
 
-   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-   <script src="resources/js/kakaoTalk.js"></script>
    <script src="./resources/js/buyer.js"></script>
    <script>
       function product_page(prod_page) {
