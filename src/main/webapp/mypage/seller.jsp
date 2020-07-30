@@ -7,7 +7,7 @@
 	List<Product_kjVO> getSale_list = (List<Product_kjVO>)request.getAttribute("getSale_list");
 %>
 <%
-	List<Product_kjVO> sale_complete_list = (List<Product_kjVO>)request.getAttribute("sale_complete_list");
+	List<Product_kjVO> dealcompleteseller_list = (List<Product_kjVO>)request.getAttribute("dealcompleteseller_list");
 %>
 <%
 	List<Product_kjVO> getdeposit_before_list = (List<Product_kjVO>)request.getAttribute("getdeposit_before_list");
@@ -73,11 +73,13 @@
         <div class="page_btns" id ="sell_list_page" align = "center"></div>
     	<%} %>
     <!-- 판매완료 -->
-    	<%if(sale_complete_list.size()==0){%>
-    	<div class="seller--form">
-    	<h3>판매완료된 경매가 없습니다</h3>
-    	</div>
+
+    	<%if(dealcompleteseller_list.size()==0) {%>
+    		<div class="seller--form">
+    		<h3>판매 완료된 경매가 없습니다</h3>
+    		</div>
     	<%}else{ %>
+
         <div class="seller--form" id ="sale_list"></div>
     	
         <div class="page_btns" id ="sale_list_page" align = "center"></div>
@@ -132,7 +134,7 @@
                 </li>
                 <li>
                     <p>올션은 통신판매중개자이며 통신 판매의 당사자가 아닙니다. 따라서 올션은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p> 
-                    <p>Copyright © eBay Korea LLC All rights reserved.</p>
+                    <p>Copyright © Alltion All rights reserved.</p>
                 </li>
             </ul>
         </div>      
@@ -341,7 +343,7 @@
         						output += '<span>구매자 아이디</span>';
         						output += '</div>';
         						output += '<div class="seller_form__list content">';
-        						output += '<span>' + item.trading_id + '</span>';
+        						output += '<span>' + item.trading_buyer_id + '</span>';
         						output += '</div>';
         						output += '</li>';
         						output += '</ul>';
@@ -493,7 +495,7 @@
     						output += '<span>구매자</span>';
     						output += '</div>';
     						output += '<div class="seller_form__list content">';
-    						output += '<span>' + item.trading_id + '</span>';
+    						output += '<span>' + item.trading_buyer_id + '</span>';
     						output += '</div>';
     						output += '</li>';
     						output += '</ul>';

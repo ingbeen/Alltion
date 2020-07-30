@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.AdminMapper">
+	
+	<!-- 회원수 -->
+	<select id="getMemberCount" resultType="int">
+		select count(*) 
+		from member
+		where member_manager != 1
+	</select>
+	
+	<!-- 경매건수 -->
+	<select id="getProductCount" resultType="int">
+		select count(*) 
+		from product
+	</select>
+	
+	<!-- 거래건수 -->
+	<select id="getTradingCount" resultType="int">
+		select count(*) 
+		from trading
+	</select>
+	
+	<!-- 입찰건수 -->
+	<select id="getBidCount" resultType="int">
+		select count(*) 
+		from bid_list
+	</select>
+	
+	<!-- 결제금액 -->
+	<select id="getPaySum" resultType="int">
+		select sum(pay_amount)
+		from pay
+		where pay_status = 'paid'
+	</select>
+	
+	<!-- 최근 일주일 경매등록수 -->
+	<select id="getDailyAuction" parameterType="int" resultType="int">
+		select count(*)
+		from product
+		<![CDATA[
+		where to_date(to_char(sysdate-(#{period}), 'yyyy-mm-dd'), 'yyyy-mm-dd') <= product_issue_date and
+		product_issue_date <= to_date(to_char(sysdate-(#{period}-1), 'yyyy-mm-dd'), 'yyyy-mm-dd')
+		]]>
+	</select>
+	
+	<!-- 카테고리별 상품수-->
+	<select id="getCateCount" parameterType="String" resultType="int">
+		select count(*)
+		from product
+		where product_category_1 = #{cate}
+	</select>
+	
+	<!-- 최근 일주일 가입자수 -->
+	<select id="getDailySubscribers" parameterType="int" resultType="int">
+		select count(*)
+		from member
+		<![CDATA[
+		where to_date(to_char(sysdate-(#{period}), 'yyyy-mm-dd'), 'yyyy-mm-dd') <= member_date and
+		member_date <= to_date(to_char(sysdate-(#{period}-1), 'yyyy-mm-dd'), 'yyyy-mm-dd')
+		]]>
+		and member_manager != 1
+	</select>
+	
+	<!-- 멤버리스트 검색결과 갯수 -->
+	<select id="getMemberListCount" parameterType="AdminMemberVO" resultType="int">
+	 	select count(*)
+	 	from member
+	 	where 
+	 	<choose>
+	 		<when test="adminMemberStatus == 0">
+	 			member_delete = #{adminMemberStatus} and
+	 			member_manager = 0
+	 		</when>
+	 		<when test="adminMemberStatus == 1">
+	 			member_delete = #{adminMemberStatus} and
+	 			member_manager = 0
+	 		</when>
+	 		<when test="adminMemberStatus == 2">
+	 			member_manager = 0
+	 		</when>
+	 		<when test="adminMemberStatus == 3">
+	 			member_manager = 1
+	 		</when>
+	 	</choose>
+	 	
+	 	<if test="adminMemberId != null and adminMemberId != ''">
+	 		and member_id like '%' || #{adminMemberId} || '%' 
+	 	</if>
+	 	
+	 	<if test="adminMemberName != null and adminMemberName != ''">
+	 		and member_name like '%' || #{adminMemberName} || '%' 
+	 	</if>
+	 	
+	 	<if test="adminMemberEmail != null and adminMemberEmail != ''">
+	 		and email like '%' || #{adminMemberEmail} || '%' 
+	 	</if>
+	 	
+	 	<if test="adminMemberPhone != null and adminMemberPhone != ''">
+	 		and member_phone like '%' || #{adminMemberPhone} || '%' 
+	 	</if>
+	 	
+	 	<if test="adminMemberStartDate != null and adminMemberStartDate != '' and adminMemberEndDate != null and adminMemberEndDate != ''">
+	 		and member_date between 
+	 			to_date(#{adminMemberStartDate}, 'yyyy-mm-dd') and 
+	 			to_date(#{adminMemberEndDate}, 'yyyy-mm-dd') + 1
+	 	</if>
+	</select>
+	
+	<!-- 멤버리스트 검색결과 -->
+	<select id="getMemberList" parameterType="AdminMemberVO" resultType="MemberVO">
+	 	select *
+		from (select
+				row_number() over (order by 
+			 	<choose>
+			 		<when test="adminMemberSort == 0">
+			 			member_date desc
+			 		</when>
+			 		<when test="adminMemberSort == 1">
+			 			member_date asc
+			 		</when>
+			 		<when test="adminMemberSort == 2">
+			 			member_id desc
+			 		</when>
+			 		<when test="adminMemberSort == 3">
+			 			member_id asc
+			 		</when>
+			 		<when test="adminMemberSort == 4">
+			 			member_name desc
+			 		</when>
+			 		<when test="adminMemberSort == 5">
+			 			member_name asc
+			 		</when>
+			 	</choose>
+				) rnum,
+				member_name,
+				member_id,
+				email,
+				member_phone,
+				member_delete,
+				member_manager,
+				to_char(member_date, 'yyyy-mm-dd') member_date
+		 		from member
+			 	where 
+			 	<choose>
+			 		<when test="adminMemberStatus == 0">
+			 			member_delete = #{adminMemberStatus} and
+			 			member_manager = 0
+			 		</when>
+			 		<when test="adminMemberStatus == 1">
+			 			member_delete = #{adminMemberStatus} and
+			 			member_manager = 0
+			 		</when>
+			 		<when test="adminMemberStatus == 2">
+			 			member_manager = 0
+			 		</when>
+			 		<when test="adminMemberStatus == 3">
+			 			member_manager = 1
+			 		</when>
+			 	</choose>
+			 	
+			 	<if test="adminMemberId != null and adminMemberId != ''">
+			 		and member_id like '%' || #{adminMemberId} || '%' 
+			 	</if>
+			 	
+			 	<if test="adminMemberName != null and adminMemberName != ''">
+			 		and member_name like '%' || #{adminMemberName} || '%' 
+			 	</if>
+			 	
+			 	<if test="adminMemberEmail != null and adminMemberEmail != ''">
+			 		and email like '%' || #{adminMemberEmail} || '%' 
+			 	</if>
+			 	
+			 	<if test="adminMemberPhone != null and adminMemberPhone != ''">
+			 		and member_phone like '%' || #{adminMemberPhone} || '%' 
+			 	</if>
+			 	
+			 	<if test="adminMemberStartDate != null and adminMemberStartDate != '' and adminMemberEndDate != null and adminMemberEndDate != ''">
+			 		and member_date between 
+			 			to_date(#{adminMemberStartDate}, 'yyyy-mm-dd') and 
+			 			to_date(#{adminMemberEndDate}, 'yyyy-mm-dd') + 1
+			 	</if>
+		 	)
+	 	<![CDATA[
+		where rnum >= #{startrow} and rnum <= #{endrow}
+		]]>
+	</select>
+	
+	<!-- 멤버정보 수정 -->
+	<update id="adminMemberUpdate" parameterType="AdminMemberVO" >
+		update member 
+		set member_name = #{adminMemberName},
+			email = #{adminMemberEmail},
+			member_phone = #{adminMemberPhone},
+			<choose>
+		 		<when test="adminMemberStatus == 0">
+		 			member_delete = #{adminMemberStatus}
+		 		</when>
+		 		<when test="adminMemberStatus == 1">
+		 			member_delete = #{adminMemberStatus}
+		 		</when>
+		 		<when test="adminMemberStatus == 3">
+		 			member_manager = 1
+		 		</when>
+		 	</choose>
+		where member_id = #{adminMemberId}
+	</update>
+	
+</mapper>

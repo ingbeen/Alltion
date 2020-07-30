@@ -84,15 +84,16 @@ public class DetailController {
 	
 	public String translateSale_credit(int sale_credit_score) {
 		String sale_credit = "";
-		if(sale_credit_score >= 150) {
+		
+		if(sale_credit_score >= 180) {
 			sale_credit = "다이아몬드";
-		}else if(sale_credit_score >= 120){
+		}else if(sale_credit_score >= 150){
 			sale_credit = "플레티넘";
-		}else if(sale_credit_score >= 100){
+		}else if(sale_credit_score >= 120){
 			sale_credit = "골드";
-		}else if(sale_credit_score >= 80) {
+		}else if(sale_credit_score >= 100) {
 			sale_credit = "실버";
-		}else if(sale_credit_score >= 40) {
+		}else if(sale_credit_score >= 60) {
 			sale_credit = "브론즈";
 		}else {
 			sale_credit = "등급 없음";

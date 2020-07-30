@@ -217,8 +217,8 @@ public class buyerController {
 			List<Product_kjVO> delivery_list = testservice.getdealcomplete_buyer(userId);
 			String id = delivery_list.get(0).getProduct_id();
 			int amount = delivery_list.get(0).getTrading_price();
-			String result = plusMoney(id, amount,"상품제목제목");
-			session.setAttribute("currentMoney", result);
+			String subject = delivery_list.get(0).getProduct_subject();
+			String result = plusMoney(id, amount, subject);
 			writer.write("<script>alert('구매가 완료되었습니다');"
 			+ "location.href='/alltion/buyer.kj';</script>");
 		}
@@ -229,6 +229,39 @@ public class buyerController {
 		return null;
 		}
 	}
+	
+	@RequestMapping(value = "/trading_transaction.kj")
+    public String trading_transaction(Product_kjVO  Product_kjvo, HttpSession session ,HttpServletResponse response,HttpServletRequest request)throws Exception
+    {
+       String userId = (String)session.getAttribute("userId");
+       String trading_transaction_method = request.getParameter("trading_transaction_method");   
+       int product_number = Integer.parseInt(request.getParameter("product_number"));
+       int res = testservice.updatetrading_transaction_method(Product_kjvo,trading_transaction_method, product_number);
+       System.out.println("trading_transaction_method" + trading_transaction_method);
+       System.out.println("res" + res);
+       response.setCharacterEncoding("utf-8");
+       response.setContentType("text/html; charset=utf-8");
+       PrintWriter writer = response.getWriter();
+       if(userId == null)
+       {
+       return "member/login";
+       }
+       else
+          {   
+       if(res != 0)
+       {
+          writer.write("<script>alert('거래방식 선택');"
+                + "location.href='./buyer.kj';</script>");
+       }
+       else
+       {
+          writer.write("<script>alert('거래방식 선택실패!!');"
+                + "location.href='./buyer.kj';</script>");
+       }
+       }
+       
+       return null;
+    }
 	
 	@RequestMapping(value = "/buyer_emoney.kj")
 	public String emoney(Model model,HttpSession session,HttpServletRequest request)
@@ -247,6 +280,10 @@ public class buyerController {
 			
 			Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 			model.addAttribute("emoneyvo", emoneyvo);			
+			Product_kjVO  Product_kjvo = testservice.selectProduct(userId,product_number);
+			String product_subject = testservice.findSubjectFromNum(product_number);
+			Product_kjvo.setProduct_subject(product_subject);
+			model.addAttribute("Product_kjvo", Product_kjvo);
 			MemberVO membervo = memberService.selectMember(userId);
 			model.addAttribute("membervo", membervo);
 			String pmvo = payService.findCurrentMoney(userId);
@@ -270,7 +307,7 @@ public class buyerController {
 		
 		String userId = (String)session.getAttribute("userId");
 		int trading_product_number = Integer.parseInt(request.getParameter("trading_product_number"));
-		String trading_id = (String)request.getParameter("trading_id");
+		String trading_buyer_id = (String)request.getParameter("trading_buyer_id");
 		Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
 		int currentMoney = Integer.parseInt(payService.findCurrentMoney(userId));
 		//int res_emoney = testservice.update_emoney(userId);
@@ -282,10 +319,10 @@ public class buyerController {
 		{
 			if(currentMoney >= Product_kjvo.getTrading_price())
 			{
-				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_id);
+				int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
 				if(res != 0)
 				{	
-					String result = minusMoney(userId, Product_kjvo.getTrading_price(), "상품제목제목");
+					String result = minusMoney(userId, Product_kjvo.getTrading_price(), Product_kjvo.getProduct_subject());
 					session.setAttribute("currentMoney", result);
 					writer.write("<script>alert('결제가 완료되었습니다');"
 					+ "location.href='/alltion/buyer.kj?product_page=1';</script>");
@@ -300,7 +337,7 @@ public class buyerController {
 		}				
 			return null;
 		}
-		@RequestMapping(value = "/address.kj") 
+		@RequestMapping(value = "/buyer_deal_update.kj") 
 		public String address_update(MemberVO membervo, HttpSession session ,HttpServletResponse response)throws Exception
 		{
 			

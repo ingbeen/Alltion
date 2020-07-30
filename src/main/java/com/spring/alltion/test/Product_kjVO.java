@@ -46,7 +46,7 @@ public class Product_kjVO {
 	 
 	 int trading_price;
 	 int trading_product_number;
-	 String trading_id;	 
+	 String trading_buyer_id;	 
 	 String trading_deposit_deadline;
 	 String trading_transaction_method;
 	 String trading_waybill_deadline;
@@ -227,11 +227,11 @@ public class Product_kjVO {
 	public void setTrading_progress(String trading_progress) {
 		this.trading_progress = trading_progress;
 	}
-	public String getTrading_id() {
-		return trading_id;
+	public String getTrading_buyer_id() {
+		return trading_buyer_id;
 	}
-	public void setTrading_id(String trading_id) {
-		this.trading_id = trading_id;
+	public void setTrading_buyer_id(String trading_buyer_id) {
+		this.trading_buyer_id = trading_buyer_id;
 	}
 	
 }

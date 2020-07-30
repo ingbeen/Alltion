@@ -4,6 +4,7 @@ package com.spring.alltion.test;
 import java.util.List;
 
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class testServiceImpl implements testService{
 		if(product_listvo.getProduct_delivery().equals("none")) {
 			product_listvo.setProduct_delivery("불가능");
 			}
+		if(product_listvo.getProduct_delivery().equals("before")) {
+			product_listvo.setProduct_delivery("선불");
+		}
+		if(product_listvo.getProduct_delivery().equals("after")) {
+			product_listvo.setProduct_delivery("착불");
+		}
 		if(product_listvo.getProduct_transaction_area().equals("none")){
 			product_listvo.setProduct_transaction_area("불가능");
 			}
@@ -103,9 +110,9 @@ public class testServiceImpl implements testService{
 	}
 
 	@Override
-	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_id) {
+	public int after_deposit(Product_kjVO Product_kjvo, int trading_product_number, String trading_buyer_id) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
-		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_id);
+		return testMapper.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
 	}
 
 	
@@ -138,6 +145,20 @@ public class testServiceImpl implements testService{
 		int res = testMapper.insertReview(Reviewvo);
 		
 		return res;
+	}
+	
+	@Override
+	public String findSubjectFromNum(int product_number) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		String res = testMapper.findSubjectFromNum(product_number);
+		return res;
+	}
+
+	@Override
+	public int updatetrading_transaction_method(Product_kjVO Product_kjvo, String trading_transaction_method,
+			int product_number) {
+			TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		return testMapper.updatetrading_transaction_method(Product_kjvo, trading_transaction_method, product_number);
 	}
 
 	@Override
