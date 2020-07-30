@@ -47,11 +47,11 @@ public class MemberController {
 	
 	// 탭 메뉴에 목록 페이지 끌고 오기	
 	@RequestMapping(value = "/")
-	public String main(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page)
+	public String main(Model model)
 	{
-		mainController.getPopularList(model, page);
-		mainController.getCategorylist(model, page);
-		mainController.getViewList(model, page);
+		mainController.getPopularList(model);
+		mainController.getRecentList(model);
+		mainController.getCloseDeadlineList(model);
 		
 		return "main/index";
 	}

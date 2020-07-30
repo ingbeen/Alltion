@@ -154,46 +154,4 @@ public class ProductlistServiceImpl implements ProductlistService {
         }
 		return productlist;
 	}
-
-	
-	// MainController
-	@Override
-	public List<ProductVO> getMain(HashMap<String, String> hashmap) {
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getMainlist2(hashmap);
-
-		return productlist;
-	}
-	
-	@Override
-	public List<ProductVO> getParticipantsForMain(HashMap<String, String> hashmap) {
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getParticipantsForMain(hashmap);
-		
-		return productlist;
-	}
-	
-	@Override
-	public int getCate01ListCount() {
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		int result = productListMapper.getCate01ListCount();
-		
-		return result;
-	}
-	
-	@Override
-	public List<ProductVO> getCate01List(HashMap<String, String> hashmap) {
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getCate01List(hashmap);
-		
-		return productlist;
-	}
-	
-	@Override
-	public List<ProductVO> getCate01List2(HashMap<String, String> hashmap) {
-		ProductListMapper productListMapper = sqlSession.getMapper(ProductListMapper.class);
-		List<ProductVO> productlist = productListMapper.getCate01List2(hashmap);
-		
-		return productlist;
-	}
 }
