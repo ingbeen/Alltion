@@ -229,6 +229,39 @@ public class buyerController {
 		}
 	}
 	
+	@RequestMapping(value = "/trading_transaction.kj")
+    public String trading_transaction(Product_kjVO  Product_kjvo, HttpSession session ,HttpServletResponse response,HttpServletRequest request)throws Exception
+    {
+       String userId = (String)session.getAttribute("userId");
+       String trading_transaction_method = request.getParameter("trading_transaction_method");   
+       int product_number = Integer.parseInt(request.getParameter("product_number"));
+       int res = testservice.updatetrading_transaction_method(Product_kjvo,trading_transaction_method, product_number);
+       System.out.println("trading_transaction_method" + trading_transaction_method);
+       System.out.println("res" + res);
+       response.setCharacterEncoding("utf-8");
+       response.setContentType("text/html; charset=utf-8");
+       PrintWriter writer = response.getWriter();
+       if(userId == null)
+       {
+       return "member/login";
+       }
+       else
+          {   
+       if(res != 0)
+       {
+          writer.write("<script>alert('거래방식 선택');"
+                + "location.href='./buyer.kj';</script>");
+       }
+       else
+       {
+          writer.write("<script>alert('거래방식 선택실패!!');"
+                + "location.href='./buyer.kj';</script>");
+       }
+       }
+       
+       return null;
+    }
+	
 	@RequestMapping(value = "/buyer_emoney.kj")
 	public String emoney(Model model,HttpSession session,HttpServletRequest request)
 	throws Exception

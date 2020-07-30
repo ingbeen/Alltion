@@ -39,5 +39,7 @@ public interface testService {
 		public int insertReview(ReviewVO Reviewvo);
 		
 		public String findSubjectFromNum(int product_number);
+		
+		public int updatetrading_transaction_method(Product_kjVO Product_kjvo, String trading_transaction_method, int product_number);
 
 }

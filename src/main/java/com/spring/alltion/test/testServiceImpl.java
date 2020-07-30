@@ -30,9 +30,18 @@ public class testServiceImpl implements testService{
 		if(product_listvo.getProduct_delivery().equals("none")) {
 			product_listvo.setProduct_delivery("불가능");
 			}
+		if(product_listvo.getProduct_delivery().equals("before")) {
+			product_listvo.setProduct_delivery("선불");
+		}
+		if(product_listvo.getProduct_delivery().equals("after")) {
+			product_listvo.setProduct_delivery("착불");
+		}
 		if(product_listvo.getProduct_transaction_area().equals("none")){
 			product_listvo.setProduct_transaction_area("불가능");
 			}
+		if(product_listvo.getTrading_transaction_method()==null) {
+			product_listvo.setTrading_transaction_method("미정");
+		}
 		}
 		return product_list;
 	}
@@ -139,6 +148,13 @@ public class testServiceImpl implements testService{
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		String res = testMapper.findSubjectFromNum(product_number);
 		return res;
+	}
+
+	@Override
+	public int updatetrading_transaction_method(Product_kjVO Product_kjvo, String trading_transaction_method,
+			int product_number) {
+			TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		return testMapper.updatetrading_transaction_method(Product_kjvo, trading_transaction_method, product_number);
 	}
 
 }

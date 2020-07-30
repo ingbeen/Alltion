@@ -39,7 +39,8 @@
 		product_delivery,
 		product_transaction_area,
 		product_id,
-		trading_buyer_id
+		trading_buyer_id,
+		trading_transaction_method
 		from product natural join trading
 		where product.product_number = trading.trading_product_number 
 		and trading.trading_progress = 'depositWaiting'
@@ -265,4 +266,14 @@
 	 	from product 
 	 	where product_number = #{product_number}
 	 </select>
+	 
+	 <update id="updatetrading_transaction_method" parameterType ="Product_kjVO">
+    
+       update 
+       trading
+       set
+       trading_transaction_method = #{trading_transaction_method}
+       where trading_product_number = #{product_number}
+    
+    </update>
 </mapper>
