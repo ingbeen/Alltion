@@ -6,14 +6,9 @@ pageEncoding="UTF-8"%>
 <%@ page import="com.spring.alltion.login.*" %>
 <%@ page import="com.spring.alltion.productRegistration.ProductVO" %>
 <%
- 	List<ProductVO> mainlist = (List<ProductVO>)request.getAttribute("mainlist");
-	List<ProductVO> cateList = (List<ProductVO>)request.getAttribute("cateList");
-	List<ProductVO> viewList = (List<ProductVO>)request.getAttribute("viewList");
-/*
-	List<ProductVO> pricelist=(List<ProductVO>)request.getAttribute("pricelist");
-	List<ProductVO> participantslist=(List<ProductVO>)request.getAttribute("participantslist");
-	List<ProductVO> viewslist=(List<ProductVO>)request.getAttribute("viewslist");
-	*/
+ 	List<ProductVO> popularList = (List<ProductVO>)request.getAttribute("popularList");
+	List<ProductVO> recentList = (List<ProductVO>)request.getAttribute("recentList");
+	List<ProductVO> closeDeadlineList = (List<ProductVO>)request.getAttribute("closeDeadlineList");
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -65,41 +60,41 @@ pageEncoding="UTF-8"%>
     <div class="menu">
         <div class="menu__tab">
             <input type="radio" name="menu--name" id="popular-items" checked>
-            <label for="popular-items">많이 본 경매</label>
+            <label for="popular-items">인기 경매</label>
+            <input type="radio" name="menu--name" id="recent-items">
+            <label for="recent-items">실시간 경매</label>
             <input type="radio" name="menu--name" id="deadline-items">
             <label for="deadline-items">마감 임박</label>
-            <input type="radio" name="menu--name" id="resell-items">
-            <label for="resell-items">인기 경매</label>
             <!-- 
             <input type="radio" name="menu--name" id="premium-items">
             <label for="premium-items">프리미엄관</label>
              -->
-            <!--  많이 본 경매  -->
+            <!--  인기 경매  -->
             <div class="menu-box content1">
-                <ul class="items__list product">
-                <% if(!mainlist.isEmpty()){
-            		loop : for(int i = 0; i < mainlist.size(); i++){%>	       	
+                <ul class="items__list popular">
+                <% if(!popularList.isEmpty()){
+            		loop : for(int i = 0; i < popularList.size(); i++){%>	       	
 		            <%for(int j = i; j < i + 4; j++) {
-						if(j == mainlist.size()) {
+						if(j == popularList.size()) {
 							break loop;
 						}
 						
-						ProductVO mainVo = (ProductVO)mainlist.get(j);
+						ProductVO popularVo = (ProductVO)popularList.get(j);
 		            %> 
                  	 <li>
-                    	<a href="/alltion/boarddetail.hs?product_number=<%=mainVo.getProduct_number() %>">
+                    	<a href="/alltion/boarddetail.hs?product_number=<%=popularVo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=mainVo.getProduct_img_1() %>><br>
+                               <img src=<%=popularVo.getProduct_img_1() %>><br>
                             </div>
-                            <div class="items__product--info product">
-                                <p class="product_name"><%=mainVo.getProduct_subject() %></p>
+                            <div class="items__product--info popular">
+                                <p class="product_name"><%=popularVo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=mainVo.getProduct_end_date() %></span>
+                                <span class="countdown"><%=popularVo.getProduct_end_date() %></span>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=mainVo.getProduct_current_price() %> 원</p>
+                                    <p class="current_price"><%=popularVo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=mainVo.getProduct_purchase_price() %> 원</p>
+                                    <p class="direct_price"><%=popularVo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
@@ -113,32 +108,32 @@ pageEncoding="UTF-8"%>
             	}%>
                 </ul>
             </div>
-            <!--  마감 임박  -->
+            <!--  실시간 경매  -->
             <div class="menu-box content2">
-                <ul class="items__list deadline">
-                <% if(!cateList.isEmpty()){
-            		loop : for(int i = 0; i < cateList.size(); i++){%>	   
+                <ul class="items__list recent">
+                <% if(!recentList.isEmpty()){
+            		loop : for(int i = 0; i < recentList.size(); i++){%>	   
 			            <%for(int j = i; j < i + 4; j++) {
-							if(j == cateList.size()) {
+							if(j == recentList.size()) {
 								break loop;
 							}
 							
-							ProductVO cateVo = (ProductVO)cateList.get(j);
+							ProductVO recentVo = (ProductVO)recentList.get(j);
 			            %>
                  	 <li>
-                    	<a href="/alltion/boarddetail.hs?product_number=<%=cateVo.getProduct_number() %>">
+                    	<a href="/alltion/boarddetail.hs?product_number=<%=recentVo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=cateVo.getProduct_img_1() %>><br>
+                               <img src=<%=recentVo.getProduct_img_1() %>><br>
                             </div>
-                            <div class="items__product--info deadline">
-                                <p class="product_name"><%=cateVo.getProduct_subject() %></p>
+                            <div class="items__product--info recent">
+                                <p class="product_name"><%=recentVo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=cateVo.getProduct_end_date() %></span>
+                                <span class="countdown"><%=recentVo.getProduct_end_date() %></span>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=cateVo.getProduct_current_price() %> 원</p>
+                                    <p class="current_price"><%=recentVo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=cateVo.getProduct_purchase_price() %> 원</p>
+                                    <p class="direct_price"><%=recentVo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
@@ -153,32 +148,32 @@ pageEncoding="UTF-8"%>
                 </ul>
 
             </div>
-            <!--  인기 경매  -->
+            <!--  마감 임박  -->
             <div class="menu-box content3">
-                <ul class="items__list resell">
-                <% if(!viewList.isEmpty()){
-            		loop : for(int i = 0; i < viewList.size(); i++){%>	       	
+                <ul class="items__list deadline">
+                <% if(!closeDeadlineList.isEmpty()){
+            		loop : for(int i = 0; i < closeDeadlineList.size(); i++){%>	       	
 		            <%for(int j = i; j < i + 4; j++) {
-						if(j == viewList.size()) {
+						if(j == closeDeadlineList.size()) {
 							break loop;
 						}
 						
-						ProductVO viewVo = (ProductVO)viewList.get(j);
+						ProductVO closeDeadlineVo = (ProductVO)closeDeadlineList.get(j);
 		            %> 
 	            	<li>
-                    	<a href="/alltion/boarddetail.hs?product_number=<%=viewVo.getProduct_number() %>">
+                    	<a href="/alltion/boarddetail.hs?product_number=<%=closeDeadlineVo.getProduct_number() %>">
                             <div class="product-box">
-                               <img src=<%=viewVo.getProduct_img_1() %>><br>
+                               <img src=<%=closeDeadlineVo.getProduct_img_1() %>><br>
                             </div>
-                            <div class="items__product--info product">
-                                <p class="product_name"><%=viewVo.getProduct_subject() %></p>
+                            <div class="items__product--info deadline">
+                                <p class="product_name"><%=closeDeadlineVo.getProduct_subject() %></p>
                                 <span class="material-icons timer">timer</span>
-                                <span class="countdown"><%=viewVo.getProduct_end_date() %></span>
+                                <span class="countdown"><%=closeDeadlineVo.getProduct_end_date() %></span>
                                 <div class="price-txt">
                                     <p class="price_text">현재가</p>
-                                    <p class="current_price"><%=viewVo.getProduct_current_price() %> 원</p>
+                                    <p class="current_price"><%=closeDeadlineVo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=viewVo.getProduct_purchase_price() %> 원</p>
+                                    <p class="direct_price"><%=closeDeadlineVo.getProduct_purchase_price() %> 원</p>
                                 </div>
                             </div>
                         </a>
