@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%
-	String url = (String)request.getAttribute("url");
+	int product_number  = (int)request.getAttribute("product_number");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -95,8 +95,8 @@ pageEncoding="UTF-8"%>
     </div>
 	<div id="kakao-talk-channel-chat-button" style='display: none;'></div>
 	<form name = "login" action = "./login1.kj" method = "post">   
-	<input type="hidden" name="url" value="${url }">
-    <!-- 로그인 영역 by 계정 -->
+	<!-- 로그인 영역 by 계정 -->
+	<input type="hidden" name="product_number" value="<%=product_number %>">
 	<div class="login">
         <div class="login-screen">
             <div class="app-title">

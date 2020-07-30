@@ -186,18 +186,18 @@ public class MemberController {
 			return res;
 		}
 
-		//TEST 상세페이지에서 로그인한뒤 상세페이지로 되돌아오는것.
+		//상세페이지에서 로그인한뒤 상세페이지로 되돌아오는것.
 		
 		@RequestMapping(value = "/loginForm1.kj")
-		public String login2Page(HttpServletRequest request,Model model)
+		public String login2Page(@RequestParam(value="product_number")int product_number,Model model)throws Exception
 		{
-			model.addAttribute("url",request.getHeader("referer"));
+			model.addAttribute("product_number",product_number);
 			return "detail_page/login2";
 		}
 		
 		@RequestMapping("/login1.kj")
 		public String user2Check(MemberVO membervo, HttpSession session,
-				HttpServletResponse response,@RequestParam(value="url")String url) throws Exception
+				HttpServletResponse response,@RequestParam(value="product_number")String product_number) throws Exception
 		{
 			
 			int res = memberService.userCheck(membervo);
@@ -208,14 +208,13 @@ public class MemberController {
 			if (res == 1)
 			{
 				session.setAttribute("userId",membervo.getMember_id());
-				String redirect = url.substring(30);
 				
-				return "redirect:/"+redirect;
+				return "redirect:/boarddetail.hs?product_number="+product_number;
 			}
 			else 	
 			{
 					
-				writer.write("<script>alert('해당 아이디와 비밀번호를 확인해 주세요!!');location.href='./loginForm.kj';</script>");
+				writer.write("<script>alert('해당 아이디와 비밀번호를 확인해 주세요!!');location.href='./loginForm1.kj?product_number="+product_number+"';</script>");
 				
 			}
 			return null;
