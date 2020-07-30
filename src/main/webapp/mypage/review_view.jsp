@@ -11,13 +11,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/main_style.css?after">
     <link rel="stylesheet" href="./resources/css/review_view.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
     
 </head>
@@ -26,7 +24,7 @@
     <div class="header">
         <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
-    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
+    
     <!-- 메인 내용 -->
     <div class="main_body">
         <div class="bidding_title">
@@ -152,7 +150,5 @@
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./resources/js/common.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

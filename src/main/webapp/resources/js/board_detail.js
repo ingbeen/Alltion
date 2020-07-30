@@ -202,7 +202,7 @@ let sessionid = parametervalue.sessionid;
 var click = true;
 
 // ↓↓응찰하기 버튼 클릭시
-	function bidList(bid_nowpage){
+function bidList(bid_nowpage){
 	$.ajax({
 		url : '/alltion/bid_list.hs',
 		type : 'post',
@@ -232,7 +232,7 @@ var click = true;
 	});
 }
 	
-	$("#bid_btn").off("click").on('click',function(){
+$("#bid_btn").off("click").on('click',function(){
 	if(click){
 		click = !click;
 		$.ajax({
@@ -264,7 +264,7 @@ var click = true;
 	}
 });
 
-	$("#bid_btn2").off("click").on('click',function(){
+$("#bid_btn2").off("click").on('click',function(){
 	if(click){	
 		click = !click;
 			$.ajax({
@@ -296,7 +296,7 @@ var click = true;
 });
 
 //경매등록자 아이디
-let writerId = '<%=writerId%>'; 
+let writerId = parametervalue.writerId; 
 let List_size = 0;
 function commentList(comment_nowpage){
 	
