@@ -88,9 +88,10 @@ String tab = (String)request.getAttribute("tab");
                             <div class="row fs18 fcBlack">
                                 <strong>출금 가능 이머니</strong>
                             </div>
-                            <div class="row fs18 fcBlue text-right">
-                                <strong>0&nbsp;원</strong>
-                                &nbsp;&nbsp;&nbsp;<a href="/alltion/pay.ms" class="btn btn-blue-green w60">출금</a>
+                            <div class="root row fs18 fcBlue text-right">
+                            	<div class="intro"></div>
+                                <strong>${currentMoney}&nbsp;원</strong>
+                                &nbsp;&nbsp;&nbsp;<button id="modal_opne_btn" class="btn btn-blue-green w60">출금</button>
                             </div>
                             <div class="row fs14 fcBlue text-center">
                                 카드충전 잔액: <strong>0&nbsp;원</strong>
@@ -104,7 +105,23 @@ String tab = (String)request.getAttribute("tab");
                     </div>
                 </div>
             </div>
-	
+	<!-- Moa Modal-->
+	<div id="modal">
+   
+	<div class="modal_content">
+        <h3>출금하실 e머니를 입력해주세요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="modal_close_btn">&times;</button></h3>
+	    <form name="outMoney" action="outMoney.ms">
+	    	<input type="text" name="money" style="border: 1px solid black;width: 300px;padding: 10px;margin-top: 15px;">
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<input type="submit" id="modal_close_btn" value="출 금">
+	    </form>
+       
+        <!-- <button type="button" id="modal_close_btn">모달 창 닫기</button> -->
+       
+    </div>
+   
+    <div class="modal_layer"></div>
+	</div>
 	<!-- 조회 테이블 -->
 	<div class="wrapper">
 		<div id="cTabs" class="cTabs cf">
@@ -350,6 +367,7 @@ String tab = (String)request.getAttribute("tab");
 	</div>
 	</div>
 	</div>
+
 	<!-- 푸터 영역 -->
 	<div class="footer">
 		<div class="upper_footer">
@@ -439,5 +457,14 @@ String tab = (String)request.getAttribute("tab");
 			'tabNavContainer' : '#cTabs'
 		});
 	});
+</script>
+<script>
+    document.getElementById("modal_opne_btn").onclick = function() {
+        document.getElementById("modal").style.display="block";
+    }
+   
+    document.getElementById("modal_close_btn").onclick = function() {
+        document.getElementById("modal").style.display="none";
+    }
 </script>
 </html>
