@@ -178,6 +178,16 @@ public class MemberController {
 			String sale_id = request.getParameter("member_id");
 			int purchase = memberService.insertpurchase(PurchaseCreditScorevo,purchase_id);
 			int sale = memberService.insertsale(SaleCreditScorevo,sale_id);
+			String pay_id = request.getParameter("member_id");
+			String findPay_id = payService.findPayid(pay_id);
+			if (findPay_id == null) {
+				payService.insertPaylist(pay_id);
+			}
+			String currentMoney = payService.findCurrentMoney(pay_id);
+			if (currentMoney == null) {
+				currentMoney = "0";
+				payService.changeMoney(pay_id, currentMoney);
+			}
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter writer = response.getWriter();
