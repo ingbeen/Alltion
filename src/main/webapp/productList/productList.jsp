@@ -163,7 +163,11 @@
                                         <p class="price_text">현재가</p>
                                         <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                         <p class="price_text">즉시 구매가</p>
-                                        <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                        <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        	<p class="direct_price">없음</p>
+                                        <%}else { %>
+                                        	<p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                        <%} %>
                                     </div>
                                 </div>
                             </a>
@@ -196,7 +200,11 @@
                                     <p class="price_text">현재가</p>
                                     <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <p class="direct_price">없음</p>
+                                    <%}else { %>
+                                        <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
@@ -228,7 +236,11 @@
                                     <p class="price_text">현재가</p>
                                     <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <p class="direct_price">없음</p>
+                                    <%}else { %>
+                                        <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
@@ -290,7 +302,11 @@
                                     <p class="price_text">현재가</p>
                                     <p class="current_price"><%=vo.getProduct_current_price() %> 원</p>
                                     <p class="price_text">즉시 구매가</p>
-                                    <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <p class="direct_price">없음</p>
+                                    <%}else { %>
+                                        <p class="direct_price"><%=vo.getProduct_purchase_price() %> 원</p>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
