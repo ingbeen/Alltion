@@ -34,4 +34,5 @@ public interface TestMapper {
 	public String findSubjectFromNum(@Param(value="product_number")int product_number);
 	public int updatetrading_transaction_method(Product_kjVO Product_kjvo, @Param(value="trading_transaction_method") String trading_transaction_method, @Param(value="product_number")int product_number);
 	
+
 }

@@ -19,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import com.spring.alltion.creditScore.PurchaseCreditScoreVO;
+import com.spring.alltion.creditScore.SaleCreditScoreVO;
+
 import com.spring.alltion.main.MainController;
 import com.spring.alltion.pay.PayService;
+
 
 
 
@@ -158,24 +163,34 @@ public class MemberController {
 			return "member/joinForm";
 		}
 		@RequestMapping("/joinprocess.kj") 
-		public String insertMember(MemberVO membervo, HttpServletResponse response) 
+		public String insertMember(MemberVO membervo, PurchaseCreditScoreVO PurchaseCreditScorevo, SaleCreditScoreVO SaleCreditScorevo, 
+				HttpServletRequest request,HttpServletResponse response) 
 			throws Exception { 
 			//파라미터에는 form 양식의 name에 따라 값이 저장된다.\
 			int res = memberService.insertMember(membervo);
 			
-			
+			String purchase_id = request.getParameter("member_id");
+			String sale_id = request.getParameter("member_id");
+			int purchase = memberService.insertpurchase(PurchaseCreditScorevo,purchase_id);
+			int sale = memberService.insertsale(SaleCreditScorevo,sale_id);
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter writer = response.getWriter();
 			if (res != 0)
 			{
-				writer.write("<script>alert('회원가입 성공!!');"
-						+ "location.href='./loginForm.kj';</script>");
-			}
-			else
-			{
+				if(purchase != 0)
+				{
+					if(sale != 0)
+					{
+							writer.write("<script>alert('회원가입 성공!!');"
+							+ "location.href='./loginForm.kj';</script>");
+					}
+					else
+					{
 				writer.write("<script>alert('회원가입 실패!!');"
 						+ "location.href='./joinForm.kj';</script>");
+					}
+				}
 			}
 			return null;
 		}

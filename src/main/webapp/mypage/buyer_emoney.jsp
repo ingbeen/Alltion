@@ -99,7 +99,7 @@
                     </div>             
                     </form>
                     </div>  
-					<form name = "buyer_deal_update" action = "./buyer_deal_update.kj" method = "post">
+               <form name = "buyer_deal_update" action = "./buyer_deal_update.kj" method = "post">
                           <div id="update_address_deal" class="modal">
                              <div class="modal-content">
                              <span class="close">&times;</span>
