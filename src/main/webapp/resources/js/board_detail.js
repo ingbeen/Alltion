@@ -555,11 +555,35 @@ function classcolor(){
 function togologin(){
 	var togologin = confirm("로그인 하시겠습니까?");
 	if(togologin==true){
-		location.href = "./loginForm.kj"
+		location.href = "./loginForm.kj";
 	}else{
 		return false;
 	}
 }
+
+//로그인이 안된상태에서 응찰하기/즉시구매하기/찜목록 버튼 클릭시 실행
+$(".no_login").off("click").on('click',function(){
+	if(click){
+		click = !click;
+		no_login();
+		//타이밍 추가
+		setTimeout(function(){
+			click=true;
+		},1000);
+	}else{
+		console.log("중복됨");
+	}
+});
+
+function no_login(){
+	var no_login = confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?");
+	if(no_login==true){
+		location.href = "./loginForm1.kj?product_number="+bno;
+	}else{
+		return false;
+	}
+}
+
 
 //남은시간 카운팅
 var _second = 1000; // 1초
