@@ -313,7 +313,7 @@ public class buyerController {
       response.setCharacterEncoding("utf-8");
       response.setContentType("text/html; charset=utf-8");
       PrintWriter writer = response.getWriter();
-      
+      int address = testservice.update_trading_address(Product_kjvo);
       String userId = (String)session.getAttribute("userId");
       int trading_product_number = Integer.parseInt(request.getParameter("trading_product_number"));
       String trading_buyer_id = (String)request.getParameter("trading_buyer_id");
@@ -331,10 +331,12 @@ public class buyerController {
             int res = testservice.after_deposit(Product_kjvo,trading_product_number,trading_buyer_id);
             if(res != 0)
             {   
+            	if(address != 0) {
                String result = minusMoney(userId, Product_kjvo.getTrading_price(), Product_kjvo.getProduct_subject());
                session.setAttribute("currentMoney", result);
                writer.write("<script>alert('결제가 완료되었습니다');"
                + "location.href='/alltion/buyer.kj?product_page=1';</script>");
+            	}
             }
          }
          else
