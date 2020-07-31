@@ -35,7 +35,53 @@ public class Product_kjVO {
 	 
 	 String trading_waybill_number;
 	 
-	 int emoney;
+	String product_img_1;
+	String product_img_2; 
+	String product_img_3;
+	String product_img_4; 
+	String product_img_5;
+	 
+	 public String getProduct_img_1() {
+		return product_img_1;
+	}
+
+	public void setProduct_img_1(String product_img_1) {
+		this.product_img_1 = product_img_1;
+	}
+
+	public String getProduct_img_2() {
+		return product_img_2;
+	}
+
+	public void setProduct_img_2(String product_img_2) {
+		this.product_img_2 = product_img_2;
+	}
+
+	public String getProduct_img_3() {
+		return product_img_3;
+	}
+
+	public void setProduct_img_3(String product_img_3) {
+		this.product_img_3 = product_img_3;
+	}
+
+	public String getProduct_img_4() {
+		return product_img_4;
+	}
+
+	public void setProduct_img_4(String product_img_4) {
+		this.product_img_4 = product_img_4;
+	}
+
+	public String getProduct_img_5() {
+		return product_img_5;
+	}
+
+	public void setProduct_img_5(String product_img_5) {
+		this.product_img_5 = product_img_5;
+	}
+
+	int emoney;
 
 	public int getProduct_number() {
 		return product_number;

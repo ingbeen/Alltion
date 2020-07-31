@@ -136,13 +136,14 @@ public class testServiceImpl implements testService{
 	}
 
 	@Override
-	public int insertReview(ReviewVO Reviewvo) {
+	public int insertReview(ReviewVO Reviewvo,int trading_product_number) {
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
 		int review_no = detailmapper.getReviewCount(Reviewvo.getReview_id())+1;
 		Reviewvo.setReview_no(review_no);
 		
 		int res = testMapper.insertReview(Reviewvo);
+		testMapper.update_trading_progress(trading_product_number);
 		
 		return res;
 	}
@@ -159,6 +160,7 @@ public class testServiceImpl implements testService{
 		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
 		return testMapper.updatetrading_transaction_method(Product_kjvo,trading_transaction_method, product_number);
 	}
+
 
 
 
