@@ -93,9 +93,6 @@ String tab = (String)request.getAttribute("tab");
                                 <strong>${currentMoney}&nbsp;원</strong>
                                 &nbsp;&nbsp;&nbsp;<button id="modal_opne_btn" class="btn btn-blue-green w60">출금</button>
                             </div>
-                            <div class="row fs14 fcBlue text-center">
-                                카드충전 잔액: <strong>0&nbsp;원</strong>
-                            </div>
                         </div>
                     </div>
                     <div class="row clearfix visible-md visible-lg">
@@ -109,11 +106,14 @@ String tab = (String)request.getAttribute("tab");
 	<div id="modal">
    
 	<div class="modal_content">
-        <h3>출금하실 e머니를 입력해주세요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="modal_close_btn">&times;</button></h3>
+        <h3>출금하실 e머니를 입력해주세요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="modal_close_btn" style="color: #BBBBBB; float: right; font-size: 30px;
+    font-weight: bold;
+    background-color: white;">&times;</button></h3>
 	    <form name="outMoney" action="outMoney.ms">
 	    	<input type="text" name="money" style="border: 1px solid black;width: 300px;padding: 10px;margin-top: 15px;">
-	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<input type="submit" id="modal_close_btn" value="출 금">
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<input type="submit" id="modal_close_btn" value="출 금" style="width: 44px; height: 40px; background: #2ea5b9; border: 1px #2ea5b9 solid; color: #fff !important;>
+">
 	    </form>
        
         <!-- <button type="button" id="modal_close_btn">모달 창 닫기</button> -->
