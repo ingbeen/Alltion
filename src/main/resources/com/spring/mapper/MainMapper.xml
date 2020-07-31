@@ -39,6 +39,7 @@
 	<select id="getPopularList" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		SELECT
+		product_bids,
 		product_number, 
 		product_subject, 
 		product_img_1,
@@ -58,7 +59,8 @@
 	
 	<select id="getRecentList" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
-			select 
+			select
+			product_bids,
 			product_number, 
 			product_subject, 
 			product_img_1,
@@ -80,6 +82,7 @@
 	<select id="getCloseDeadlineList" resultType="com.spring.alltion.productRegistration.ProductVO">
 	<![CDATA[
 		SELECT
+		product_bids,
 	    product_number, 
 	    product_subject, 
 	    product_img_1,
