@@ -31,9 +31,9 @@ public interface testService {
 		public int update_deal_address(MemberVO membervo);
 		public int deliverycomplete(Product_kjVO Product_kjvo,int product_number);	
 		
-		public int insertReview(ReviewVO Reviewvo);		
+		public int insertReview(ReviewVO Reviewvo, int trading_product_number);		
 		public String findSubjectFromNum(int product_number);		
 		public int updatetrading_transaction_method(Product_kjVO Product_kjvo, String trading_transaction_method, int product_number);
-
+		
 
 }

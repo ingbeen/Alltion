@@ -1,7 +1,6 @@
 package com.spring.alltion.test;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.alltion.creditScore.CreditScoreService;
@@ -21,7 +21,6 @@ import com.spring.alltion.creditScore.SaleCreditScoreVO;
 import com.spring.alltion.detailpage.ReviewVO;
 import com.spring.alltion.login.MemberService;
 import com.spring.alltion.login.MemberVO;
-import com.spring.alltion.pay.PayController;
 import com.spring.alltion.pay.PayService;
 import com.spring.alltion.pay.PaymentVO;
 @Controller
@@ -36,6 +35,7 @@ public class buyerController {
    @Autowired
    private PayService payService;
    
+   //구매 페이지 리스트
    @RequestMapping(value = "/buyer.kj")
    public String getProductlist(Model model, HttpSession session,HttpServletRequest request)
    throws Exception
@@ -63,21 +63,21 @@ public class buyerController {
       return  "mypage/buyer";
       }
    }
-   
+   //구매 페이지 구매중인 경매 ajax
    @RequestMapping(value = "product_page.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> product_list_page(int page, HttpSession session) {
       List<Product_kjVO> product_list = testservice.getProductlist((String)session.getAttribute("userId"));
       return product_list;
    }
-   
+   //구매 페이지 운송장 번호 받기전 배송대기 경매 ajax
    @RequestMapping(value = "before_page.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> delivery_before_page(int page, HttpSession session){
       List<Product_kjVO> delivery_before_list = testservice.getdelivery_before((String)session.getAttribute("userId"));
       return delivery_before_list;
    }
-   
+   //판매 페이지 판매 대기경매 ajax
    @RequestMapping(value = "wait_sell.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> wait_sell_page(int page, HttpSession session)
@@ -85,7 +85,7 @@ public class buyerController {
       List<Product_kjVO> getdeposit_before_list = testservice.getdeposit_before((String)session.getAttribute("userId"));
       return getdeposit_before_list;
    }
-   
+   //판매중인 경매 ajax
    @RequestMapping(value = "sell.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> sell_page(int page, HttpSession session)
@@ -93,7 +93,7 @@ public class buyerController {
       List<Product_kjVO> sell_list = testservice.getSalelist((String)session.getAttribute("userId"));
       return sell_list;
    }
-   
+   //구매 페이지 운송장 번호 확인 ajax
    @RequestMapping(value = "delivery_complete.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> complete_page(int page, HttpSession session)
@@ -101,7 +101,7 @@ public class buyerController {
       List<Product_kjVO> complete_list = testservice.getdeliveryList((String)session.getAttribute("userId"));
       return complete_list;
    }
-   
+   //구매 페이지 최종 구매확인 ajax
    @RequestMapping(value = "complete_buyer.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> complete_buyer(int page, HttpSession session)
@@ -109,7 +109,7 @@ public class buyerController {
       List<Product_kjVO> delivery_complete_list = testservice.getdealcomplete_buyer((String)session.getAttribute("userId"));
       return delivery_complete_list;
    }
-   
+   //판매 페이지 최종 판매확인 ajax
    @RequestMapping(value = "sale_complete.bo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
    @ResponseBody
    public List<Product_kjVO> sale_complete_page(int page, HttpSession session)
@@ -119,7 +119,7 @@ public class buyerController {
    }
    
    
-   
+   //판매 페이지 리스트
    @RequestMapping(value = "/seller.kj")
    public String getSeller(Model model, HttpSession session)
    throws Exception
@@ -164,7 +164,7 @@ public class buyerController {
       
    }
    
-   
+   //판매 페이지 운송장 번호 입력 
    @RequestMapping(value = "/insert_waybill.kj")
    public String insertwaybill(Product_kjVO Product_kjvo , HttpServletResponse response,  HttpSession session) 
          throws Exception
@@ -193,18 +193,25 @@ public class buyerController {
       return null;
       }
    }
-   
+   //구매 페이지 운송장 번호 확인후 최종 구매 
    @RequestMapping(value = "/delivery.kj")
-   public String deliverycomplete(Product_kjVO Product_kjvo , HttpServletResponse response,  HttpSession session,HttpServletRequest request)
+   public String deliverycomplete(Product_kjVO Product_kjvo , HttpServletResponse response,  HttpSession session,HttpServletRequest request,
+		   PurchaseCreditScoreVO purchasevo, SaleCreditScoreVO salevo,@RequestParam(value="product_id")String product_id,@RequestParam(value="product_number")int product_number)
    throws Exception
    {
       String userId = (String)session.getAttribute("userId");
+      purchasevo.setPurchase_id(userId);
+      System.out.println("Product_kjvo.getProduct_id : " + product_id);
+      
+      String sale_id = Product_kjvo.getProduct_id();
+      salevo.setSale_id(sale_id);    
       response.setCharacterEncoding("utf-8");
       response.setContentType("text/html; charset=utf-8");
       PrintWriter writer = response.getWriter();
-      int product_number = Integer.parseInt(request.getParameter("product_number"));
+  
       int res = testservice.deliverycomplete(Product_kjvo,product_number); // 거래중 -> 거래완료
-      System.out.println("res : " + res);
+      int sale = creditScoreService.saleNormalCount(salevo);
+      int purchase = creditScoreService.purchaseNormalCount(purchasevo);
       if(userId == null)
       {
          return "member/login";
@@ -218,17 +225,21 @@ public class buyerController {
          int amount = delivery_list.get(0).getTrading_price();
          String subject = delivery_list.get(0).getProduct_subject();
          String result = plusMoney(id, amount, subject);
+         if(sale != 0) {
+        	 if(purchase != 0) {
          writer.write("<script>alert('구매가 완료되었습니다');"
          + "location.href='/alltion/buyer.kj';</script>");
-      }
+        	 					}
        else 
-      {
+       		{
          writer.write("<script>alert('구매가  실패하였습니다!!');location.href='./waybill.kj';</script>");
+       		}
+         }
       }
       return null;
       }
    }
-   
+   //구매 페이지 거래 방식 선택
    @RequestMapping(value = "/trading_transaction.kj")
     public String trading_transaction(Product_kjVO  Product_kjvo, HttpSession session ,HttpServletResponse response,HttpServletRequest request)throws Exception
     {
@@ -261,7 +272,7 @@ public class buyerController {
        
        return null;
     }
-   
+   //구매 페이지 자신의 이머니 정보를 불러옴
    @RequestMapping(value = "/buyer_emoney.kj")
    public String emoney(Model model,HttpSession session,HttpServletRequest request)
    throws Exception
@@ -294,7 +305,7 @@ public class buyerController {
           return "mypage/buyer_emoney";
       }
    }   
-   
+   //구매 페이지 이머니를 통한 구매 결재
    @RequestMapping(value = "/buyer_deal.kj")
    public String deal(Product_kjVO  Product_kjvo, Model model, HttpSession session, HttpServletResponse response ,HttpServletRequest request)throws Exception
    {
@@ -335,6 +346,7 @@ public class buyerController {
       }            
          return null;
       }
+   	  //구매 페이지 구매자의 주소 변경
       @RequestMapping(value = "/buyer_deal_update.kj") 
       public String address_update(MemberVO membervo, HttpSession session ,HttpServletResponse response)throws Exception
       {
@@ -441,25 +453,28 @@ public class buyerController {
          }
          return result;
       }
-      
+      //구매 페이지 리뷰 작성
       @RequestMapping("/review.kj")
-      public String insertReview(ReviewVO Reviewvo, HttpServletResponse response,HttpSession session)
+      public String insertReview(ReviewVO Reviewvo, HttpServletResponse response,HttpSession session,HttpServletRequest request,@RequestParam(value="trading_product_number")int trading_product_number)
       throws Exception{
          
-         int res = testservice.insertReview(Reviewvo);
+         int res = testservice.insertReview(Reviewvo,trading_product_number);
          response.setCharacterEncoding("utf-8");
          response.setContentType("text/html; charset=utf-8");
          PrintWriter writer = response.getWriter();
          if (res != 0)
          {
-            writer.write("<script>alert('리뷰 작성!!');"
+        	 
+             writer.write("<script>alert('리뷰 작성!!');"
                   + "location.href='./buyer.kj';</script>");
+        	 
          }
          else
          {
             writer.write("<script>alert('리뷰작성 실패!!');"
                   + "location.href='./buyer.kj';</script>");
          }
+         
          return null;
       }
 
