@@ -104,7 +104,7 @@
         <div class="page_btns" id = "buyer_complete_page_list" align="center"></div>  
         
         <form name = "review<%=i %>" action = "./review.kj" method = "post">
-       <div id="member_update_modal_email" class="modal">
+        <div id="member_update_modal_email" class="modal">
                                       <div class="modal-content">
                                           <span class="close">&times;</span>
                                           <fieldset id="member_update">
@@ -131,9 +131,9 @@
                                                   <input type = "checkbox" name = "review_evaluate" id = "review_evaluate" value = "매우불만족" onclick="oneCheckbox(this)">&nbsp;매우불만족&nbsp;&nbsp;&nbsp;
                                                   <br>
                                                   <br>
-                                        <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
-                                        <br>
-                                        <a href="javascript:review<%=i %>.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;
+                                       			 <textarea id = "review_content" name = "review_content" style="width:100%;height:100px;border-style : solid;border-width : 1px; resize: none;"></textarea>
+                                        		 <br>
+                                       			 <a href="javascript:review<%=i %>.submit()" class="base_btn">리뷰 작성</a>&nbsp;&nbsp;
 
                                                  </li>   
                                     
@@ -519,7 +519,7 @@
                   
                   output += '</div>';
                   
-                  output += '<a href = "./delivery.kj?product_number=' + item.product_number + '" class = "base_btn" >입금 하기</a>';
+                  output += '<a href = "./delivery.kj?product_number=' + item.product_number + '" class = "base_btn" >거래 완료</a>';
                   }
                   $("#delivery_complete_list").append(output);
                   });

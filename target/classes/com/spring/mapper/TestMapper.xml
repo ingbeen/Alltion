@@ -247,9 +247,10 @@
        </selectKey>
        
        insert into review
-       (review_id,review_evaluator,review_evaluate,review_subject,review_content,review_date)
+       (review_number,review_id,review_evaluator,review_evaluate,review_subject,review_content,review_date)
        values
        (
+       #{review_number},
        #{review_id},
        #{review_evaluator},
        #{review_evaluate},

@@ -267,9 +267,7 @@ public class buyerController {
    throws Exception
    {
       String userId = (String)session.getAttribute("userId");
-      System.out.println("userId : " + userId);
       int product_number = Integer.parseInt(request.getParameter("product_number"));
-      System.out.println("product_number : " + product_number);
       if(userId == null)
       {
          return "member/login";
@@ -277,14 +275,17 @@ public class buyerController {
       else
       {
          Test_emoneyVO emoneyvo = testservice.selectEmoney(userId);
-         model.addAttribute("emoneyvo", emoneyvo);         
+         model.addAttribute("emoneyvo", emoneyvo); 
+         
          Product_kjVO  Product_kjvo = testservice.selectProduct(userId,product_number);
+         
          String product_subject = testservice.findSubjectFromNum(product_number);
-         System.out.println("product_subject : " + product_subject);
          Product_kjvo.setProduct_subject(product_subject);
          model.addAttribute("Product_kjvo", Product_kjvo);
+         
          MemberVO membervo = memberService.selectMember(userId);
          model.addAttribute("membervo", membervo);
+         
          String pmvo = payService.findCurrentMoney(userId);
           if (pmvo == null) {
              pmvo = "0";
