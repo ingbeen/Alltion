@@ -23,4 +23,5 @@ public interface MemberMapper {
 	public int insertpurchase(PurchaseCreditScoreVO PurchaseCreditScorevo, @Param(value="purchase_id")String purchase_id);
 	public int insertsale(SaleCreditScoreVO SaleCreditScorevo, @Param(value="sale_id")String sale_id);
 	public int AdminCheck(MemberVO membervo);
+	public int getMember_manager(@Param(value="userId")String userId); // 매니저 체크
 }
