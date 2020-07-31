@@ -10,6 +10,7 @@
 	String id = (String)session.getAttribute("userId");
 	// 상품 정보
 	ProductVO productvo = (ProductVO)request.getAttribute("productvo");
+	String category_2_eng = (String)request.getAttribute("category_2_eng");
 	// 판매자 정보
 	String writerId = productvo.getProduct_id();
 	// 판매자 정보
@@ -310,11 +311,14 @@
                     	<button type="button" id="bid_btn2">즉시구매</button>
                     <%} %>
                     <button type="button" id="bid_btn4">찜하기</button>
-                    <a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
+                    <a href=./getCategorylist.ms?product_category_2=<%=category_2_eng%>><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id==null){%>
-					<font><a href="./loginForm1.kj?product_number=<%=productvo.getProduct_number() %>" style="color:cornflowerblue;">로그인</a> 후 이용가능 합니다.</font><br>
+					<button type="button" class="no_login">응찰하기</button>
+					<button type="button" class="no_login">즉시구매</button>
+					<button type="button" class="no_login">찜하기</button>
+					<a href=./getCategorylist.ms?product_category_2=<%=category_2_eng%>><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%}else if(id.equals(productvo.getProduct_id())){ %>
-					<a href="./Mainlist.ms"><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
+					<a href=./getCategorylist.ms?product_category_2=<%=category_2_eng%>><button type="button" id="bid_btn3">목록으로 돌아가기</button></a>
 				<%} %>
 				</div>
 
