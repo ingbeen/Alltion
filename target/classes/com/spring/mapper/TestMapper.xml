@@ -49,7 +49,7 @@
       trading_transaction_method
       from product natural join trading
       where product.product_number = trading.trading_product_number 
-      and trading.trading_progress = 'depositWaiting'
+      and trading.trading_progress = '입금대기'
       and trading_buyer_id = #{userId}
       order by trading_deposit_deadline
       
@@ -65,7 +65,7 @@
       from product
       natural join trading 
       where product.product_number = trading.trading_product_number
-      and trading.trading_progress = 'depositWaiting'
+      and trading.trading_progress = '입금대기'
       and product_id = #{userId}
       order by product_number
 
