@@ -17,6 +17,7 @@
 	 	<result property="sample4_detailAddress" column="sample4_detailAddress"/>
 	 	<result property="member_delete" column="member_delete"/>
 		<result property="member_manager" column="member_manager"/>
+		<result property="member_date" column="member_date"/>
 	 </resultMap>
 	 
 	 <select id="userCheck" parameterType="MemberVO" resultType="int">

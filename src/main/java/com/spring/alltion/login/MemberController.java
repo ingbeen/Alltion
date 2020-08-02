@@ -3,6 +3,7 @@ package com.spring.alltion.login;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.spring.alltion.main.MainController;
+import com.spring.alltion.pay.PayService;
 
 
 
@@ -36,17 +39,28 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
-	@RequestMapping("/")
-	public String main()
+	
+	@Autowired
+	private MainController mainController;
+	
+	@Autowired
+	private PayService payService;
+	
+	// 탭 메뉴에 목록 페이지 끌고 오기	
+	@RequestMapping(value = "/")
+	public String main(Model model)
 	{
-		return "index";
+		mainController.getPopularList(model);
+		mainController.getRecentList(model);
+		mainController.getCloseDeadlineList(model);
+		
+		return "main/index";
 	}
 	
 	@RequestMapping("/main.kj")
 	public String mainPage()
 	{
-		return "index";
+		return "main/index";
 	}
 
 		@RequestMapping(value = "/loginForm.kj")
@@ -57,7 +71,7 @@ public class MemberController {
 		
 		@RequestMapping("/login.kj")
 		public String userCheck(MemberVO membervo, HttpSession session,
-				HttpServletResponse response) throws Exception
+				HttpServletResponse response,HttpServletRequest request) throws Exception
 		{
 			
 			int res = memberService.userCheck(membervo);
@@ -68,7 +82,15 @@ public class MemberController {
 			if (res == 1)
 			{
 				session.setAttribute("userId",membervo.getMember_id());
-				
+
+				String userId = membervo.getMember_id();
+				// currentMoney = 로그인한 사람이 보유한 사이버머니
+				String currentMoney = payService.findCurrentMoney(userId);
+				if (currentMoney == null) {
+					currentMoney = "0";
+				}
+				session.setAttribute("currentMoney", currentMoney);
+
 				return "redirect:/";
 			}
 			else 	
@@ -163,5 +185,45 @@ public class MemberController {
 			int res = memberService.idCheckService(member_id);
 			return res;
 		}
+
+		//상세페이지에서 로그인한뒤 상세페이지로 되돌아오는것.
 		
+		@RequestMapping(value = "/loginForm1.kj")
+		public String login2Page(@RequestParam(value="product_number")int product_number,Model model)throws Exception
+		{
+			model.addAttribute("product_number",product_number);
+			return "detail_page/login2";
+		}
+		
+		@RequestMapping("/login1.kj")
+		public String user2Check(MemberVO membervo, HttpSession session,
+				HttpServletResponse response,@RequestParam(value="product_number")String product_number) throws Exception
+		{
+			
+			int res = memberService.userCheck(membervo);
+			
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			if (res == 1)
+			{
+				session.setAttribute("userId",membervo.getMember_id());
+				String userId = membervo.getMember_id();
+				// currentMoney = 로그인한 사람이 보유한 사이버머니
+				String currentMoney = payService.findCurrentMoney(userId);
+				if (currentMoney == null) {
+					currentMoney = "0";
+				}
+				session.setAttribute("currentMoney", currentMoney);
+				return "redirect:/boarddetail.hs?product_number="+product_number;
+			}
+			else 	
+			{
+					
+				writer.write("<script>alert('해당 아이디와 비밀번호를 확인해 주세요!!');location.href='./loginForm1.kj?product_number="+product_number+"';</script>");
+				
+			}
+			return null;
+		}
+
 }
