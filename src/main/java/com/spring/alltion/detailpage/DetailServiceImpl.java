@@ -1,6 +1,5 @@
 package com.spring.alltion.detailpage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +17,7 @@ public class DetailServiceImpl {
 	private SqlSession sqlSession;
 	
 	//경매 상품 정보 불러오기
-	public ProductVO getDetail(int product_number) {
+	public ProductVO getDetail(int product_number,Model model) {
 		DetailMapper detailmapper = sqlSession.getMapper(DetailMapper.class);
 		ProductVO productvo = detailmapper.getDetail(product_number);
 		// 1차 카테고리 다듬기
@@ -27,6 +26,7 @@ public class DetailServiceImpl {
 		
 		// 2차 카테고리 다듬기
 		String product_category_2 = productvo.getProduct_category_2();
+		model.addAttribute("category_2_eng",product_category_2);
 		productvo.setProduct_category_2(TranslateCate_2(product_category_2));
 		
 		// 거래방법 한글로 다듬기 (택배)

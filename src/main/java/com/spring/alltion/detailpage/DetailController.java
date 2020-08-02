@@ -34,7 +34,7 @@ public class DetailController {
 	public String boardDetail(@RequestParam(value="product_number")int product_number,Model model) {
 		
 		// 상품번호를 통해서 상품 상세 정보를 얻는다.
-		ProductVO productvo = detailService.getDetail(product_number);
+		ProductVO productvo = detailService.getDetail(product_number,model);
 		model.addAttribute("productvo",productvo);
 		
 		// 판매자 정보를 얻는다.
