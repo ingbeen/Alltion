@@ -343,7 +343,7 @@ function fileValidation(file) {
     if (thumbnailCount > 4) { // 이미지는 최대 5장까지만
         alert("이미지는 최대 5장까지 가능합니다");
         return true;
-    } else if (file.size > 3145728) { // 용량 3MB 유효성 검사
+    } else if (file.size > 30145728) { // 용량 3MB 유효성 검사
         alert("업로드 가능한 이미지의 최대용량은 3MB입니다");
         return true;
     } else if (file.type != "image/jpeg") { // 확장자 유효성 검사

@@ -103,7 +103,7 @@ public class ProductServiceImpl implements ProductService {
 			
 			// 파일용량 유효성 검사, 3MB가 넘으면 리턴
 			size = file.getSize();
-			if (size > 3145728) {
+			if (size > 30145728) {
 				out.println(1);
 				out.close();
 				return;
