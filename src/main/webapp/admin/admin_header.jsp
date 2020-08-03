@@ -38,7 +38,7 @@
                 <i class="fas fa-exchange-alt"></i>
                 <span>거래 관리</span>
             </li>
-            <li>
+            <li onclick="location.href='adminPay.yb'">
                 <i class="fas fa-hand-holding-usd"></i>
                 <span>결제 관리</span>
             </li>
@@ -47,7 +47,6 @@
                 <span>카카오톡 채널로 이동</span>
             </li>
         </ul>
-        <div class="sidebar--toggle flex-row"><i class="fa fa-fw fa-angle-left"></i></div>
     </nav>
 
     <!--  스크립트 영역  -->

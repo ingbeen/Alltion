@@ -1,4 +1,4 @@
-/* admin_trading 시작 by.유빈 */
+/* admin_pay 시작 by.유빈 */
 
 let clickCheck = false; // 중복클릭 방지
 
@@ -19,55 +19,65 @@ $(() => {
 });
 
 $(document).ready(() => {
-	getAdminTradingDate(1);
+	getAdminPayDate(1);
 })
 
-function getAdminTradingDate(page) {
+function getAdminPayDate(page) {
 	LoadingWithMask(); // 로딩화면 실행
 	
     let formData = $('#searchForm').serialize();
     formData += "&page=" + page;
     	
     $.ajax({
-        url : "getAdminTradingDate.yb",
+        url : "getAdminPayDate.yb",
         data : formData,
         dataType :"json",
-        success : (adminTradingDate) => {
-        	writeTradingList(adminTradingDate.tradingList);
-        	writeTradingCount(adminTradingDate.listcount);
-        	writePageInfo(adminTradingDate.pagination);
+        success : (adminPayDate) => {
+        	writePayList(adminPayDate);
+        	writePayCount(adminPayDate.listcount);
+        	writePageInfo(adminPayDate.pagination);
+        	commasHandler("on");
         	closeLoadingWithMask(); // 로딩화면 종료
     	},
-        error : () => closeLoadingWithMask() // 로딩화면 종료
+        error : () => {
+        	commasHandler("on");
+        	closeLoadingWithMask(); // 로딩화면 종료
+        }
     });
 }
 
 $(document).on('click','.listSearch--sendSearchBtn', () => {
+	commasHandler("off");
+	
     if (searchFormCheck()) {
+    	commasHandler("on");
         return;
     }
     
-    getAdminTradingDate(1);
+    getAdminPayDate(1);
 });
 
-function searchFormCheck() {
-    const phoneRegexp = /^[0-9]*$/;
-    let searchPhone = $('input[name="adminTradingNumber"]').val();
-    if(!phoneRegexp.test(searchPhone)) {
-        alert("상품번호는 숫자만 입력해주세요");
-        return true;
-    }
+function commasHandler(value) {
+	let adminPayMoney = $("[name='adminPayMoney']");
+	
+	if (value == "on") {
+		adminPayMoney.val(addCommas(adminPayMoney.val()));
+	} else if(value == "off") {
+		adminPayMoney.val(removeCommas(adminPayMoney.val()));
+	}
+}
 
-    let v_startDate = $('input[name="adminTradingStartDate"]').val();
-    let v_endDate = $('input[name="adminTradingEndDate"]').val();
+function searchFormCheck() {
+    let v_startDate = $('input[name="adminPayStartDate"]').val();
+    let v_endDate = $('input[name="adminPayEndDate"]').val();
     
     if (v_startDate.length > 0 ? v_endDate.length == 0 : false) {
-    	alert("등록기간의 날짜를 전부 입력해주세요");
+    	alert("결제기간의 날짜를 전부 입력해주세요");
         return true;
     }
     
     if (v_endDate.length > 0 ? v_startDate.length == 0 : false) {
-    	alert("등록기간의 날짜를 전부 입력해주세요");
+    	alert("결제기간의 날짜를 전부 입력해주세요");
         return true;
     }
     
@@ -75,74 +85,57 @@ function searchFormCheck() {
     let endDate = new Date(v_endDate);
     let subtractDate = endDate - startDate;
     if (subtractDate < 0) {
-        alert("등록기간의 시작하는 날짜는 끝나는날짜보다 빨라야 합니다");
+        alert("결제기간의 시작하는 날짜는 끝나는날짜보다 빨라야 합니다");
         return true;
     }
 
     return false;
 };
 
-function writeTradingList(tradingList) {
-	let adminTradingTable = "";
+function writePayList(adminPayDate) {
+	let adminPayTable = "";
 	
-	adminTradingTable += `
-		<tr class="list--tableHeader">
-		    <th style="width:5%">상품 번호</th>
-		    <th style="width:9%">구매자 아이디</th>
-		    <th style="width:9%">판매자 아이디</th>
-		    <th style="width:7%">거래 가격</th>
-		    <th style="width:9%">입금 기한</th>
-		    <th style="width:9%">운송장번호 입력기한</th>
-		    <th style="width:9%">구매확정기한</th>
-		    <th style="width:6%">거래방식</th>
-		    <th style="width:10%">운송장번호</th>
-		    <th style="width:8%">진행상태</th>
-		    <th style="width:9%">등록일</th>
-		    <th style="width:10%">거래변경</th>
-        </tr>`;
+	let payList = adminPayDate.payList;
+	let payDateList = adminPayDate.payDateList;
 	
-	$.each(tradingList, (idx, vo) => {
-		vo.tradingVO.trading_price = addCommas(vo.tradingVO.trading_price);
-		
-		adminTradingTable += `
-			<tr>
-	            <td class="tdCenter">${vo.tradingVO.trading_product_number}</td>
-	            <td class="tdCenter">${vo.tradingVO.trading_buyer_id}</td>
-	            <td class="tdCenter">${vo.productVO.product_id}</td>
-	            <td class="tdRight">${vo.tradingVO.trading_price}</td>
-	            <td class="tdCenter">${vo.tradingVO.trading_deposit_deadline}</td>
-	            <td class="tdCenter">${vo.tradingVO.trading_waybill_deadline}</td>
-	            <td class="tdCenter">${vo.tradingVO.trading_purchase_deadline}</td>`;
-		
-		if (vo.tradingVO.trading_transaction_method == "선불" ||
-				vo.tradingVO.trading_transaction_method == "착불") {
-			adminTradingTable += `
-				<td class="tdCenter">택배</td>`;
-		} else if (vo.tradingVO.trading_transaction_method == null) {
-			adminTradingTable += `
-				<td class="tdCenter">미정</td>`;
-		} else {
-			adminTradingTable += `
-				<td class="tdCenter">직거래</td>`;
+	$.each(payList, (idx, vo) => {
+		vo.pay_date = payDateList[idx];
+	});
+ 	
+	adminPayTable += `
+            <tr class="list--tableHeader">
+			    <th style="width:14%">결제 번호</th>
+			    <th style="width:14%">아이디</th>
+			    <th style="width:14%">결제 상태</th>
+			    <th style="width:14%">결제 금액</th>
+			    <th style="width:14%">이전 금액</th>
+			    <th style="width:14%">변동 후 금액</th>
+			    <th style="width:16%">결제일</th>
+            </tr>`;
+	
+	$.each(payList, (idx, vo) => {
+		vo.pay_amount = addCommas(vo.pay_amount);
+		vo.pay_lastmoney = addCommas(vo.pay_lastmoney);
+		vo.pay_nowmoney = addCommas(vo.pay_nowmoney);
+		if (vo.pay_status == "paid") {
+			vo.pay_status = "결제"
 		}
 		
-		adminTradingTable += `
-	            <td class="tdCenter">${vo.tradingVO.trading_waybill_number}</td>
-	            <td class="tdCenter">${vo.tradingVO.trading_progress}</td>
-	            <td class="tdCenter">${vo.tradingVO.trading_date}</td>`;
-		
-		adminTradingTable += `
-	            <td class="flex-row list--update">
-		            <button class="list--deadlineExtensionBtn" type="button">기한연장</button>
-		            <button class="list--tradingResetBtn" type="button">초기화</button>
-		        </td>
-	        </tr>`;
+		adminPayTable += `
+			<tr>
+	            <td class="tdCenter">${vo.pay_merchant_uid}</td>
+	            <td class="tdCenter">${vo.pay_id}</td>
+	            <td class="tdCenter">${vo.pay_status}</td>
+	            <td class="tdRight">${vo.pay_amount}</td>
+	            <td class="tdRight">${vo.pay_lastmoney}</td>
+	            <td class="tdRight">${vo.pay_nowmoney}</td>
+	            <td class="tdCenter">${vo.pay_date}</td>`;
 	});
 	
-	$('.list--table').html(adminTradingTable);
+	$('.list--table').html(adminPayTable);
 }
 
-function writeTradingCount(listcount) {
+function writePayCount(listcount) {
 	$('.list--count').html(listcount);
 }
 
@@ -312,9 +305,62 @@ function successTradingReset(tradingVO, tr) {
 	tr.children().eq(9).html(tradingVO.trading_progress);
 }
 
-function addCommas(value) {
-    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g,  ",");
+// 결제금액 input태그 Open, Close 하기
+function changeInput(item) {
+    let value = item.value; // 불가능, 가능
+    let adminPayMoney = $("[name$='adminPayMoney']");
+    
+	if (value == 0) {
+		adminPayMoney.attr("disabled", true);
+		adminPayMoney.addClass('readonlyfalse');
+		adminPayMoney.val('');
+	} else if (value == 1) {
+		adminPayMoney.attr("disabled", false);
+		adminPayMoney.removeClass('readonlyfalse');
+		adminPayMoney.focus();
+	} else if (value == 2) {
+		adminPayMoney.attr("disabled", false);
+		adminPayMoney.removeClass('readonlyfalse');
+		adminPayMoney.focus();
+	}
+    
 }
+
+/* 결제금액 천단위쉼표, 숫자만입력 시작  */
+$("[name$='adminPayMoney']")
+	.on("focus", function () {
+		let value = $(this).val(); // 입력값
+		value = removeCommas(value); // 쉼표제거
+    	$(this).val(value); // 반환
+	})
+	.on("focusout", function () { 
+		let value = $(this).val(); // 입력값
+		if(value && value.length > 0) { // 데이터가 존재하면
+	        if(!$.isNumeric(value)) { // 숫자가 아닌것은 제거
+	        	value = value.replace(/[^0-9]/g, "");
+	        }
+	        value = addCommas(value); // 쉼표추가
+	        $(this).val(value); // 반환
+		}
+	})
+	.on("keyup", function () {
+    $(this).val($(this).val().replace(/[^0-9]/g, "")); // 숫자가 아닌것은 제거
+});
+
+//3자리 단위마다 콤마 생성
+function addCommas(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
+//모든 콤마 제거
+function removeCommas(value) {
+    if(!value || value.length == 0) {
+    	return "";
+    } else {
+    	return value.split(",").join("");
+    }
+}
+/* 결제금액 천단위쉼표, 숫자만입력 끝 */
 
 //로딩화면
 function LoadingWithMask() {
@@ -354,4 +400,4 @@ function closeLoadingWithMask() {
 	$('#mask, #loadingImg').remove(); 
 }
 
-/* admin_trading 끝 by.유빈 */
+/* admin_pay 끝 by.유빈 */

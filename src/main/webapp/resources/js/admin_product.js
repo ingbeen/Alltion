@@ -21,6 +21,8 @@ $(document).ready(() => {
 })
 
 function getAdminProductDate(page) {
+	LoadingWithMask(); // 로딩화면 실행
+	
     let formData = $('#searchForm').serialize();
     formData += "&page=" + page;
 	
@@ -32,8 +34,9 @@ function getAdminProductDate(page) {
         	writeProductList(adminProductDate.productList);
         	writeProductCount(adminProductDate.listcount);
         	writePageInfo(adminProductDate.pagination);
+        	closeLoadingWithMask(); // 로딩화면 종료
     	},
-        error : () => {}
+        error : () => closeLoadingWithMask() // 로딩화면 종료
     });
 }
 
@@ -101,19 +104,19 @@ function writeProductList(productList) {
 			<tr>
 	            <td class="tdCenter">${vo.product_number}</td>
 	            <td><p>${vo.product_subject}</p></td>
-	            <td>${vo.product_id}</td>
-	            <td>${vo.product_category_1}</td>
+	            <td class="tdCenter">${vo.product_id}</td>
+	            <td class="tdCenter">${vo.product_category_1}</td>
 	            <td class="tdRight">${vo.product_current_price}</td>
 	            <td class="tdRight">${vo.product_bids}</td>
-	            <td>${vo.product_end_date}</td>
-	            <td>${vo.product_issue_date}</td>`;
+	            <td class="tdCenter">${vo.product_end_date}</td>
+	            <td class="tdCenter">${vo.product_issue_date}</td>`;
 		
 		if (vo.product_progress == 0) {
 			adminProductTable += `
-				<td>진행중</td>`;
+				<td class="tdCenter">진행중</td>`;
 		} else if (vo.product_progress == 1) {
 			adminProductTable += `
-				<td>마감</td>`;
+				<td class="tdCenter">마감</td>`;
 		}
 		
 		adminProductTable += `
@@ -193,8 +196,6 @@ $(document).on('click', '.list--nonActive', (e) => {
 	getAdminProductDate(page);
 });
 
-let originData = [];
-
 $(document).on('click','.list--productEndBtn', function() {
 	let result = confirm("마감된 경매는 되돌리지 못합니다\n정말로 경매를 마감 하시겠습니까?");
 	if(!result) {
@@ -225,6 +226,44 @@ function successProductEnd(newProductVO, tr) {
 
 function addCommas(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g,  ",");
+}
+
+//로딩화면
+function LoadingWithMask() {
+	// 화면의 높이와 너비를 구한다
+	let maskHeight = $(document).height();
+	let maskWidth  = window.document.body.clientWidth;
+	 
+	// 화면에 출력할 마스크를 설정
+	let mask       = ' \
+		<div id="mask" style=" \
+		    	position:absolute; \
+		    	z-index:999999; \
+		    	background-color:#000000; \
+		    	left:0; \
+		    	top:0;"> \
+		</div>';
+	
+	// 화면에 출력할 로딩이미지를 설정
+	let loadingImg = '<img id="loadingImg" src="resources/img/loading/Spinner-1s-200px.gif">';
+	
+	// 화면에 레이어 추가
+	$('body').append(mask)
+	
+	// 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채움
+	$('#mask').css({
+	        'width' : maskWidth,
+	        'height': maskHeight,
+	        'opacity' :'0.3'
+	});
+	
+	// 로딩중 이미지 표시
+	$('body').append(loadingImg);
+}
+
+//로딩화면 해제
+function closeLoadingWithMask() {
+	$('#mask, #loadingImg').remove(); 
 }
 
 /* admin_product 끝 by.유빈 */
