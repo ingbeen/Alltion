@@ -65,8 +65,7 @@ $(function() {
 	subPage[9] = "cate10";
 	subPage[10] = "cate11";
 	subPage[11] = "cate12";
-	//var idx = cateurl.indexOf("product_category_2=");
-	//var idx = cateurl.substring(61,69);
+
 	var getidx1 = cateurl.indexOf(subPage[0]);
 	var getidx2 = cateurl.indexOf(subPage[1]);
 	var getidx3 = cateurl.indexOf(subPage[2]);
@@ -79,19 +78,10 @@ $(function() {
 	var getidx10 = cateurl.indexOf(subPage[9]);
 	var getidx11 = cateurl.indexOf(subPage[10]);
 	var getidx12 = cateurl.indexOf(subPage[11]);
-//	var cate02 = cateurl.substring(idx+1);
-//	console.log(cate02);
-//	var cate01 = cate.substring(4,6);
-//	console.log(cate01);
-//	if(cate01 == '01') {
-//		$('#mainmenu1').next().slideDown();
-//	}else if(cate01 == '02') {
-//		$('#mainmenu2').next().slideDown();
-//	}else if(cate01 == '03') {
-//		$('#mainmenu3').next().slideDown();
-//	}
+
 	if(getidx1 != -1){
 		$("#mainmenu1").next().slideDown();
+		$("."+category2)
 	};
 	if(getidx2 != -1){
 		$("#mainmenu2").next().slideDown();
@@ -126,4 +116,13 @@ $(function() {
 	if(getidx12 != -1){
 		$("#mainmenu12").next().slideDown();
 	}
+});
+
+$(document).ready(function(){
+	var url = window.location.href;
+	var categoryidx = url.indexOf("=")
+	var category2 = url.substring(categoryidx+1);
+	
+   	$("."+category2).addClass('on');
+
 });

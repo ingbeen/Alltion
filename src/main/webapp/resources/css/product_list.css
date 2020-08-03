@@ -47,6 +47,10 @@
     margin-bottom: 12px;
 }
 
+.submenu li.on {
+	text-decoration-line: underline;
+}
+
 .left_session.cate {
     flex-basis: 25%;
     position: relative;
