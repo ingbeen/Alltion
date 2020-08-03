@@ -49,3 +49,81 @@ function slideShow() {
     dots[index - 1].className += " active";
     setTimeout(slideShow, 4000);
 }
+
+$(function() {
+	var cateurl = window.location.href;
+	var subPage = new Array;
+	subPage[0] = "cate01";
+	subPage[1] = "cate02";
+	subPage[2] = "cate03";
+	subPage[3] = "cate04";
+	subPage[4] = "cate05";
+	subPage[5] = "cate06";
+	subPage[6] = "cate07";
+	subPage[7] = "cate08";
+	subPage[8] = "cate09";
+	subPage[9] = "cate10";
+	subPage[10] = "cate11";
+	subPage[11] = "cate12";
+	//var idx = cateurl.indexOf("product_category_2=");
+	//var idx = cateurl.substring(61,69);
+	var getidx1 = cateurl.indexOf(subPage[0]);
+	var getidx2 = cateurl.indexOf(subPage[1]);
+	var getidx3 = cateurl.indexOf(subPage[2]);
+	var getidx4 = cateurl.indexOf(subPage[3]);
+	var getidx5 = cateurl.indexOf(subPage[4]);
+	var getidx6 = cateurl.indexOf(subPage[5]);
+	var getidx7 = cateurl.indexOf(subPage[6]);
+	var getidx8 = cateurl.indexOf(subPage[7]);
+	var getidx9 = cateurl.indexOf(subPage[8]);
+	var getidx10 = cateurl.indexOf(subPage[9]);
+	var getidx11 = cateurl.indexOf(subPage[10]);
+	var getidx12 = cateurl.indexOf(subPage[11]);
+//	var cate02 = cateurl.substring(idx+1);
+//	console.log(cate02);
+//	var cate01 = cate.substring(4,6);
+//	console.log(cate01);
+//	if(cate01 == '01') {
+//		$('#mainmenu1').next().slideDown();
+//	}else if(cate01 == '02') {
+//		$('#mainmenu2').next().slideDown();
+//	}else if(cate01 == '03') {
+//		$('#mainmenu3').next().slideDown();
+//	}
+	if(getidx1 != -1){
+		$("#mainmenu1").next().slideDown();
+	};
+	if(getidx2 != -1){
+		$("#mainmenu2").next().slideDown();
+	}
+	if(getidx3 != -1){
+		$("#mainmenu3").next().slideDown();
+	}
+	if(getidx4 != -1){
+		$("#mainmenu4").next().slideDown();
+	}
+	if(getidx5 != -1){
+		$("#mainmenu5").next().slideDown();
+	}
+	if(getidx6 != -1){
+		$("#mainmenu6").next().slideDown();
+	}
+	if(getidx7 != -1){
+		$("#mainmenu7").next().slideDown();
+	}
+	if(getidx8 != -1){
+		$("#mainmenu8").next().slideDown();
+	}
+	if(getidx9 != -1){
+		$("#mainmenu9").next().slideDown();
+	}
+	if(getidx10 != -1){
+		$("#mainmenu10").next().slideDown();
+	}
+	if(getidx11 != -1){
+		$("#mainmenu11").next().slideDown();
+	}
+	if(getidx12 != -1){
+		$("#mainmenu12").next().slideDown();
+	}
+});
