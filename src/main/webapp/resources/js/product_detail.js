@@ -81,41 +81,40 @@ $(function() {
 
 	if(getidx1 != -1){
 		$("#mainmenu1").next().slideDown();
-		$("."+category2)
 	};
 	if(getidx2 != -1){
 		$("#mainmenu2").next().slideDown();
-	}
+	};
 	if(getidx3 != -1){
 		$("#mainmenu3").next().slideDown();
-	}
+	};
 	if(getidx4 != -1){
 		$("#mainmenu4").next().slideDown();
-	}
+	};
 	if(getidx5 != -1){
 		$("#mainmenu5").next().slideDown();
-	}
+	};
 	if(getidx6 != -1){
 		$("#mainmenu6").next().slideDown();
-	}
+	};
 	if(getidx7 != -1){
 		$("#mainmenu7").next().slideDown();
-	}
+	};
 	if(getidx8 != -1){
 		$("#mainmenu8").next().slideDown();
-	}
+	};
 	if(getidx9 != -1){
 		$("#mainmenu9").next().slideDown();
-	}
+	};
 	if(getidx10 != -1){
 		$("#mainmenu10").next().slideDown();
-	}
+	};
 	if(getidx11 != -1){
 		$("#mainmenu11").next().slideDown();
-	}
+	};
 	if(getidx12 != -1){
 		$("#mainmenu12").next().slideDown();
-	}
+	};
 });
 
 $(document).ready(function(){
