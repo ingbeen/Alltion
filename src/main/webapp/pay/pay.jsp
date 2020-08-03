@@ -80,8 +80,8 @@
         </div>
         <div class="paybox">
             <ul class="tablist" role="tablist">
-                <li class="tab" role="tab"><a href="#panel1" onclick="fnMove(1)">충 전</a></li>
-                <li class="tab" role="tab"><a href="#panel2" onclick="fnMove(1)">환 불</a></li>
+                <li class="tab" role="tab"><a href="#panel1">충 전</a></li>
+                <li class="tab" role="tab"><a href="#panel2">환 불</a></li>
                 <li class="tab-menu">
                     <div class="line"></div>
                     <div class="line"></div>
@@ -246,42 +246,6 @@
         $('.Tab_menu1').click();
 
     </script>
-    <script type="text/javascript">
-        $(function() {
-            // 광고 없애기
-            $(".ad__banner--closeBtn").click(function() {
-                $(".ad__banner").hide();
-            })
-
-            // 헤더 고정
-            var header = $('.lower_header');
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 0) {
-                    header.addClass('sticky');
-                } else {
-                    header.removeClass('sticky');
-                }
-            })
-
-            // 카테고리 누를 때마다 이동
-            $("ul.deadline-items__category a").click(function() {
-                //                
-                //                var activeTab = $(this).attr('id');
-                //                
-                //				$('ul.deadline-items__category a').removeClass('active');
-                //				$('.menu-box').removeClass('active');
-                //				$(this).prop('checked', true);
-                //				$('div#' + activeTab).addClass('active');
-            })
-        });
-    </script>
-    <script>
-    function fnMove(seq){
-        var offset = $("#div" + seq).offset();
-        $('html, body').animate({scrollTop : offset.top}, 400);
-    }
-    </script>
-
 	<!--  스크립트 영역  -->
 	<script src="<c:url value="https://code.jquery.com/jquery-3.5.1.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/pay.js" />"></script>
