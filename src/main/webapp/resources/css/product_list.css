@@ -48,7 +48,7 @@
 }
 
 .submenu li.on {
-	text-decoration-line: underline;
+	font-weight: bold;
 }
 
 .left_session.cate {

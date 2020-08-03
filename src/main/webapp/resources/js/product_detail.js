@@ -9,7 +9,7 @@ $(function() {
         let newPosition = scrollTop + topPosition + "px";
         let stopArea = $(document).height() - $(window).height() - footerHeight;
 
-        if (scrollTop + 120 > stopArea) { // 120 추가 이유: 카테고리 펼쳐져 있을 때도 푸터 위에서 멈추게 하기 위해
+        if (scrollTop + 500 > stopArea) { // 120 추가 이유: 카테고리 펼쳐져 있을 때도 푸터 위에서 멈추게 하기 위해
             $('.list_sidebar').css('position', 'normal');
         } else {
             $(".list_sidebar").stop().animate({
