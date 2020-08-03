@@ -240,7 +240,7 @@
 			product_progress 
 		from product 
 		where product_category_2 = #{product_category_2} and sysdate <= product_end_date+1 
-		order by product_participants desc
+		order by product_bids desc
 	]]>
 	</select>
 	
@@ -299,7 +299,7 @@
 			product_purchase_price,
 			product_progress 
 		from product where sysdate <= product_end_date+1 
-		order by product_participants desc
+		order by product_bids desc
 	]]>
 	</select>
 	
