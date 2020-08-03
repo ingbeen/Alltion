@@ -119,17 +119,20 @@
             <div class="flex-column list--content">
                 <table class="list--table">
                     <tr class="list--tableHeader">
-                        <th style="width:15%">아이디</th>
-                        <th style="width:15%">이름</th>
-                        <th style="width:20%">이메일</th>
-                        <th style="width:15%">연락처</th>
-                        <th style="width:10%">계정상태</th>
-                        <th style="width:15%">가입일</th>
-                        <th style="width:10%">수정</th>
+			            <th style="width:8%">상품 번호</th>
+			            <th style="width:10%">상품 제목</th>
+			            <th style="width:10%">판매자 아이디</th>
+			            <th style="width:8%">상품 분류</th>
+			            <th style="width:8%">경매현재가</th>
+			            <th style="width:8%">입찰수</th>
+			            <th style="width:14%">경매종료일</th>
+			            <th style="width:14%">등록일</th>
+			            <th style="width:10%">진행상태</th>
+			            <th style="width:10%">마감처리</th>
                     </tr>
                 </table>
                 <div class="flex-row list--pagingWarp">
-                    <p><span class="list--count"></span>개의 회원정보가 검색되었습니다</p>
+                    <p><span class="list--count"></span>개의 상품정보가 검색되었습니다</p>
                     <ul class="list--paging"></ul>
                 </div>
             </div>

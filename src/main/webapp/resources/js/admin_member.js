@@ -31,6 +31,8 @@ $(document).on('click','.listSearch--sendSearchBtn', () => {
 });
 
 function getAdminMemberDate(page) {
+	LoadingWithMask(); // 로딩화면 실행
+	
     let formData = $('#searchForm').serialize();
     formData += "&page=" + page;
 	
@@ -42,9 +44,12 @@ function getAdminMemberDate(page) {
         	writeMemberList(adminMemberDate.memberList);
         	writeMemberCount(adminMemberDate.listcount);
         	writePageInfo(adminMemberDate.pagination);
-        	updateFormStatus = false;
+        	closeLoadingWithMask(); // 로딩화면 종료
     	},
-        error : () => {}
+        error : () => {
+        	closeLoadingWithMask(); // 로딩화면 종료
+        	updateFormStatus = false;
+        }
     });
 }
 
@@ -97,24 +102,24 @@ function writeMemberList(memberList) {
 	$.each(memberList, (idx, vo) => {
 		adminMemberTable += `
 			<tr>
-	            <td>${vo.member_id}</td>
-	            <td>${vo.member_name}</td>
-	            <td>${vo.email}</td>
-	            <td>${vo.member_phone}</td>`;
+	            <td class="tdCenter">${vo.member_id}</td>
+	            <td class="tdCenter">${vo.member_name}</td>
+	            <td class="tdCenter">${vo.email}</td>
+	            <td class="tdCenter">${vo.member_phone}</td>`;
 		
 		if (vo.member_delete == 0 && vo.member_manager == 0) {
 			adminMemberTable += `
-				<td>정상</td>`;
+				<td class="tdCenter">정상</td>`;
 		} else if (vo.member_delete == 1 && vo.member_manager == 0) {
 			adminMemberTable += `
-				<td>탈퇴</td>`;
+				<td class="tdCenter">탈퇴</td>`;
 		} else if (vo.member_manager == 1) {
 			adminMemberTable += `
-				<td>관리자</td>`;
+				<td class="tdCenter">관리자</td>`;
 		}
 		
 		adminMemberTable += `
-	            <td>${vo.member_date}</td>
+	            <td class="tdCenter">${vo.member_date}</td>
 	            <td class="flex-row list--update">
 	                <button class="list--changeUpdateFormBtn" type="button">수정</button>
 	            </td>
@@ -207,11 +212,11 @@ $(document).on('click','.list--changeUpdateFormBtn', function() {
     }
 
     let updateFormOutput = `
-        <td>${originData[0]}</td>
-        <td><input type="text" value="${originData[1]}"></td>
-        <td><input type="text" value="${originData[2]}"></td>
-        <td><input type="text" value="${originData[3]}"></td>
-        <td>
+        <td class="tdCenter">${originData[0]}</td>
+        <td class="tdCenter"><input type="text" value="${originData[1]}"></td>
+        <td class="tdCenter"><input type="text" value="${originData[2]}"></td>
+        <td class="tdCenter"><input type="text" value="${originData[3]}"></td>
+        <td class="tdCenter">
             <select>`;
 
     if (originData[4] == "정상") {
@@ -234,7 +239,7 @@ $(document).on('click','.list--changeUpdateFormBtn', function() {
     updateFormOutput += `
             </select>
         </td>
-        <td>${originData[5]}</td>
+        <td class="tdCenter">${originData[5]}</td>
         <td class="flex-row list--update">
             <button class="list--updateBtn" type="button">수정</button>
             <button class="list--cancelUpdateFormBtn" type="button">취소</button>
@@ -247,12 +252,12 @@ $(document).on('click','.list--cancelUpdateFormBtn', function() {
     let tr = $(this).closest('tr');
 
     let updateFormOutput = `
-        <td>${originData[0]}</td>
-        <td>${originData[1]}</td>
-        <td>${originData[2]}</td>
-        <td>${originData[3]}</td>
-        <td>${originData[4]}</td>
-        <td>${originData[5]}</td>
+        <td class="tdCenter">${originData[0]}</td>
+        <td class="tdCenter">${originData[1]}</td>
+        <td class="tdCenter">${originData[2]}</td>
+        <td class="tdCenter">${originData[3]}</td>
+        <td class="tdCenter">${originData[4]}</td>
+        <td class="tdCenter">${originData[5]}</td>
         <td class="flex-row list--update">
             <button class="list--changeUpdateFormBtn" type="button">수정</button>
         </td>`;
@@ -313,6 +318,44 @@ function updateComplete(updateData, tr) {
 	
 	originData = [];
 	updateFormStatus = false;
+}
+
+//로딩화면
+function LoadingWithMask() {
+  // 화면의 높이와 너비를 구한다
+  let maskHeight = $(document).height();
+  let maskWidth  = window.document.body.clientWidth;
+   
+  // 화면에 출력할 마스크를 설정
+  let mask       = ' \
+  	<div id="mask" style=" \
+	    	position:absolute; \
+	    	z-index:999999; \
+	    	background-color:#000000; \
+	    	left:0; \
+	    	top:0;"> \
+  	</div>';
+  
+  // 화면에 출력할 로딩이미지를 설정
+  let loadingImg = '<img id="loadingImg" src="resources/img/loading/Spinner-1s-200px.gif">';
+
+  // 화면에 레이어 추가
+  $('body').append(mask)
+
+  // 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채움
+  $('#mask').css({
+          'width' : maskWidth,
+          'height': maskHeight,
+          'opacity' :'0.3'
+  });
+
+  // 로딩중 이미지 표시
+  $('body').append(loadingImg);
+}
+
+//로딩화면 해제
+function closeLoadingWithMask() {
+  $('#mask, #loadingImg').remove(); 
 }
 
 /* admin_member 끝 by.유빈 */

@@ -1,7 +1,5 @@
 /* admin_product 시작 by.유빈 */
 
-let updateFormStatus = false;
-
 $(() => {
     $("#listSearch--startDate").datepicker({
         showOn: "both",
@@ -18,25 +16,27 @@ $(() => {
     });
 });
 
-//$(document).ready(() => {
-//	getAdminMemberDate(1);
-//})
+$(document).ready(() => {
+	getAdminProductDate(1);
+})
 
-function getAdminMemberDate(page) {
+function getAdminProductDate(page) {
+	LoadingWithMask(); // 로딩화면 실행
+	
     let formData = $('#searchForm').serialize();
     formData += "&page=" + page;
 	
     $.ajax({
-        url : "getAdminMemberDate.yb",
+        url : "getAdminProductDate.yb",
         data : formData,
         dataType :"json",
-        success : (adminMemberDate) => {
-        	writeMemberList(adminMemberDate.memberList);
-        	writeMemberCount(adminMemberDate.listcount);
-        	writePageInfo(adminMemberDate.pagination);
-        	updateFormStatus = false;
+        success : (adminProductDate) => {
+        	writeProductList(adminProductDate.productList);
+        	writeProductCount(adminProductDate.listcount);
+        	writePageInfo(adminProductDate.pagination);
+        	closeLoadingWithMask(); // 로딩화면 종료
     	},
-        error : () => {}
+        error : () => closeLoadingWithMask() // 로딩화면 종료
     });
 }
 
@@ -45,7 +45,7 @@ $(document).on('click','.listSearch--sendSearchBtn', () => {
         return;
     }
     
-//    getAdminMemberDate(1);
+    getAdminProductDate(1);
 });
 
 function searchFormCheck() {
@@ -80,51 +80,56 @@ function searchFormCheck() {
     return false;
 };
 
-function writeMemberList(memberList) {
-	let adminMemberTable = "";
+function writeProductList(productList) {
+	let adminProductTable = "";
 	
-	adminMemberTable += `
+	adminProductTable += `
 		<tr class="list--tableHeader">
-	        <th style="width:15%">아이디</th>
-	        <th style="width:15%">이름</th>
-	        <th style="width:20%">이메일</th>
-	        <th style="width:15%">연락처</th>
-	        <th style="width:10%">계정상태</th>
-	        <th style="width:15%">가입일</th>
-	        <th style="width:10%">수정</th>
-	    </tr>`;
+            <th style="width:8%">상품 번호</th>
+            <th style="width:10%">상품 제목</th>
+            <th style="width:10%">판매자 아이디</th>
+            <th style="width:8%">상품 분류</th>
+            <th style="width:8%">경매현재가</th>
+            <th style="width:8%">입찰수</th>
+            <th style="width:14%">경매종료일</th>
+            <th style="width:14%">등록일</th>
+            <th style="width:10%">진행상태</th>
+            <th style="width:10%">마감처리</th>
+        </tr>`;
 	
-	$.each(memberList, (idx, vo) => {
-		adminMemberTable += `
-			<tr>
-	            <td>${vo.member_id}</td>
-	            <td>${vo.member_name}</td>
-	            <td>${vo.email}</td>
-	            <td>${vo.member_phone}</td>`;
+	$.each(productList, (idx, vo) => {
+		vo.product_current_price = addCommas(vo.product_current_price);
 		
-		if (vo.member_delete == 0 && vo.member_manager == 0) {
-			adminMemberTable += `
-				<td>정상</td>`;
-		} else if (vo.member_delete == 1 && vo.member_manager == 0) {
-			adminMemberTable += `
-				<td>탈퇴</td>`;
-		} else if (vo.member_manager == 1) {
-			adminMemberTable += `
-				<td>관리자</td>`;
+		adminProductTable += `
+			<tr>
+	            <td class="tdCenter">${vo.product_number}</td>
+	            <td><p>${vo.product_subject}</p></td>
+	            <td class="tdCenter">${vo.product_id}</td>
+	            <td class="tdCenter">${vo.product_category_1}</td>
+	            <td class="tdRight">${vo.product_current_price}</td>
+	            <td class="tdRight">${vo.product_bids}</td>
+	            <td class="tdCenter">${vo.product_end_date}</td>
+	            <td class="tdCenter">${vo.product_issue_date}</td>`;
+		
+		if (vo.product_progress == 0) {
+			adminProductTable += `
+				<td class="tdCenter">진행중</td>`;
+		} else if (vo.product_progress == 1) {
+			adminProductTable += `
+				<td class="tdCenter">마감</td>`;
 		}
 		
-		adminMemberTable += `
-	            <td>${vo.member_date}</td>
+		adminProductTable += `
 	            <td class="flex-row list--update">
-	                <button class="list--changeUpdateFormBtn" type="button">수정</button>
+	                <button class="list--productEndBtn" type="button">마감</button>
 	            </td>
 	        </tr>`;
 	});
 	
-	$('.list--table').html(adminMemberTable);
+	$('.list--table').html(adminProductTable);
 }
 
-function writeMemberCount(listcount) {
+function writeProductCount(listcount) {
 	$('.list--count').html(listcount);
 }
 
@@ -188,131 +193,77 @@ $(document).on('click', '.list--nonActive', (e) => {
 	// 클릭한 페이지버튼의 번호를 가져온다
 	page = e.currentTarget.getAttribute('data-page');
 	
-	getAdminMemberDate(page);
+	getAdminProductDate(page);
 });
 
-let originData = [];
-
-$(document).on('click','.list--changeUpdateFormBtn', function() {
-    if (updateFormStatus) {
-        alert("수정은 한개의 데이터씩 가능합니다");
-        return;
-    }
-    updateFormStatus = true;
-
-    let tr = $(this).closest('tr');
-
-    for(let i = 0; i < 6; i ++) {
-        originData.push(tr.children().eq(i).html());
-    }
-
-    let updateFormOutput = `
-        <td>${originData[0]}</td>
-        <td><input type="text" value="${originData[1]}"></td>
-        <td><input type="text" value="${originData[2]}"></td>
-        <td><input type="text" value="${originData[3]}"></td>
-        <td>
-            <select>`;
-
-    if (originData[4] == "정상") {
-        updateFormOutput += `
-            <option value="0" selected>정상</option>
-            <option value="1">탈퇴</option>
-            <option value="2">관리자</option>`;
-    } else if (originData[4] == "탈퇴") {
-        updateFormOutput += `
-            <option value="0">정상</option>
-            <option value="1" selected>탈퇴</option>
-            <option value="2">관리자</option>`;
-    } else {
-        updateFormOutput += `
-            <option value="0" selected>정상</option>
-            <option value="1">탈퇴</option>
-            <option value="2" selected>관리자</option>`;
-    }
-
-    updateFormOutput += `
-            </select>
-        </td>
-        <td>${originData[5]}</td>
-        <td class="flex-row list--update">
-            <button class="list--updateBtn" type="button">수정</button>
-            <button class="list--cancelUpdateFormBtn" type="button">취소</button>
-        </td>`;
-
-    tr.html(updateFormOutput);
-});
-
-$(document).on('click','.list--cancelUpdateFormBtn', function() {
-    let tr = $(this).closest('tr');
-
-    let updateFormOutput = `
-        <td>${originData[0]}</td>
-        <td>${originData[1]}</td>
-        <td>${originData[2]}</td>
-        <td>${originData[3]}</td>
-        <td>${originData[4]}</td>
-        <td>${originData[5]}</td>
-        <td class="flex-row list--update">
-            <button class="list--changeUpdateFormBtn" type="button">수정</button>
-        </td>`;
-
-    tr.html(updateFormOutput);
-
-    originData = [];
-    updateFormStatus = false;
-});
-
-$(document).on('click','.list--updateBtn', function() {
-    let tr = $(this).closest('tr');
-
-    let updateData = [];
-
-    for(let i = 0; i < 5; i ++) {
-    	if (i == 0) {
-    		updateData.push(tr.children().eq(i).html());
-    	} else {
-        	updateData.push(tr.children().eq(i).children().val());
-    	}
-    }
-
-    let formData = "";
-    formData += "adminMemberId=" + updateData[0];
-    formData += "&adminMemberName=" + updateData[1];
-    formData += "&adminMemberEmail=" + updateData[2];
-    formData += "&adminMemberPhone=" + updateData[3];
-    formData += "&adminMemberStatus=" + updateData[4];
-
-    $.ajax({
-        url : "adminMemberUpdate.yb",
-        data : formData,
-        success : () => {updateComplete(updateData, tr)},
-        error : () => {}
-    });
-});
-
-function updateComplete(updateData, tr) {
-	for (let i = 1; i < 5; i++) {
-		if (i == 4) {
-			if (updateData[i] == 0) {
-				tr.children().eq(i).html("정상");
-			} else if (updateData[i] == 1) {
-				tr.children().eq(i).html("탈퇴");
-			} else if (updateData[i] == 2) {
-				tr.children().eq(i).html("관리자");
-			}
-		} else {
-			tr.children().eq(i).html(updateData[i]);
-		}
+$(document).on('click','.list--productEndBtn', function() {
+	let result = confirm("마감된 경매는 되돌리지 못합니다\n정말로 경매를 마감 하시겠습니까?");
+	if(!result) {
+		return
 	}
 	
-	let changeBtn = `
-        <button class="list--changeUpdateFormBtn" type="button">수정</button>`;
+    let tr = $(this).closest('tr');
+    
+    let productNumber = tr.children().eq(0).html();
 	
-	tr.children().eq(6).html(changeBtn);
+    $.ajax({
+		url : "adminProductEnd.yb",
+		data : {
+			"product_number" : productNumber,
+		},
+	    dataType :"json",
+		success : (newProductVO) => {
+			successProductEnd(newProductVO, tr);
+		},
+		error : () => {}
+	});
+});
+
+function successProductEnd(newProductVO, tr) {
+	tr.children().eq(6).html(newProductVO.product_end_date);
+	tr.children().eq(8).html("마감");
+}
+
+function addCommas(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g,  ",");
+}
+
+//로딩화면
+function LoadingWithMask() {
+	// 화면의 높이와 너비를 구한다
+	let maskHeight = $(document).height();
+	let maskWidth  = window.document.body.clientWidth;
+	 
+	// 화면에 출력할 마스크를 설정
+	let mask       = ' \
+		<div id="mask" style=" \
+		    	position:absolute; \
+		    	z-index:999999; \
+		    	background-color:#000000; \
+		    	left:0; \
+		    	top:0;"> \
+		</div>';
 	
-	originData = [];
-	updateFormStatus = false;
+	// 화면에 출력할 로딩이미지를 설정
+	let loadingImg = '<img id="loadingImg" src="resources/img/loading/Spinner-1s-200px.gif">';
+	
+	// 화면에 레이어 추가
+	$('body').append(mask)
+	
+	// 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채움
+	$('#mask').css({
+	        'width' : maskWidth,
+	        'height': maskHeight,
+	        'opacity' :'0.3'
+	});
+	
+	// 로딩중 이미지 표시
+	$('body').append(loadingImg);
+}
+
+//로딩화면 해제
+function closeLoadingWithMask() {
+	$('#mask, #loadingImg').remove(); 
 }
 
 /* admin_product 끝 by.유빈 */

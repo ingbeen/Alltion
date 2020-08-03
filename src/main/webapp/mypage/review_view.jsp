@@ -11,89 +11,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/main_style.css?after">
     <link rel="stylesheet" href="./resources/css/review_view.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?
+    family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/kakaoTalk.css">
-	<link rel="shortcut icon" type="image⁄x-icon" href="./resources/img/header/logo.jpg">
-	<link rel="stylesheet" href="./resources/css/style.css?after">
     <title>All-tion</title>
     
 </head>
 <body>
     <!-- 모든 페이지 공통 영역 by 하나  -->
     <div class="header">
-        <div class="upper_header">
-            <div class="upper_header--nav">
-                <span>
-                    <a href="" id="clock"></a>
-                </span>
-                <ul>
-                    <li>
-                        <a href="./mypage.kj">${userId}</a>
-                    </li>
-                    <li>
-                        <a href="./logout.kj">로그아웃</a>
-                    </li>
-                    <li>
-                    	<a href="./registration.yb">판매하기</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="lower_header">
-            <div class="lower_header--nav">
-                <h1 class="logo">
-                    <a href="/alltion/">ALL-TION</a>
-                </h1>
-                <div class="category">
-                    <a class="category--drop">
-                        <img src="./resources/img/header/category_tab.png">
-                    </a>
-                </div>
-                <div class="search">
-                    <select class="search--select">
-                        <option value="">전체</option>
-                        <option value="cate01">패션</option>
-                        <option value="cate02">뷰티</option>
-                        <option value="cate03">출산/유아동</option>
-                        <option value="cate04">전자기기</option>
-                        <option value="cate05">가전제품</option>
-                        <option value="cate06">가구/인테리어</option>
-                        <option value="cate07">반려동물/취미</option>
-                        <option value="cate08">도서/음반/문구</option>
-                        <option value="cate09">티켓/쿠폰</option>
-                        <option value="cate10">스포츠</option>
-                        <option value="cate11">공구/산업용품</option>
-                        <option value="cate12">기타잡화</option>
-                    </select>
-                    <input type="text" placeholder="찾으시는 상품을 입력해 주세요" class="search__input">
-                </div>
-                <ul class="member_info">
-                    <li>
-                        <a href="./mypage.kj">
-                            <span class="material-icons">perm_identity</span><br>
-                            <span>마이 페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishList.yb?page=1&endDateFormat=0">
-                            <span class="material-icons">turned_in_not</span><br>
-                            <span>찜 목록</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-icons">access_time</span><br>
-                            <span>참여 경매</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="../header/main_header.jsp"></jsp:include>
     </div>
-    <div id="kakao-talk-channel-chat-button" style='display: none;'></div>
+    
     <!-- 메인 내용 -->
     <div class="main_body">
         <div class="bidding_title">
@@ -123,6 +54,11 @@
             <div class="review_writer">작성자</div>
             <div class="review_date">작성일</div>
         </div>
+        <%if(reviewlist.size()==0){%>
+				<div class="no_list" align="center">
+					<p>출력할 내용이 없습니다.</p>
+				</div>
+  			<%}%>
         <%for(int i=0;i<reviewlist.size();i++){
         	ReviewVO reviewvo = reviewlist.get(i);
         	if(i >= 5*(nowpage-1) && i <= 4 + 5*(nowpage-1)){
@@ -132,7 +68,7 @@
         	<div class="review_no"><p><%=reviewvo.getReview_no() %></p></div>
             <div class="product_image"><img src="<%=reviewvo.getReview_image()%>"></div>
             <div class="product_subject"><p><%=reviewvo.getReview_subject() %></p></div>
-            <div class="review_content"><p style="color: cornflowerblue;"><%=reviewvo.getReview_evaluate() %></p><p><%=reviewvo.getReview_content() %></p></div>
+            <div class="review_content"><p><font style="color: cornflowerblue;"><%=reviewvo.getReview_evaluate() %></font><br><%=reviewvo.getReview_content() %></p></div>
             <div class="review_writer"><p><%=reviewvo.getReview_evaluator().substring(0,3) %>***</p></div>
             <div class="review_date"><p><%=reviewvo.getReview_date() %></p></div>
         </div>
@@ -141,9 +77,7 @@
         <div class="page_btns" align="center">
             <%if(nowpage>1){ %>
 	        <a href="./review_view.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
-	        <%}else{%>
-	        <a><button>&#171;</button></a>
-	        <% }
+	        <%}
 	        for(int i=1;i<=maxpage;i++){ %>
 	        <%if(i==nowpage){ %>
 	        	<a href="./review_view.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
@@ -153,9 +87,7 @@
 	        
 	        <%if(nowpage<maxpage){ %>
 	        <a href="./review_view.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
-        	<%}else{ %>
-        	<a><button>&#187;</button></a>
-        	<%} %>
+        	<%}%>
         </div>
         
     </div>
@@ -219,7 +151,5 @@
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./resources/js/common.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
 </body>
 </html>

@@ -48,7 +48,7 @@
                     해당 물품이 낙찰이 되거나 경매시간이 종료될 경우 해당 물품의 정보는 확인하실 수 없습니다.
                 </li>
             </ul>
-        
+        </div>
         <div class="table_title">
             <p>현재 <font style="color:cornflowerblue;border-bottom: 1px solid #FFA30E;">판매중인 경매</font>에 대해서 모두 <%=productvolist.size()%>개가 검색되었습니다.</p>
         </div>
@@ -59,6 +59,11 @@
                 <div class="product_delivery">배송</div>
                 <div class="bid_deadline">마감 시간</div>
             </div>
+            <%if(productvolist.size()==0){%>
+				<div class="no_list" align="center">
+					<p>출력할 내용이 없습니다.</p>
+				</div>
+  			<%}%>
             <%
             for(int i=0;i<productvolist.size();i++){  
   				ProductVO productvo = productvolist.get(i);
@@ -110,9 +115,7 @@
         <div class="page_btns" align="center">
         	<%if(nowpage>1){ %>
 	        <a href="./selling.hs?page=<%=nowpage-1%>"><button>&#171;</button></a>
-	        <%}else{%>
-	        <a><button>&#171;</button></a>
-	        <% }
+	        <%}
 	        for(int i=1;i<=maxpage;i++){ %>
 	        	<%if(i==nowpage){ %>
         		<a href="./selling.hs?page=<%=i %>"><button style="background-color:darkgray; cursor:default;" disabled="true"><%=i %></button></a>
@@ -121,12 +124,10 @@
 	        <%}} %>
 	        <%if(nowpage<maxpage){ %>
 	        <a href="./selling.hs?page=<%=nowpage+1%>"><button>&#187;</button></a>
-        	<%}else{ %>
-        	<a><button>&#187;</button></a>
-        	<%} %>
+        	<%}%>
         </div>
     </div>
-</div>
+
     <!-- 푸터 영역 -->
     <div class="footer">
         <div class="upper_footer">
@@ -185,10 +186,7 @@
 
     <!--  스크립트 영역  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
     <script src="./resources/js/common.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="resources/js/kakaoTalk.js"></script>
     <script type="text/javascript" src="./resources/js/selling.js?productvolist_size=<%=productvolist_size%>"></script>
     
 </body></html>

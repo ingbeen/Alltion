@@ -202,7 +202,7 @@ let sessionid = parametervalue.sessionid;
 var click = true;
 
 // ↓↓응찰하기 버튼 클릭시
-	function bidList(bid_nowpage){
+function bidList(bid_nowpage){
 	$.ajax({
 		url : '/alltion/bid_list.hs',
 		type : 'post',
@@ -232,7 +232,7 @@ var click = true;
 	});
 }
 	
-	$("#bid_btn").off("click").on('click',function(){
+$("#bid_btn").off("click").on('click',function(){
 	if(click){
 		click = !click;
 		$.ajax({
@@ -264,7 +264,7 @@ var click = true;
 	}
 });
 
-	$("#bid_btn2").off("click").on('click',function(){
+$("#bid_btn2").off("click").on('click',function(){
 	if(click){	
 		click = !click;
 			$.ajax({
@@ -296,7 +296,7 @@ var click = true;
 });
 
 //경매등록자 아이디
-let writerId = '<%=writerId%>'; 
+let writerId = parametervalue.writerId; 
 let List_size = 0;
 function commentList(comment_nowpage){
 	
@@ -555,11 +555,35 @@ function classcolor(){
 function togologin(){
 	var togologin = confirm("로그인 하시겠습니까?");
 	if(togologin==true){
-		location.href = "./loginForm.kj"
+		location.href = "./loginForm.kj";
 	}else{
 		return false;
 	}
 }
+
+//로그인이 안된상태에서 응찰하기/즉시구매하기/찜목록 버튼 클릭시 실행
+$(".no_login").off("click").on('click',function(){
+	if(click){
+		click = !click;
+		no_login();
+		//타이밍 추가
+		setTimeout(function(){
+			click=true;
+		},1000);
+	}else{
+		console.log("중복됨");
+	}
+});
+
+function no_login(){
+	var no_login = confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?");
+	if(no_login==true){
+		location.href = "./loginForm1.kj?product_number="+bno;
+	}else{
+		return false;
+	}
+}
+
 
 //남은시간 카운팅
 var _second = 1000; // 1초

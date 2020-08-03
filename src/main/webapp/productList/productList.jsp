@@ -162,7 +162,11 @@
 	                                    <span class="price_text">현재가</span>
 	                                    <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
 	                                    <span class="price_text">즉구가</span>
-	                                    <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+	                                    <%if (vo.getProduct_purchase_price() == 0) {%>
+                                            <span class="direct_price">없음</span><br>
+                                        <%}else { %>    
+                                            <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                        <%} %>
 	                                </div>
                                 </div>
                             </a>
@@ -192,9 +196,13 @@
                                 <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
                                 <div class="price-txt">
                                     <span class="price_text">현재가</span>
-                                    <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
-                                    <span class="price_text">즉구가</span>
-                                    <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+	                                <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                <span class="price_text">즉구가</span>
+	                                <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <span class="direct_price">없음</span><br>
+                                    <%}else { %>    
+                                        <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
@@ -223,9 +231,13 @@
                                 <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
                                 <div class="price-txt">
                                     <span class="price_text">현재가</span>
-                                    <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
-                                    <span class="price_text">즉구가</span>
-                                    <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+	                                <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                <span class="price_text">즉구가</span>
+	                                <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <span class="direct_price">없음</span><br>
+                                    <%}else { %>    
+                                        <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
@@ -284,9 +296,13 @@
                                 <span class="view_count"><%=vo.getProduct_bids() %> 건</span>
                                 <div class="price-txt">
                                 	<span class="price_text">현재가</span>
-                                    <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
-                                    <span class="price_text">즉구가</span>
-                                    <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+	                                <span class="current_price"><%=vo.getProduct_current_price() %> 원</span><br>
+	                                <span class="price_text">즉구가</span>
+	                                <%if (vo.getProduct_purchase_price() == 0) {%>
+                                        <span class="direct_price">없음</span><br>
+                                    <%}else { %>    
+                                        <span class="direct_price"><%=vo.getProduct_purchase_price() %> 원</span><br>
+                                    <%} %>
                                 </div>
                             </div>
                         </a>
