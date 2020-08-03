@@ -17,7 +17,7 @@ public class Product_kjVO {
 	 String trading_transaction_method;
 	 String trading_waybill_deadline;
 	 String trading_progress;
-	 
+	 String trading_phone;
 	 String trading_purchase_date;
 	 
 	 String trading_sample4_postcode;
@@ -297,6 +297,14 @@ public class Product_kjVO {
 
 	public void setEmoney(int emoney) {
 		this.emoney = emoney;
+	}
+
+	public String getTrading_phone() {
+		return trading_phone;
+	}
+
+	public void setTrading_phone(String trading_phone) {
+		this.trading_phone = trading_phone;
 	}	
 	
 }

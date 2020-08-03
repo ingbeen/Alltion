@@ -161,6 +161,12 @@ public class testServiceImpl implements testService{
 		return testMapper.updatetrading_transaction_method(Product_kjvo,trading_transaction_method, product_number);
 	}
 
+	@Override
+	public int update_trading_address(Product_kjVO Product_kjvo) {
+		TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+		return testMapper.update_trading_address(Product_kjvo);
+	}
+
 
 
 

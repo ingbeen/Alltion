@@ -367,7 +367,7 @@
         						output += '<span>구매자 번호</span>';
         						output += '</div>';
         						output += '<div class="seller_form__list content">';
-        						output += '<span>' + item.member_phone + '</span>';
+        						output += '<span>' + item.trading_phone + '</span>';
         						output += '</div>';
         						output += '</li>';
         						output += '</ul>';

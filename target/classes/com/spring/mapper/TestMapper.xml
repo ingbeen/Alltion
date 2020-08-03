@@ -33,7 +33,14 @@
    <result property="product_img_4" column="product_img_4"/>
    <result property="product_img_5" column="product_img_5"/>
 
+   <result property="trading_sample4_postcode" column="trading_sample4_postcode"/>
+   <result property="trading_sample4_roadAddress" column="trading_sample4_roadAddress"/>
+   <result property="trading_sample4_jibunAddress" column="trading_sample4_jibunAddress"/>
+   <result property="trading_sample4_detailAddress" column="trading_sample4_detailAddress"/>
+   <result property="trading_phone" column = "trading_phone"/>
 </resultMap>
+	  
+	  
    
       <select id = "getProductlist"  resultMap="Product_KjResultMap">
       <!-- 구매중인 상품 리스트  -->
@@ -82,7 +89,7 @@
       trading_transaction_method,
       trading_buyer_id,
       member_name,
-      member_phone,
+      trading_phone,
       sample4_postcode,
       sample4_roadAddress,
       sample4_jibunAddress,
@@ -228,7 +235,8 @@
       sample4_postcode,
       sample4_roadaddress,
       sample4_jibunaddress,
-      sample4_detailaddress,   
+      sample4_detailaddress,
+      member_phone,   
       trading_buyer_id,
       trading_transaction_method
       from trading 
@@ -277,7 +285,7 @@
     
     <select id = "findSubjectFromNum" resultType = "String">
        select 
-          product_subject
+       product_subject
        from product 
        where product_number = #{product_number}
     </select>
@@ -295,4 +303,19 @@
    <update id="update_trading_progress" parameterType="int">
    	update trading set trading_progress ='리뷰완료' where trading_product_number = #{trading_product_number}
    </update>
+   
+   <update id="update_trading_address" parameterType ="Product_kjVO">
+   		
+   		update
+   		trading
+   		set
+   		trading_sample4_postcode = #{trading_sample4_postcode},
+   		trading_sample4_roadAddress = #{trading_sample4_roadAddress},
+   		trading_sample4_jibunAddress = #{trading_sample4_jibunAddress},
+   		trading_sample4_detailAddress = #{trading_sample4_detailAddress},
+   		trading_phone = #{trading_phone}
+   		where trading_product_number = #{trading_product_number}
+   		
+      </update>
+   
 </mapper>
