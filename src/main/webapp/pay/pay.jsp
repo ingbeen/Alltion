@@ -81,8 +81,8 @@
         </div>
         <div class="paybox">
             <ul class="tablist" role="tablist">
-                <li class="tab" role="tab"><a href="#panel1">충 전</a></li>
-                <li class="tab" role="tab"><a href="#panel2">환 불</a></li>
+                <li class="tab" role="tab"><a href="#panel1" onclick="return false;">충 전</a></li>
+                <li class="tab" role="tab"><a href="#panel2" onclick="return false;">환 불</a></li>
                 <li class="tab-menu">
                     <div class="line"></div>
                     <div class="line"></div>
@@ -128,7 +128,7 @@
                                 </tbody>
                             </table>
                             <div class="submit">
-                                <input type="button" value="충전하기">
+                                <input type="submit" value="충전하기">
                             </div>
                         </form>
                     </div>
@@ -156,7 +156,7 @@
                                 </tbody>
                             </table>
                             <div class="submit" style="text-align: center;">
-                                <input type="button" value="환불요청하기">
+                                <input type="submit" value="환불요청하기">
                             </div>
                         </form>
                     </div>

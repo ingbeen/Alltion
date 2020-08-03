@@ -39,7 +39,6 @@ public class PayController {
 	@RequestMapping(value = "/cancel.bo", method = RequestMethod.POST)
 	@ResponseBody
 	public String cancel(@RequestParam(value = "pay_merchant_uid") String pay_merchant_uid) { // 결제번호 : merchant_uid
-		System.out.println("merchant_uid=" + pay_merchant_uid);
 		PaymentCheck obj = new PaymentCheck();
 		String token = obj.getImportToken();
 		int res = obj.cancelPayment(token, pay_merchant_uid);
@@ -79,7 +78,6 @@ public class PayController {
 			payService.insertPay(vo);
 			payService.chargePay(convertChargeMoney, pay_id);
 		} catch (Exception e) {
-			System.out.println("데이터삽입 실패");
 			e.printStackTrace();
 		}
 
@@ -88,7 +86,6 @@ public class PayController {
 	@RequestMapping(value = "/cancelData.bo", method = RequestMethod.POST)
 	@ResponseBody
 	public void cancelOracle(HttpSession session, @RequestParam(value = "pay_merchant_uid") String pay_merchant_uid) {
-		System.out.println("cancelOracle: " + pay_merchant_uid);
 		PayVO vo = new PayVO();
 		vo = payService.getPayList(pay_merchant_uid);
 		vo.setPay_merchant_uid(vo.getPay_merchant_uid());
