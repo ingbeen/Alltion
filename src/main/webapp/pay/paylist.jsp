@@ -33,7 +33,7 @@ String tab = (String)request.getAttribute("tab");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/main_style.css">
-<link rel="stylesheet" href="./resources/css/paylist.css">
+<link rel="stylesheet" href="./resources/css/paylist.css?after">
 <link rel="stylesheet" href="./resources/css/bootstrap.css">
 <link rel="stylesheet" href="./resources/css/button.css">
 <link

@@ -34,38 +34,35 @@ body {
 }
 
 .cTabs>div {
-	font-size: 20px;
+	font-size: 18px;
 	text-decoration: none;
 	padding-left: 5%;
 	padding-right: 5%;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom: 2px solid #FFA30E;
+	border-bottom: 1px solid #dddddd;
 	/*border-bottom: none;*/
 	display: block;
 	background-color: white;
 	color: black;
-	font-weight: bold;
 	z-index: 1;
 }
 
 .cTabs>div:hover {
-	-webkit-transition: color 1s, background-color 1s;
-	/* For Safari 3.1 to 6.0 */
-	transition: color 1s, background-color 1s;
-	color: #000;
+	color: #ffffff;
 	cursor: pointer;
-	background-color: #FF7519;
+	background-color: #ffd149;
+	font-weight: bold;
 	border-bottom: none;
 	margin-bottom: -3px;
-	border-bottom: 2px solid #FF7519;
-	border-radius: 10px 10px 0 0;
+	border-bottom: 1px solid rgba(225, 217, 90, 0.16);
+	border-radius: 4px 4px 0 0;
 }
 
 .cTabContent {
 	padding: 10px;
+	margin-top: 24px;
 	/*background: whitesmoke;*/
-	background: rgba(195, 160, -200, 0.16);
 	color: #fff;
 	/*border-top: 3px solid #555555;*/
 	min-height: 260px;
@@ -79,12 +76,12 @@ body {
 }
 
 .cTabs>div.active {
-	color: #000;
+	color: #ffffff;
 	background-color: rgb(249, 168, 37);
 	/*border-bottom: 3px solid #888888;*/
-	border-bottom: 2px solid #FF7519;
-	margin-bottom: -3px;
-	border-radius: 10px 10px 0 0;
+	border-bottom: 1px solid rgb(249, 168, 37);
+	border-radius: 4px 4px 0 0;
+	font-weight: bold;
 }
 
 @charset "UTF-8";
@@ -159,7 +156,7 @@ body {
 
 .cancel li, .paymentlist li {
 	display: inline;
-	border-left: 1px solid #999;
+	border-bottom: 1px solid #dddddd;
 	float: left;
 	min-width: 140px;
 	text-align: center;
@@ -189,8 +186,12 @@ body {
 
 .firstcharge li, .firstcancel li, .firstline li {
 	/*background-color: #BDBDBD;*/
-	background-color: rgba(255, 160, -255, 0.29);
-	border-bottom: 1px solid rgba(255, 160, -255, 1.09);
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #dddddd;
+}
+
+.firstcharge li span, .firstcancel li span, .firstline li span {
+	font-size: 14px;
 }
 
 .chargepage ul li, .cancelpage ul li, .paymentpage ul li {
