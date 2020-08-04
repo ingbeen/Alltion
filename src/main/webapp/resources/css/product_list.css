@@ -79,12 +79,11 @@
 .items__list.list li, .items__list.product li {
     flex-basis: 33.33%;
     display: inline-block;
-    max-width: 32%;
+    max-width: 33%;
     padding: 0 15px 15px 15px;
 }
 .product-box img{
 	width: 100%;
-	max-width: 258px;
 	height: 300px;
 	max-height: 300px;
 	min-width: 258px;	
@@ -124,6 +123,9 @@
     font-weight: 800;
     margin-top: 18px;
     margin-bottom: 2px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .material-icons.timer {

@@ -176,6 +176,9 @@ input[id="deadline-items"]:checked ~ .content3 {display: block;}
     flex-basis: 25%;
     margin-bottom: 64px;
     padding: 0 10px;
+   	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .product-box {
@@ -190,13 +193,18 @@ input[id="deadline-items"]:checked ~ .content3 {display: block;}
     height: 100%;
 }
 
-.items__product--info {position: relative;}
+.items__product--info {
+	position: relative;
+}
 
 .product_name {
     font-size: 20px;
     font-weight: 800;
     margin-top: 18px;
     margin-bottom: 2px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .material-icons.timer {
