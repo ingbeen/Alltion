@@ -37,8 +37,8 @@ CREATE TABLE product (
 		product_participants number not null, -- 참가자수
 		product_credit_score number not null, -- 신용도
 		product_views number not null, -- 조회수
-		product_progress number not null -- 진행상태 : 진행중 = 0, 낙찰 = 1
 		product_issue_date date not null, -- 등록일
+		product_progress number not null -- 진행상태 : 진행중 = 0, 낙찰 = 1
 );
 */
 
